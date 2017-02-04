@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <![endif]-->
         <title>login </title>
         <!-- BOOTSTRAP STYLE SHEET -->
-        <link href="<?php  base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" />
+        <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" />
         <!-- GOOGLE FONT FOR BETTER FONT STYLE -->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
         <!-- CUSTOM STYLE CSS -->
@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <header>
                 <div class="row  pad-top ">
                     <div class="col-lg-4"> <!-- début div logo -->
-                        <img src="<?php site_url(); ?>assets/img/vivaldi-font-logo.png" alt=""  />
+                        <img src="assets/img/vivaldi-font-logo.png" alt=""  />
                     </div> <!-- fin div logo -->
 
                     <div class="col-lg-8"> 
