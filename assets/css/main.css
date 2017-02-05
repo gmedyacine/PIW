@@ -1,0 +1,14 @@
+body {
+
+    background-color:f4f4f4;
+    <!--   font-family: 'Open Sans Condensed', sans-serif; -->
+    font-size:17px;
+   
+}
+.error p{
+    color: red;
+}
+
+.pad-top {
+    padding-top:20px;
+}
