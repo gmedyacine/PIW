@@ -1,14 +1,26 @@
 body {
-
-    background-color:f4f4f4;
-    <!--   font-family: 'Open Sans Condensed', sans-serif; -->
+    background-color: rgb(49, 46, 46);
+    <!--
+    font-family: 'Open Sans Condensed', sans-serif; -->
     font-size:17px;
-   
 }
 .error p{
     color: red;
 }
-
 .pad-top {
     padding-top:20px;
 }
+#menu_gauche .btn{
+    text-align: left;
+}
+@media (min-width: 992px){
+    #connexion{
+        margin-left: 33%;
+        margin-right: 0px;
+    }
+
+    #connexion .col-md-4{
+        width: 40%;
+    }
+}
+

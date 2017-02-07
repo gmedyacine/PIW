@@ -9,7 +9,7 @@ include('include/head.php');
             <header>
                 <div class="row  pad-top ">
                     <div class="col-lg-4"> <!-- début div logo -->
-                        <img src="<?php echo base_url(); ?>assets/img/vivaldi-font-logo.png" alt=""  />
+                        <img src="<?php echo base_url(); ?>assets/img/logo-piw.png" alt=""  />
                     </div> <!-- fin div logo -->
 
                     <div class="col-lg-8"> 
@@ -20,7 +20,7 @@ include('include/head.php');
 
 
             <!-- ROW END -->
-            <div class="row ">
+            <div id="connexion" class="row ">
                 <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
                     <div class="panel panel-info panel-set">
                         <div class="panel-heading">

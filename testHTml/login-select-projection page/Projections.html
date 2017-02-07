@@ -1,0 +1,176 @@
+﻿<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <!--[if IE]>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+            <![endif]-->
+        <title>Projections </title>
+        <!-- BOOTSTRAP STYLE SHEET -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <link href="assets/css/style.css" rel="stylesheet" />
+        <link href="assets/css/vanilla.datepicker.css" rel="stylesheet" />
+        <!-- GOOGLE FONT FOR BETTER FONT STYLE -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
+
+
+    </head>
+    <body>
+
+        <div class="container">
+            <header>
+                <div class="row  pad-top ">
+                    <div class="col-lg-4"> <!-- début div logo -->
+                        <img src="assets/img/vivaldi-font-logo.png" alt=""  />
+                    </div> <!-- fin div logo -->
+
+                    
+                </div>    <!-- ROW END -->
+                <br /><br />
+            </header>
+
+
+
+            <div class="row ">
+
+                <div class="col-md-3">    <!-- Colonne du Menu -->
+
+
+                    <nav class="navbar navbar-vertical-left">
+
+                        <div class="btn-group-vertical btn-group-lg">
+
+                            <button type="button" class="btn btn-info" id="menu">Projection1</button>
+                            <button type="button" class="btn btn-info" id="menu">Projection2</button>
+                            <button type="button" class="btn btn-info" id="menu">Projection3</button>
+                            <button type="button" class="btn btn-info glyphicon glyphicon-cog" aria-hidden="true"> Parametrage</button>
+                        </div>
+
+                        </br></br>
+
+                    </nav>
+
+
+
+
+
+
+
+                </div> <!-- Fin colonne Menu -->
+
+                <div class="col-md-9"> <!-- Début partie du tableau -->
+                    <fieldset class="group-border">
+
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <p>Date de début:<input type="text" class="datepicker" id="filtre" /></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <p>Date de fin:<input type="text" class="datepicker" id="filtre" /></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <p>Filtre:<input type="text" id="filtre" /></p>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="row ">       <!-- Début titre du tableau et lien export excel-->
+                        <hr/>  <!-- Séparation-->
+                        <div class="col-6 pull-left">
+                            <H2>Titre du tableau</H2>
+                        </div>
+                        <div class="col-6 pull-right">
+                            <a class="btn icon-btn btn-success" href="#">
+                                <span class="glyphicon btn-glyphicon glyphicon-share img-circle text-info"></span>
+                                Export Execl
+                            </a>
+                        </div>
+                    </div> <!-- Fin titre du tableau et lien export excel-->
+
+                    <div class="row "> <!-- Début tableau  -->
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Nom</th>
+                                    <th>Prenom</th>
+                                    <th>Psudo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div> <!-- Fin tableau -->
+
+                    <div class="row "> <!-- Début pagination  -->
+
+
+                        <nav aria-label="...">
+                            <ul class="pager">
+                                <li><a href="#">Previous</a></li>
+                                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">Next</a></li>
+                            </ul>
+                        </nav>
+
+                    </div> <!-- fin pagination  -->
+
+                </div> <!-- Fin partie du tableau -->
+
+            </div>
+            <!-- ROW END -->
+
+        </div>
+        <!-- CONATINER END -->
+
+        <!-- REQUIRED SCRIPTS FILES -->
+        <!-- CORE JQUERY FILE -->
+        <script src="assets/js/jquery-3.1.1.min.js"></script>
+        <!-- REQUIRED BOOTSTRAP SCRIPTS -->
+        <script src="assets/js/bootstrap.js"></script>
+        <script src="assets/js/vanilla.datepicker.js"></script>
+        <script type="text/javascript">
+            datepicker('.datepicker');
+//            var projections = ["projection 1","projection 2","projection 3"];
+//            $(document).ready( function()  {
+//   
+//    $.each(projections,function(id,val){
+//        var button = '<button>'+val+'</button>'; 
+//        $("#menu").append(button);
+//    });
+//   
+//});
+        </script>
+
+
+</html>

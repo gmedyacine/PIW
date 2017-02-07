@@ -1726,7 +1726,7 @@ pre code {
     margin-left: 33.33333333%;
   }
   .col-sm-offset-3 {
-    /* margin-left: 25%; */
+    margin-left: 25%;
   }
   .col-sm-offset-2 {
     margin-left: 16.66666667%;
@@ -1752,7 +1752,7 @@ pre code {
     width: 83.33333333%;
   }
   .col-md-9 {
-    width: 40%;
+    width: 75%;
   }
   .col-md-8 {
     width: 66.66666667%;
@@ -1881,7 +1881,7 @@ pre code {
     margin-left: 41.66666667%;
   }
   .col-md-offset-4 {
-    margin-left: 7.333333%;
+    margin-left: 33.33333333%;
   }
   .col-md-offset-3 {
     margin-left: 25%;
@@ -1913,8 +1913,7 @@ pre code {
     width: 75%;
   }
   .col-lg-8 {
-    width: 11.666667%;
-    float: right;
+    width: 66.66666667%;
   }
   .col-lg-7 {
     width: 58.33333333%;
