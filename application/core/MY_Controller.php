@@ -13,12 +13,19 @@ class MY_Controller extends CI_Controller {
 }
 
 class Home_Controller extends MY_Controller {
-
+    protected $projections=array("1" => "STATUS CHARGEMENT REPORTS",
+            "2" => "TEMPS_CHARGEMENT_REPORTS",
+            "3" => "COMPTE RENDU MASTERI",
+            "4" => "STATUS TACHES",
+            "5" => "SUIVI VEGA",
+            "120" => "PARAMETRAGE");
+    
     public function __construct() {
         parent::__construct();
         if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
         }
+        $this->data["projections"] = json_encode($this->projections);
     }
 
     protected function logout() {
