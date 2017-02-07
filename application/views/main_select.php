@@ -14,7 +14,6 @@ include('include/head.php');
              <div class="row ">
                        <!-- Colonne du Menu -->
                          <?php include('include/menu.php'); ?>
-                <script src="<?php echo base_url(); ?>assets/js/home.js"></script> 
                 <div class="col-md-9 col-md-offset-4 col-sm-6 col-sm-offset-3">
                     <div class="panel panel-info panel-set">
                         <div class="panel-heading">
