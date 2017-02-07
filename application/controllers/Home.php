@@ -36,8 +36,10 @@ class Home extends Home_Controller {
     }
 
     public function projection($id) {
-        $result = $this->projection->getProjection($id);
-        $this->data["dataTable"]= json_encode($result);
+        $dataPrj = $this->projection->getProjection($id);
+        $dataColonneNames = $this->projection->getNameColonne($id);
+        $this->data["dataTable"]= json_encode($dataPrj);
+        $this->data["dataNameColonne"]= json_encode($dataColonneNames);
         $this->data["id_projection"]= $id;
         $this->data["title"] = "Afficher Ma projection";
         $this->load->view("projection", $this->data);

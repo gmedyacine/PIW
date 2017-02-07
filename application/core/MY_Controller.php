@@ -3,7 +3,7 @@
 
 class MY_Controller extends CI_Controller {
 
-    protected $data = array('title' => 'Login');
+    protected $data = array('title' => 'Login',"id_projection"=>0);
 
     public function __construct() {
         parent::__construct();
@@ -17,8 +17,7 @@ class Home_Controller extends MY_Controller {
             "2" => "TEMPS_CHARGEMENT_REPORTS",
             "3" => "COMPTE RENDU MASTERI",
             "4" => "STATUS TACHES",
-            "5" => "SUIVI VEGA",
-            "120" => "PARAMETRAGE");
+            "5" => "SUIVI VEGA");
     
     public function __construct() {
         parent::__construct();

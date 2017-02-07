@@ -11,10 +11,10 @@ include('include/head.php');
           <?php include('include/header.php'); ?>
 
             <!-- ROW END -->
-             <div class="row ">
+             <div class="row content">
                        <!-- Colonne du Menu -->
                          <?php include('include/menu.php'); ?>
-                <div class="col-md-9 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                <div class="col-sm-6">
                     <div class="panel panel-info panel-set">
                         <div class="panel-heading">
                             Liste des projections 

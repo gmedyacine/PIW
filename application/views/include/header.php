@@ -1,13 +1,17 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>﻿
 <header>
-    <div class="row  pad-top ">
-        <div class="col-lg-4"> <!-- début div logo -->
-            <img src="<?php echo base_url(); ?>assets/img/logo-piw.png" alt=""  />
-        </div> <!-- fin div logo -->
-
-        <div class="col-lg-8"> 
-            <a href="<?php echo base_url() . "index.php/logout" ?>" class="btn btn-info pull-left">Déconnecter </a>
-        </div> 
-    </div> 
-    <br /><br />
+    <script type="text/javascript">
+        var idPrj = <?php echo $id_projection; ?>;
+    </script>
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="logo">
+                <img src="<?php echo base_url(); ?>assets/img/logo-piw.png" alt=""  />
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-6 col-sm-6">
+            <a id="logout" href="<?php echo base_url() . "index.php/logout" ?>" class="btn btn-info">Déconnecter </a>
+        </div>     
+        <br /><br />
+    </div>
 </header>

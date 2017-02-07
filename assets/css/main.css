@@ -15,12 +15,15 @@ body {
 }
 @media (min-width: 992px){
     #connexion{
-        margin-left: 33%;
+        /* margin-left: 33%; */
         margin-right: 0px;
     }
 
     #connexion .col-md-4{
-        width: 40%;
+        width: 30%;
     }
+}
+.content{
+    margin-top: 4%;
 }
 
