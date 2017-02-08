@@ -24,5 +24,7 @@ $(document).ready(function () {
     $("#mainTables").empty().append(thead);
     $("#mainTables").append(tbody);
     datepicker('.datepicker');
+    
+    $("#panel-table h2").empty().append(projections[idPrj]);
 
 });
