@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'piw',
+	'hostname' => 'dscpowerkppiw12.mysql.db',
+	'username' => 'dscpowerkppiw12',
+	'password' => 'Piw12017',
+	'database' => 'dscpowerkppiw12',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
