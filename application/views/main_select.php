@@ -35,7 +35,7 @@ include('include/head.php');
                             </br>
                             </br>
                             </br>
-                            <a href="#" class="btn btn-info pull-right">Valider </a>
+                            <a href="#" id="valid_select" class="btn btn-info pull-right">Valider </a>
                             </br>
 
 

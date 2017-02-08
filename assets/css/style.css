@@ -2,107 +2,110 @@
 /* CSS Document */
 
 body {
-  background-color:	#555555;
-  font-size:17px;
-     }
+    background-color:	#555555;
+    font-size:17px;
+}
 
 .pad-top {
-      padding-top:20px;
-         }
-		 
+    padding-top:20px;
+}
+
 .filtre_ligne
 {
-  height: 30px;
-  width: 130px;
-  display: inline-block;
-  margin-left: 10%;
+    height: 30px;
+    width: 130px;
+    display: inline-block;
+    margin-left: 10%;
 }
 
 #panel-table
 {
-	 margin-right:50;
+    margin-right:50;
 }
 
-#logout
+.btn-bleu
 {
-	margin-top:33;
-	float:right;
-	margin-right:50;	
+    margin-top:33;
+    float:right;
+    margin-right:50;	
+}
+.btn-bleu-filtre{
+    float:right;	
 }
 
 .table
 {
-margin-right:20;
-margin-left:50;
-width:90%
+    margin-right:20;
+    margin-left:50;
+    width:90%
 }
 
 /* nav menu styles */
 #nav {
-  display: block;
-  width: 90%;
-  margin: 0 auto;
-  -webkit-box-shadow: 3px 2px 3px rgba(0,0,0,0);
-  -moz-box-shadow: 3px 2px 3px rgba(0,0,0,0);
-  box-shadow: 3px 2px 3px rgba(0,0,0,0);
-  list-style:none;
-  margin-left: 0px;
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    -webkit-box-shadow: 3px 2px 3px rgba(0,0,0,0);
+    -moz-box-shadow: 3px 2px 3px rgba(0,0,0,0);
+    box-shadow: 3px 2px 3px rgba(0,0,0,0);
+    list-style:none;
+    margin-left: 0px;
 }
 
 #nav li {
-	 list-style:none; }
+    list-style:none; }
 
 #nav > li > a {
-  display: block;
-  padding: 16px 18px;
-  font-size: 0.8em;
-  font-weight: bold;
-  color: #fff;
-  text-decoration: none;
-  border-bottom: 1px solid #212121;
-  background-color: #5bc0de;
-  background: -webkit-gradient(linear, left top, left bottom, from(#343434), to(#292929));
-  background: -webkit-linear-gradient(top, #5bc0de, #5bc0de);
-  background: -moz-linear-gradient(top, #343434, #292929);
-  background: -ms-linear-gradient(top, #343434, #292929);
-  background: -o-linear-gradient(top, #343434, #292929);
-  background: linear-gradient(top, #343434, #292929);
+    display: block;
+    padding: 16px 18px;
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid #212121;
+    background-color: #5bc0de;
+    background: -webkit-gradient(linear, left top, left bottom, from(#343434), to(#292929));
+    background: -webkit-linear-gradient(top, #5bc0de, #5bc0de);
+    background: -moz-linear-gradient(top, #343434, #292929);
+    background: -ms-linear-gradient(top, #343434, #292929);
+    background: -o-linear-gradient(top, #343434, #292929);
+    background: linear-gradient(top, #343434, #292929);
 }
 #nav > li > a:hover, #nav > li > a.open {
-  color: #fff;
-  border-bottom-color: #384f76;
-  background-color: #5bc0de;
-  background: -webkit-gradient(linear, left top, left bottom, from(#6985b5), to(#456397));
-  background: -webkit-linear-gradient(top, #5bc0de, #10b7e5);
-  background: -moz-linear-gradient(top, #6985b5, #456397);
-  background: -ms-linear-gradient(top, #6985b5, #456397);
-  background: -o-linear-gradient(top, #6985b5, #456397);
-  background: linear-gradient(top, #6985b5, #456397);
+    color: #fff;
+    border-bottom-color: #384f76;
+    background-color: #5bc0de;
+    background: -webkit-gradient(linear, left top, left bottom, from(#6985b5), to(#456397));
+    background: -webkit-linear-gradient(top, #5bc0de, #10b7e5);
+    background: -moz-linear-gradient(top, #6985b5, #456397);
+    background: -ms-linear-gradient(top, #6985b5, #456397);
+    background: -o-linear-gradient(top, #6985b5, #456397);
+    background: linear-gradient(top, #6985b5, #456397);
 }
 
 #nav li ul { display: none; background: #4a5b78; }
 
 #nav li ul li a { 
-  display: block; 
-  background: none;
-  padding: 10px 0px;
-  padding-left: 0px;
-  font-size: 0.7em;
-  text-decoration: none;
-  font-weight: bold;
-  color: #e3e7f1;
-  text-shadow: 1px 1px 0px #000;
+    display: block; 
+    background: none;
+    padding: 10px 0px;
+    padding-left: 0px;
+    font-size: 0.7em;
+    text-decoration: none;
+    font-weight: bold;
+    color: #e3e7f1;
+    text-shadow: 1px 1px 0px #000;
 }
 #nav li ul li a:hover {
-  background: #394963;
+    background: #394963;
 }
 #nav li ul.active{
-     display: block;
+    display: block;
 }
 #nav li ul.active li.active a {
-  background: #394963;
+    background: #394963;
 }    
 .active
 {
-	 background: #394963;
+    background: #394963;
 }

@@ -12,6 +12,12 @@ $(document).ready(function () {
         }
         $("#menu_gauche_ul").append(li);
     });
-     
+     $("#valid_select").click(function(){
+         var val=$("#main_select").val();
+         if(val>0){
+              document.location.href=base_url+"index.php/projection/"+val;
+         }
+        
+     });
     $("#menu_gauche .btn").last().addClass("glyphicon glyphicon-cog");
 });

@@ -33,6 +33,7 @@ include('include/head.php');
                                         <p>Date de fin<input type="text" class="datepicker filtre_ligne" id="date_fin" /></p>
                                     </div>
                                 </div>
+                                <a id="filtre_date" href="#" class="btn-bleu-filtre btn btn-info">Excuter le filtre </a>
                             </div>
                         </div>
                     </div>

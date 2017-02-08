@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="col-lg-9 col-md-6 col-sm-6">
-            <a id="logout" href="<?php echo base_url() . "index.php/logout" ?>" class="btn btn-info">Déconnecter </a>
+            <a id="logout" href="<?php echo base_url() . "index.php/logout" ?>" class="btn-bleu btn btn-info">Déconnecter </a>
         </div>     
         <br /><br />
     </div>

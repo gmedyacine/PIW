@@ -3,12 +3,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends Home_Controller {
-    
-    
-    
-    public function __construct(){
+
+    public function __construct() {
         parent::__construct();
-        $this->load->model('projection','',TRUE);
+        $this->load->model('projection', '', TRUE);
     }
 
     /**
@@ -27,7 +25,7 @@ class Home extends Home_Controller {
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-        $this->data["title"] = "Selectionnez une projection";        
+        $this->data["title"] = "Selectionnez une projection";
         $this->load->view('main_select', $this->data);
     }
 
@@ -38,11 +36,21 @@ class Home extends Home_Controller {
     public function projection($id) {
         $dataPrj = $this->projection->getProjection($id);
         $dataColonneNames = $this->projection->getNameColonne($id);
-        $this->data["dataTable"]= json_encode($dataPrj);
-        $this->data["dataNameColonne"]= json_encode($dataColonneNames);
-        $this->data["id_projection"]= $id;
+        $this->data["dataTable"] = json_encode($dataPrj);
+        $this->data["dataNameColonne"] = json_encode($dataColonneNames);
+        $this->data["id_projection"] = $id;
         $this->data["title"] = "Afficher Ma projection";
         $this->load->view("projection", $this->data);
+    }
+
+    public function excuteFiltre() {
+        $date_debut = $this->input->post('date_debut');
+        $date_fin = $this->input->post('date_fin');
+        $id_projection = $this->input->post('id_projection');
+        $dataPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin);
+        $datas = json_encode($dataPrj);
+        header('Content-Type: application/json');
+        echo json_encode($datas);
     }
 
 }
