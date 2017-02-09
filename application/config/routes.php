@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'login';
 $route['connexion'] = 'verifyLogin';
 $route['home'] = 'home';
+$route['filtre']='home/excuteFiltre';
 $route['projection/(:num)'] = 'home/projection/$1';
 $route['logout'] = 'home/logout';
 $route['404_override'] = '';

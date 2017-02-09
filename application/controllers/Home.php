@@ -46,11 +46,23 @@ class Home extends Home_Controller {
     public function excuteFiltre() {
         $date_debut = $this->input->post('date_debut');
         $date_fin = $this->input->post('date_fin');
-        $id_projection = $this->input->post('id_projection');
+        
+        $id_projection = $this->input->post('idPrj');
         $dataPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin);
         $datas = json_encode($dataPrj);
         header('Content-Type: application/json');
-        echo json_encode($datas);
+        echo $datas;
+    }
+
+    function checkDateFormat($date) {
+        if (preg_match("/[0-9]{4}\/[0-12]{2}\/[0-31]{2}/", $date)) {
+            if (checkdate(substr($date, 3, 2), substr($date, 0, 2), substr($date, 6, 4)))
+                return true;
+            else
+                return false;
+        } else {
+            return false;
+        }
     }
 
 }

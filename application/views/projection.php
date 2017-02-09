@@ -2,9 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
 ?>﻿
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.table2excel.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+
 <script type="text/javascript">
     var projections = <?php echo $projections; ?>;
-    var dataTable = <?php echo $dataTable; ?>;
+    var dataTable = <?php   echo $dataTable; ?>;
     var dataNameColonne = <?php echo $dataNameColonne; ?>;
 </script>
 <body>
@@ -25,12 +30,12 @@ include('include/head.php');
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <p>Date de début<input type="text" class="datepicker filtre_ligne" id="date_debut" /></p>
+                                        <p>Date de début<input type="text" class="datepicker filtre_ligne" id="date_debut_filtre" /></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <p>Date de fin<input type="text" class="datepicker filtre_ligne" id="date_fin" /></p>
+                                        <p>Date de fin<input type="text" class="datepicker filtre_ligne" id="date_fin_filtre" /></p>
                                     </div>
                                 </div>
                                 <a id="filtre_date" href="#" class="btn-bleu-filtre btn btn-info">Excuter le filtre </a>
@@ -45,9 +50,9 @@ include('include/head.php');
                                 <H2>Titre du tableau</H2>
                             </div>
                             <div class="col-6 pull-right">
-                                <a class="btn icon-btn btn-success" href="#">
+                                <a id="exportExcel" class="btn icon-btn btn-success" href="#">
                                     <span class="glyphicon btn-glyphicon glyphicon-share img-circle text-info"></span>
-                                    Export Execl
+                                    Export Excel
                                 </a>
                             </div>
 
@@ -69,18 +74,7 @@ include('include/head.php');
                         </div> <!-- Fin tableau -->
                     </div>
                 </div>
-                <div class="row "> <!-- Début pagination  -->
-                    <nav aria-label="...">
-                        <ul class="pager">
-                            <li><a href="#">Previous</a></li>
-                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">Next</a></li>
-                        </ul>
-                    </nav>
-
-                </div>
+                
 
             </div> <!-- fin pagination  -->
             <script src="<?php echo base_url(); ?>assets/js/projection.js"></script>
