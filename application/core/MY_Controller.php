@@ -13,8 +13,8 @@ class MY_Controller extends CI_Controller {
 }
 
 class Home_Controller extends MY_Controller {
-    protected $projections=array("1" => "STATUS CHARGEMENT REPORTS",
-            "2" => "TEMPS_CHARGEMENT_REPORTS",
+    protected $projections=array("1" => "STATUS CHARGEMENT",
+            "2" => "TEMPS CHARGEMENT ",
             "3" => "COMPTE RENDU MASTERI",
             "4" => "STATUS TACHES",
             "5" => "SUIVI VEGA");
