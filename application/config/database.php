@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'dscpowerkppiw12.mysql.db',
-	'username' => 'dscpowerkppiw12',
-	'password' => 'Piw12017',
-	'database' => 'dscpowerkppiw12',
+	'hostname' => 'sql6',
+	'username' => 'centorit',
+	'password' => 'C3nt0r-iT',
+	'database' => 'centorit_webapp',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
