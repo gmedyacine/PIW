@@ -50,7 +50,7 @@ body {
     width: 28px;
     height: 28px;
     margin: 0 25px;
-    background: url('/fileadmin/templates/img/table_paging.png') no-repeat
+    background: url('../img/table_paging.png') no-repeat
 }
 
 .pager .prev-page {

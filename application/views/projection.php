@@ -60,7 +60,7 @@ include('include/head.php');
 
                         <div class="row "> <!-- Début tableau  -->
 
-                            <table id="mainTables" class="table table-bordered"> 
+                            <table id="mainTables" class="table table-bordered table-reduit-<?php echo $id_projection; ?>"> 
                                 <thead class="table-success" > 
                                     
                                 </thead> 
