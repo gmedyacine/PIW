@@ -8,7 +8,6 @@ include('include/head.php');
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
 
 <script type="text/javascript">
-    var projections = <?php echo $projections; ?>;
     var dataTable = <?php   echo $dataTable; ?>;
     var dataNameColonne = <?php echo $dataNameColonne; ?>;
 </script>

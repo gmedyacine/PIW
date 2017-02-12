@@ -1,8 +1,7 @@
 <?php ?>
-<script src="<?php echo base_url(); ?>assets/js/home.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/nav.js"></script>
 <script type="text/javascript">
     var base_url = "<?php echo base_url(); ?>";
+    var projections = <?php echo $projections; ?>;
 </script>
 <div class="col-md-3">    <!-- Colonne du Menu -->
     <nav id="menu_gauche">
@@ -16,6 +15,8 @@
         </ul>
     </nav>
 </div>
+<script src="<?php echo base_url(); ?>assets/js/home.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/nav.js"></script>
 
 
 
