@@ -44,7 +44,7 @@ include('include/head.php');
                     </div>
                 </fieldset>
                 <div class="row ">       <!-- Début titre du tableau et lien export excel-->
-                    <div id="panel-table" class="panel panel-default">
+                    <div id="panel-table" class="panel panel-default panel-reduit-<?php echo $id_projection; ?>">
                         <div class="panel-body">
                             <div class="col-6 pull-left">
                                 <H2>Titre du tableau</H2>
@@ -60,7 +60,7 @@ include('include/head.php');
 
                         <div class="row "> <!-- Début tableau  -->
 
-                            <table id="mainTables" class="table table-bordered table-reduit-<?php echo $id_projection; ?>"> 
+                            <table id="mainTables" class="table table-bordered"> 
                                 <thead class="table-success" > 
                                     
                                 </thead> 
