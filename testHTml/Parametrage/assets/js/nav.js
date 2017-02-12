@@ -1,7 +1,7 @@
 $(document).ready(function(){
   $("#nav > li > a").on("click", function(e){
     if($(this).parent().has("ul")) {
-     // e.preventDefault();
+      e.preventDefault();
     }
     
     if(!$(this).hasClass("open")) {
