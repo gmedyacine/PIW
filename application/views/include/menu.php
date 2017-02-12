@@ -12,7 +12,7 @@
 
                 </ul>
             </li>
-            <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Parametrage</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/parametrage"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Parametrage</a></li>
         </ul>
     </nav>
 </div>

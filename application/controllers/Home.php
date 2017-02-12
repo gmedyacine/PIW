@@ -7,6 +7,7 @@ class Home extends Home_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('projection', '', TRUE);
+        $this->load->model('user', '', TRUE);
     }
 
     /**
@@ -46,7 +47,7 @@ class Home extends Home_Controller {
     public function excuteFiltre() {
         $date_debut = $this->input->post('date_debut');
         $date_fin = $this->input->post('date_fin');
-        
+
         $id_projection = $this->input->post('idPrj');
         $dataPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin);
         $datas = json_encode($dataPrj);
@@ -63,6 +64,14 @@ class Home extends Home_Controller {
         } else {
             return false;
         }
+    }
+
+    public function parametrage() {
+        $users = $this->user->getAllUsers();
+        $this->data["title"] = "Parametrage de notification";
+        $this->data["users"] = json_encode($users);
+
+        $this->load->view("parametrage", $this->data);
     }
 
 }

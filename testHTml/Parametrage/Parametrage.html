@@ -1,0 +1,268 @@
+﻿<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <!--[if IE]>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+            <![endif]-->
+        <title>Projections </title>
+        <!-- BOOTSTRAP STYLE SHEET -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <link href="assets/css/style.css" rel="stylesheet" />
+        <link href="assets/css/vanilla.datepicker.css" rel="stylesheet" />
+        <!-- GOOGLE FONT FOR BETTER FONT STYLE -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
+
+
+    </head>
+    <body>
+
+        <div class="container-fluide">
+
+
+            <header>
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="logo">
+                            <img src="assets/img/logo-piw.png" alt=""  />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-8 col-sm-6">
+
+
+                        <a href="#" id="logout" class="btn btn-info ">Déconnecter </a>
+
+                    </div>     
+                    <br /><br />
+            </header>
+
+
+
+            <div class="row ">
+
+                <div class="col-lg-3 col-md-3 ">    <!-- Colonne du Menu -->
+
+
+                    <!---------------Partie Menu------------------->
+                    <nav>
+                        <ul id="nav" >
+                            <li><a href="#"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>  Status chargement Report</a>
+                                <ul>
+                                    <li ><a href="#"> Temps chargement reports</a></li>
+
+                                </ul>
+                            </li>
+                            <li ><a href="#"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>  Graphic Design</a>
+                                <ul>
+                                    <li><a href="#">Adobe Photoshop</a></li>
+                                    <li class="active"><a href="#">Branding & Logos</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Parametrage</a></li>
+                        </ul>
+                    </nav>
+
+                    <!--------------------Fin Menu----------------------->
+
+
+                </div> <!-- Fin colonne Menu -->
+
+
+                <div class="col-md-9"> <!-- Début partie des onglets -->
+
+
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active">
+                            <a href="#sms" role="tab" data-toggle="tab">
+                                Notification Par SMS
+                            </a>
+                        </li>
+                        <li><a href="#email" role="tab" data-toggle="tab">
+                                <i class="fa fa-user"></i> Notification Par E-mail
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="sms">
+
+
+                            <div id="panel-table" class="panel panel-default">
+                                <div class="panel-body">              
+
+                                    <div class="form-group">
+                                        <form action="#" method="post">
+
+                                            <label class="control-label col-sm-2" for="nom">Nom</label>
+                                            <div class="nom col-sm-10">
+                                                <input type="text" class="form-control" >
+                                                </br>
+                                            </div>
+
+                                            </br>
+
+
+                                            <label class="control-label col-sm-2" for="prenom">Prénom </label>
+                                            <div class="prenom col-sm-10">
+                                                <input type="text" class="form-control" >
+                                                </br>
+                                            </div>
+
+
+
+
+                                            <label class="control-label col-sm-2" for="tel">Téléphone </label>
+                                            <div class="tel col-sm-10">
+                                                <input type="text" class="form-control" >
+                                                </br>
+                                            </div>
+
+                                            <div class="add">
+                                                <a href="#" class="btn btn-success pull-right">Ajouter</a>
+                                            </div>
+
+
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>Téléphone</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>John</td>
+                                        <td>Smith</td>
+                                        <td>3234445556</td>
+                                        <td><button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mary</td>
+                                        <td>Moe</td>
+                                        <td>1234657654</td>
+                                        <td><button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>July</td>
+                                        <td>Dooley</td>
+                                        <td>4356785435</td>
+                                        <td><button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+
+
+                        </div> <!-------Fin page SMS----->
+
+                        <div class="tab-pane fade" id="email">
+
+
+                            <div id="panel-table" class="panel panel-default">
+                                <div class="panel-body">              
+
+                                    <div class="form-group">
+                                        <form action="#" method="post">
+
+                                            <label class="control-label col-sm-2" for="nom">Nom</label>
+                                            <div class="nom col-sm-10">
+                                                <input type="text" class="form-control" >
+                                                </br>
+                                            </div>
+
+
+                                            <label class="control-label col-sm-2" for="prenom">Prénom </label>
+                                            <div class="prenom col-sm-10">
+                                                <input type="text" class="form-control" >
+                                                </br>
+                                            </div>
+
+
+                                            <label class="control-label col-sm-2" for="tel">E-mail </label>
+                                            <div class="tel col-sm-10">
+                                                <input type="text" class="form-control" >
+                                                </br>
+                                            </div>
+
+                                            <div class="add">
+                                                <a href="#" class="btn btn-success pull-right">Ajouter</a>
+                                            </div>
+
+
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>E-mail</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>John</td>
+                                        <td>Smith</td>
+                                        <td>john@example.com</td>
+                                        <td><button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mary</td>
+                                        <td>Moe</td>
+                                        <td>mary@example.com</td>
+                                        <td><button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>July</td>
+                                        <td>Dooley</td>
+                                        <td>july@example.com</td>
+                                        <td><button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>  
+
+
+
+                        </div> <!-------Fin page E-mail----->
+
+                    </div>  <!-------Fin Tab panes----->
+
+                </div><!-- Fin partie des onglets -->
+
+
+
+            </div> <!-- Fin Row -->
+
+        </div><!--Fin Container  -->
+
+        <!-- REQUIRED SCRIPTS FILES -->
+        <!-- CORE JQUERY FILE -->
+        <script src="assets/js/jquery-3.1.1.min.js"></script>
+        <!-- REQUIRED BOOTSTRAP SCRIPTS -->
+        <script src="assets/js/bootstrap.js"></script>
+        <script src="assets/js/vanilla.datepicker.js"></script>
+        <script src="assets/js/nav.js"></script>
+        <script type="text/javascript">
+            datepicker('.datepicker');
+        </script>
+</html>
