@@ -21,6 +21,12 @@ body {
 #panel-table
 {
     margin-right:50;
+    overflow: auto;
+}
+
+.table-reduit-4, table-reduit-5{
+    font-size: 0.6em !important;
+     overflow: auto;
 }
 
 .btn-bleu
