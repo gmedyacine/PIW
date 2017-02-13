@@ -23,7 +23,7 @@ body {
     margin-right:50;
  }
 
-.table-reduit-4, .table-reduit-5{
+.panel-reduit-4, .panel-reduit-5{
     font-size: 0.6em !important;
      overflow: auto;
 }
@@ -115,3 +115,32 @@ body {
 {
     background: #394963;
 }
+.tab-panel {
+    background: #F5F5F5;
+    box-shadow: 0 0 4px rgba(0,0,0,.4);
+    border-radius: 0;
+    text-align: center;
+    padding: 10px;
+}
+
+.btn-round {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.btn-round.btn-lg {
+    width: 48px;
+    height: 48px;
+}
+
+.btn-round.btn-sm {
+    width: 34px;
+    height: 34px;
+}
+
+.btn-round.btn-xs {
+    width: 24px;
+    height: 24px;
+}
+

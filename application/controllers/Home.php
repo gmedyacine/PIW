@@ -7,6 +7,7 @@ class Home extends Home_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('projection', '', TRUE);
+        $this->load->model('user', '', TRUE);
     }
 
     /**
@@ -46,7 +47,7 @@ class Home extends Home_Controller {
     public function excuteFiltre() {
         $date_debut = $this->input->post('date_debut');
         $date_fin = $this->input->post('date_fin');
-        
+
         $id_projection = $this->input->post('idPrj');
         $dataPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin);
         $datas = json_encode($dataPrj);
@@ -54,15 +55,50 @@ class Home extends Home_Controller {
         echo $datas;
     }
 
-    function checkDateFormat($date) {
-        if (preg_match("/[0-9]{4}\/[0-12]{2}\/[0-31]{2}/", $date)) {
-            if (checkdate(substr($date, 3, 2), substr($date, 0, 2), substr($date, 6, 4)))
-                return true;
-            else
-                return false;
+    public function parametrage() {
+        $this->load->helper(array('form'));
+        $users = $this->user->getAllUsers();
+        $this->data["title"] = "Parametrage de notification";
+        $this->data["users"] = json_encode($users);
+
+        $this->load->view("parametrage", $this->data);
+    }
+
+    public function addUser() {
+        $this->load->helper(array('form'));
+        $this->load->helper('security');
+        $this->load->library('form_validation');
+
+        $users = $this->user->getAllUsers();
+        $this->data["title"] = "Parametrage de notification";
+        $this->data["users"] = json_encode($users);
+
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('mail', 'E-Mail', 'trim|required|valid_email|xss_clean');
+        $this->form_validation->set_rules('tel', 'Téléphone', 'required|xss_clean|alpha_numeric_spaces');
+        $this->form_validation->set_rules('admin', 'Admin', 'xss_clean');
+        $this->form_validation->set_rules('notifSms', 'Notif mail', 'xss_clean');
+        $this->form_validation->set_rules('notifMail', 'Notif sms', 'xss_clean');
+
+
+        if ($this->form_validation->run() == FALSE) {
+            //Field validation failed.  User redirected to login page
+            $this->load->view('parametrage', $this->data);
         } else {
-            return false;
+            $username = $this->input->post('username');
+            $mail = $this->input->post('mail');
+            $tel = $this->input->post('tel');
+            $admin = $this->input->post('admin');
+            $notifMail = $this->input->post('notifMail');
+            $notifSms = $this->input->post('notifSms');
+            $this->user->insertUser($username, $mail, $tel, $notifMail, $notifSms, $admin);
+            redirect('parametrage', 'refresh');
         }
+    }
+
+    function deleteUser($idUser) {
+        $this->user->deleteUser($idUser);
+        redirect('parametrage', 'refresh');
     }
 
 }

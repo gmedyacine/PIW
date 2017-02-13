@@ -8,7 +8,6 @@ include('include/head.php');
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
 
 <script type="text/javascript">
-    var projections = <?php echo $projections; ?>;
     var dataTable = <?php   echo $dataTable; ?>;
     var dataNameColonne = <?php echo $dataNameColonne; ?>;
 </script>
@@ -44,7 +43,7 @@ include('include/head.php');
                     </div>
                 </fieldset>
                 <div class="row ">       <!-- Début titre du tableau et lien export excel-->
-                    <div id="panel-table" class="panel panel-default">
+                    <div id="panel-table" class="panel panel-default panel-reduit-<?php echo $id_projection; ?>">
                         <div class="panel-body">
                             <div class="col-6 pull-left">
                                 <H2>Titre du tableau</H2>
@@ -60,7 +59,7 @@ include('include/head.php');
 
                         <div class="row "> <!-- Début tableau  -->
 
-                            <table id="mainTables" class="table table-bordered table-reduit-<?php echo $id_projection; ?>"> 
+                            <table id="mainTables" class="table table-bordered"> 
                                 <thead class="table-success" > 
                                     
                                 </thead> 

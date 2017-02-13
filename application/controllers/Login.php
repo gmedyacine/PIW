@@ -25,7 +25,7 @@ class Login extends MY_Controller {
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-        $this->user->creatQuery();
+        //$this->user->creatQuery();
         $this->load->helper(array('form'));
         $this->load->view('login', $this->data);
     }
