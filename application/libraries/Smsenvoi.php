@@ -17,7 +17,7 @@ require_once("smsenvoi.config.php");
 * @author Stephane Nachez <s.nachez@smsenvoi.com>
 * @copyright SMSENVOI.com
 */
-class smsenvoi{
+class Smsenvoi{
 
 	/**
 	* Résultat Brut

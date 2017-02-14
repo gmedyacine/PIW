@@ -28,7 +28,6 @@ class Login extends MY_Controller {
     public function index() {
         //$this->user->creatQuery();
         $this->load->helper(array('form'));
-        $this->load->library('smsenvoi');
         $this->load->view('login', $this->data);
     }
 
@@ -72,11 +71,12 @@ class Login extends MY_Controller {
         $this->email->message($message);
         $this->email->set_mailtype('html');
 
-       // $this->email->send();
+        $this->email->send();
         $this->projection->ecritJournal($ligneLog);
     }
 
     private function sendSms($tel, $data) {
+        $this->load->library('smsenvoi');
         $message = "Liste des projet avec status KO<br>";
         $message .= " Statut des rapports<br>";
         foreach ($data["st_rep"] as $alert) {
@@ -89,8 +89,11 @@ class Login extends MY_Controller {
             $message .= "<br>* nom de tache: " . $alert->nom_tache . " [ " . $alert->alias . " ]  | agent:  " . $alert->agent . " | date fin: " . $alert->endup_time;
             $ligneLog[] = array("code" => $alert->nom_tache);
         }
-       // $this->smsenvoi->sendCALL($tel,$message);
-        
+
+        $this->smsenvoi->sendCALL("+33616156323", $message);
+       /* $credits = $this->smsenvoi->checkCredits();
+        echo $credits;*/
+        die;
     }
 
 }
