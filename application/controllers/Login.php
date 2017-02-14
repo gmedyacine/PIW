@@ -50,7 +50,7 @@ class Login extends MY_Controller {
         $ligneLog = array();
         $this->load->library('email');
 
-        $this->email->from('no-replay@dsc-power.com', 'Gharsa');
+        $this->email->from('no-replay@ipw.centor-it.fr.com', 'Gharsa');
         $this->email->to($mail);
         $this->email->cc("gmedyacine@gmail.com");
 
@@ -77,22 +77,23 @@ class Login extends MY_Controller {
 
     private function sendSms($tel, $data) {
         $this->load->library('smsenvoi');
-        $message = "Liste des projet avec status KO<br>";
-        $message .= " Statut des rapports<br>";
+        $message = "Liste des projet avec status KO \n";
+        $message .= " Statut des rapports \n";
         foreach ($data["st_rep"] as $alert) {
-            $message .= "<br>*code projet: " . $alert->proj_code . " | job date: " . $alert->job_date;
+            $message .= "\n *code projet: " . $alert->proj_code . " | job date: " . $alert->job_date;
             $ligneLog[] = array("code" => $alert->proj_code);
         }
 
-        $message .= " Statut des taches<br>";
+        $message .= " Statut des taches";
         foreach ($data["st_tach"] as $alert) {
-            $message .= "<br>* nom de tache: " . $alert->nom_tache . " [ " . $alert->alias . " ]  | agent:  " . $alert->agent . " | date fin: " . $alert->endup_time;
+            $message .= "\n * nom de tache: " . $alert->nom_tache . " [ " . $alert->alias . " ]  | agent:  " . $alert->agent . " | date fin: " . $alert->endup_time;
             $ligneLog[] = array("code" => $alert->nom_tache);
         }
 
-        $this->smsenvoi->sendCALL("+33616156323", $message);
-       /* $credits = $this->smsenvoi->checkCredits();
-        echo $credits;*/
+
+        $this->smsenvoi->sendSMS($tel, $message, 'PREMIUM', $senderlabel='NOTIFICATION STATUT IPW', '', '', '', 'http://ipw.centor-it.fr/');
+        $credits = $this->smsenvoi->checkCredits();
+        var_dump($credits);
         die;
     }
 
