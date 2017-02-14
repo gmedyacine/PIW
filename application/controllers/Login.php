@@ -41,7 +41,7 @@ class Login extends MY_Controller {
                 $this->sendMail($user->mail, $dataAlert);
             }
             if ($user->notif_sms) {
-                $this->sendSms($user->tel, $dataAlert);
+                $this->sendSms($user->num_tel, $dataAlert);
             }
         }
     }
