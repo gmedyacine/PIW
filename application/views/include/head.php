@@ -13,7 +13,6 @@
         <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" />
         <script src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
         <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" />
-        <link href="<?php echo base_url(); ?>assets/css/vanilla.datepicker.css" rel="stylesheet" />
         <!-- GOOGLE FONT FOR BETTER FONT STYLE -->
         <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />-->
         <!-- CUSTOM STYLE CSS -->

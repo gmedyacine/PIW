@@ -28,6 +28,7 @@ class Login extends MY_Controller {
     public function index() {
         //$this->user->creatQuery();
         $this->load->helper(array('form'));
+        $this->load->library('smsenvoi');
         $this->load->view('login', $this->data);
     }
 
@@ -40,14 +41,14 @@ class Login extends MY_Controller {
                 $this->sendMail($user->mail, $dataAlert);
             }
             if ($user->notif_sms) {
-                $this->sendSms($user->mail, $dataAlert);
+                $this->sendSms($user->tel, $dataAlert);
             }
         }
     }
 
     private function sendMail($mail, $dataAlert) {
-        
-        $ligneLog= array();
+
+        $ligneLog = array();
         $this->load->library('email');
 
         $this->email->from('no-replay@dsc-power.com', 'Gharsa');
@@ -60,23 +61,36 @@ class Login extends MY_Controller {
         $message .= "<h3> Statut des rapports</h3><br>";
         foreach ($dataAlert["st_rep"] as $alert) {
             $message .= "<br><b>*</b> code projet: " . $alert->proj_code . " | job date: " . $alert->job_date;
-            $ligneLog[]=array("code"=>$alert->proj_code);
+            $ligneLog[] = array("code" => $alert->proj_code);
         }
 
         $message .= "<h3> Statut des taches</h3><br>";
         foreach ($dataAlert["st_tach"] as $alert) {
-            $message .= "<br><b>*</b> nom de tache: " . $alert->nom_tache . " [ " . $alert->alias. " ]  | agent:  ".$alert->agent. " | date fin: ".$alert->endup_time;
-            $ligneLog[]=array("code"=>$alert->nom_tache);
+            $message .= "<br><b>*</b> nom de tache: " . $alert->nom_tache . " [ " . $alert->alias . " ]  | agent:  " . $alert->agent . " | date fin: " . $alert->endup_time;
+            $ligneLog[] = array("code" => $alert->nom_tache);
         }
         $this->email->message($message);
         $this->email->set_mailtype('html');
 
-        $this->email->send();
+       // $this->email->send();
         $this->projection->ecritJournal($ligneLog);
     }
 
     private function sendSms($tel, $data) {
-        // excuter l'envoi sms
+        $message = "Liste des projet avec status KO<br>";
+        $message .= " Statut des rapports<br>";
+        foreach ($data["st_rep"] as $alert) {
+            $message .= "<br>*code projet: " . $alert->proj_code . " | job date: " . $alert->job_date;
+            $ligneLog[] = array("code" => $alert->proj_code);
+        }
+
+        $message .= " Statut des taches<br>";
+        foreach ($data["st_tach"] as $alert) {
+            $message .= "<br>* nom de tache: " . $alert->nom_tache . " [ " . $alert->alias . " ]  | agent:  " . $alert->agent . " | date fin: " . $alert->endup_time;
+            $ligneLog[] = array("code" => $alert->nom_tache);
+        }
+       // $this->smsenvoi->sendCALL($tel,$message);
+        
     }
 
 }
