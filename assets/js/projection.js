@@ -5,8 +5,8 @@ $(document).ready(function () {
     });
 
     $("#filtre_date").click(function () {
-        var date_debut = $("#date_debut_filtre").val();
-        var date_fin = $("#date_fin_filtre").val();
+        var date_debut = format_date($("#date_debut_filtre").val());
+        var date_fin = format_date($("#date_fin_filtre").val());
         $("#loader").show();
         $.ajax({
             type: "POST",
@@ -22,7 +22,7 @@ $(document).ready(function () {
     var thead = $('<thead>').append(tr).addClass('table-success');
     $("#mainTables").empty().append(thead);
     refreshData();
-    datepicker('.datepicker');
+    $('#date_debut_filtre, #date_debut_filtre').datepicker( { dateFormat: 'dd/mm/yy' });
 
     $("#panel-table h2").empty().append(projections[idPrj]);
     $("#exportExcel").click(function () {
@@ -33,7 +33,7 @@ $(document).ready(function () {
         });
     });
 
-   
+
 
     function refreshData() {
         var tbody = $('<tbody></tbody>').empty();
@@ -47,7 +47,15 @@ $(document).ready(function () {
         $("#mainTables").find("tbody").remove();
         $("#mainTables").append(tbody);
         $('.pager').hide();
-         paginate("#mainTables", 'tbody tr', 6);
+        var rowCount = $('#mainTables >tbody >tr').length;
+        if (rowCount > 1000) {
+            var perPage = 60;
+        } else if (rowCount > 300) {
+            var perPage = 35;
+        } else {
+            var perPage = 15;
+        }
+        paginate("#mainTables", 'tbody tr', perPage);
 
     }
 
@@ -57,5 +65,11 @@ $(document).ready(function () {
         return strDate;
     }
 
-    });
+    function format_date(s) {
+        var b = s.split(/\D/);
+        return b.reverse().join('-');
+
+    }
+
+});
 

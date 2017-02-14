@@ -2,13 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
 ?>﻿
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.table2excel.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
 
 <script type="text/javascript">
-    var dataTable = <?php   echo $dataTable; ?>;
+    var dataTable = <?php echo $dataTable; ?>;
     var dataNameColonne = <?php echo $dataNameColonne; ?>;
 </script>
 <body>
@@ -29,12 +30,12 @@ include('include/head.php');
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <p>Date de début<input type="text" class="datepicker filtre_ligne" id="date_debut_filtre" /></p>
+                                        <p>Date de début<input type="text"  class="datepicker filtre_ligne" id="date_debut_filtre" /></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <p>Date de fin<input type="text" class="datepicker filtre_ligne" id="date_fin_filtre" /></p>
+                                        <p>Date de fin<input type="text"  class="datepicker filtre_ligne" id="date_fin_filtre" /></p>
                                     </div>
                                 </div>
                                 <a id="filtre_date" href="#" class="btn-bleu-filtre btn btn-info">Excuter le filtre </a>
@@ -61,10 +62,10 @@ include('include/head.php');
 
                             <table id="mainTables" class="table table-bordered"> 
                                 <thead class="table-success" > 
-                                    
+
                                 </thead> 
                                 <tbody> 
-                                   
+
 
                                 </tbody> 
                             </table>
@@ -73,7 +74,7 @@ include('include/head.php');
                         </div> <!-- Fin tableau -->
                     </div>
                 </div>
-                
+
 
             </div> <!-- fin pagination  -->
             <script src="<?php echo base_url(); ?>assets/js/projection.js"></script>

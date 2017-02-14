@@ -7,6 +7,7 @@ class Login extends MY_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('user', '', TRUE);
+        $this->load->model('projection', '', TRUE);
     }
 
     /**
@@ -28,6 +29,71 @@ class Login extends MY_Controller {
         //$this->user->creatQuery();
         $this->load->helper(array('form'));
         $this->load->view('login', $this->data);
+    }
+
+    public function sendNotif() {
+
+        $dataAlert = $this->projection->getLignesAlert();
+        $usersTonotif = $this->user->getAllUsers();
+        foreach ($usersTonotif as $user) {
+            if ($user->notif_mail) {
+                $this->sendMail($user->mail, $dataAlert);
+            }
+            if ($user->notif_sms) {
+                $this->sendSms($user->num_tel, $dataAlert);
+            }
+        }
+    }
+
+    private function sendMail($mail, $dataAlert) {
+
+        $ligneLog = array();
+        $this->load->library('email');
+
+        $this->email->from('no-replay@dsc-power.com', 'Gharsa');
+        $this->email->to($mail);
+        $this->email->cc("gmedyacine@gmail.com");
+
+        $this->email->subject('IPW Notification statut');
+        $message = "<h2>Liste des projet avec status KO</h2><br>";
+
+        $message .= "<h3> Statut des rapports</h3><br>";
+        foreach ($dataAlert["st_rep"] as $alert) {
+            $message .= "<br><b>*</b> code projet: " . $alert->proj_code . " | job date: " . $alert->job_date;
+            $ligneLog[] = array("code" => $alert->proj_code);
+        }
+
+        $message .= "<h3> Statut des taches</h3><br>";
+        foreach ($dataAlert["st_tach"] as $alert) {
+            $message .= "<br><b>*</b> nom de tache: " . $alert->nom_tache . " [ " . $alert->alias . " ]  | agent:  " . $alert->agent . " | date fin: " . $alert->endup_time;
+            $ligneLog[] = array("code" => $alert->nom_tache);
+        }
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        $this->email->send();
+        $this->projection->ecritJournal($ligneLog);
+    }
+
+    private function sendSms($tel, $data) {
+        $this->load->library('smsenvoi');
+        $message = "Liste des projet avec status KO<br>";
+        $message .= " Statut des rapports<br>";
+        foreach ($data["st_rep"] as $alert) {
+            $message .= "<br>*code projet: " . $alert->proj_code . " | job date: " . $alert->job_date;
+            $ligneLog[] = array("code" => $alert->proj_code);
+        }
+
+        $message .= " Statut des taches<br>";
+        foreach ($data["st_tach"] as $alert) {
+            $message .= "<br>* nom de tache: " . $alert->nom_tache . " [ " . $alert->alias . " ]  | agent:  " . $alert->agent . " | date fin: " . $alert->endup_time;
+            $ligneLog[] = array("code" => $alert->nom_tache);
+        }
+
+        $this->smsenvoi->sendCALL("+33616156323", $message);
+       /* $credits = $this->smsenvoi->checkCredits();
+        echo $credits;*/
+        die;
     }
 
 }
