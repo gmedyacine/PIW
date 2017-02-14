@@ -53,6 +53,7 @@ $route['default_controller'] = 'login';
 $route['connexion'] = 'verifyLogin';
 $route['home'] = 'home';
 $route['parametrage']='home/parametrage';
+$route["notification"]='login/sendNotif';
 $route['filtre']='home/excuteFiltre';
 $route['add-user']='home/addUser';
 $route['delete-user/(:num)']='home/deleteUser/$1';

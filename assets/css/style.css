@@ -24,8 +24,7 @@ body {
  }
 
 .panel-reduit-4, .panel-reduit-5{
-    font-size: 0.6em !important;
-     overflow: auto;
+    overflow: auto;
 }
 
 .btn-bleu
