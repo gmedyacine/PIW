@@ -3,7 +3,10 @@ $(document).ready(function () {
     $.each(dataNameColonne, function (id, val) {
         tr.append($('<th>').append(val));
     });
-
+    var d=new Date();
+    $("#date_fin_filtre").val($.datepicker.formatDate('dd/mm/yy', d));
+    d.setMonth(d.getMonth()-1);
+    $("#date_debut_filtre").val( $.datepicker.formatDate('dd/mm/yy', d) );
     $("#filtre_date").click(function () {
         var date_debut = format_date($("#date_debut_filtre").val());
         var date_fin = format_date($("#date_fin_filtre").val());
