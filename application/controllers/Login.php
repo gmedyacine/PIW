@@ -46,7 +46,8 @@ class Login extends MY_Controller {
     }
 
     private function sendMail($mail, $dataAlert) {
-
+        if (empty($dataAlert))
+            return;
         $ligneLog = array();
         $this->load->library('email');
 
@@ -59,41 +60,55 @@ class Login extends MY_Controller {
 
         $message .= "<h3> Statut des rapports</h3><br>";
         foreach ($dataAlert["st_rep"] as $alert) {
-            $message .= "<br><b>*</b> code projet: " . $alert->proj_code . " | job date: " . $alert->job_date;
-            $ligneLog[] = array("code" => $alert->proj_code);
+            list($date, $time) = explode(' ', $alert->job_date);
+            if (!$this->projection->checkAlertExistLog($alert->proj_code . "_" . $date)) {
+                $message .= "<br><b>*</b> code projet: " . $alert->proj_code . " | job date: " . $alert->job_date;
+                $ligneLog[] = array("code" => $alert->proj_code . "_" . $date);
+            }
         }
 
         $message .= "<h3> Statut des taches</h3><br>";
         foreach ($dataAlert["st_tach"] as $alert) {
-            $message .= "<br><b>*</b> nom de tache: " . $alert->nom_tache . " [ " . $alert->alias . " ]  | agent:  " . $alert->agent . " | date fin: " . $alert->endup_time;
-            $ligneLog[] = array("code" => $alert->nom_tache);
+            list($date, $time) = explode(' ', $alert->endup_time);
+            if (!$this->projection->checkAlertExistLog($alert->nom_tache . "_" . $date)) {
+                $message .= "<br><b>*</b> nom de tache: " . $alert->nom_tache . " [ " . $alert->alias . " ]  | agent:  " . $alert->agent . " | date fin: " . $alert->endup_time;
+                $ligneLog[] = array("code" => $alert->nom_tache . "_" . $date);
+            }
         }
         $this->email->message($message);
         $this->email->set_mailtype('html');
 
-        $this->email->send();
+        // $this->email->send();
         $this->projection->ecritJournal($ligneLog);
     }
 
     private function sendSms($tel, $data) {
+        if (empty($data))
+            return;
         $this->load->library('smsenvoi');
         $message = "Liste des projet avec status KO \n";
         $message .= " Statut des rapports \n";
         foreach ($data["st_rep"] as $alert) {
-            $message .= "\n *code projet: " . $alert->proj_code . " | job date: " . $alert->job_date;
-            $ligneLog[] = array("code" => $alert->proj_code);
+            list($date, $time) = explode(' ', $alert->job_date);
+            if (!$this->projection->checkAlertExistLog($alert->proj_code . "_" . $date)) {
+                $message .= "\n *code projet: " . $alert->proj_code . " | job date: " . $alert->job_date;
+                $ligneLog[] = array("code" => $alert->proj_code);
+            }
         }
 
         $message .= " Statut des taches";
         foreach ($data["st_tach"] as $alert) {
-            $message .= "\n * nom de tache: " . $alert->nom_tache . " [ " . $alert->alias . " ]  | agent:  " . $alert->agent . " | date fin: " . $alert->endup_time;
-            $ligneLog[] = array("code" => $alert->nom_tache);
+            list($date, $time) = explode(' ', $alert->endup_time);
+            if (!$this->projection->checkAlertExistLog($alert->nom_tache . "_" . $date)) {
+                $message .= "\n * nom de tache: " . $alert->nom_tache . " [ " . $alert->alias . " ]  | agent:  " . $alert->agent . " | date fin: " . $alert->endup_time;
+                $ligneLog[] = array("code" => $alert->nom_tache);
+            }
         }
 
 
-        $this->smsenvoi->sendSMS($tel, $message, 'PREMIUM', $senderlabel='NOTIFICATION STATUT IPW', '', '', '', 'http://ipw.centor-it.fr/');
-        $credits = $this->smsenvoi->checkCredits();
-        var_dump($credits);
+        //$this->smsenvoi->sendSMS($tel, $message, 'PREMIUM', $senderlabel = 'NOTIFICATION STATUT IPW', '', '', '', 'http://ipw.centor-it.fr/');
+        //$credits = $this->smsenvoi->checkCredits();
+        //var_dump($credits);
         die;
     }
 

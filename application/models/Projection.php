@@ -70,16 +70,30 @@ Class Projection extends CI_Model {
 
     public function ecritJournal($dataInsert) {
         $this->creatJournal();
+        if(empty($dataInsert)) return;
         $this->db->insert_batch('ipw_log_alert',$dataInsert);
     }
 
     private function creatJournal() {
-        $query = 'CREATE TABLE IF NOT EXISTS `ipw_log_alert` (
+         $query = 'CREATE TABLE IF NOT EXISTS `ipw_log_alert` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `code` varchar(250) NOT NULL,
+  `code` varchar(250) NOT NULL, 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;';
-      $this->db->query($query);   
+        $this->db->query($query);   
+         
+    }
+    
+    public function checkAlertExistLog($code){
+        $this->db->select('*');
+        $this->db->from('ipw_log_alert');
+        $this->db->where('code',$code);
+        $queryReq=$this->db->get();
+        $num=$queryReq->num_rows();
+        if($num > 0){
+            return true;
+        }
+        return false;
     }
 
 }
