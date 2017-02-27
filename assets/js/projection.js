@@ -35,7 +35,7 @@ $(document).ready(function () {
             filename: projections[idPrj] + date_string()
         });
     });
-
+    // $("#mainTables").DataTable();
 
 
     function refreshData() {
@@ -43,7 +43,7 @@ $(document).ready(function () {
         $.each(dataTable, function (idObj, valData) {
             var trData = $('<tr></tr>');
             $.each(dataNameColonne, function (id, val) {
-                trData.append($('<td>' + valData[val] + '</td>'));
+                trData.append($('<td class="whiteSpace">' + valData[val] + '</td>'));
             });
             tbody.append(trData);
         });
@@ -51,10 +51,8 @@ $(document).ready(function () {
         $("#mainTables").append(tbody);
         $('.pager').hide();
         var rowCount = $('#mainTables >tbody >tr').length;
-        if (rowCount > 1000) {
-            var perPage = 60;
-        } else if (rowCount > 300) {
-            var perPage = 35;
+        if (rowCount > 50) {
+            var perPage = 25;
         } else {
             var perPage = 15;
         }
