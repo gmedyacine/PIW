@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends MY_Controller {
 
+    protected $ligneLog = array();
+
     function __construct() {
         parent::__construct();
         $this->load->model('user', '', TRUE);
@@ -26,7 +28,7 @@ class Login extends MY_Controller {
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-        //$this->user->creatQuery();
+        //$this->projection->creatJournal();
         $this->load->helper(array('form'));
         $this->load->view('login', $this->data);
     }
@@ -43,17 +45,18 @@ class Login extends MY_Controller {
                 $this->sendSms($user->num_tel, $dataAlert);
             }
         }
+         $this->projection->ecritJournal($this->ligneLog);
     }
 
     private function sendMail($mail, $dataAlert) {
-        if (empty($dataAlert))
+        if (empty($dataAlert["st_rep"])&&empty($dataAlert["st_tach"]))
             return;
         $ligneLog = array();
         $this->load->library('email');
 
         $this->email->from('no-replay@ipw.centor-it.fr.com', 'Gharsa');
         $this->email->to($mail);
-        $this->email->cc("gmedyacine@gmail.com");
+       // $this->email->cc("gmedyacine@gmail.com");
 
         $this->email->subject('IPW Notification statut');
         $message = "<h2>Liste des projet avec status KO</h2><br>";
@@ -75,11 +78,12 @@ class Login extends MY_Controller {
                 $ligneLog[] = array("code" => $alert->nom_tache . "_" . $date);
             }
         }
+        if(empty($ligneLog))   return;
         $this->email->message($message);
         $this->email->set_mailtype('html');
 
-        // $this->email->send();
-        $this->projection->ecritJournal($ligneLog);
+        $this->email->send();
+        $this->ligneLog = $ligneLog;
     }
 
     private function sendSms($tel, $data) {
@@ -92,7 +96,7 @@ class Login extends MY_Controller {
             list($date, $time) = explode(' ', $alert->job_date);
             if (!$this->projection->checkAlertExistLog($alert->proj_code . "_" . $date)) {
                 $message .= "\n *code projet: " . $alert->proj_code . " | job date: " . $alert->job_date;
-                $ligneLog[] = array("code" => $alert->proj_code);
+                $ligneLog[] = array("code" => $alert->proj_code. "_" . $date);
             }
         }
 
@@ -101,15 +105,14 @@ class Login extends MY_Controller {
             list($date, $time) = explode(' ', $alert->endup_time);
             if (!$this->projection->checkAlertExistLog($alert->nom_tache . "_" . $date)) {
                 $message .= "\n * nom de tache: " . $alert->nom_tache . " [ " . $alert->alias . " ]  | agent:  " . $alert->agent . " | date fin: " . $alert->endup_time;
-                $ligneLog[] = array("code" => $alert->nom_tache);
+                $ligneLog[] = array("code" => $alert->nom_tache. "_" . $date);
             }
         }
-
-
-        //$this->smsenvoi->sendSMS($tel, $message, 'PREMIUM', $senderlabel = 'NOTIFICATION STATUT IPW', '', '', '', 'http://ipw.centor-it.fr/');
-        //$credits = $this->smsenvoi->checkCredits();
+   if(empty($ligneLog))   return;
+       $this->smsenvoi->sendSMS($tel, $message, 'PREMIUM', $senderlabel = 'NOTIFICATION STATUT IPW', '', '', '', 'http://ipw.centor-it.fr/');
+        $credits = $this->smsenvoi->checkCredits();
         //var_dump($credits);
-        die;
+       // die;
     }
 
 }
