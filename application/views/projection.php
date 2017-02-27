@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
 ?>﻿
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery.dataTables.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.table2excel.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.dataTables.min.js"></script>
@@ -44,7 +45,7 @@ include('include/head.php');
                     </div>
                 </fieldset>
                 <div class="row ">       <!-- Début titre du tableau et lien export excel-->
-                    <div id="panel-table" class="panel panel-default panel-reduit-<?php echo $id_projection; ?>">
+                    <div id="panel-table" class="panel panel-default panel-reduit-5">
                         <div class="panel-body">
                             <div class="col-6 pull-left">
                                 <H2>Titre du tableau</H2>
@@ -60,8 +61,8 @@ include('include/head.php');
 
                         <div class="row "> <!-- Début tableau  -->
 
-                            <table id="mainTables" class="table table-bordered"> 
-                                <thead class="table-success" > 
+                            <table id="mainTables" class="table cell-border dataTable" cellspacing="0" width="100%"> 
+                                <thead class="" > 
 
                                 </thead> 
                                 <tbody> 

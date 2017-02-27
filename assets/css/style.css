@@ -21,7 +21,7 @@ body {
 #panel-table
 {
     margin-right:50;
- }
+}
 
 .panel-reduit-4, .panel-reduit-5{
     overflow: auto;
@@ -40,9 +40,16 @@ body {
 .table
 {
     margin-right:20;
-    margin-left:50;
+    margin-left:30px !important;
     width:90%;
     font-size: 0.7em;
+}
+.table td.whiteSpace{
+    white-space: nowrap;
+}
+tr.bri{
+    background: #f0d7d7 !important;
+    color: #1e1ef2;
 }
 
 /* nav menu styles */

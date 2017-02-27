@@ -3,10 +3,10 @@ $(document).ready(function () {
     $.each(dataNameColonne, function (id, val) {
         tr.append($('<th>').append(val));
     });
-    var d=new Date();
+    var d = new Date();
     $("#date_fin_filtre").val($.datepicker.formatDate('dd/mm/yy', d));
-    d.setMonth(d.getMonth()-1);
-    $("#date_debut_filtre").val( $.datepicker.formatDate('dd/mm/yy', d) );
+    d.setMonth(d.getMonth() - 1);
+    $("#date_debut_filtre").val($.datepicker.formatDate('dd/mm/yy', d));
     $("#filtre_date").click(function () {
         var date_debut = format_date($("#date_debut_filtre").val());
         var date_fin = format_date($("#date_fin_filtre").val());
@@ -25,7 +25,7 @@ $(document).ready(function () {
     var thead = $('<thead>').append(tr).addClass('table-success');
     $("#mainTables").empty().append(thead);
     refreshData();
-    $('#date_debut_filtre, #date_debut_filtre').datepicker( { dateFormat: 'dd/mm/yy' });
+    $('#date_debut_filtre, #date_debut_filtre').datepicker({dateFormat: 'dd/mm/yy'});
 
     $("#panel-table h2").empty().append(projections[idPrj]);
     $("#exportExcel").click(function () {
@@ -35,15 +35,18 @@ $(document).ready(function () {
             filename: projections[idPrj] + date_string()
         });
     });
-
+    // $("#mainTables").DataTable();
 
 
     function refreshData() {
         var tbody = $('<tbody></tbody>').empty();
         $.each(dataTable, function (idObj, valData) {
             var trData = $('<tr></tr>');
+            if ((idPrj == 1 && $.trim(valData["status"]).toUpperCase()!="OK")||(idPrj == 4 && $.trim(valData["statut"]).toUpperCase()!="OK")) {
+                trData.addClass('bri');
+            }
             $.each(dataNameColonne, function (id, val) {
-                trData.append($('<td>' + valData[val] + '</td>'));
+                trData.append($('<td class="whiteSpace">' + valData[val] + '</td>'));
             });
             tbody.append(trData);
         });
@@ -51,10 +54,8 @@ $(document).ready(function () {
         $("#mainTables").append(tbody);
         $('.pager').hide();
         var rowCount = $('#mainTables >tbody >tr').length;
-        if (rowCount > 1000) {
-            var perPage = 60;
-        } else if (rowCount > 300) {
-            var perPage = 35;
+        if (rowCount > 50) {
+            var perPage = 25;
         } else {
             var perPage = 15;
         }
@@ -74,17 +75,18 @@ $(document).ready(function () {
         return b.reverse().join('-');
 
     }
- function checkViewPageNumber(){
-     var action=$('.pager').find('.page-number').length>25;
-     if(action){
-         $.each($('.page-number'),function(index,elem){
-             if(index==3) $(elem).after('    ......');
-             if(index>3 && index< ($('.page-number').length - 3)){
-                 $(elem).hide();
-             }
-         });
-     }
- }
- 
+    function checkViewPageNumber() {
+        var action = $('.pager').find('.page-number').length > 25;
+        if (action) {
+            $.each($('.page-number'), function (index, elem) {
+                if (index == 3)
+                    $(elem).after('    ......');
+                if (index > 3 && index < ($('.page-number').length - 3)) {
+                    $(elem).hide();
+                }
+            });
+        }
+    }
+
 });
 
