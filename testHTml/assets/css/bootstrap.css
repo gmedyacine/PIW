@@ -1925,8 +1925,7 @@ pre code {
     width: 41.66666667%;
   }
   .col-lg-4 {
-    width: 45%;
-    margin-left: 17px;
+    width: 33.33333333%;
   }
   .col-lg-3 {
     width: 25%;
@@ -2423,8 +2422,6 @@ input[type="search"] {
 }
 .form-group {
   margin-bottom: 15px;
-  margin-top: 15px;
-  margin-left: 25px;
 }
 .radio,
 .checkbox {

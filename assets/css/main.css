@@ -1,14 +1,86 @@
 body {
-
-    background-color:f4f4f4;
-    <!--   font-family: 'Open Sans Condensed', sans-serif; -->
+    background-color: rgb(49, 46, 46);
+    <!--
+    font-family: 'Open Sans Condensed', sans-serif; -->
     font-size:17px;
-   
 }
 .error p{
     color: red;
 }
-
 .pad-top {
     padding-top:20px;
+}
+#menu_gauche .btn{
+    text-align: left;
+}
+@media (min-width: 992px){
+    #connexion{
+        /* margin-left: 33%; */
+        margin-right: 0px;
+    }
+
+    #connexion .col-md-4{
+        width: 30%;
+    }
+}
+.content{
+    margin-top: 4%;
+}
+
+#loader{
+    display: none;
+    position: fixed;
+    top: 67%;
+    right: 33%;
+}
+.pager {
+    margin-top: 50px;
+    color: #919191;
+    text-align: center
+}
+
+.pager>span {
+    display: inline-block;
+    height: 20px;
+    vertical-align: middle;
+    cursor: pointer
+}
+
+.pager .next-page,.pager .prev-page {
+    width: 28px;
+    height: 28px;
+    margin: 0 25px;
+    background: url('../img/table_paging.png') no-repeat
+}
+
+.pager .prev-page {
+    background-position: -84px 0
+}
+
+.pager .prev-page:hover {
+    background-position: -56px 0
+}
+
+.pager .next-page:hover {
+    background-position: -28px 0
+}
+
+.pager .page-number {
+    padding: 0 10px;
+    border-right: 1px solid #919191
+}
+
+.pager .page-number.first {
+    padding-left: 0
+}
+
+.pager .page-number.last {
+    border: none;
+    padding-right: 0
+}
+
+.pager .page-number.active {
+    font-weight: bold;
+    text-decoration: underline;
+    background: #fff;
 }

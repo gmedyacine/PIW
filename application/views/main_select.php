@@ -8,23 +8,13 @@ include('include/head.php');
     <body>
 
         <div class="container-fluid">
-            <header>
-                <div class="row  pad-top ">
-                    <div class="col-lg-4"> <!-- début div logo -->
-                        <img src="<?php echo base_url(); ?>assets/img/vivaldi-font-logo.png" alt=""  />
-                    </div> <!-- fin div logo -->
-
-                    <div class="col-lg-8"> 
-                    </div> 
-                </div> 
-                <br /><br />
-            </header>
-
+          <?php include('include/header.php'); ?>
 
             <!-- ROW END -->
-             <div class="row ">
-                <script src="<?php echo base_url(); ?>assets/js/home.js"></script> 
-                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+             <div class="row content">
+                       <!-- Colonne du Menu -->
+                         <?php include('include/menu.php'); ?>
+                <div class="col-sm-6">
                     <div class="panel panel-info panel-set">
                         <div class="panel-heading">
                             Liste des projections 
@@ -45,9 +35,7 @@ include('include/head.php');
                             </br>
                             </br>
                             </br>
-                            
-                            <a href="<?php echo base_url()."index.php/logout" ?>" class="btn btn-info pull-left">Déconnecter </a>
-                            <a href="#" class="btn btn-info pull-right">Valider </a>
+                            <a href="#" id="valid_select" class="btn btn-info pull-right">Valider </a>
                             </br>
 
 
