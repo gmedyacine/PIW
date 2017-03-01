@@ -35,7 +35,7 @@ $(document).ready(function () {
             filename: projections[idPrj] + date_string()
         });
     });
-    // $("#mainTables").DataTable();
+     $("#mainTables").DataTable();
 
 
     function refreshData() {
@@ -59,8 +59,8 @@ $(document).ready(function () {
         } else {
             var perPage = 15;
         }
-        paginate("#mainTables", 'tbody tr', perPage);
-        checkViewPageNumber();
+       // paginate("#mainTables", 'tbody tr', perPage);
+       // checkViewPageNumber();
 
     }
 

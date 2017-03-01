@@ -3,7 +3,7 @@
 Class User extends CI_Model {
 
     function login($username, $password) {
-        $this->db->select('id, username, password');
+        $this->db->select('id, username, password,sup_user as role');
         $this->db->from('piw_users');
         $this->db->where('username', $username);
         $this->db->where('password', MD5($password));

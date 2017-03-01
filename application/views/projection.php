@@ -59,20 +59,16 @@ include('include/head.php');
 
                         </div> <!-- Fin titre du tableau et lien export excel-->
 
-                        <div class="row "> <!-- Début tableau  -->
+                        <table id="mainTables" class="table cell-border" cellspacing="0" width="100%"> 
+                            <thead class="" > 
 
-                            <table id="mainTables" class="table cell-border dataTable" cellspacing="0" width="100%"> 
-                                <thead class="" > 
-
-                                </thead> 
-                                <tbody> 
+                            </thead> 
+                            <tbody> 
 
 
-                                </tbody> 
-                            </table>
+                            </tbody> 
+                        </table>
 
-
-                        </div> <!-- Fin tableau -->
                     </div>
                 </div>
 
