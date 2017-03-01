@@ -100,5 +100,8 @@ class Home extends Home_Controller {
         $this->user->deleteUser($idUser);
         redirect('parametrage', 'refresh');
     }
-
+	
+public function biblio() {
+$this->load->view("biblio");
+}
 }
