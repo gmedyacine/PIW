@@ -11,6 +11,7 @@
 
                 </ul>
             </li>
+			<li><a href="<?php echo base_url(); ?>index.php/biblio"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>  Bibliothèque</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/parametrage"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Parametrage</a></li>
         </ul>
     </nav>
