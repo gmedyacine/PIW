@@ -36,19 +36,19 @@ include('include/head.php');
                                     <div class="error"><?php echo validation_errors(); ?></div>
                                     <label class="control-label col-sm-2" for="username">Username</label>
                                     <div class="nom col-sm-10">
-                                        <input name="username" type="text" class="form-control" >
+                                        <input name="username" type="text" value="<?php echo set_value('username'); ?>" class="form-control" >
                                         </br>
                                     </div>
 
                                     </br>
                                     <label class="control-label col-sm-2" for="mail">E-mail </label>
                                     <div class="mail col-sm-10">
-                                        <input name="mail" type="text" class="form-control" >
+                                        <input name="mail" type="text" value="<?php echo set_value('mail'); ?>" class="form-control" >
                                         </br>
                                     </div>
                                     <label class="control-label col-sm-2" for="tel">Téléphone </label>
                                     <div class="tel col-sm-10">
-                                        <input name="tel" type="text" class="form-control" >
+                                        <input name="tel" value="<?php echo set_value('tel'); ?>" type="text" class="form-control" >
                                         </br>
                                     </div>
                                     <label class="control-label col-sm-2" for="admin">Admin </label>
