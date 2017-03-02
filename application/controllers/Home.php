@@ -8,6 +8,12 @@ class Home extends Home_Controller {
         parent::__construct();
         $this->load->model('projection', '', TRUE);
         $this->load->model('user', '', TRUE);
+		$this->load->model('files', '', TRUE);
+		
+		$this->load->helper('form');
+		$this->load->helper('file');
+        $this->load->helper('url');
+		
     }
 
     /**
@@ -102,6 +108,62 @@ class Home extends Home_Controller {
     }
 	
 public function biblio() {
-$this->load->view("biblio");
+
+$data["fetch_data"]=$this->files->fetch_data();
+
+$this->load->view("biblio",$data);
+}	
+
+public function download($file) {
+$this->load->helper('download');
+
+$data=file_get_contents(base_url().'uploads/'.$file);
+
+force_download($file,$data);
+
 }
+
+public function delete_data($id,$name){
+
+   
+	$this->load->model('files');
+	$this->files->delete_data($id);
+	unlink('./uploads/'.$name); // delete file
+	redirect(base_url()."index.php/biblio");
+
+
+
+}
+
+        public function upload_file()
+        {
+
+		
+		
+                $config['upload_path']          = './uploads/';
+              $config['allowed_types']        = 'txt|docx|pdf|doc|';
+               //$config['max_size']             = 100;
+               // $config['max_width']            = 1024;
+               // $config['max_height']           = 768;
+         
+
+                 /*$this->load->library('upload', $config);
+
+                if ( ! $this->upload->do_upload('new_file'))
+                {
+                       
+						echo"Error !!";
+                       
+                }
+                else
+                {    
+				      
+				       echo"Success !!";
+					
+                } 
+				*/
+				
+        }
+
+
 }
