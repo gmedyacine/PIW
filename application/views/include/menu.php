@@ -11,7 +11,10 @@
 
                 </ul>
             </li>
-            <li><a href="<?php echo base_url(); ?>index.php/parametrage"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Parametrage</a></li>
+            <?php if($role!=2){ ?>
+                  <li><a href="<?php echo base_url(); ?>index.php/parametrage"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Parametrage</a></li>
+           <?php  } ?>
+          
         </ul>
     </nav>
 </div>

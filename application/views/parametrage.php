@@ -53,7 +53,12 @@ include('include/head.php');
                                     </div>
                                     <label class="control-label col-sm-2" for="admin">Admin </label>
                                     <div class="admin col-sm-10">
-                                        <input name="admin"  type="checkbox" class="form-control float-left">
+                                        <input  name="admin"  value="1" type="checkbox" class="connexion form-control float-left">
+                                        </br>
+                                    </div>
+                                    <label class="control-label col-sm-2" for="admin">Oper </label>
+                                    <div class="admin col-sm-10">
+                                        <input  name="admin"  value="2" type="checkbox" class="connexion form-control float-left">
                                         </br>
                                     </div>
                                     <label class="control-label col-sm-2" for="notifMail">Notif mail </label>
