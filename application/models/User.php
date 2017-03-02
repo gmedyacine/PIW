@@ -48,7 +48,7 @@ Class User extends CI_Model {
             'num_tel' => $tel,
             'notif_mail' => !empty($notif_mail),
             'notif_sms' => !empty($notif_sms),
-            'sup_user' => !empty($sup_user));
+            'sup_user' => $sup_user);
 
         $this->db->insert('piw_users', $user_to_add);
         return true;

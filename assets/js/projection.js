@@ -25,7 +25,7 @@ $(document).ready(function () {
     var thead = $('<thead>').append(tr).addClass('table-success');
     $("#mainTables").empty().append(thead);
     refreshData();
-    $('#date_debut_filtre, #date_debut_filtre').datepicker({dateFormat: 'dd/mm/yy'});
+    $('#date_debut_filtre, #date_fin_filtre').datepicker({dateFormat: 'dd/mm/yy'});
 
     $("#panel-table h2").empty().append(projections[idPrj]);
     $("#exportExcel").click(function () {
