@@ -50,24 +50,48 @@ include('include/head.php');
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>LUNDI_AU_SAMEDI</td>
-                                    <td>JOB_1_UNIX</td>
-                                    <td>Vega</td>
-                                    <td>JOB_1_UNIX.doc</td>
-                                    <td> <a href="#">Loop </a>|<a href="#"> télécharger </a>|<a href="#"> Supprimer </a></td>
-
+							<?php  if($fetch_data->num_rows() > 0)
+							{
+							
+							  foreach ($fetch_data->result() as $row)
+							  { ?>
+							    <tr>
+								
+                                    <td><?php echo $row->calendrier ; ?></td>
+									<td><?php echo $row->job ; ?></td>
+                                    <td><?php echo $row->vega ; ?></td>
+                                    <td><?php echo $row->nomFichier ; ?></td>
+                                 
+                                    <td> <a href="#">Loop </a>|<a href="<?php echo base_url(); ?>index.php/home/download/<?php echo $row->nomFichier ; ?>"> télécharger </a>|<a href="<?php echo base_url(); ?>index.php/home/delete_data/<?php echo $row->id ; ?>/<?php echo $row->nomFichier ; ?>" class="delete_data" "> Supprimer </a> 
+									<br>
+									 
+								
+									
+									<form action="<?php echo base_url(); ?>index.php/home/upload_file" method="post" enctype="multipart/form-data" >
+									<input type="file" name="new_file"  />
+									
+									<input type="submit" class="btn btn-primary btn-xs" name="upload" value="Upload" />
+									</form>
+									</td>
+                                
                                 </tr>
-                                <tr>
-
-                                    <td>LUNDI</td>
-                                    <td>JOB_2_NT</td>
-                                    <td>Vega</td>
-                                    <td>JOB_2_NT.doc</td>
-                                    <td> <a href="#">Loop </a>|<a href="#"> télécharger </a>|<a href="#"> Supprimer </a></td>
-
-
-                                </tr>
+								
+							  
+							  
+							 <?php }
+							
+							}
+							else
+							{?>
+							<tr>
+							<td colspan="3"> Pas de données   </td>
+							</tr>
+						<?php	}
+							
+							
+							?>
+                              
+                                
                             </tbody>
                         </table>    
                     </div>
