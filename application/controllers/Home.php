@@ -95,8 +95,10 @@ class Home extends Home_Controller {
             $mail = $this->input->post('mail');
             $tel = $this->input->post('tel');
             $admin = $this->input->post('admin');
+            $oper= $this->input->post('oper');
             $notifMail = $this->input->post('notifMail');
             $notifSms = $this->input->post('notifSms');
+            var_dump($username, $mail, $tel, $notifMail, $notifSms, $admin);die;
             $this->user->insertUser($username, $mail, $tel, $notifMail, $notifSms, $admin);
             redirect('parametrage', 'refresh');
         }
