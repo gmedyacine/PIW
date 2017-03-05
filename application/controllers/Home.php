@@ -8,29 +8,13 @@ class Home extends Home_Controller {
         parent::__construct();
         $this->load->model('projection', '', TRUE);
         $this->load->model('user', '', TRUE);
-		$this->load->model('files', '', TRUE);
-		
-		$this->load->helper('form');
-		$this->load->helper('file');
+        $this->load->model('files', '', TRUE);
+
+        $this->load->helper('form');
+        $this->load->helper('file');
         $this->load->helper('url');
-		
     }
 
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     * 	- or -
-     * 		http://example.com/index.php/welcome/index
-     * 	- or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
     public function index() {
         $this->data["title"] = "Selectionnez une projection";
         $this->load->view('main_select', $this->data);
@@ -95,7 +79,7 @@ class Home extends Home_Controller {
             $mail = $this->input->post('mail');
             $tel = $this->input->post('tel');
             $admin = $this->input->post('admin');
-            $oper= $this->input->post('oper');
+            $oper = $this->input->post('oper');
             $notifMail = $this->input->post('notifMail');
             $notifSms = $this->input->post('notifSms');
             $this->user->insertUser($username, $mail, $tel, $notifMail, $notifSms, $admin);
@@ -107,64 +91,69 @@ class Home extends Home_Controller {
         $this->user->deleteUser($idUser);
         redirect('parametrage', 'refresh');
     }
-	
-public function biblio() {
 
-$data["fetch_data"]=$this->files->fetch_data();
+    public function biblio() {
+        $data = $this->data;
+        $data["fetch_data"] = $this->files->fetch_data();
+        $this->load->view("biblio", $data);
+    }
 
-$this->load->view("biblio",$data);
-}	
+    public function download($file) {
+        $this->load->helper('download');
+        $data = file_get_contents(base_url() . 'uploads/' . $file);
+        force_download($file, $data);
+    }
 
-public function download($file) {
-$this->load->helper('download');
-
-$data=file_get_contents(base_url().'uploads/'.$file);
-
-force_download($file,$data);
-
-}
-
-public function delete_data($id,$name){
-
-   
-	$this->load->model('files');
-	$this->files->delete_data($id);
-	unlink('./uploads/'.$name); // delete file
-	redirect(base_url()."index.php/biblio");
+    public function delete_data($id, $name) {
 
 
+        $this->load->model('files');
+        $this->files->delete_data($id);
+        unlink('./uploads/' . $name); // delete file
+        redirect(base_url() . "index.php/biblio");
+    }
 
-}
+    public function upload_file() {
+        $this->load->helper(array('form'));
+        $this->load->helper('security');
+        $this->load->library('form_validation');
+        $this->data["fetch_data"] = $this->files->fetch_data();
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'txt|docx|pdf|doc|';
+        $config['max_size'] = '';
+        $config['max_width'] = '';
+        $config['max_height'] = '';
+        $this->load->library('upload', $config);
 
-        public function upload_file()
-        {
+        if (!$this->upload->do_upload('new_file')) {
+            $error = array('error' => $this->upload->display_errors());
+            $this->data['error_upload'] = $error;
+            $this->load->view('biblio', $this->data);
+        } else {
+            $row_id = $this->input->post('row_id');
+            $upload_data = $this->upload->data();
+            $name = $upload_data['file_name'];
+            if (empty($row_id)) {
 
-		
-		
-                $config['upload_path']          = './uploads/';
-              $config['allowed_types']        = 'txt|docx|pdf|doc|';
-               //$config['max_size']             = 100;
-               // $config['max_width']            = 1024;
-               // $config['max_height']           = 768;
-         
+                $this->form_validation->set_rules('job', 'Job', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('calender', 'Calender', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('vega', 'Vega', 'required|xss_clean');
 
-                 /*$this->load->library('upload', $config);
-
-                if ( ! $this->upload->do_upload('new_file'))
-                {
-                       
-						echo"Error !!";
-                       
+                if ($this->form_validation->run() == FALSE) {
+                    $this->load->view('biblio', $this->data);
+                } else {
+                    $calender = $this->input->post('calender');
+                    $job = $this->input->post('job');
+                    $vega = $this->input->post('vega');
+                    $data_to_add = array("job" => $job, "calendrier" => $calender, "vega" => $vega, "nom_fichier" => $name);
+                    $this->files->add_file($data_to_add);
+                    redirect('biblio', 'refresh');
                 }
-                else
-                {    
-				      
-				       echo"Success !!";
-					
-                } 
-				*/
-				
+            } else {
+                $this->files->update_file($row_id, $name);
+                redirect('biblio', 'refresh');
+            }
         }
-
+    }
 
 }
