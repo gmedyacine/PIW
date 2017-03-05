@@ -19,24 +19,22 @@ Class User extends CI_Model {
     }
 
     function creatQuery() {
-        $sql_stat_drop = "DROP TABLE IF EXISTS piw_users;";
+        $sql_stat_drop = "DROP TABLE IF EXISTS `ipw_files`;";
         $this->db->query($sql_stat_drop);
-        $query_creat = "CREATE TABLE IF NOT EXISTS `piw_users` (
-  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
-  `username` varchar(10) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `mail` varchar(100) NOT NULL,
-  `num_tel` varchar(15) NOT NULL,
-  `notif_mail` tinyint(1) NOT NULL,
-  `notif_sms` tinyint(1) NOT NULL,
-  `sup_user` tinyint(1) NOT NULL,
+        $query_creat = "CREATE TABLE IF NOT EXISTS `ipw_files` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `calendrier` varchar(200) NOT NULL,
+  `job` varchar(200) NOT NULL,
+  `vega` varchar(200) NOT NULL,
+  `nom_fichier` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;";
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;";
         $this->db->query($query_creat);
 
-        $query_insert = "INSERT INTO `piw_users` (`id`, `username`, `password`, `mail`, `num_tel`, `notif_mail`, `notif_sms`, `sup_user`) VALUES
-(1, 'sup_user', '5ddd2ef311a9bd6179dac0c21502f47e', '', '0', 0, 0, 1),
-(7, 'farid', '10fadc2981c5d4e062a690518b7f14e2', 'gmedyacine@gmail.com', '0716154343', 1, 1, 0);";
+        $query_insert = "INSERT INTO `ipw_files` (`id`, `calendrier`, `job`, `vega`, `nom_fichier`) VALUES
+(1, 'LUNDI_AU_SAMEDI', 'JOB_1_UNIX', 'Vega', 'cdc_site1.docx'),
+(3, 'JEUDI', 'JOB_3_WIN7', 'Vega', 'JOB_3_WIN7.doc'),
+(4, 'SAMEDI', 'JOB_4_LINUX', 'Vega', 'JOB_4_LINUX.txt');";
         $this->db->query($query_insert);
     }
 
