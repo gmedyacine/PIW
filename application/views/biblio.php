@@ -101,4 +101,15 @@ include('include/head.php');
                 <!-- ROW END -->
             </div>
         </div>
+		
+		<script type="text/javascript">
+$(document).ready(function(){
+		
+	$(".fancybox").fancybox({
+		openEffect  : 'none',
+		closeEffect : 'none',
+		iframe : {
+			preload: false
+		}
+	});
         <?php include('include/footer.php'); ?>
