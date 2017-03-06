@@ -62,7 +62,7 @@ include('include/head.php');
                                     <td><?php echo $row->vega ; ?></td>
                                     <td><?php echo $row->nomFichier ; ?></td>
                                  
-                                    <td> <a href="#">Loop </a>|<a href="<?php echo base_url(); ?>index.php/home/download/<?php echo $row->nomFichier ; ?>"> télécharger </a>|<a href="<?php echo base_url(); ?>index.php/home/delete_data/<?php echo $row->id ; ?>/<?php echo $row->nomFichier ; ?>" class="delete_data" "> Supprimer </a> 
+                                    <td> <a class="fancybox" data-fancybox-type="iframe" href="<?php echo base_url(); ?>uploads/<?php echo $row->nomFichier; ?>">Loop </a>|<a href="<?php echo base_url(); ?>index.php/home/download/<?php echo $row->nomFichier ; ?>"> télécharger </a>|<a href="<?php echo base_url(); ?>index.php/home/delete_data/<?php echo $row->id ; ?>/<?php echo $row->nomFichier ; ?>" class="delete_data" "> Supprimer </a> 
 									<br>
 									 
 								
