@@ -11,10 +11,10 @@
 
                 </ul>
             </li>
-            <?php if($role!=2){ ?>
-                  <li><a href="<?php echo base_url(); ?>index.php/parametrage"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Parametrage</a></li>
-           <?php  } ?>
-          
+            <li><a href="<?php echo base_url(); ?>index.php/biblio"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>  Bibliothèque</a></li>
+            <?php if ($role != 2) { ?>
+                <li><a href="<?php echo base_url(); ?>index.php/parametrage"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Parametrage</a></li>
+           <?php } ?>
         </ul>
     </nav>
 </div>
