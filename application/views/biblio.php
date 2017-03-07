@@ -2,11 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
 ?>﻿
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="<?php echo base_url(); ?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
 <body>
 
     <div class="container-fluid">
         <?php include('include/header.php'); ?>
-
+        <?php include('include/fancy.php'); ?>
         <!-- ROW END -->
         <div class="row content">
             <!-- Colonne du Menu -->
@@ -15,7 +17,7 @@ include('include/head.php');
             <div class="col-md-9"> <!-- Début partie des onglets -->
 
                 <!-- Tab panes -->
-                <div class="tab-content">
+                <div class="panel tab-content">
                     <div style="overflow: auto;" class="tab-panel fade active in" >
                         <div id="panel-table" class="panel panel-default">
                             <div class="panel-body">              
@@ -61,7 +63,7 @@ include('include/head.php');
                                 <tr>
                                     <th>Calendrier</th>
                                     <th>Job</th>
-                                     <th>Vega</th>
+                                    <th>Vega</th>
                                     <th>Fichier</th>
                                     <th>Action</th>
                                 </tr>
