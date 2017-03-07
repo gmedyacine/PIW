@@ -25,12 +25,16 @@ class Home extends Home_Controller {
     }
 
     public function projection($id) {
-        $dataPrj = $this->projection->getProjection($id);
+
+        $retPrj = $this->projection->getProjection($id);
+        $dataPrj=$retPrj["data"];
         $dataColonneNames = $this->projection->getNameColonne($id);
         $this->data["dataTable"] = json_encode($dataPrj);
         $this->data["dataNameColonne"] = json_encode($dataColonneNames);
         $this->data["id_projection"] = $id;
         $this->data["title"] = "Afficher Ma projection";
+        $lastDate = $retPrj["lastDate"];
+        $this->data['lastDate'] = json_encode($lastDate);
         $this->load->view("projection", $this->data);
     }
 
@@ -39,7 +43,8 @@ class Home extends Home_Controller {
         $date_fin = $this->input->post('date_fin');
 
         $id_projection = $this->input->post('idPrj');
-        $dataPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin);
+        $retPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin);
+        $dataPrj=$retPrj["data"];
         $datas = json_encode($dataPrj);
         header('Content-Type: application/json');
         echo $datas;
@@ -94,6 +99,7 @@ class Home extends Home_Controller {
 
     public function biblio() {
         $data = $this->data;
+        $data["idBib"]=json_encode("bib_vega");
         $data["fetch_data"] = $this->files->fetch_data();
         $this->load->view("biblio", $data);
     }

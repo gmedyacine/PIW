@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
-    var d = new Date();
+    var d =getLastDate(); 
     $("#date_fin_filtre").val($.datepicker.formatDate('dd/mm/yy', d));
     d.setMonth(d.getMonth() - 1);
-    $("#date_debut_filtre").val($.datepicker.formatDate('dd/mm/yy', d));
+   
     $("#filtre_date").click(function () {
         var date_debut = format_date($("#date_debut_filtre").val());
         var date_fin = format_date($("#date_fin_filtre").val());
@@ -59,7 +59,7 @@ $(document).ready(function () {
         } else {
             var perPage = 15;
         }
-        $("#mainTables").DataTable();
+        $("#mainTables").DataTable( { "order": [] });
 
     }
 
@@ -73,6 +73,15 @@ $(document).ready(function () {
         var b = s.split(/\D/);
         return b.reverse().join('-');
 
+    }
+    
+    function getLastDate(){
+        if(lastDate.length==0){
+            return new Date();
+        }
+        var dateStr=lastDate.split(" ");
+        var dateJr=dateStr[0].split("-");
+        return  new Date(dateJr[0], dateJr[1] - 1, dateJr[2]);
     }
     
 
