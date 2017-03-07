@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    $(".fancybox").fancybox({
+       $(".fancybox").fancybox({
         'width': 600, // or whatever
         'height': 320,
         'type': 'iframe'
-    });
-     paginate("#mainTablesBib", 'tbody tr', 15);
-    checkViewPageNumber();
+    }); 
+    $("#mainTablesBib").DataTable();
+    //checkViewPageNumber();
    function checkViewPageNumber() {
         var action = $('.pager').find('.page-number').length > 25;
         if (action) {
