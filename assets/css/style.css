@@ -164,4 +164,6 @@ div.dataTables_filter{
     margin-top: 1em !important;
     margin-left: 2.3em;
 }
-
+#ul_bib li{
+    text-transform: uppercase;
+}

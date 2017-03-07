@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
-    var d = new Date();
+    var d =getLastDate(); 
     $("#date_fin_filtre").val($.datepicker.formatDate('dd/mm/yy', d));
     d.setMonth(d.getMonth() - 1);
-    $("#date_debut_filtre").val($.datepicker.formatDate('dd/mm/yy', d));
+   
     $("#filtre_date").click(function () {
         var date_debut = format_date($("#date_debut_filtre").val());
         var date_fin = format_date($("#date_fin_filtre").val());
@@ -59,7 +59,7 @@ $(document).ready(function () {
         } else {
             var perPage = 15;
         }
-        $("#mainTables").DataTable();
+        $("#mainTables").DataTable( { "order": [] });
 
     }
 
@@ -74,18 +74,16 @@ $(document).ready(function () {
         return b.reverse().join('-');
 
     }
-    function checkViewPageNumber() {
-        var action = $('.pager').find('.page-number').length > 25;
-        if (action) {
-            $.each($('.page-number'), function (index, elem) {
-                if (index == 3)
-                    $(elem).after('    ......');
-                if (index > 3 && index < ($('.page-number').length - 3)) {
-                    $(elem).hide();
-                }
-            });
+    
+    function getLastDate(){
+        if(lastDate.length==0){
+            return new Date();
         }
+        var dateStr=lastDate.split(" ");
+        var dateJr=dateStr[0].split("-");
+        return  new Date(dateJr[0], dateJr[1] - 1, dateJr[2]);
     }
+    
 
 });
 

@@ -9,7 +9,7 @@ Class Projection extends CI_Model {
         "4" => array("table" => "ipw_status_task", "date_filtre" => "startup_time"),
         "5" => array("table" => "ipw_suivi_vega", "date_filtre" => "date_suivi"));
 
-    public function getProjection($id_projection = "0", $per_page=10,$page=0,$date_debut = null, $date_fin = null) {
+    public function getProjection($id_projection = "0",$date_debut = null, $date_fin = null, $per_page=2000,$page=0) {
         if (!array_key_exists($id_projection, $this->tab_projection_id)) {
             return;
         }
@@ -29,7 +29,8 @@ Class Projection extends CI_Model {
         $this->db->limit($per_page,$page);
         $query = $this->db->get();
 
-        $ret = $query->result();
+        $ret["data"] = $query->result();
+        $ret["lastDate"]=!empty($ret["data"]) ? $ret["data"][0]->$filtre : "";
         return $ret;
     }
 

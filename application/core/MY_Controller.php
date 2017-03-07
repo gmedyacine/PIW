@@ -2,7 +2,7 @@
 
 class MY_Controller extends CI_Controller {
 
-    protected $data = array('title' => 'Login', "id_projection" => 0, 'role' => 2);
+    protected $data = array('title' => 'Login', "id_projection" => 0,"idBib"=>0, 'role' => 2);
 
     public function __construct() {
         parent::__construct();
