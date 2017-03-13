@@ -22,7 +22,7 @@ include('include/head.php');
                 <div class="panel tab-content">
                     <div style="overflow: auto;" class="tab-panel fade active in" >
                         <div id="panel-table" class="panel" style="width: 112%;margin-right: 0 !important">
-                            <div class="panel-body">              
+                            <div class="panel-body" style="width: 85%">              
                                 <?php if ($role != 2) { ?>
                                     <div class="form-group">
                                         <form action="<?php echo base_url(); ?>index.php/home/upload_file" method="post" enctype="multipart/form-data" >
@@ -92,7 +92,8 @@ include('include/head.php');
                                             <td><?php echo $row->vega; ?></td>
                                             <td><?php echo $row->nom_fichier; ?></td>
                                             <td> 
-                                                <a class="fancybox" data-fancybox-type="iframe" href="http://docs.google.com/gview?url=<?php echo base_url(); ?>uploads/<?php echo $row->nom_fichier; ?>&embedded=true">Loop </a>|
+                                                <a class="fancybox" data-fancybox-type="iframe" 
+                                                 <?php if($row->nom_fichier) { ?>  href="http://docs.google.com/gview?url=<?php echo base_url(); ?>uploads/<?php echo $row->nom_fichier; ?>&embedded=true" <?php }else{ ?> href="#" <?php } ?> >Loop </a>|
                                                 <a href="<?php echo base_url(); ?>index.php/home/download/<?php echo $row->nom_fichier; ?>"> télécharger </a>|
                                                 <?php if ($role != 2) { ?>
                                                     <a href="<?php echo base_url(); ?>index.php/home/delete_data/<?php echo $row->id; ?>/<?php echo $row->nom_fichier; ?>" class="delete_data" "> Supprimer </a> 
