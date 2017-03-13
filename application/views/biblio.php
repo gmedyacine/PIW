@@ -35,6 +35,7 @@ include('include/head.php');
                                                 <input name="calender" type="text" value="<?php echo set_value('calender'); ?>" class="form-control" >
                                                 </br>
                                             </div>
+
                                             <label class="control-label col-sm-2" for="job">Job</label>
                                             <div class="nom col-sm-10">
                                                 <input name="job" type="text" value="<?php echo set_value('job'); ?>" class="form-control" >
@@ -43,6 +44,11 @@ include('include/head.php');
                                             <label class="control-label col-sm-2" for="vega">Vega</label>
                                             <div class="nom col-sm-10">
                                                 <input name="vega" type="text" value="<?php echo set_value('vega'); ?>" class="form-control" >
+                                                </br>
+                                            </div>
+                                            <label class="control-label col-sm-2" for="heure_lib">Heure lib</label>
+                                            <div class="nom col-sm-10">
+                                                <input name="heure_lib" type="text" value="<?php echo set_value('heure_lib'); ?>" class="form-control" >
                                                 </br>
                                             </div>
                                             <label class="control-label col-sm-2" for="file">Fichier </label>
