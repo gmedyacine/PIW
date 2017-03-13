@@ -9,7 +9,7 @@ include('include/head.php');
     <div class="container-fluid">
 
         <?php include('include/header.php'); ?>
-       <?php include('include/dataTables.php'); ?>
+        <?php include('include/dataTables.php'); ?>
         <?php include('include/fancy.php'); ?> 
         <!-- ROW END -->
         <div class="row content">
@@ -21,7 +21,7 @@ include('include/head.php');
                 <!-- Tab panes -->
                 <div class="panel tab-content">
                     <div style="overflow: auto;" class="tab-panel fade active in" >
-                        <div id="panel-table" class="panel panel-default">
+                        <div id="panel-table" class="panel" style="width: 112%;margin-right: 0 !important">
                             <div class="panel-body">              
                                 <?php if ($role != 2) { ?>
                                     <div class="form-group">
@@ -65,6 +65,7 @@ include('include/head.php');
                             <thead>
                                 <tr>
                                     <th>Calendrier</th>
+                                    <th>heure lib</th>
                                     <th>Job</th>
                                     <th>Vega</th>
                                     <th>Fichier</th>
@@ -80,6 +81,7 @@ include('include/head.php');
                                         <tr>
 
                                             <td><?php echo $row->calendrier; ?></td>
+                                            <td><?php echo $row->heure_lib; ?></td>
                                             <td><?php echo $row->job; ?></td>
                                             <td><?php echo $row->vega; ?></td>
                                             <td><?php echo $row->nom_fichier; ?></td>
@@ -114,6 +116,6 @@ include('include/head.php');
             </div>
         </div>
     </div>
-        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/biblio.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/biblio.js"></script>
 
-        <?php include('include/footer.php'); ?>
+    <?php include('include/footer.php'); ?>

@@ -17,7 +17,7 @@ class Home_Controller extends MY_Controller {
         "2" => "TEMPS CHARGEMENT ",
         "3" => "COMPTE RENDU MASTERI",
         "4" => "STATUS TACHES",
-        "5" => "SUIVI VEGA");
+        "5" => "TACHES VEGA");
 
     public function __construct() {
         parent::__construct();
