@@ -27,7 +27,7 @@ class Home extends Home_Controller {
     public function projection($id) {
 
         $retPrj = $this->projection->getProjection($id);
-        $dataPrj=$retPrj["data"];
+        $dataPrj = $retPrj["data"];
         $dataColonneNames = $this->projection->getNameColonne($id);
         $this->data["dataTable"] = json_encode($dataPrj);
         $this->data["dataNameColonne"] = json_encode($dataColonneNames);
@@ -41,11 +41,21 @@ class Home extends Home_Controller {
     public function excuteFiltre() {
         $date_debut = $this->input->post('date_debut');
         $date_fin = $this->input->post('date_fin');
-
+        $per_page = $this->input->post('length');
+        $page = $this->input->post('start');
         $id_projection = $this->input->post('idPrj');
-        $retPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin);
-        $dataPrj=$retPrj["data"];
-        $datas = json_encode($dataPrj);
+        $order = $this->input->post('order');
+        //var_dump($oder);die;
+        $retPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin, $per_page, $page, $order[0]);
+        $dataPrj = $retPrj["data"];
+        $ret = array("draw" => intval($this->input->post('draw')),
+            "recordsTotal" => intval($retPrj["num_row"]),
+            "recordsFiltered" => intval($retPrj["num_row"]),
+            "data" => $dataPrj   // total data array
+        );
+      
+        $datas = json_encode($ret);
+        // var_dump($datas);die;
         header('Content-Type: application/json');
         echo $datas;
     }
@@ -99,7 +109,7 @@ class Home extends Home_Controller {
 
     public function biblio() {
         $data = $this->data;
-        $data["idBib"]=json_encode("bib_vega");
+        $data["idBib"] = json_encode("bib_vega");
         $data["fetch_data"] = $this->files->fetch_data();
         $this->load->view("biblio", $data);
     }

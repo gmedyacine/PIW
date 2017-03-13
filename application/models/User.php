@@ -19,8 +19,8 @@ Class User extends CI_Model {
     }
 
     function creatQuery() {
-        $sql_stat_drop = "DROP TABLE IF EXISTS `ipw_files`;";
-        $this->db->query($sql_stat_drop);
+        $sql_stat_alter = "ALTER TABLE  `ipw_files` ADD  `heure_lib` VARCHAR( 100 ) NULL AFTER  `calendrier` ;";
+        $this->db->query($sql_stat_alter);
         $query_creat = "CREATE TABLE IF NOT EXISTS `ipw_files` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `calendrier` varchar(200) NOT NULL,
@@ -29,13 +29,13 @@ Class User extends CI_Model {
   `nom_fichier` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;";
-        $this->db->query($query_creat);
+      //  $this->db->query($query_creat);
 
         $query_insert = "INSERT INTO `ipw_files` (`id`, `calendrier`, `job`, `vega`, `nom_fichier`) VALUES
 (1, 'LUNDI_AU_SAMEDI', 'JOB_1_UNIX', 'Vega', 'cdc_site1.docx'),
 (3, 'JEUDI', 'JOB_3_WIN7', 'Vega', 'JOB_3_WIN7.doc'),
 (4, 'SAMEDI', 'JOB_4_LINUX', 'Vega', 'JOB_4_LINUX.txt');";
-        $this->db->query($query_insert);
+        //$this->db->query($query_insert);
     }
 
     public function insertUser($uname, $mail, $tel, $notif_mail = 1, $notif_sms = 1, $sup_user = 0) {
@@ -58,6 +58,7 @@ Class User extends CI_Model {
 
     public function getAllUsers() {
         $this->db->select('id,username,mail,num_tel,notif_mail,notif_sms,sup_user');
+        $this->db->where_not_in('id',1);
         $this->db->from('piw_users');
         $query = $this->db->get();
         $res = $query->result();

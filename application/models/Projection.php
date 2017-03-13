@@ -3,13 +3,13 @@
 Class Projection extends CI_Model {
 
     protected $tab_projection_id = array(
-        "1" => array("table" => "ipw_charge_reports_stat", "date_filtre" => "job_date"),
-        "2" => array("table" => "ipw_chrg_rep_temps", "date_filtre" => "date_chargement"),
-        "3" => array("table" => "ipw_crt_masteri", "date_filtre" => "date_oper"),
-        "4" => array("table" => "ipw_status_task", "date_filtre" => "startup_time"),
-        "5" => array("table" => "ipw_suivi_vega", "date_filtre" => "date_suivi"));
+        "1" => array("table" => "ipw_charge_reports_stat", "date_filtre" => "job_date","tab_colonne"=>array("proj_code","job_count","status","job_date")),
+        "2" => array("table" => "ipw_chrg_rep_temps", "date_filtre" => "date_chargement","tab_colonne"=>array("report_nom","date_chargement")),
+        "3" => array("table" => "ipw_crt_masteri", "date_filtre" => "date_oper","tab_colonne"=>array("programme","date_oper","temps_execution")),
+        "4" => array("table" => "ipw_status_task", "date_filtre" => "startup_time","tab_colonne"=>array("plan_id","plan_name","nom_tache","startup_time","endup_time","elapsed","statut","monitor","alias","agent","jcl_procedure")),
+        "5" => array("table" => "IPW_TACHES_VEGA", "date_filtre" => "date_suivi","tab_colonne"=>array("scheduled","date_suivi","tache","num_tsk","","plan_id","plan_name","jcl_procedure","libelle","comments")));
 
-    public function getProjection($id_projection = "0",$date_debut = null, $date_fin = null, $per_page=2000,$page=0) {
+    public function getProjection($id_projection = "0",$date_debut = null, $date_fin = null, $per_page=8000,$page=0,$colone_order=null) {
         if (!array_key_exists($id_projection, $this->tab_projection_id)) {
             return;
         }
@@ -25,12 +25,27 @@ Class Projection extends CI_Model {
         if ($date_fin && $this->validateDate($date_fin)) {
             $this->db->where($filtre . " <=", $date_fin);
         }
-        $this->db->order_by($filtre, " desc");
+        $db=clone $this->db;
+        $num_row=$db->get()->num_rows();
+        
+        if(!empty($colone_order)){
+            $this->db->order_by($this->tab_projection_id[$id_projection]["tab_colonne"][$colone_order["column"]-1], $colone_order["dir"]);
+        }
+        else{
+               $this->db->order_by($filtre, " desc");
+        }
+        
+        
         $this->db->limit($per_page,$page);
         $query = $this->db->get();
+        $arrayAss=$query->result_array();
+//echo         $this->db->last_query(); die;
 
-        $ret["data"] = $query->result();
-        $ret["lastDate"]=!empty($ret["data"]) ? $ret["data"][0]->$filtre : "";
+        foreach ($arrayAss as $row){
+            $ret["data"][] = array_values($row);
+        }
+        $ret["num_row"]=$num_row;
+        $ret["lastDate"]=!empty($arrayAss) ? $arrayAss[0][$filtre] : "";
         return $ret;
     }
 
