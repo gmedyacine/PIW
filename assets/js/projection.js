@@ -46,6 +46,7 @@ $(document).ready(function () {
                 }
 
             });
+           $("#mainTables td").addClass("whiteSpace");  
         } else {
             var date_debut = format_date($("#date_debut_filtre").val());
             var date_fin = format_date($("#date_fin_filtre").val());
