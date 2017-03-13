@@ -150,8 +150,8 @@ class Home extends Home_Controller {
             $upload_data = $this->upload->data();
             $name = $upload_data['file_name'];
             if (empty($row_id)) {
-
-                $this->form_validation->set_rules('job', 'Job', 'trim|required|xss_clean');
+ $this->form_validation->set_rules('job', 'Job', 'trim|required|xss_clean');
+				$this->form_validation->set_rules('heure_lib', 'heure_lib', 'trim|required|xss_clean');
                 $this->form_validation->set_rules('calender', 'Calender', 'trim|required|xss_clean');
                 $this->form_validation->set_rules('vega', 'Vega', 'required|xss_clean');
 
@@ -159,9 +159,10 @@ class Home extends Home_Controller {
                     $this->load->view('biblio', $this->data);
                 } else {
                     $calender = $this->input->post('calender');
+					$heure_lib = $this->input->post('heure_lib');
                     $job = $this->input->post('job');
                     $vega = $this->input->post('vega');
-                    $data_to_add = array("job" => $job, "calendrier" => $calender, "vega" => $vega, "nom_fichier" => $name);
+                    $data_to_add = array("job" => $job, "calendrier" => $calender, "heure_lib" => $heure_lib, "vega" => $vega, "nom_fichier" => $name);
                     $this->files->add_file($data_to_add);
                     redirect('biblio', 'refresh');
                 }
