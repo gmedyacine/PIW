@@ -29,7 +29,7 @@ Class Projection extends CI_Model {
         $num_row=$db->get()->num_rows();
         
         if(!empty($colone_order)){
-            $this->db->order_by($this->tab_projection_id[$id_projection]["tab_colonne"][$colone_order["column"]-1], $colone_order["dir"]);
+            $this->db->order_by($this->tab_projection_id[$id_projection]["tab_colonne"][$colone_order["column"]], $colone_order["dir"]);
         }
         else{
                $this->db->order_by($filtre, " desc");
