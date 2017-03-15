@@ -46,7 +46,7 @@ $(document).ready(function () {
                 }
 
             });
-           $("#mainTables td").addClass("whiteSpace");  
+
         } else {
             var date_debut = format_date($("#date_debut_filtre").val());
             var date_fin = format_date($("#date_fin_filtre").val());
@@ -100,6 +100,21 @@ $(document).ready(function () {
         var dateJr = dateStr[0].split("-");
         return  new Date(dateJr[0], dateJr[1] - 1, dateJr[2]);
     }
+    $( document ).ajaxComplete(function( event, request, settings ) {
+        $("#mainTables td").addClass("whiteSpace");
+        if(idPrj==1||idPrj==4){
+            $.each($("#mainTables tr"),function(id,tr){
+                $.each($(tr).find("td"),function(i,td){
+                    if(i==7&&idPrj==4&&($(td).text().indexOf("OK")==-1&&$(td).text().indexOf("ok")==-1)){
+                        $(tr).addClass("bri");
+                    }
+                    if(i==3&&idPrj==1&&($(td).text().indexOf("OK")==-1&&$(td).text().indexOf("ok")==-1)){
+                        $(tr).addClass("bri");
+                    }
+                })
+            });
+         }
+     });
 
 
 })
