@@ -22,9 +22,10 @@ $(document).ready(function () {
     });
     $('#date_debut_filtre, #date_fin_filtre').datepicker({dateFormat: 'dd/mm/yy'});
     $("#panel-table h2").empty().append(projections[idPrj]);
-    $("#exportExcel").click(function () {
-        $('#mainTables').dataTable().fnDestroy();
-        refreshData("export");
+
+	$(".dropdown-menu #exportExcel").click(function () {
+    $('#mainTables').dataTable().fnDestroy();
+    refreshData("export");
     });
     function refreshData(texport) {
 
@@ -34,7 +35,7 @@ $(document).ready(function () {
         });
         var thead = $('<thead>').append(tr).addClass('table-success');
         $("#mainTables").empty().append(thead);
-        if (typeof texport == "undefined") {
+        if (typeof texport == "undefined") { // chargement par défaut "sans paramètres"
             $("#mainTables").DataTable({
                 "order": [],
                 "bProcessing": true,
