@@ -7,18 +7,34 @@ $(document).ready(function () {
     $("#filtre_date").click(function () {
         var date_debut = format_date($("#date_debut_filtre").val());
         var date_fin = format_date($("#date_fin_filtre").val());
-        $("#loader").show();
-        $.ajax({
-            type: "POST",
-            url: base_url + "index.php/filtre",
-            data: {date_debut: date_debut, date_fin: date_fin, idPrj: idPrj}})
-                .done(function (dataFiltre) {
-                    $('#mainTables').dataTable().fnDestroy();
-                    dataTable = dataFiltre;
-                    refreshData("filtre_date");
-                    $("#loader").hide();
-                });
-        $("#mainTables").DataTable();
+              //date validation
+        if (date_debut > date_fin)
+        {
+            $("#date_debut_filtre").addClass("has-error").after($("#msg_error").css('visibility', 'visible'));
+
+        }
+        else
+        {
+
+            $("#date_debut_filtre").removeClass("has-error").after($("#msg_error").css('visibility', 'hidden'));
+
+
+            $("#loader").show();
+            $.ajax({
+                type: "POST",
+                url: base_url + "index.php/filtre",
+                data: {date_debut: date_debut, date_fin: date_fin, idPrj: idPrj}})
+                    .done(function (dataFiltre) {
+                        $('#mainTables').dataTable().fnDestroy();
+                        dataTable = dataFiltre;
+                        refreshData("filtre_date");
+                        $("#loader").hide();
+                    });
+            $("#mainTables").DataTable();
+
+
+        }
+        //End date validation
     });
     $('#date_debut_filtre, #date_fin_filtre').datepicker({dateFormat: 'dd/mm/yy'});
     $("#panel-table h2").empty().append(projections[idPrj]);
