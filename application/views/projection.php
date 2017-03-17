@@ -27,6 +27,7 @@ include('include/dataTables.php'); ?>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <p>Date de début<input type="text"  class="datepicker filtre_ligne" id="date_debut_filtre" /></p>
+										<span id="msg_error"  style="font-size:70%;color:red;visibility:hidden;"> Date non valide</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
