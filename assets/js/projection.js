@@ -115,7 +115,7 @@ $(document).ready(function () {
 				
                     .done(function (dataFiltre) {
                           
-						   alert(dataFiltre.recordsFiltered);
+						  // alert(dataFiltre.recordsFiltered);
 						  dataTable = dataFiltre;
 															
 					    var tbody = $('<tbody></tbody>').empty();
