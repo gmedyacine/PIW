@@ -55,9 +55,9 @@ include('include/dataTables.php');
 
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a id="exportExcel" href="#">Exporter le filtre execut&eacute;</a></li>
-                                    <li><a href="#">Exporter les donn&eacute;es de jour</a></li>
-                                    <li><a  href="#">Exporter toute la table</a></li>
+                                    <li><a id="exportExcelFiltre" href="#">Exporter le filtre execut&eacute;</a></li>
+                                    <li><a id="exportExcelToDay" href="#">Exporter les donn&eacute;es de jour</a></li>
+                                    <li><a  id="exportExcelAll" href="#">Exporter toute la table</a></li>
 
                                 </ul>
 
