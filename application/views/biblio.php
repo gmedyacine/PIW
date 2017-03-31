@@ -30,18 +30,18 @@ include('include/head.php');
                                                 <?php echo validation_errors(); ?>
                                                 <?php echo isset($error_upload) ? $error_upload['error'] : ""; ?>
                                             </div>
-                                            <label class="control-label col-sm-2" for="calender">Calender</label>
+                                            <label class="control-label col-sm-2" for="calender">Calendrier</label>
                                             <div class="nom col-sm-10">
                                                 <input name="calender" type="text" value="<?php echo set_value('calender'); ?>" class="form-control" >
                                                 </br>
                                             </div>
 
-                                            <label class="control-label col-sm-2" for="job">Job</label>
+                                            <label class="control-label col-sm-2" for="job">Titre</label>
                                             <div class="nom col-sm-10">
                                                 <input name="job" type="text" value="<?php echo set_value('job'); ?>" class="form-control" >
                                                 </br>
                                             </div>
-                                            <label class="control-label col-sm-2" for="vega">Vega</label>
+                                            <label class="control-label col-sm-2" for="vega">Categorie</label>
                                             <div class="nom col-sm-10">
                                                 <input name="vega" type="text" value="<?php echo set_value('vega'); ?>" class="form-control" >
                                                 </br>
@@ -71,9 +71,9 @@ include('include/head.php');
                             <thead>
                                 <tr>
                                     <th>Calendrier</th>
-                                    <th>heure lib</th>
-                                    <th>Job</th>
-                                    <th>Vega</th>
+                                    <th class="whiteSpace">heure lib</th>
+                                    <th  class="whiteSpace">Titre</th>
+                                    <th>Categorie </th>
                                     <th>Fichier</th>
                                     <th>Action</th>
                                 </tr>
@@ -88,7 +88,7 @@ include('include/head.php');
 
                                             <td><?php echo $row->calendrier; ?></td>
                                             <td><?php echo $row->heure_lib; ?></td>
-                                            <td><?php echo $row->job; ?></td>
+                                            <td  class="whiteSpace"><?php echo $row->job; ?></td>
                                             <td><?php echo $row->vega; ?></td>
                                             <td><?php echo $row->nom_fichier; ?></td>
                                             <td> 

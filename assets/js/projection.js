@@ -7,6 +7,12 @@ $(document).ready(function () {
     $("#filtre_date").click(function () {
         var date_debut = format_date($("#date_debut_filtre").val());
         var date_fin = format_date($("#date_fin_filtre").val());
+        if(!validateDate(date_debut,date_fin)){
+            $("#date_debut_filtre").addClass("has-error").after($("#msg_error").css('visibility', 'visible'));
+            return;
+        }else{
+            $("#date_debut_filtre").removeClass("has-error").after($("#msg_error").css('visibility', 'hidden')); 
+        }
         $("#loader").show();
         $.ajax({
             type: "POST",
@@ -105,7 +111,7 @@ $(document).ready(function () {
         if(idPrj==1||idPrj==4){
             $.each($("#mainTables tr"),function(id,tr){
                 $.each($(tr).find("td"),function(i,td){
-                    if(i==7&&idPrj==4&&($(td).text().indexOf("OK")==-1&&$(td).text().indexOf("ok")==-1)){
+                    if(i==9&&idPrj==4&&($(td).text().indexOf("OK")==-1&&$(td).text().indexOf("ok")==-1)){
                         $(tr).addClass("bri");
                     }
                     if(i==3&&idPrj==1&&($(td).text().indexOf("OK")==-1&&$(td).text().indexOf("ok")==-1)){
@@ -115,8 +121,19 @@ $(document).ready(function () {
             });
          }
      });
+     
+    
+    function validateDate(dateDebut,dateFin){
+        if(dateDebut>dateFin){
+            return false;
+        }
+        else{
+            return true;
+        }
+    } 
+     
+});
 
 
-})
-        ;
+
 
