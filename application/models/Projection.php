@@ -36,7 +36,7 @@ Class Projection extends CI_Model
         if ($date_debut == $date_fin) {
             $this->egalDateFiltre = true;
         }
-        if ($date_debut && $datDeb=$this->validateDate($date_debut . " 00:00:01")) {
+        if ($date_debut && $datDeb=$this->validateDate($date_debut . " 00:00:00")) {
             $this->db->where($filtre . " >=", $datDeb);
         }
 
