@@ -21,7 +21,8 @@ include('include/head.php');
                 <!-- Tab panes -->
                 <div class="panel tab-content">
                     <div style="overflow: auto;" class="tab-panel fade active in" >
-                        <div id="panel-table" class="panel" style="width: 112%;margin-right: 0 !important">
+                        <button type="button"  id="show-form" class="btn btn-info">Ajouter un document</button>
+                        <div id="panel-table" class="panel" style="width: 112%;display: none; margin-right: 0 !important">
                             <div class="panel-body" style="width: 85%">              
                                 <?php if ($role != 2) { ?>
                                     <div class="form-group">
