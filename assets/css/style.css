@@ -21,6 +21,12 @@ body {
 #panel-table
 {
     margin-right:50;
+    
+}
+#show-form{
+    float: left;
+    margin: 30px;
+    width: 94%;
 }
 
 .panel-reduit-4, .panel-reduit-5{
@@ -36,7 +42,9 @@ body {
 .btn-bleu-filtre{
     float:right;	
 }
-
+.whiteSpace{
+    white-space: nowrap;
+}
 .table
 {
     margin-right:20;

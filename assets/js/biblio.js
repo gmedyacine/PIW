@@ -5,6 +5,11 @@ $(document).ready(function () {
         'type': 'iframe'
     }); 
     $("#mainTablesBib").DataTable();
+    
+    $("#show-form").click(function(){
+        $("#panel-table").toggle();
+    });
+    
     //checkViewPageNumber();
    function checkViewPageNumber() {
         var action = $('.pager').find('.page-number').length > 25;
