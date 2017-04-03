@@ -20,8 +20,15 @@
                 </ul>
             </li>
             <?php if ($role != 2) { ?>
-                <li><a href="<?php echo base_url(); ?>index.php/parametrage"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Parametrage</a></li>
-                <?php } ?>
+                <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Parametrage</a>
+				 <ul id="ul_param">
+			        <li><a href="<?php echo base_url(); ?>index.php/parametrage">Gestion des utilisateurs</a></li>
+				    <li><a href="<?php echo base_url(); ?>index.php/add_biblio">Gestion des bibliothèques</a></li>
+                    <li><a href="#">Gestion des rapports</a></li>
+                
+                </ul>
+				</li>
+               	 <?php } ?>
         </ul>
     </nav>
 </div>
