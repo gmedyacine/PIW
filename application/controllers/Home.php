@@ -113,6 +113,12 @@ class Home extends Home_Controller {
         $data["fetch_data"] = $this->files->fetch_data();
         $this->load->view("biblio", $data);
     }
+	
+    public function add_bib() {
+
+	   $this->load->view("addBib");
+	  
+	  }
 
     public function download($file) {
         $this->load->helper('download');
