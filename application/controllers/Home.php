@@ -114,7 +114,7 @@ class Home extends Home_Controller {
         $this->load->view("biblio", $data);
     }
 	
-    public function add_bib() {
+    public function add_biblio() {
 
 	   $this->load->view("addBib");
 	  
