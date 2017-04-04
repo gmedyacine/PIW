@@ -14,13 +14,24 @@ include('include/head.php');
             <!-- Colonne du Menu -->
             <?php include('include/menu.php'); ?>
 
-            <div class="col-md-9"> <!-- Début partie des onglets -->
-
+            <div class="col-md-9 "> <!-- Début partie des onglets -->
+                <ul class="nav nav-tabs " role="tablist">
+                    <li class="active">
+                        <a href="#biblio" class="tab" role="tab" data-toggle="tab">
+                            Ajouter Bibliothèque
+                        </a>
+                    </li>
+					<li>
+                        <a href="#biblio" class="tab" role="tab" data-toggle="tab">
+                           Ajouter Sous-bibliothèque
+                        </a>
+                    </li>
+                </ul>
 
                 <!-- Tab panes -->
-               
-              
-                        <div class="panel panel-default">
+                <div class="tab-content">
+                    <div class="tab-panel fade active in" id="biblio">
+                        <div id="panel-table" class="panel panel-default">
                             <div class="panel-body">              
 
                                 <div class="form-group">
@@ -28,14 +39,14 @@ include('include/head.php');
                               
                                     <label class="control-label col-sm-2" for="nom">Nom</label>
                                     <div class="nom col-sm-10">
-                                        <input name="nom" type="text"  class="form-control" >
+                                        <input name="nom" type="text"  required="required" class="form-control " >
                                         </br>
                                     </div>
 
                                     </br>
                                     <label class="control-label col-sm-2" for="description">Description </label>
-                                    <div class="mail col-sm-10">
-                                        <input name="description" type="text" class="form-control" >
+                                    <div class="desc col-sm-10">
+                                        <input name="description" type="text" class="form-control " >
                                         </br>
                                     </div>
 
@@ -49,8 +60,7 @@ include('include/head.php');
                                 </div>
                             </div>
                         </div>
-                        <div  class="panel panel-default">
-                            <div class="panel-body">  
+
                         <table  class="table table-striped">
                             <thead>
                                 <tr>
@@ -87,13 +97,16 @@ include('include/head.php');
                                     </tr>
                                 </tbody>
                         </table>   
-                        </div>
-                       </div>						
-               
+                    </div>
+				
 
                     <script src="<?php echo base_url(); ?>assets/js/users.js"></script>
-              
+                </div> <!-- Fin partie du tableau -->
                 <!-- ROW END -->
             </div>
+	
         </div>
+		</div>
+		
         <?php include('include/footer.php'); ?>
+		
