@@ -45,8 +45,9 @@ class Home extends Home_Controller {
         $page = $this->input->post('start');
         $id_projection = $this->input->post('idPrj');
         $order = $this->input->post('order');
+        $search = $this->input->post('search');
         //var_dump($oder);die;
-        $retPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin, $per_page, $page, $order[0]);
+        $retPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin, $per_page, $page, $order[0],$search['value']);
         $dataPrj = $retPrj["data"];
         $ret = array("draw" => intval($this->input->post('draw')),
             "recordsTotal" => intval($retPrj["num_row"]),
