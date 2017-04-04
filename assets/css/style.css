@@ -185,3 +185,10 @@ div.dataTables_filter{
     color:red;
     visibility:hidden;
 }
+
+
+.tab{
+    background-color: #ccc;
+    color: rgba(0, 0, 0, .5);
+    text-decoration: none;
+}
