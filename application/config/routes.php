@@ -54,6 +54,7 @@ $route['connexion'] = 'verifyLogin';
 $route['home'] = 'home';
 $route['parametrage']='home/parametrage';
 $route['biblio']='home/biblio';
+$route['add_biblio']='home/add_biblio';
 $route['download']='home/download/$file';
 $route["notification"]='login/sendNotif';
 $route['filtre']='home/excuteFiltre';

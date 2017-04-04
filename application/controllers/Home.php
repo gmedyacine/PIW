@@ -9,10 +9,14 @@ class Home extends Home_Controller {
         $this->load->model('projection', '', TRUE);
         $this->load->model('user', '', TRUE);
         $this->load->model('files', '', TRUE);
+		$this->load->model('biblio', '', TRUE);
+	
 
         $this->load->helper('form');
         $this->load->helper('file');
         $this->load->helper('url');
+		
+		$this->load->library('session');
     }
 
     public function index() {
@@ -114,6 +118,33 @@ class Home extends Home_Controller {
         $data["fetch_data"] = $this->files->fetch_data();
         $this->load->view("biblio", $data);
     }
+	
+		  public function add_biblio() {
+		$this->load->helper(array('form'));
+		 
+        $this->load->helper('security');
+        $this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('nom', 'Mom', 'required');
+        
+		
+		  if ($this->form_validation->run() == FALSE) {
+            //Field validation failed.  User redirected to login page
+            $this->load->view('addBib', $this->data);
+        } else {
+	
+	   $nom = $this->input->post('nom');
+       $desc = $this->input->post('description');
+	   $data = array('lib_categ'=>$nom,'commentaire'=>$desc,'added_by' => '','added_at' =>date('Y-m-d H:i:s',time()));
+	    $this->biblio->add_biblio($data);
+  
+		  $this->load->view("addBib");
+        }
+
+  
+	  }
+
+	  
 
     public function download($file) {
         $this->load->helper('download');
