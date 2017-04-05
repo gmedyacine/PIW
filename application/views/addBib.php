@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
 ?>﻿
 
+<script type="text/javascript">
+    var dataCateg = <?php echo $users; ?>;
+</script>
 
 <body>
 
@@ -55,46 +58,29 @@ include('include/head.php');
                                     <div class="add">
                                         <input class="btn btn-success pull-right" type="submit" value="Ajouter"/>
                                     </div>
-
+                                        
                                     </form>
+									
                                 </div>
+								<div><?php echo $this->session->flashdata('msg'); ?> </div>
+					
+
+
                             </div>
                         </div>
 
-                        <table  class="table table-striped">
+                        <table id="tabCat" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>Nom</th>
                                     <th>Description</th>
+									<th>Added_by</th>
+									<th>Added_at</th>
                                     <th>Supprimer</th>
                                
                                 </tr>
                             </thead>
- <tbody>
-                                    <tr>
-                                        <td>SUIVI_VEGA</td>
-                                        <td></td>
-                           
-                                        <td><button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>MASTERI</td>
-                                        <td></td>
-                      
-                                        <td><button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>EDD</td>
-                                        <td></td>
-                                   
-                                        <td><button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>SAGE</td>
-                                        <td></td>
-                                   
-                                        <td><button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>
-                                    </tr>
+                                <tbody>
                                 </tbody>
                         </table>   
                     </div>
@@ -138,7 +124,7 @@ include('include/head.php');
                             </div>
                         </div>
 
-                        <table  class="table table-striped">
+                        <table  id="#" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>Nom (Sous-bibliothèque)</th>
@@ -164,11 +150,25 @@ include('include/head.php');
                   
                 </div> <!-- Fin partie du tableau -->
                 <!-- ROW END -->
+			
             </div>
 	
         </div>
 		</div>
-		  <script src="<?php echo base_url(); ?>assets/js/users.js"></script>
+
+
+   <script src="<?php echo base_url(); ?>assets/js/categ.js"></script>
+<script type="text/javascript">
+		
+		$(document).ready(function () {
+ 
+window.setTimeout(function() {
+    $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+        $(this).remove(); 
+    });
+}, 1000);
+ 
+});
+</script>
 
         <?php include('include/footer.php'); ?>
-		

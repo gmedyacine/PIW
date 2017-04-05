@@ -118,6 +118,18 @@ class Home extends Home_Controller {
         $this->load->view("biblio", $data);
     }
 	
+	    public function fetch_biblio() {
+        $data = $this->data;
+        $data["idCat"] = json_encode("categ");
+        $data["fetch_data"] = $this->biblio->fetch_categ();
+        $this->load->view("addBib", $data);
+    }
+	
+	    function delete_biblio($idCat) {
+        $this->biblio->delete_categ($idCat);
+        redirect('addBib', 'refresh');
+	}
+	
 		  public function add_biblio() {
 		$this->load->helper(array('form'));
 		 
@@ -135,9 +147,14 @@ class Home extends Home_Controller {
 	   $nom = $this->input->post('nom');
        $desc = $this->input->post('description');
 	   $data = array('lib_categ'=>$nom,'commentaire'=>$desc,'added_by' => '','added_at' =>date('Y-m-d H:i:s',time()));
-	    $this->biblio->add_biblio($data);
+	   $this->biblio->add_categ($data);
+
   
-		  $this->load->view("addBib");
+  //display success message
+        $this->session->set_flashdata('msg', '<div style="margin: 75 150 0px;" class="alert alert-success text-center">Insertion avec succès !! </div>');
+        redirect(base_url() . "index.php/add_biblio");	  
+	   
+		   $this->load->view("addBib");
         }
 
   
