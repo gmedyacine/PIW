@@ -25,6 +25,7 @@ class Home_Controller extends MY_Controller {
             redirect('login', 'refresh');
         }
         $dataLogin = $this->session->userdata('logged_in');
+        $this->data['id_user_connected'] = $dataLogin["id"];
         $this->data['role'] = $dataLogin["role"];
         $this->data["projections"] = json_encode($this->projections);
     }

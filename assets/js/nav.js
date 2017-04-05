@@ -19,4 +19,12 @@ $(document).ready(function(){
       $(this).next("ul").slideUp(350);
     }
   });
+  $.each($("#ul_param li"),function(id,val){
+       var idElem=$(val).attr("id");
+       if(idElem==id_param){
+            $("#ul_param").addClass("active");
+            $(val).addClass("active");
+       }
+    });
+  
 });

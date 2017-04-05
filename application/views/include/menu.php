@@ -2,6 +2,7 @@
 <script type="text/javascript">
     var base_url = "<?php echo base_url(); ?>";
     var projections = <?php echo $projections; ?>;
+    var id_param=<?php echo $id_param; ?>;
 </script>
 <div class="col-md-3">    <!-- Colonne du Menu -->
     <nav id="menu_gauche">
@@ -19,18 +20,18 @@
                     <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;Sage</a></li>
                 </ul>
             </li>
-         
+            <?php if ($role != 2) { ?>
                 <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Parametrage</a>
-				 <ul id="ul_param">
-				    <?php if ($role != 2) { ?>
-			        <li><a href="<?php echo base_url(); ?>index.php/parametrage">Gestion des utilisateurs</a></li>
-					 	 <?php } ?>
-				    <li><a href="<?php echo base_url(); ?>index.php/add_biblio">Gestion des bibliothèques</a></li>
-                    <li><a href="#">Gestion des rapports</a></li>
-                
-                </ul>
-				</li>
-              
+                    <ul id="ul_param">
+
+                        <li id="menu_users" ><a href="<?php echo base_url(); ?>index.php/parametrage">Gestion des utilisateurs</a></li>
+
+                        <li id="categ"><a href="<?php echo base_url(); ?>index.php/add_biblio">Gestion des bibliothèques</a></li>
+                        <li><a href="#">Gestion des rapports</a></li>
+
+                    </ul>
+                </li>
+            <?php } ?>
         </ul>
     </nav>
 </div>

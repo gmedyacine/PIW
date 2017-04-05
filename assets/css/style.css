@@ -28,7 +28,9 @@ body {
     margin: 30px;
     width: 94%;
 }
-
+.bg-white{
+  background: #fff !important;   
+}
 .panel-reduit-4, .panel-reduit-5{
     overflow: auto;
 }
@@ -125,7 +127,7 @@ tr.bri{
 #nav li ul.active li.active a {
     background: #394963;
 }    
-.active
+#menu_gauche .active
 {
     background: #394963;
 }
