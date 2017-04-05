@@ -9,10 +9,14 @@ class Home extends Home_Controller {
         $this->load->model('projection', '', TRUE);
         $this->load->model('user', '', TRUE);
         $this->load->model('files', '', TRUE);
+        $this->load->model('biblio', '', TRUE);
+
 
         $this->load->helper('form');
         $this->load->helper('file');
         $this->load->helper('url');
+
+        $this->load->library('session');
     }
 
     public function index() {
@@ -45,17 +49,18 @@ class Home extends Home_Controller {
         $page = $this->input->post('start');
         $id_projection = $this->input->post('idPrj');
         $order = $this->input->post('order');
-        //var_dump($oder);die;
-        $retPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin, $per_page, $page, $order[0]);
+        $search = $this->input->post('search');
+//var_dump($oder);die;
+        $retPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin, $per_page, $page, $order[0], $search['value']);
         $dataPrj = $retPrj["data"];
         $ret = array("draw" => intval($this->input->post('draw')),
             "recordsTotal" => intval($retPrj["num_row"]),
             "recordsFiltered" => intval($retPrj["num_row"]),
             "data" => $dataPrj   // total data array
         );
-      
+
         $datas = json_encode($ret);
-        // var_dump($datas);die;
+// var_dump($datas);die;
         header('Content-Type: application/json');
         echo $datas;
     }
@@ -65,7 +70,7 @@ class Home extends Home_Controller {
         $users = $this->user->getAllUsers();
         $this->data["title"] = "Parametrage de notification";
         $this->data["users"] = json_encode($users);
-
+        $this->data['id_param'] = json_encode("menu_users");
         $this->load->view("parametrage", $this->data);
     }
 
@@ -87,7 +92,7 @@ class Home extends Home_Controller {
 
 
         if ($this->form_validation->run() == FALSE) {
-            //Field validation failed.  User redirected to login page
+//Field validation failed.  User redirected to login page
             $this->load->view('parametrage', $this->data);
         } else {
             $username = $this->input->post('username');
@@ -112,6 +117,40 @@ class Home extends Home_Controller {
         $data["idBib"] = json_encode("bib_vega");
         $data["fetch_data"] = $this->files->fetch_data();
         $this->load->view("biblio", $data);
+    }
+
+    public function fetch_biblio() {
+        $data = $this->data;
+        $data["idCat"] = json_encode("categ");
+        $data["fetch_data"] = $this->biblio->fetch_categ();
+        $this->load->view("addBib", $data);
+    }
+
+    function delete_biblio($idCat) {
+        $this->biblio->delete_categ($idCat);
+        redirect('add_biblio', 'refresh');
+    }
+
+    public function add_biblio() {
+        $this->load->helper(array('form'));
+
+        $this->load->helper('security');
+        $this->load->library('form_validation');
+        $this->data['data_categs']=json_encode($this->biblio->fetch_categ());
+        $this->data['id_param'] = json_encode("categ");
+        $this->form_validation->set_rules('nom', 'Nom', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('addBib', $this->data);
+        } else {
+            $nom = $this->input->post('nom');
+            $desc = $this->input->post('description');
+            $data = array('lib_categ' => $nom, 'commentaire' => $desc, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
+            $this->biblio->add_categ($data);
+            $this->session->set_flashdata('msg', '<div style="margin: 75 150 0px;" class="alert alert-success text-center">Insertion avec succès !! </div>');
+            redirect(base_url() . "index.php/add_biblio");
+
+            $this->load->view("addBib");
+        }
     }
 
     public function download($file) {
@@ -150,8 +189,8 @@ class Home extends Home_Controller {
             $upload_data = $this->upload->data();
             $name = $upload_data['file_name'];
             if (empty($row_id)) {
- $this->form_validation->set_rules('job', 'Job', 'trim|required|xss_clean');
-				$this->form_validation->set_rules('heure_lib', 'heure_lib', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('job', 'Job', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('heure_lib', 'heure_lib', 'trim|required|xss_clean');
                 $this->form_validation->set_rules('calender', 'Calender', 'trim|required|xss_clean');
                 $this->form_validation->set_rules('vega', 'Vega', 'required|xss_clean');
 
@@ -159,7 +198,7 @@ class Home extends Home_Controller {
                     $this->load->view('biblio', $this->data);
                 } else {
                     $calender = $this->input->post('calender');
-					$heure_lib = $this->input->post('heure_lib');
+                    $heure_lib = $this->input->post('heure_lib');
                     $job = $this->input->post('job');
                     $vega = $this->input->post('vega');
                     $data_to_add = array("job" => $job, "calendrier" => $calender, "heure_lib" => $heure_lib, "vega" => $vega, "nom_fichier" => $name);
@@ -173,4 +212,10 @@ class Home extends Home_Controller {
         }
     }
 
-}
+    public function list_scat(){
+        $id_cat= $this->input('id_cat');
+         $this->biblio->fetch_sous_categ($id_cat);
+    }
+    
+            }
+

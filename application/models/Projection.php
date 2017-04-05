@@ -15,7 +15,7 @@ Class Projection extends CI_Model
     protected $dateDebut;
     protected $dateFin;
 
-    public function getProjection($id_projection = "0", $date_debut = null, $date_fin = null, $per_page = 8000, $page = 0, $colone_order = null)
+    public function getProjection($id_projection = "0", $date_debut = null, $date_fin = null, $per_page = 8000, $page = 0, $colone_order = null,$search_value=null)
     {
 
         $this->dateDebut = $date_debut;
@@ -39,7 +39,14 @@ Class Projection extends CI_Model
         if ($date_debut && $datDeb=$this->validateDate($date_debut . " 00:00:00")) {
             $this->db->where($filtre . " >=", $datDeb);
         }
-
+        if(!empty($search_value)){
+              $this->db->like($this->tab_projection_id[$id_projection]["tab_colonne"][0], $search_value);
+            foreach ($this->tab_projection_id[$id_projection]["tab_colonne"] as $col){
+                  $this->db->or_like($col, $search_value);
+            }
+           
+        }
+        
         $db = clone $this->db;
         $num_row = $db->get()->num_rows();
 
