@@ -9,14 +9,14 @@ class Home extends Home_Controller {
         $this->load->model('projection', '', TRUE);
         $this->load->model('user', '', TRUE);
         $this->load->model('files', '', TRUE);
-		$this->load->model('biblio', '', TRUE);
-	
+        $this->load->model('biblio', '', TRUE);
+
 
         $this->load->helper('form');
         $this->load->helper('file');
         $this->load->helper('url');
-		
-		$this->load->library('session');
+
+        $this->load->library('session');
     }
 
     public function index() {
@@ -51,14 +51,14 @@ class Home extends Home_Controller {
         $order = $this->input->post('order');
         $search = $this->input->post('search');
         //var_dump($oder);die;
-        $retPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin, $per_page, $page, $order[0],$search['value']);
+        $retPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin, $per_page, $page, $order[0], $search['value']);
         $dataPrj = $retPrj["data"];
         $ret = array("draw" => intval($this->input->post('draw')),
             "recordsTotal" => intval($retPrj["num_row"]),
             "recordsFiltered" => intval($retPrj["num_row"]),
             "data" => $dataPrj   // total data array
         );
-      
+
         $datas = json_encode($ret);
         // var_dump($datas);die;
         header('Content-Type: application/json');
@@ -118,33 +118,29 @@ class Home extends Home_Controller {
         $data["fetch_data"] = $this->files->fetch_data();
         $this->load->view("biblio", $data);
     }
-	
-		  public function add_biblio() {
-		$this->load->helper(array('form'));
-		 
+
+    public function add_biblio() {
+        $this->load->helper(array('form'));
+
         $this->load->helper('security');
         $this->load->library('form_validation');
-		
-		$this->form_validation->set_rules('nom', 'Mom', 'required');
-        
-		
-		  if ($this->form_validation->run() == FALSE) {
+
+        $this->form_validation->set_rules('nom', 'Mom', 'required');
+
+
+        if ($this->form_validation->run() == FALSE) {
             //Field validation failed.  User redirected to login page
             $this->load->view('addBib', $this->data);
         } else {
-	
-	   $nom = $this->input->post('nom');
-       $desc = $this->input->post('description');
-	   $data = array('lib_categ'=>$nom,'commentaire'=>$desc,'added_by' => '','added_at' =>date('Y-m-d H:i:s',time()));
-	    $this->biblio->add_biblio($data);
-  
-		  $this->load->view("addBib");
+
+            $nom = $this->input->post('nom');
+            $desc = $this->input->post('description');
+            $data = array('lib_categ' => $nom, 'commentaire' => $desc, 'added_by' => '', 'added_at' => date('Y-m-d H:i:s', time()));
+            $this->biblio->add_biblio($data);
+
+            $this->load->view("addBib");
         }
-
-  
-	  }
-
-	  
+    }
 
     public function download($file) {
         $this->load->helper('download');
@@ -182,8 +178,8 @@ class Home extends Home_Controller {
             $upload_data = $this->upload->data();
             $name = $upload_data['file_name'];
             if (empty($row_id)) {
- $this->form_validation->set_rules('job', 'Job', 'trim|required|xss_clean');
-				$this->form_validation->set_rules('heure_lib', 'heure_lib', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('job', 'Job', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('heure_lib', 'heure_lib', 'trim|required|xss_clean');
                 $this->form_validation->set_rules('calender', 'Calender', 'trim|required|xss_clean');
                 $this->form_validation->set_rules('vega', 'Vega', 'required|xss_clean');
 
@@ -191,7 +187,7 @@ class Home extends Home_Controller {
                     $this->load->view('biblio', $this->data);
                 } else {
                     $calender = $this->input->post('calender');
-					$heure_lib = $this->input->post('heure_lib');
+                    $heure_lib = $this->input->post('heure_lib');
                     $job = $this->input->post('job');
                     $vega = $this->input->post('vega');
                     $data_to_add = array("job" => $job, "calendrier" => $calender, "heure_lib" => $heure_lib, "vega" => $vega, "nom_fichier" => $name);
