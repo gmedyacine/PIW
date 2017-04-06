@@ -147,7 +147,7 @@ class Home extends Home_Controller {
             $desc = $this->input->post('description');
             $data = array('lib_categ' => $nom, 'commentaire' => $desc, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
             $this->biblio->add_categ($data);
-            $this->session->set_flashdata('msg', '<div style="margin: 75 150 0px;" class="alert alert-success text-center">Insertion avec succès !! </div>');
+            $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">Insertion avec succès !! </div>');
             redirect(base_url() . "index.php/add-biblio");
 
             $this->load->view("addBib");
@@ -160,7 +160,7 @@ class Home extends Home_Controller {
         $desc = $this->input->post('desc');
         $data = array('lib_sous_categ‏_nom' => $nom, 'lib_sous_categ‏_desc' => $desc,'lib_sous_categ‏_categ' => $id_cat, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
         $this->biblio->add_sous_categ($data);
-        $this->session->set_flashdata('msg', '<div style="margin: 75 150 0px;" class="alert alert-success text-center">Insertion sous categorie avec succès !! </div>');
+        $this->session->set_flashdata('msg', '<div class=" brav-fix alert alert-success text-center">Insertion sous categorie avec succès !! </div>');
         redirect(base_url() . "index.php/add-biblio");
 
         $this->load->view("addBib");
