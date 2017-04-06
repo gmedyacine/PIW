@@ -106,7 +106,12 @@ tr.bri{
 }
 
 #nav li ul { display: none; background: #4a5b78; }
-
+.brav-fix{
+    margin: 11% 2% 0px 52%;
+    width: 364px;
+    position: fixed;
+    z-index: 9;
+}
 #nav li ul li a {
     display: block;
     background: none;
