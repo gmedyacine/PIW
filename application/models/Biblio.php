@@ -12,9 +12,10 @@ Class Biblio extends CI_Model {
         return $ret;
     }
 
-    function fetch_sous_categ() {
+    function fetch_sous_categ($id=0) {
         $query = $this->db->select('*')
-                ->from("ipw_lib_categ‏")
+                ->where('lib_sous_categ‏_categ',$id)
+                ->from("ipw_lib_sous_categ‏")
                 ->join("piw_users", 'piw_users.id = added_by')
                 ->get(); //select * from piw_files
 
@@ -35,7 +36,7 @@ Class Biblio extends CI_Model {
         }
     }
     function add_sous_categ($data) {
-        if ($this->db->insert('ipw_lib_categ‏', $data)) {
+        if ($this->db->insert('ipw_lib_sous_categ‏', $data)) {
             return true;
         } else {
             return false;

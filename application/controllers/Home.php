@@ -128,7 +128,7 @@ class Home extends Home_Controller {
 
     function delete_biblio($idCat) {
         $this->biblio->delete_categ($idCat);
-        redirect('add_biblio', 'refresh');
+        redirect('add-biblio', 'refresh');
     }
 
     public function add_biblio() {
@@ -136,8 +136,9 @@ class Home extends Home_Controller {
 
         //$this->load->helper('security');
         $this->load->library('form_validation');
-        $this->data['data_categs']=json_encode($this->biblio->fetch_categ());
+        $this->data['data_categs'] = json_encode($this->biblio->fetch_categ());
         $this->data['id_param'] = json_encode("categ");
+        $this->data['data_sous_categs'] = json_encode($this->biblio->fetch_sous_categ());
         $this->form_validation->set_rules('nom', 'Nom', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('addBib', $this->data);
@@ -147,10 +148,22 @@ class Home extends Home_Controller {
             $data = array('lib_categ' => $nom, 'commentaire' => $desc, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
             $this->biblio->add_categ($data);
             $this->session->set_flashdata('msg', '<div style="margin: 75 150 0px;" class="alert alert-success text-center">Insertion avec succès !! </div>');
-            redirect(base_url() . "index.php/add_biblio");
+            redirect(base_url() . "index.php/add-biblio");
 
             $this->load->view("addBib");
         }
+    }
+
+    public function add_sous_biblio() {
+        $nom = $this->input->post('nom');
+        $id_cat = $this->input->post('id_cat');
+        $desc = $this->input->post('desc');
+        $data = array('lib_sous_categ‏_nom' => $nom, 'lib_sous_categ‏_desc' => $desc,'lib_sous_categ‏_categ' => $id_cat, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
+        $this->biblio->add_sous_categ($data);
+        $this->session->set_flashdata('msg', '<div style="margin: 75 150 0px;" class="alert alert-success text-center">Insertion sous categorie avec succès !! </div>');
+        redirect(base_url() . "index.php/add-biblio");
+
+        $this->load->view("addBib");
     }
 
     public function download($file) {
@@ -212,10 +225,13 @@ class Home extends Home_Controller {
         }
     }
 
-    public function list_scat(){
-        $id_cat= $this->input('id_cat');
-         $this->biblio->fetch_sous_categ($id_cat);
+    public function list_scat() {
+        $id_cat = $this->input->post('id_cat');
+        $ret=$this->biblio->fetch_sous_categ($id_cat);
+        $datas = json_encode($ret);
+       // var_dump($id_cat);die;
+        header('Content-Type: application/json');
+        echo $datas;
     }
-    
-            }
 
+}

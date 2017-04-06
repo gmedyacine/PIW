@@ -2,7 +2,7 @@
 
 class MY_Controller extends CI_Controller {
 
-    protected $data = array('title' => 'Login', "id_projection" => 0,"idBib"=>0, 'role' => 2);
+    protected $data = array('title' => 'Login', "id_projection" => 0, "idBib" => 0, 'role' => 2);
 
     public function __construct() {
         parent::__construct();
@@ -26,6 +26,7 @@ class Home_Controller extends MY_Controller {
         }
         $dataLogin = $this->session->userdata('logged_in');
         $this->data['id_user_connected'] = $dataLogin["id"];
+        $this->data['id_param'] = 0;
         $this->data['role'] = $dataLogin["role"];
         $this->data["projections"] = json_encode($this->projections);
          $this->data["id_param"] = 0;;

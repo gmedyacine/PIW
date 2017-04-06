@@ -3,7 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
 ?>﻿
 <script type="text/javascript">
-    var data_categs =<?php echo $data_categs; ?>
+    var data_categs =<?php echo $data_categs; ?>;
+    var data_sous_categs =<?php echo $data_sous_categs; ?>;
 </script>
 <body>
 
@@ -14,7 +15,7 @@ include('include/head.php');
         <div class="row content">
             <!-- Colonne du Menu -->
             <?php include('include/menu.php'); ?>
-
+            <div><?php echo $this->session->flashdata('msg'); ?> </div>
             <div class="col-md-9 "> <!-- Début partie des onglets -->
                 <ul class="nav nav-tabs " role="tablist">
                     <li class="active">
@@ -31,36 +32,36 @@ include('include/head.php');
 
                 <!-- Tab panes -->
                 <div class="tab-content bg-white">
-                    <div data-toggle="tab" class="tab-pane fade active in" id="biblio">
+                    <div class="tab-pane fade active in" id="biblio">
                         <div id="panel-table" class="panel panel-default">
                             <div class="panel-body">              
 
                                 <div class="form-group">
-                                    <form action="home/add_biblio" role="form" accept-charset="utf-8" method="post">
+                                    <?php echo form_open('add-biblio'); ?>
 
-                                        <label class="control-label col-sm-2" for="nom">Nom</label>
-                                        <div class="nom col-sm-10">
-                                            <input name="nom" type="text"  required="required" class="form-control " >
-                                            </br>
-                                        </div>
-
+                                    <label class="control-label col-sm-2" for="nom">Nom</label>
+                                    <div class="nom col-sm-10">
+                                        <input name="nom" type="text"  required="required" class="form-control " >
                                         </br>
-                                        <label class="control-label col-sm-2" for="description">Description </label>
-                                        <div class="desc col-sm-10">
-                                            <input name="description" type="text" class="form-control " >
-                                            </br>
-                                        </div>
+                                    </div>
+
+                                    </br>
+                                    <label class="control-label col-sm-2" for="description">Description </label>
+                                    <div class="desc col-sm-10">
+                                        <input name="description" type="text" class="form-control " >
+                                        </br>
+                                    </div>
 
 
 
-                                        <div class="add">
-                                            <input class="btn btn-success pull-right" type="submit" value="Ajouter"/>
-                                        </div>
+                                    <div class="add">
+                                        <input class="btn btn-success pull-right" type="submit" value="Ajouter"/>
+                                    </div>
 
                                     </form>
 
                                 </div>
-                                <div><?php echo $this->session->flashdata('msg'); ?> </div>
+
                             </div>
                         </div>
 
@@ -79,70 +80,58 @@ include('include/head.php');
                             </tbody>
                         </table>   
                     </div>
-                    <div data-toggle="tab" class="tab-pane fade" id="sousBiblio">
+                    <div  class="tab-pane fade" id="sousBiblio">
                         <div class="panel panel-default">
                             <div class="panel-body">              
 
                                 <div class="form-group">
-                                    <!--<form action="#" method="post">
+                                    <?php echo form_open('add-sous-biblio'); ?>
 
 
-                                        <label class="control-label col-sm-2" for="biblio">Bibliothèque</label>
-                                        <div class="nom col-sm-10">
-                                            <select id="list-bib" class="form-control" required="required" >
-                                                <option value="0">-- choisir une bibliothèque--</option>
-                                            </select>
-                                            </br>
-                                        </div>
-
-                                        <label class="control-label col-sm-2" for="nom">Nom</label>
-                                        <div class="nom col-sm-10">
-                                            <input name="nom" type="text"  required="required" class="form-control " >
-                                            </br>
-                                        </div>
-
+                                    <label class="control-label col-sm-2" for="biblio">Bibliothèque</label>
+                                    <div class="nom col-sm-10">
+                                        <select id="list-bib" name="id_cat" class="form-control" required="required" >
+                                        </select>
                                         </br>
-                                        <label class="control-label col-sm-2" for="description">Description </label>
-                                        <div class="desc col-sm-10">
-                                            <input name="description" type="text" class="form-control " >
-                                            </br>
-                                        </div>
+                                    </div>
 
+                                    <label class="control-label col-sm-2" for="nom">Nom</label>
+                                    <div class="nom col-sm-10">
+                                        <input name="nom" type="text"  required="required" class="form-control " >
+                                        </br>
+                                    </div>
 
+                                    </br>
+                                    <label class="control-label col-sm-2" for="description">Description </label>
+                                    <div class="desc col-sm-10">
+                                        <input name="description" type="text" class="form-control " >
+                                        </br>
+                                    </div>
+                                    <div class="add">
+                                        <input class="btn btn-success pull-right" type="submit" value="Ajouter"/>
+                                    </div>
 
-                                        <div class="add">
-                                            <input class="btn btn-success pull-right" type="submit" value="Ajouter"/>
-                                        </div>
-
-                                    </form>-->
+                                    </form>
                                 </div>
                             </div>
                         </div>
 
-                        <table  id="#" class="table table-striped">
+                        <table  id="sou_bib" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>Nom (Sous-bibliothèque)</th>
-                                    <th>Bibliothèque</th>
                                     <th>Description</th>
+                                    <th>Added_by</th>
+                                    <th>Added_at</th>
                                     <th>Supprimer</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Vega 1</td>
-                                    <td>SUIVI_VEGA</td>
-                                    <td></td>
-
-                                    <td><button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>
-                                </tr>
 
                             </tbody>
                         </table>   
                     </div>
-
-
                 </div> <!-- Fin partie du tableau -->
                 <!-- ROW END -->
 
