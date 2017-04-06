@@ -134,7 +134,7 @@ class Home extends Home_Controller {
     public function add_biblio() {
         $this->load->helper(array('form'));
 
-        $this->load->helper('security');
+        //$this->load->helper('security');
         $this->load->library('form_validation');
         $this->data['data_categs']=json_encode($this->biblio->fetch_categ());
         $this->data['id_param'] = json_encode("categ");
