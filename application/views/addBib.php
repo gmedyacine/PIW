@@ -36,7 +36,7 @@ include('include/head.php');
                             <div class="panel-body">              
 
                                 <div class="form-group">
-                                    <form action="#" method="post">
+                                    <form action="home/add_biblio" role="form" accept-charset="utf-8" method="post">
 
                                         <label class="control-label col-sm-2" for="nom">Nom</label>
                                         <div class="nom col-sm-10">
@@ -84,7 +84,7 @@ include('include/head.php');
                             <div class="panel-body">              
 
                                 <div class="form-group">
-                                    <form action="#" method="post">
+                                    <!--<form action="#" method="post">
 
 
                                         <label class="control-label col-sm-2" for="biblio">Bibliothèque</label>
@@ -114,7 +114,7 @@ include('include/head.php');
                                             <input class="btn btn-success pull-right" type="submit" value="Ajouter"/>
                                         </div>
 
-                                    </form>
+                                    </form>-->
                                 </div>
                             </div>
                         </div>

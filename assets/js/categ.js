@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     refreshDataCat();
     loadCateg();
-    loadSousCategorie();
+   // loadSousCategorie();
     function refreshDataCat() {
         var tbody = $('<tbody></tbody>').empty();
         $.each(data_categs, function (idObj, valData) {
