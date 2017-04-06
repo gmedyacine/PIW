@@ -36,7 +36,7 @@ include('include/head.php');
                             <div class="panel-body">              
 
                                 <div class="form-group">
-                                    <form action="#" method="post">
+                                  <?php echo form_open('add-biblio'); ?>
 
                                         <label class="control-label col-sm-2" for="nom">Nom</label>
                                         <div class="nom col-sm-10">

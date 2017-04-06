@@ -26,7 +26,7 @@
 
                         <li id="menu_users" ><a href="<?php echo base_url(); ?>index.php/parametrage">Gestion des utilisateurs</a></li>
 
-                        <li id="categ"><a href="<?php echo base_url(); ?>index.php/add_biblio">Gestion des bibliothèques</a></li>
+                        <li id="categ"><a href="<?php echo base_url(); ?>index.php/add-biblio">Gestion des bibliothèques</a></li>
                         <li><a href="#">Gestion des rapports</a></li>
 
                     </ul>
