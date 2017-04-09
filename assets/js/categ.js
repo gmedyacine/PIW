@@ -63,7 +63,7 @@ $(document).ready(function () {
 
                 trData.append($('<td>').append('<button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>').click(function () {
                     if (confirm('Vous etes sur le point de supprimer ' + valData["lib_sous_categ‏_nom"])) {
-                        document.location.href = "delete-categ/" + valData["lib_sous_categ‏_id"];
+                        document.location.href = "delete-sous-categ/" + valData["lib_sous_id"];
                     } else {
                         return;
                     }

@@ -24,11 +24,13 @@ class Home_Controller extends MY_Controller {
         if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
         }
+        $this->load->model('biblio', '', TRUE);
         $dataLogin = $this->session->userdata('logged_in');
         $this->data['id_user_connected'] = $dataLogin["id"];
         $this->data['id_param'] = 0;
         $this->data['role'] = $dataLogin["role"];
         $this->data["projections"] = json_encode($this->projections);
+        $this->data["menu"] = json_encode($this->biblio->fetch_menu());
     }
 
     protected function logout() {

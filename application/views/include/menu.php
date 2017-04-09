@@ -3,6 +3,7 @@
     var base_url = "<?php echo base_url(); ?>";
     var projections = <?php echo $projections; ?>;
     var id_param=<?php echo $id_param; ?>;
+    var menu_bib=<?php echo $menu; ?>;
 </script>
 <div class="col-md-3">    <!-- Colonne du Menu -->
     <nav id="menu_gauche">

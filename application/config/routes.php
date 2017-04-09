@@ -63,6 +63,7 @@ $route['filtre']='home/excuteFiltre';
 $route['add-user']='home/addUser';
 $route['delete-user/(:num)']='home/deleteUser/$1';
 $route['delete-categ/(:num)']='home/delete_biblio/$1';
+$route['delete-sous-categ/(:num)']='home/delete_sous_biblio/$1';
 $route['projection/(:num)'] = 'home/projection/$1';
 $route['logout'] = 'home/logout';
 $route['404_override'] = '';

@@ -130,6 +130,11 @@ class Home extends Home_Controller {
         $this->biblio->delete_categ($idCat);
         redirect('add-biblio', 'refresh');
     }
+    
+    function delete_sous_biblio($idSCat) {
+        $this->biblio->delete_sous_categ($idSCat);
+        redirect('add-biblio', 'refresh');
+    }
 
     public function add_biblio() {
         $this->load->helper(array('form'));
