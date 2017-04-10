@@ -54,6 +54,7 @@ $route['connexion'] = 'verifyLogin';
 $route['home'] = 'home';
 $route['parametrage']='home/parametrage';
 $route['biblio/(:num)/(:num)']='home/biblio/$1/$2';
+$route['biblio/(:num)/(:num)']='home/biblio/$1';
 $route['add-biblio']='home/add_biblio';
 $route['add-sous-biblio']='home/add_sous_biblio';
 $route["list-sc"]='home/list_scat';
