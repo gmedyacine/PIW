@@ -2,7 +2,7 @@
 
 Class Files extends CI_Model {
 
-    function fetch_data() {
+    function fetch_data($id_categ,$id_sous_categ) {
         $query = $this->db->get("ipw_files"); //select * from piw_files
         return $query;
     }
