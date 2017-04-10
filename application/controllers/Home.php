@@ -112,10 +112,12 @@ class Home extends Home_Controller {
         redirect('parametrage', 'refresh');
     }
 
-    public function biblio() {
+    public function biblio($id_bib,$id_sous_bib=0) {
         $data = $this->data;
-        $data["idBib"] = json_encode("bib_vega");
-        $data["fetch_data"] = $this->files->fetch_data();
+        $data["idBib"]= json_encode($id_bib);
+        $data["id_categ"]= json_encode($id_bib);
+        $data["id_sous_categ"]= json_encode($id_sous_bib);
+        $data["fetch_data"] = $this->files->fetch_data($id_sous_bib,$id_bib);
         $this->load->view("biblio", $data);
     }
 
@@ -128,6 +130,11 @@ class Home extends Home_Controller {
 
     function delete_biblio($idCat) {
         $this->biblio->delete_categ($idCat);
+        redirect('add-biblio', 'refresh');
+    }
+    
+    function delete_sous_biblio($idSCat) {
+        $this->biblio->delete_sous_categ($idSCat);
         redirect('add-biblio', 'refresh');
     }
 

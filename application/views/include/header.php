@@ -2,7 +2,6 @@
 <header>
     <script type="text/javascript">
         var idPrj = <?php echo $id_projection; ?>;
-        var idBib = <?php echo $idBib; ?>;
     </script>
     <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6">

@@ -3,6 +3,10 @@
     var base_url = "<?php echo base_url(); ?>";
     var projections = <?php echo $projections; ?>;
     var id_param=<?php echo $id_param; ?>;
+    var menu_bib=<?php echo $menu; ?>;
+    var id_categ=<?php echo $id_categ; ?>;
+     var idBib=<?php echo $idBib; ?>;
+    var id_sous_categ=<?php echo $id_sous_categ; ?>;
 </script>
 <div class="col-md-3">    <!-- Colonne du Menu -->
     <nav id="menu_gauche">
@@ -14,7 +18,7 @@
             </li>
             <li><a href="#" class=""><span class="glyphicon glyphicon-book" aria-hidden="true"></span>  Bibliothèque</a>
                 <ul id="ul_bib">
-                    <li id="bib_vega"><a href="<?php echo base_url(); ?>index.php/biblio">&nbsp;&nbsp;&nbsp;&nbsp;Suivi Vega</a></li>
+                    <li id="bib"><a href="<?php echo base_url(); ?>index.php/biblio">&nbsp;&nbsp;&nbsp;&nbsp;Suivi Vega</a></li>
                     <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;Masteri</a></li>
                     <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;Edd</a></li>
                     <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;Sage</a></li>

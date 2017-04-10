@@ -12,13 +12,7 @@ $(document).ready(function () {
         }
         $("#menu_gauche_ul").append(li);
     });
-    $.each($("#ul_bib li"),function(id,val){
-       var idElem=$(val).attr("id");
-       if(idElem==idBib){
-            $("#ul_bib").addClass("active");
-            $(val).addClass("active");
-       }
-    });
+    
      $("#valid_select").click(function(){
          var val=$("#main_select").val();
          if(val>0){
