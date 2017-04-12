@@ -15,7 +15,7 @@ $(document).ready(function () {
     $('#list-bib').change(function () {
         loadSC($(this).val());
     });
-
+    masque_fields_bib();
     $("#cnt-mainTablesBib").before($("<div>").text("Search:  ").attr("id", "search_glob").append($("<input>").keyup(function () {
                 if ($(this).val().length > 3) {
                     $.ajax({
@@ -43,5 +43,12 @@ $(document).ready(function () {
             });
         }
     }
+function masque_fields_bib(){
+    if(id_categ==33) return;
+    $(".heur_lib").text("Dossier");
+    $(".label_calender").text("Date insertion");
+    
+}
+
 });
 
