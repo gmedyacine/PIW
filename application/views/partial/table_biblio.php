@@ -1,8 +1,8 @@
 <table id="mainTablesBib" class="table table-striped cell-border"  cellspacing="0" width="100%"> 
     <thead>
         <tr>
-            <th>Calendrier</th>
-            <th class="whiteSpace">heure lib</th>
+            <th class="label_calender">Calendrier</th>
+            <th class="heur_lib whiteSpace">heure lib</th>
             <th  class="whiteSpace">Titre</th>
             <th>Categorie </th>
             <th>Fichier</th>

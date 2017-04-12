@@ -31,7 +31,7 @@ include('include/head.php');
                                                 <?php echo validation_errors(); ?>
                                                 <?php echo isset($error_upload) ? $error_upload['error'] : ""; ?>
                                             </div>
-                                            <label class="control-label col-sm-2" for="calender">Calendrier</label>
+                                            <label  class="label_calender control-label col-sm-2" for="calender">Calendrier</label>
                                             <div class="nom col-sm-10">
                                                 <input name="calender" type="text" value="<?php echo set_value('calender'); ?>" class="form-control" >
                                                 </br>
@@ -57,7 +57,7 @@ include('include/head.php');
                                                 <input name="vega" type="text" value="<?php echo set_value('vega'); ?>" class="form-control" >
                                                 </br>
                                             </div>
-                                            <label class="control-label col-sm-2" for="heure_lib">Heure lib</label>
+                                            <label  class="heur_lib control-label col-sm-2" for="heure_lib">Heure lib</label>
                                             <div class="nom col-sm-10">
                                                 <input name="heure_lib" type="text" value="<?php echo set_value('heure_lib'); ?>" class="form-control" >
                                                 </br>
