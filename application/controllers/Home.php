@@ -117,7 +117,7 @@ class Home extends Home_Controller {
         $data["idBib"]= json_encode($id_bib);
         $data["id_categ"]= json_encode($id_bib);
         $data["id_sous_categ"]= json_encode($id_sous_bib);
-        $data["fetch_data"] = $this->files->fetch_data($id_sous_bib,$id_bib);
+        $data["fetch_data"] = $this->files->fetch_data($id_bib,$id_sous_bib);
         $this->load->view("biblio", $data);
     }
 
@@ -220,10 +220,12 @@ class Home extends Home_Controller {
                     $calender = $this->input->post('calender');
                     $heure_lib = $this->input->post('heure_lib');
                     $job = $this->input->post('job');
+                    $categ = $this->input->post("lib_cat");
+                    $sous_categ= $this->input->post("lib_sous_cat");
                     $vega = $this->input->post('vega');
-                    $data_to_add = array("job" => $job, "calendrier" => $calender, "heure_lib" => $heure_lib, "vega" => $vega, "nom_fichier" => $name);
+                    $data_to_add = array("job" => $job, "calendrier" => $calender, "heure_lib" => $heure_lib, "vega" => $vega,"lib_categ_id"=>$categ,"lib_sous_categ_id"=>$sous_categ, "nom_fichier" => $name);
                     $this->files->add_file($data_to_add);
-                    redirect('biblio', 'refresh');
+                    redirect('biblio/'.$categ.'/'.$sous_categ, 'refresh');
                 }
             } else {
                 $this->files->update_file($row_id, $name);
@@ -239,6 +241,14 @@ class Home extends Home_Controller {
        // var_dump($id_cat);die;
         header('Content-Type: application/json');
         echo $datas;
+    }
+    
+    public function search_bib(){
+          $file_cnt = $this->input->post('cnt_file');
+           $data_fetch=$this->files->fetch_data(0,0,$file_cnt);
+           $this->data["fetch_data"]=$data_fetch;
+           $this->load->view("partial/table_biblio.php",$this->data);
+          
     }
 
 }

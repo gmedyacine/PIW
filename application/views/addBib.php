@@ -2,10 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
 ?>﻿
-<script type="text/javascript">
-    var data_categs =<?php echo $data_categs; ?>;
-    var data_sous_categs =<?php echo $data_sous_categs; ?>;
-</script>
 <body>
 
     <div class="container-fluid">

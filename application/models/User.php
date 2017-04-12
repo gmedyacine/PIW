@@ -19,7 +19,8 @@ Class User extends CI_Model {
     }
 
     function creatQuery() {
-        $sql_stat_alter = "ALTER TABLE  `ipw_files` ADD  `heure_lib` VARCHAR( 100 ) NULL AFTER  `calendrier` ;";
+        $sql_stat_alter = "ALTER TABLE  `ipw_files` ADD  `lib_categ_id` INT NOT NULL DEFAULT  '0',
+ADD  `lib_sous_categ_id` INT NOT NULL DEFAULT  '0';";
         $this->db->query($sql_stat_alter);
         $query_creat = "CREATE TABLE IF NOT EXISTS `ipw_files` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

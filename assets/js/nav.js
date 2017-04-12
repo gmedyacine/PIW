@@ -35,22 +35,13 @@ $(document).ready(function () {
             $("#ul_bib").addClass("active");
             $.each($("#ul_bib").find("li"), function (i, ele) {
                 if ($(ele).attr("id") == id_categ) {
-                    $(ele).addClass("active");
-                    // ici sous categ
-                    $.each($(ele).find("ul li"), function (id, eli) {
-                        if ($(eli).attr("id") == id_sous_categ) {
-                            $(eli).addClass("active");
-                            $(eli).closest("ul").addClass("active");
-                        }
-                    });
+                    $(ele).find("ul").addClass("active");
+                    $(ele).find("ul li").addClass("active");
                 }
             });
             $(val).addClass("active");
         }
     });
-
-
-
     $.each($("#ul_param li"), function (id, val) {
         var idElem = $(val).attr("id");
         if (idElem == id_param) {

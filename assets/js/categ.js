@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
     refreshDataCat();
-    loadCateg();
     refreshSC(0);
     $('#list-bib').change(function () {
         refreshSC($(this).val());
@@ -33,15 +32,7 @@ $(document).ready(function () {
         paginate("#tabCat", 'tbody tr', 6);
 
     }
-    function loadCateg() {
-        $.each(data_categs, function (i, item) {
-            $('#list-bib').append($('<option>', {
-                value: item.lib_categ_id,
-                text: item.lib_categ
-            }));
-        });
-
-    }
+    
 
     function refreshSC(id) {
         if (id == 0) {
