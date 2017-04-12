@@ -2,11 +2,13 @@
 <script type="text/javascript">
     var base_url = "<?php echo base_url(); ?>";
     var projections = <?php echo $projections; ?>;
-    var id_param=<?php echo $id_param; ?>;
-    var menu_bib=<?php echo $menu; ?>;
-    var id_categ=<?php echo $id_categ; ?>;
-     var idBib=<?php echo $idBib; ?>;
-    var id_sous_categ=<?php echo $id_sous_categ; ?>;
+    var id_param =<?php echo $id_param; ?>;
+    var menu_bib =<?php echo $menu; ?>;
+    var id_categ =<?php echo $id_categ; ?>;
+    var idBib =<?php echo $idBib; ?>;
+    var data_categs =<?php echo $data_categs; ?>;
+    var data_sous_categs =<?php echo $data_sous_categs; ?>;
+    var id_sous_categ =<?php echo $id_sous_categ; ?>;
 </script>
 <div class="col-md-3">    <!-- Colonne du Menu -->
     <nav id="menu_gauche">

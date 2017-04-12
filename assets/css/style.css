@@ -154,7 +154,9 @@ tr.bri{
     width: 48px;
     height: 48px;
 }
-
+#search_glob{
+    float: right;
+}
 .btn-round.btn-sm {
     width: 34px;
     height: 34px;

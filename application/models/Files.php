@@ -2,9 +2,22 @@
 
 Class Files extends CI_Model {
 
-    function fetch_data($id_categ,$id_sous_categ) {
-        $query = $this->db->get("ipw_files"); //select * from piw_files
-        return $query;
+    function fetch_data($id_categ=0,$id_sous_categ=0,$cnt_file="") {
+        $query = $this->db->select('*')->from("ipw_files");
+        if($id_categ>0){
+            $query->where("lib_categ_id",$id_categ);
+            if($id_sous_categ>0)  $query->where("lib_sous_categ_id",$id_sous_categ);
+        }
+        if(!empty($cnt_file)){
+            $query->like("heure_lib",$cnt_file);
+            $query->or_like("nom_fichier",$cnt_file);
+            $query->or_like("job",$cnt_file);
+            $query->or_like("calendrier",$cnt_file);
+            $query->or_like("vega",$cnt_file);
+        }
+       
+        $ret=$query->get()->result(); //select * from piw_files
+        return $ret;
     }
 
     function delete_data($id) {
