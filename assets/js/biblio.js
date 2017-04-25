@@ -16,8 +16,8 @@ $(document).ready(function () {
         loadSC($(this).val());
     });
     masque_fields_bib();
-    $("#cnt-mainTablesBib").before($("<div>").text("Search:  ").attr("id", "search_glob").append($("<input>").keyup(function () {
-                if ($(this).val().length > 3) {
+    $("#cnt-mainTablesBib").before($("<div>").text("Search:  ").attr("id", "search_glob").append($("<input placeholder='taper 3 carteres'>").keyup(function () {
+                if ($(this).val().length > 2) {
                     $.ajax({
                         type: "post",
                         url: base_url + "index.php/tab-bib",
@@ -44,7 +44,7 @@ $(document).ready(function () {
         }
     }
 function masque_fields_bib(){
-    if(id_categ==33) return;
+    if(id_categ==31) return;
     $(".heur_lib").text("Dossier");
     $(".label_calender").text("Date insertion");
     
