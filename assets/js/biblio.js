@@ -45,8 +45,8 @@ $(document).ready(function () {
     }
 function masque_fields_bib(){
     if(id_categ==31) return;
-    $(".heur_lib").text("Dossier");
-    $(".label_calender").text("Date insertion");
+    $(".heur_lib").text(lib_dossier);
+    $(".label_calender").text(lib_insert_date);
     
 }
 

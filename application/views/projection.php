@@ -27,16 +27,16 @@ include('include/dataTables.php');
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <p>Date de début<input type="text"  class="datepicker filtre_ligne" id="date_debut_filtre" /></p>
-                                        <span id="msg_error"> Date non valide</span>
+                                        <p><?php echo $this->lang->line("date_debut"); ?><input type="text"  class="datepicker filtre_ligne" id="date_debut_filtre" /></p>
+                                        <span id="msg_error"><?php echo $this->lang->line("date_not_valide"); ?></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <p>Date de fin<input type="text"  class="datepicker filtre_ligne" id="date_fin_filtre" /></p>
+                                        <p><?php echo $this->lang->line("date_end"); ?><input type="text"  class="datepicker filtre_ligne" id="date_fin_filtre" /></p>
                                     </div>
                                 </div>
-                                <a id="filtre_date" href="#" class="btn-bleu-filtre btn btn-info">Excuter le filtre </a>
+                                <a id="filtre_date" href="#" class="btn-bleu-filtre btn btn-info"><?php echo $this->lang->line("excute_filtre"); ?></a>
                             </div>
                         </div>
                     </div>
@@ -56,9 +56,9 @@ include('include/dataTables.php');
 
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a id="exportExcelFiltre" href="#">Exporter le filtre execut&eacute;</a></li>
-                                    <li><a id="exportExcelToDay" href="#">Exporter les donn&eacute;es de jour</a></li>
-                                    <li><a  id="exportExcelAll" href="#">Exporter toute la table</a></li>
+                                    <li><a id="exportExcelFiltre" href="#"><?php echo $this->lang->line("export_excute_filtre"); ?></a></li>
+                                    <li><a id="exportExcelToDay" href="#"><?php echo $this->lang->line("export_last_day"); ?></a></li>
+                                    <li><a  id="exportExcelAll" href="#"><?php echo $this->lang->line("export_all"); ?></a></li>
 
                                 </ul>
 

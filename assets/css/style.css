@@ -35,9 +35,12 @@ body {
     overflow: auto;
 }
 
+.right-header{
+    float: right;
+
+}
 .btn-bleu
 {
-    margin-top:33;
     float:right;
     margin-right:50;	
 }

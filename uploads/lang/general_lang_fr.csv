@@ -1,0 +1,24 @@
+key;traduction
+main_menu;select item
+default_projection;default projection
+rapport_libelle;Reports
+biblio;Biblio
+logout;logout
+parametrage;settings
+date_debut;start date
+date_end;end date
+date_not_valide;not valid date
+excute_filtre;excute
+export_excute_filtre;export excute filtre
+export_last_day;export last day
+export_all;export all
+add;Add
+file;File
+hour;Hour
+categorie;categorie
+title;title
+sous_lib;small lib
+add_document;Add document
+calendar;calendar
+lib_dossier;lib_dossier
+lib_insert_date;insert date

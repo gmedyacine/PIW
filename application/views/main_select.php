@@ -17,7 +17,7 @@ include('include/head.php');
                 <div class="col-sm-6">
                     <div class="panel panel-info panel-set">
                         <div class="panel-heading">
-                            Liste des projections 
+                            <?php echo $this->lang->line('main_menu'); ?>
                         </div>
                         </br>
                         <div class="panel-body"> 
@@ -26,7 +26,7 @@ include('include/head.php');
 
                                 <div class="col-sm-12">
                                     <select id="main_select" class="form-control" >
-                                           <option value="0">-- choisir une projection--</option>
+                                           <option value="0">-- <?php echo $this->lang->line('default_projection'); ?> --</option>
                                        </select>
                                 </div>
 

@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-include('include/head.php');
-?>﻿
+include('include/head.php'); ?>﻿
 
 <script type="text/javascript">
     var dataUsers = <?php echo $users; ?>;
