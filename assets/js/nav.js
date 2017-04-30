@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    $('.selectpicker').selectpicker();
+    $("#select-lang").change(function(){
+        var lang=$(this).val();
+        location.href= base_url + "index.php/select-lang/"+lang;
+
+    });
     $("#nav > li > a").on("click", function (e) {
         if ($(this).parent().has("ul")) {
             // e.preventDefault();

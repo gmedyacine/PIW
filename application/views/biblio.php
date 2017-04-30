@@ -5,6 +5,8 @@ include('include/head.php');
 <body>
     <script type="text/javascript">
         var $ = jQuery.noConflict();
+        var lib_dossier="<?php echo $this->lang->line("lib_dossier"); ?>";
+        var lib_insert_date="<?php echo $this->lang->line("lib_insert_date"); ?>";
     </script>
     <div class="container-fluid">
 
@@ -21,7 +23,7 @@ include('include/head.php');
                 <!-- Tab panes -->
                 <div class="panel tab-content">
                     <div style="overflow: auto;" class="tab-panel fade active in" >
-                        <button type="button"  id="show-form" class="btn btn-info">Ajouter un document</button>
+                        <button type="button"  id="show-form" class="btn btn-info"><?php echo $this->lang->line("add_document"); ?></button>
                         <div id="panel-table" class="panel" style="width: 112%;display: none; margin-right: 0 !important">
                             <div class="panel-body" style="width: 85%">              
                                 <?php if ($role != 2) { ?>
@@ -31,46 +33,45 @@ include('include/head.php');
                                                 <?php echo validation_errors(); ?>
                                                 <?php echo isset($error_upload) ? $error_upload['error'] : ""; ?>
                                             </div>
-                                            <label  class="label_calender control-label col-sm-2" for="calender">Calendrier</label>
+                                            <label  class="label_calender control-label col-sm-2" for="calender"><?php echo $this->lang->line("calendar"); ?></label>
                                             <div class="nom col-sm-10">
                                                 <input name="calender" type="text" value="<?php echo set_value('calender'); ?>" class="form-control" >
                                                 </br>
                                             </div>
-                                            <label class="control-label col-sm-2" for="lib_cat">Bibliotheque</label>
+                                            <label class="control-label col-sm-2" for="lib_cat"><?php echo $this->lang->line("biblio"); ?></label>
                                             <div class="nom col-sm-10">
                                                 <select name="lib_cat" class="form-control"  id="list-bib"></select>
                                                 </br>
                                             </div>
-                                            <label class="control-label col-sm-2" for="lib_sous_cat">Sous Biblio</label>
+                                            <label class="control-label col-sm-2" for="lib_sous_cat"><?php echo $this->lang->line("sous_lib"); ?></label>
                                             <div class="nom col-sm-10">
                                                 <select name="lib_sous_cat" class="form-control"  id="lib-sous-cat"></select>
                                                 </br>
                                             </div>
 
-                                            <label class="control-label col-sm-2" for="job">Titre</label>
+                                            <label class="control-label col-sm-2" for="job"><?php echo $this->lang->line("title"); ?></label>
                                             <div class="nom col-sm-10">
                                                 <input name="job" type="text" value="<?php echo set_value('job'); ?>" class="form-control" >
                                                 </br>
                                             </div>
-                                            <label class="control-label col-sm-2" for="vega">Categorie</label>
+                                            <label class="control-label col-sm-2" for="vega"><?php echo $this->lang->line("categorie"); ?></label>
                                             <div class="nom col-sm-10">
                                                 <input name="vega" type="text" value="<?php echo set_value('vega'); ?>" class="form-control" >
                                                 </br>
                                             </div>
-                                            <label  class="heur_lib control-label col-sm-2" for="heure_lib">Heure lib</label>
+                                            <label  class="heur_lib control-label col-sm-2" for="heure_lib"><?php echo $this->lang->line("hour"); ?></label>
                                             <div class="nom col-sm-10">
                                                 <input name="heure_lib" type="text" value="<?php echo set_value('heure_lib'); ?>" class="form-control" >
                                                 </br>
                                             </div>
-                                            <label class="control-label col-sm-2" for="file">Fichier </label>
+                                            <label class="control-label col-sm-2" for="file"><?php echo $this->lang->line("file"); ?></label>
                                             <div class="tel col-sm-8">
                                                 <input type="file" name="new_file" class="form-control" >
                                                 </br>
                                             </div>
                                             <div class="upload col-sm-2">
-                                                <input class="btn btn-success pull-right" type="submit" value="Ajouter"/>
+                                                <input class="btn btn-success pull-right" type="submit" value="<?php echo $this->lang->line("add"); ?>"/>
                                             </div>
-
 
                                         </form>
                                     </div>
