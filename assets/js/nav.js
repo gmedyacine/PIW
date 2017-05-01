@@ -1,10 +1,4 @@
 $(document).ready(function () {
-    $('.selectpicker').selectpicker();
-    $("#select-lang").change(function(){
-        var lang=$(this).val();
-        location.href= base_url + "index.php/select-lang/"+lang;
-
-    });
     $("#nav > li > a").on("click", function (e) {
         if ($(this).parent().has("ul")) {
             // e.preventDefault();
@@ -29,10 +23,10 @@ $(document).ready(function () {
         $.each(menu.sous_menu, function (i, s_mn) {
             var url_s = base_url + "index.php/biblio/" + menu.id_menu + "/" + s_mn.lib_sous_id;
             ul_sm.append(
-                    $("<li>").attr("id", s_mn.lib_sous_id).append($("<a>").attr("href", url_s).html(s_mn["lib_sous_categ‏_nom"])));
+                    $("<li>").attr("id", s_mn.lib_sous_id).append($("<a>").attr("href", url_s).html('<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;'+s_mn["lib_sous_categ‏_nom"])));
         });
         var url = base_url + "index.php/biblio/" + menu.id_menu;
-        var elem = $("<li>").attr("id", menu.id_menu).append($("<a>").attr("href", url).html(menu.lib_menu).append(ul_sm));
+        var elem = $("<li>").attr("id", menu.id_menu).append($("<a>").attr("href", url).html('<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;'+menu.lib_menu).append(ul_sm));
         $("#ul_bib").append(elem);
     });
     $.each($("#ul_bib li"), function (id, val) {

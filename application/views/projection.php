@@ -61,10 +61,7 @@ include('include/dataTables.php');
                                     <li><a  id="exportExcelAll" href="#"><?php echo $this->lang->line("export_all"); ?></a></li>
 
                                 </ul>
-
-
-
-                            </div>
+</div>
 
                         </div> <!-- Fin titre du tableau et lien export excel-->
 

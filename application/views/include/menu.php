@@ -13,12 +13,14 @@
 <div class="col-md-3">    <!-- Colonne du Menu -->
     <nav id="menu_gauche">
         <ul id="nav">
-            <li><a href="#" class=""><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("rapport_libelle") ?></a>
-                <ul id="menu_gauche_ul" >
+            <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("rapport_libelle") ?>
+                </a>
+                <ul id="menu_gauche_ul">
 
                 </ul>
             </li>
-            <li><a href="#" class=""><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line('biblio'); ?></a>
+            <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line('biblio'); ?>
+                </a>
                 <ul id="ul_bib">
                     <li id="bib"><a href="<?php echo base_url(); ?>index.php/biblio">&nbsp;&nbsp;&nbsp;&nbsp;Suivi Vega</a></li>
                     <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;Masteri</a></li>
@@ -27,15 +29,15 @@
                 </ul>
             </li>
             <?php if ($role != 2) { ?>
-                <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line('parametrage'); ?></a>
+                <li><a href="#"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line('parametrage'); ?>
+                    </a>
                     <ul id="ul_param">
 
-                        <li id="menu_users" ><a href="<?php echo base_url(); ?>index.php/parametrage">Gestion des utilisateurs</a></li>
+                        <li id="menu_users"><a href="<?php echo base_url(); ?>index.php/parametrage"><span
+                                    class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;Gestion des utilisateurs</a></li>
 
-                        <li id="categ"><a href="<?php echo base_url(); ?>index.php/add-biblio">Gestion des bibliothèques</a></li>
-                        <li><a href="#">Gestion des rapports</a></li>
-                        <li><a href=""<?php echo base_url(); ?>index.php/config-lang">Gestion des langues</a></li>
-
+                        <li id="categ"><a href="<?php echo base_url(); ?>index.php/add-biblio"><span
+                                    class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;Gestion des bibliothèques</a></li>
                     </ul>
                 </li>
             <?php } ?>
