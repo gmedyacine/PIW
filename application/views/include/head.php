@@ -13,7 +13,7 @@
         <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" />
         <script src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
         <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css" rel="stylesheet" />
         <!-- GOOGLE FONT FOR BETTER FONT STYLE -->
         <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />-->

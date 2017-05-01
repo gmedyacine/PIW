@@ -21,7 +21,7 @@ body {
 #panel-table
 {
     margin-right:50;
-    
+
 }
 #show-form{
     float: left;
@@ -29,7 +29,7 @@ body {
     width: 94%;
 }
 .bg-white{
-  background: #fff !important;   
+    background: #fff !important;
 }
 .panel-reduit-4, .panel-reduit-5{
     overflow: auto;
@@ -42,10 +42,10 @@ body {
 .btn-bleu
 {
     float:right;
-    margin-right:50;	
+    margin-right:50;
 }
 .btn-bleu-filtre{
-    float:right;	
+    float:right;
 }
 .whiteSpace{
     white-space: nowrap;
@@ -78,37 +78,32 @@ tr.bri{
 }
 
 #nav li {
-    list-style:none; }
+    list-style:none;
+    background: #fff;
+}
 
 #nav > li > a {
     display: block;
     padding: 16px 18px;
     font-size: 0.8em;
-    font-weight: bold;
-    color: #fff;
+    color: #000;
     text-decoration: none;
     border-bottom: 1px solid #212121;
-    background-color: #5bc0de;
-    background: -webkit-gradient(linear, left top, left bottom, from(#343434), to(#292929));
-    background: -webkit-linear-gradient(top, #5bc0de, #5bc0de);
-    background: -moz-linear-gradient(top, #343434, #292929);
-    background: -ms-linear-gradient(top, #343434, #292929);
-    background: -o-linear-gradient(top, #343434, #292929);
-    background: linear-gradient(top, #343434, #292929);
+    background-color: #fff;
 }
 #nav > li > a:hover, #nav > li > a.open {
-    color: #fff;
     border-bottom-color: #384f76;
     background-color: #5bc0de;
-    background: -webkit-gradient(linear, left top, left bottom, from(#6985b5), to(#456397));
-    background: -webkit-linear-gradient(top, #5bc0de, #10b7e5);
+    background: rgba(209, 224, 247, 0.54);
     background: -moz-linear-gradient(top, #6985b5, #456397);
     background: -ms-linear-gradient(top, #6985b5, #456397);
     background: -o-linear-gradient(top, #6985b5, #456397);
     background: linear-gradient(top, #6985b5, #456397);
 }
-
-#nav li ul { display: none; background: #4a5b78; }
+.glyphicon{
+    color: #F6DC72;
+}
+#nav li ul {display: none;background: #fff;}
 .brav-fix{
     margin: 11% 2% 0px 52%;
     width: 364px;
@@ -120,24 +115,22 @@ tr.bri{
     background: none;
     padding: 10px 0px;
     padding-left: 0px;
-    font-size: 0.7em;
+    font-size: 12px;
     text-decoration: none;
-    font-weight: bold;
-    color: #e3e7f1;
-    text-shadow: 1px 1px 0px #000;
+    color: #000;
 }
 #nav li ul li a:hover {
-    background: #394963;
+    background: rgba(209, 224, 247, 0.54);
 }
 #nav li ul.active{
     display: block;
 }
 #nav li ul.active li.active a {
-    background: #394963;
-}    
+    background: rgba(209, 224, 247, 0.54);
+}
 #menu_gauche .active
 {
-    background: #394963;
+    /* background: #394963; */
 }
 .tab-panel {
     background: #F5F5F5;

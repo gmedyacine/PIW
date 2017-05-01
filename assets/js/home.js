@@ -4,7 +4,7 @@ $(document).ready(function () {
         var option = '<option value="' + id + '">' + val + '</option>';
         $("#main_select").append(option);
 
-        var li = $("<li><a href='" + base_url + "index.php/projection/" + id + "'> " + val + "</a></li>");
+        var li = $("<li><a href='" + base_url + "index.php/projection/" + id + "'> " + '<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;'+ val + "</a></li>");
         if (id == idPrj) {
             $("#menu_gauche_ul").addClass("active");
             li.addClass("active");
