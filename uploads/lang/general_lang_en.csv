@@ -1,24 +1,44 @@
 key;traduction
 main_menu;select item
-default_projection;default projection
+default_projection;Default projection
 rapport_libelle;Reports
-biblio;Biblio
-logout;logout
-parametrage;settings
-date_debut;start date
-date_end;end date
-date_not_valide;not valid date
-excute_filtre;excute
-export_excute_filtre;export excute filtre
-export_last_day;export last day
-export_all;export all
+biblio;Libraries
+logout;Logout
+parametrage;Settings
+date_debut;Start date 
+date_end;End date
+date_not_valide;Not valid date
+excute_filtre;Excute
+export_excute_filtre;Export excuted filtre
+export_last_day;Export last day
+export_all;Export all
+export_excel;Export to Excel
 add;Add
 file;File
 hour;Hour
-categorie;categorie
-title;title
-sous_lib;small lib
+categorie;Category
+title;Title
+sous_lib;Sub-library
 add_document;Add document
-calendar;calendar
-lib_dossier;lib_dossier
-lib_insert_date;insert date
+calendar;Calendar
+lib_dossier;lib_folder
+lib_insert_date;Insert date
+add_lib;Add Library
+add_sub_lib;Add Sub-library
+name;Name
+description;Description
+added_by;Added by
+added_at;Added at
+delete;Delete
+bibliotheque;Library
+valider;Select
+notification;Notification
+username;User Name
+email;E-mail
+tel;Telephone
+admin;Admin
+oper;Operator
+notif_mail;E-mail notification
+notif_sms;SMS notification
+gestion_utilisateurs;User Management 
+gestion_biblio;Library Management
