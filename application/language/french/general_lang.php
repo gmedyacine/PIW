@@ -1,5 +1,4 @@
 <?php
-ini_set('auto_detect_line_endings',TRUE);
 $url= base_url();
 $handle = fopen($url.'/uploads/lang/general_lang_fr.csv','r');
 while ( ($data = fgetcsv($handle,0,";") ) !== FALSE ) {

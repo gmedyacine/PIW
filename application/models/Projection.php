@@ -137,7 +137,65 @@ Class Projection extends CI_Model {
         }
         return false;
     }
+    public function showAllReports(){
+       
+        $this->db->query("show tables from  like 'ipw%';");
+        var_dump($this->result());die;
+        foreach($this->result() as $prj){
+
+        }
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ?>

@@ -20,6 +20,7 @@ class Home extends Home_Controller {
     }
 
     public function index() {
+        
         $this->data["title"] = "Selectionnez une projection";
         $this->load->view('main_select', $this->data);
     }
