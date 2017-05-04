@@ -41,6 +41,9 @@
                     </ul>
                 </li>
             <?php } ?>
+                
+                  <li><a href="<?php echo base_url(); ?>index.php/demande"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("demande_specifique"); ?></a>
+                  </li>
         </ul>
     </nav>
 </div>
