@@ -42,3 +42,9 @@ notif_mail;E-mail notification
 notif_sms;SMS notification
 gestion_utilisateurs;User Management 
 gestion_biblio;Library Management
+demande_specifique;Specific Request
+liste_des_demandes;List of Requests
+objet_de_demande;Subject 
+message;Message
+envoyer;Send
+msg_success;Your request has been send succssfuly !!
