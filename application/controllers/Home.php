@@ -10,6 +10,7 @@ class Home extends Home_Controller {
         $this->load->model('user', '', TRUE);
         $this->load->model('files', '', TRUE);
         $this->load->model('biblio', '', TRUE);
+        $this->load->model('demande', '', TRUE);
 
 
         $this->load->helper('form');
@@ -50,7 +51,7 @@ class Home extends Home_Controller {
         $id_projection = $this->input->post('idPrj');
         $order = $this->input->post('order');
         $search = $this->input->post('search');
-//var_dump($oder);die;
+
         $retPrj = $this->projection->getProjection($id_projection, $date_debut, $date_fin, $per_page, $page, $order[0], $search['value']);
         $dataPrj = $retPrj["data"];
         $ret = array("draw" => intval($this->input->post('draw')),
@@ -60,7 +61,7 @@ class Home extends Home_Controller {
         );
 
         $datas = json_encode($ret);
-// var_dump($datas);die;
+
         header('Content-Type: application/json');
         echo $datas;
     }
@@ -172,7 +173,25 @@ class Home extends Home_Controller {
 
         $this->load->view("addBib");
     }
+    
+    public function demandeSpecifique()
+    {
+        $this->data["allDemandes_json"] = json_encode($this->demande->getAllDemandes());
+        $this->load->view("demande", $this->data);
+    }
+    
+     public function addDemande()
+    {       
+            $objet = $this->input->post('objet');
+            $msg = $this->input->post('message');
+            $data = array('objet' => $objet, 'message' => $msg, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
+            $this->demande->add_demande($data);
+            $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">Votre demande a été envoyé avec succès !! </div>');
+            redirect(base_url() . "index.php/demande");
+    }
 
+  
+    
     public function download($file) {
         $this->load->helper('download');
         $data = file_get_contents(base_url() . 'uploads/' . $file);
