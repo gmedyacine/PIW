@@ -65,7 +65,24 @@ ADD  `lib_sous_categ_id` INT NOT NULL DEFAULT  '0';";
         $res = $query->result();
         return $res;
     }
-
+    public function getUsernameById($id) {
+        $this->db->select('username');
+        $this->db->where('id',$id);
+        $this->db->from('piw_users');
+        //$this->db->limit(1);
+        $query = $this->db->get();
+        $res = $query->row();
+        return $res;
+    }
+    
+    public function getAllAdminEmail() {
+        $this->db->select('mail');
+        $this->db->where('sup_user',1);
+        $this->db->from('piw_users');
+        $query = $this->db->get();
+        $res = $query->result();
+        return $res;
+    }
     public function deleteUser($id) {
         $this->db->where('id', $id);
         $this->db->delete('piw_users');
