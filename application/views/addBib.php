@@ -16,12 +16,12 @@ include('include/head.php');
                 <ul class="nav nav-tabs " role="tablist">
                     <li class="active">
                         <a href="#biblio" class="tab" role="tab" data-toggle="tab">
-                            Ajouter Bibliothèque
+                           <?php echo $this->lang->line("add_lib"); ?> 
                         </a>
                     </li>
                     <li>
                         <a href="#sousBiblio" class="tab" role="tab" data-toggle="tab">
-                            Ajouter Sous-bibliothèque
+                            <?php echo $this->lang->line("add_sub_lib"); ?> 
                         </a>
                     </li>
                 </ul>
@@ -35,14 +35,14 @@ include('include/head.php');
                                 <div class="form-group">
                                     <?php echo form_open('add-biblio'); ?>
 
-                                    <label class="control-label col-sm-2" for="nom">Nom</label>
+                                    <label class="control-label col-sm-2" for="nom"><?php echo $this->lang->line("name"); ?> </label>
                                     <div class="nom col-sm-10">
                                         <input name="nom" type="text"  required="required" class="form-control " >
                                         </br>
                                     </div>
 
                                     </br>
-                                    <label class="control-label col-sm-2" for="description">Description </label>
+                                    <label class="control-label col-sm-2" for="description"><?php echo $this->lang->line("description"); ?>  </label>
                                     <div class="desc col-sm-10">
                                         <input name="description" type="text" class="form-control " >
                                         </br>
@@ -51,7 +51,7 @@ include('include/head.php');
 
 
                                     <div class="add">
-                                        <input class="btn btn-success pull-right" type="submit" value="Ajouter"/>
+                                        <input class="btn btn-success pull-right" type="submit" value="<?php echo $this->lang->line("add"); ?>"/>
                                     </div>
 
                                     </form>
@@ -64,11 +64,11 @@ include('include/head.php');
                         <table id="tabCat" class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Nom</th>
-                                    <th>Description</th>
-                                    <th>Added_by</th>
-                                    <th>Added_at</th>
-                                    <th>Supprimer</th>
+                                    <th><?php echo $this->lang->line("name"); ?></th>
+                                    <th><?php echo $this->lang->line("description"); ?></th>
+                                    <th><?php echo $this->lang->line("added_by"); ?></th>
+                                    <th><?php echo $this->lang->line("added_at"); ?></th>
+                                    <th><?php echo $this->lang->line("delete"); ?></th>
 
                                 </tr>
                             </thead>
@@ -84,27 +84,27 @@ include('include/head.php');
                                     <?php echo form_open('add-sous-biblio'); ?>
 
 
-                                    <label class="control-label col-sm-2" for="biblio">Bibliothèque</label>
+                                    <label class="control-label col-sm-2" for="biblio"><?php echo $this->lang->line("bibliotheque"); ?></label>
                                     <div class="nom col-sm-10">
                                         <select id="list-bib" name="id_cat" class="form-control" required="required" >
                                         </select>
                                         </br>
                                     </div>
 
-                                    <label class="control-label col-sm-2" for="nom">Nom</label>
+                                    <label class="control-label col-sm-2" for="nom"><?php echo $this->lang->line("name"); ?></label>
                                     <div class="nom col-sm-10">
                                         <input name="nom" type="text"  required="required" class="form-control " >
                                         </br>
                                     </div>
 
                                     </br>
-                                    <label class="control-label col-sm-2" for="description">Description </label>
+                                    <label class="control-label col-sm-2" for="description"><?php echo $this->lang->line("description"); ?> </label>
                                     <div class="desc col-sm-10">
                                         <input name="description" type="text" class="form-control " >
                                         </br>
                                     </div>
                                     <div class="add">
-                                        <input class="btn btn-success pull-right" type="submit" value="Ajouter"/>
+                                        <input class="btn btn-success pull-right" type="submit" value="<?php echo $this->lang->line("add"); ?>"/>
                                     </div>
 
                                     </form>
@@ -115,11 +115,11 @@ include('include/head.php');
                         <table  id="sou_bib" class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Nom (Sous-bibliothèque)</th>
-                                    <th>Description</th>
-                                    <th>Added_by</th>
-                                    <th>Added_at</th>
-                                    <th>Supprimer</th>
+                                    <th><?php echo $this->lang->line("name"); ?> (<?php echo $this->lang->line("sous_lib"); ?>)</th>
+                                    <th><?php echo $this->lang->line("description"); ?></th>
+                                    <th><?php echo $this->lang->line("added_by"); ?></th>
+                                    <th><?php echo $this->lang->line("added_at"); ?></th>
+                                    <th><?php echo $this->lang->line("delete"); ?></th>
 
                                 </tr>
                             </thead>

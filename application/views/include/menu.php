@@ -34,13 +34,16 @@
                     <ul id="ul_param">
 
                         <li id="menu_users"><a href="<?php echo base_url(); ?>index.php/parametrage"><span
-                                    class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;Gestion des utilisateurs</a></li>
+                                    class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("gestion_utilisateurs") ?></a></li>
 
                         <li id="categ"><a href="<?php echo base_url(); ?>index.php/add-biblio"><span
-                                    class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;Gestion des bibliothèques</a></li>
+                                    class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("gestion_biblio") ?></a></li>
                     </ul>
                 </li>
             <?php } ?>
+                
+                  <li><a href="<?php echo base_url(); ?>index.php/demande"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("demande_specifique"); ?></a>
+                  </li>
         </ul>
     </nav>
 </div>

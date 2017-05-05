@@ -50,7 +50,7 @@ include('include/dataTables.php');
                             <div class="col-6 pull-right dropdown">
                                 <button class="btn icon-btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     <span class="glyphicon btn-glyphicon glyphicon-share img-circle text-info"></span>
-                                    Export Excel 
+                                   <?php echo $this->lang->line("export_excel"); ?>  
                                     <span class="caret"></span>
                                 </button>
 
