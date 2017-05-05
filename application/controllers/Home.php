@@ -113,12 +113,12 @@ class Home extends Home_Controller {
         redirect('parametrage', 'refresh');
     }
 
-    public function biblio($id_bib,$id_sous_bib=0) {
+    public function biblio($id_bib, $id_sous_bib = 0) {
         $data = $this->data;
-        $data["idBib"]= json_encode($id_bib);
-        $data["id_categ"]= json_encode($id_bib);
-        $data["id_sous_categ"]= json_encode($id_sous_bib);
-        $data["fetch_data"] = $this->files->fetch_data($id_bib,$id_sous_bib);
+        $data["idBib"] = json_encode($id_bib);
+        $data["id_categ"] = json_encode($id_bib);
+        $data["id_sous_categ"] = json_encode($id_sous_bib);
+        $data["fetch_data"] = $this->files->fetch_data($id_bib, $id_sous_bib);
         $this->load->view("biblio", $data);
     }
 
@@ -133,7 +133,7 @@ class Home extends Home_Controller {
         $this->biblio->delete_categ($idCat);
         redirect('add-biblio', 'refresh');
     }
-    
+
     function delete_sous_biblio($idSCat) {
         $this->biblio->delete_sous_categ($idSCat);
         redirect('add-biblio', 'refresh');
@@ -166,32 +166,69 @@ class Home extends Home_Controller {
         $nom = $this->input->post('nom');
         $id_cat = $this->input->post('id_cat');
         $desc = $this->input->post('desc');
-        $data = array('lib_sous_categ‏_nom' => $nom, 'lib_sous_categ‏_desc' => $desc,'lib_sous_categ‏_categ' => $id_cat, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
+        $data = array('lib_sous_categ‏_nom' => $nom, 'lib_sous_categ‏_desc' => $desc, 'lib_sous_categ‏_categ' => $id_cat, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
         $this->biblio->add_sous_categ($data);
         $this->session->set_flashdata('msg', '<div class=" brav-fix alert alert-success text-center">Insertion sous categorie avec succès !! </div>');
         redirect(base_url() . "index.php/add-biblio");
 
         $this->load->view("addBib");
     }
-    
-    public function demandeSpecifique()
-    {
+
+    public function demandeSpecifique() {
         $this->data["allDemandes_json"] = json_encode($this->demande->getAllDemandes());
         $this->load->view("demande", $this->data);
     }
-    
-     public function addDemande()
-    {       
-            $objet = $this->input->post('objet');
-            $msg = $this->input->post('message');
-            $data = array('objet' => $objet, 'message' => $msg, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
-            $this->demande->add_demande($data);
+
+    public function addDemande() {
+        $objet = $this->input->post('objet');
+        $msg = $this->input->post('message');
+        $data = array('objet' => $objet, 'message' => $msg, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
+        if ($this->demande->add_demande($data)) {
+            $this->session->set_userdata('demande_data', $data); // save $data in a session
             $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">Votre demande a été envoyé avec succès !! </div>');
-            redirect(base_url() . "index.php/demande");
+            $emails=$this->adminsMails(); // pour recupérer les emails de tous les admins
+            
+            $this->sendMailToAdmin($emails);
+        }
+
+        redirect(base_url() . "index.php/demande");
     }
 
-  
+    public function getUserName($id) {
+        return $this->user->getUsernameById($id);
+    }
+
+    public function adminsMails() {
+
+        $users = $this->user->getAllAdminEmail();
+        $emails = '';
+        foreach ($users as $user) {
+            if ($user->mail != ''){
+                $emails.= $user->mail . ', ';
+            }
+        }
+        return $emails;
+    }
     
+    public function sendMailToAdmin($emails) {
+
+        $this->load->library('email');
+        $demande = $this->session->userdata('demande_data'); //pour recupérer les information de la demande à partir de la session
+        $username = $this->getUserName($demande['added_by'])->username; //pour recupérer le username à partir de l'id
+
+        $this->email->from('no-replay@ipw.centor-it.fr.com', 'IPW');
+        $this->email->to($emails);
+        $this->email->cc("gmedyacine@gmail.com, nadia.hbr@gmail.com");
+        $this->email->subject('Demande spécifique');
+
+        include('include/message.php');
+
+        $this->email->message($message);
+
+        $this->email->set_mailtype('html');
+        $this->email->send();
+    }
+
     public function download($file) {
         $this->load->helper('download');
         $data = file_get_contents(base_url() . 'uploads/' . $file);
@@ -240,11 +277,11 @@ class Home extends Home_Controller {
                     $heure_lib = $this->input->post('heure_lib');
                     $job = $this->input->post('job');
                     $categ = $this->input->post("lib_cat");
-                    $sous_categ= $this->input->post("lib_sous_cat");
+                    $sous_categ = $this->input->post("lib_sous_cat");
                     $vega = $this->input->post('vega');
-                    $data_to_add = array("job" => $job, "calendrier" => $calender, "heure_lib" => $heure_lib, "vega" => $vega,"lib_categ_id"=>$categ,"lib_sous_categ_id"=>$sous_categ, "nom_fichier" => $name);
+                    $data_to_add = array("job" => $job, "calendrier" => $calender, "heure_lib" => $heure_lib, "vega" => $vega, "lib_categ_id" => $categ, "lib_sous_categ_id" => $sous_categ, "nom_fichier" => $name);
                     $this->files->add_file($data_to_add);
-                    redirect('biblio/'.$categ.'/'.$sous_categ, 'refresh');
+                    redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
                 }
             } else {
                 $this->files->update_file($row_id, $name);
@@ -255,19 +292,18 @@ class Home extends Home_Controller {
 
     public function list_scat() {
         $id_cat = $this->input->post('id_cat');
-        $ret=$this->biblio->fetch_sous_categ($id_cat);
+        $ret = $this->biblio->fetch_sous_categ($id_cat);
         $datas = json_encode($ret);
-       // var_dump($id_cat);die;
+        // var_dump($id_cat);die;
         header('Content-Type: application/json');
         echo $datas;
     }
-    
-    public function search_bib(){
-          $file_cnt = $this->input->post('cnt_file');
-           $data_fetch=$this->files->fetch_data(0,0,$file_cnt);
-           $this->data["fetch_data"]=$data_fetch;
-           $this->load->view("partial/table_biblio.php",$this->data);
-          
+
+    public function search_bib() {
+        $file_cnt = $this->input->post('cnt_file');
+        $data_fetch = $this->files->fetch_data(0, 0, $file_cnt);
+        $this->data["fetch_data"] = $data_fetch;
+        $this->load->view("partial/table_biblio.php", $this->data);
     }
 
 }
