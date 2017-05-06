@@ -48,3 +48,6 @@ objet_de_demande;Subject
 message;Message
 envoyer;Send
 msg_success;Your request has been send successfully !!
+title_login;connection login and password
+username_connexion;username
+password_connexion;password

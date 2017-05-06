@@ -1,6 +1,5 @@
 <?php ?>
 <script type="text/javascript">
-    var base_url = "<?php echo base_url(); ?>";
     var projections = <?php echo $projections; ?>;
     var id_param =<?php echo $id_param; ?>;
     var menu_bib =<?php echo $menu; ?>;
