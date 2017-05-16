@@ -17,7 +17,13 @@ class Home_Controller extends MY_Controller {
         "2" => "TEMPS CHARGEMENT ",
         "3" => "COMPTE RENDU MASTERI",
         "4" => "STATUS TACHES",
-        "5" => "TACHES VEGA");
+        "5" => "TACHES VEGA",
+        "6"=> "DISTRIBUICAO VENDAS",
+        "7" => "LIST AGENTS",
+        "8" => "REPORT LEDGER",
+        "9" => "STATEMENT",
+        "10" => "STATEMENT BIM",
+        "11"=> "SUBSCRIPTIONS BY TXNTYPE");
 
     public function __construct() {
         parent::__construct();
