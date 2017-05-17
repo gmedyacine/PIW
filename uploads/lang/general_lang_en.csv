@@ -50,3 +50,6 @@ envoyer;Send
 msg_success;Your request has been send successfully !!
 add_categ;Add category
 assigner_categ;Assign a category
+select_categ;Select a category
+categ_not_found;You didn't find your category ?
+create_categ;Create a new category
