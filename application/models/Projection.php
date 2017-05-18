@@ -41,7 +41,6 @@ Class Projection extends CI_Model {
                 $this->db->or_like($col, $search_value);
             }
         }
-
         $db = clone $this->db;
         $num_row = $db->get()->num_rows();
 

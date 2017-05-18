@@ -62,7 +62,7 @@ class Home extends Home_Controller {
         );
 
         $datas = json_encode($ret);
-
+// var_dump($datas);die;
         header('Content-Type: application/json');
         echo $datas;
     }
