@@ -16,7 +16,7 @@ $(document).ready(function () {
         loadSC($(this).val());
     });
     masque_fields_bib();
-    $("#cnt-mainTablesBib").before($("<div>").text("Search:  ").attr("id", "search_glob").append($("<input placeholder='taper 3 carteres'>").keyup(function () {
+    $("#cnt-mainTablesBib").before($("<div>").text("Search:  ").attr("id", "search_glob").append($("<input placeholder='Enter 3 characters'>").keyup(function () {
                 if ($(this).val().length > 2) {
                     $.ajax({
                         type: "post",

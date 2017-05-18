@@ -7,7 +7,14 @@ Class Projection extends CI_Model {
         "2" => array("table" => "ipw_chrg_rep_temps", "date_filtre" => "date_chargement", "tab_colonne" => array("report_nom", "temps_execution", "date_chargement")),
         "3" => array("table" => "ipw_crt_masteri", "date_filtre" => "date_oper", "tab_colonne" => array("programme", "date_oper", "temps_execution")),
         "4" => array("table" => "ipw_status_task", "date_filtre" => "startup_time", "tab_colonne" => array("id", "tache_id", "plan_id", "plan_name", "nom_tache", "date_reference", "startup_time", "endup_time", "elapsed", "statut", "monitor", "alias", "agent", "procedure")),
-        "5" => array("table" => "ipw_taches_vega", "date_filtre" => "date_suivi", "tab_colonne" => array("id", "date_suivi", "scheduled", "tache", "num_tsk", "plan_id", "plan_name", "procedure", "libelle", "comments")));
+        "5" => array("table" => "ipw_taches_vega", "date_filtre" => "date_suivi", "tab_colonne" => array("id", "date_suivi", "scheduled", "tache", "num_tsk", "plan_id", "plan_name", "procedure", "libelle", "comments")),
+        "6" => array("table" => "ipw_rept_distribuicao_vendas", "date_filtre" => "date", "tab_colonne" => array("date", "vendas_agentes", "nbr_agentes_merchants", "nbr_streets", "vendas_streets", "vendas_clientes", "nbr_clients", "total_vendas", "cumulativo", "evolucao")),
+        "7" => array("table" => "ipw_rept_list_agents", "date_filtre" =>"added_at", "tab_colonne" => array("client_code", "account_id", "product_id", "account_type", "client_name", "device_identifier", "address", "locality", "district", "city", "province","added_at")),
+        "8" => array("table" => "ipw_rept_report_ledger", "date_filtre" => "date","tab_colonne" => array("date", "account_reference", "amount/100")),
+        "9" => array("table" => "ipw_rept_statement", "date_filtre" => "transaction_date", "tab_colonne" => array("account_id", "business_transcation_id", "available_balance/100", "current_balance/100", "transaction_amount", "fee", "commission_amount", "transaction_date", "transaction_type", "status")),
+        "10" => array("table" => "ipw_rept_statement_bim", "date_filtre" => "date","tab_colonne" => array("date", "bank_id", "txn_type", "txn_amount", "txn_date")),
+        "11" => array("table" => "ipw_rept_subscriptions_by_txntype", "date_filtre" => "date", "tab_colonne" => array("date", "txn_type", "txn_total", "txn_amount")));
+     
     protected $egalDateFiltre = false;
     protected $dateDebut;
     protected $dateFin;
