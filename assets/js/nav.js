@@ -26,7 +26,7 @@ $(document).ready(function () {
                     $("<li>").attr("id", s_mn.lib_sous_id).append($("<a>").attr("href", url_s).html('<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;'+s_mn["lib_sous_categ‏_nom"])));
         });
         var url = base_url + "index.php/biblio/" + menu.id_menu;
-        var elem = $("<li>").attr("id", menu.id_menu).append($("<a>").attr("href", url).html('<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;'+menu.lib_menu).append(ul_sm));
+        var elem = $("<li>").attr("id", menu.id_menu).append($("<a>").attr("href", url).html('<div><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;'+menu.lib_menu+"</div>").append(ul_sm));
         $("#ul_bib").append(elem);
     });
     $.each($("#ul_bib li"), function (id, val) {
@@ -36,10 +36,11 @@ $(document).ready(function () {
             $.each($("#ul_bib").find("li"), function (i, ele) {
                 if ($(ele).attr("id") == id_categ) {
                     $(ele).find("ul").addClass("active");
-                    $(ele).find("ul li").addClass("active");
+                    $(ele).find("div").addClass("active"); // ici tous les li active
+                                                             // on a besoin d'une seule li active
                 }
             });
-            $(val).addClass("active");
+            //$(val).addClass("active");
         }
     });
     $.each($("#ul_param li"), function (id, val) {
