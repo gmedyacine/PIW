@@ -61,6 +61,10 @@ $(document).ready(function () {
                 "order": [],
                 "bProcessing": true,
                 "serverSide": true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'colvis'
+                ],
                 "ajax": {
                     "data": {idPrj: idPrj},
                     "url": base_url + "index.php/filtre",
@@ -232,7 +236,21 @@ $(document).ready(function () {
             return true;
         }
     }
+    function queryParams(p) {
+        return {
+            idPrj: idPrj,
+        };
+    }
+    function creatColonne() {
+        var tr = $('<tr>');
+        $.each(dataNameColonne, function (id, val) {
+            tr.append($('<th data-field="' + val + '" data-sortable="true">').append(val));
+        });
+        var thead = $('<thead>').append(tr);
 
+        $("#mainTables").empty().append(thead);
+
+    }
 });
 
 

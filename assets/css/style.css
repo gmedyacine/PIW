@@ -88,7 +88,7 @@ tr.bri{
     font-size: 0.8em;
     color: #000;
     text-decoration: none;
-    border-bottom: 1px solid #212121;
+    border-top: 1px solid #212121;
     background-color: #fff;
 }
 #nav > li > a:hover, #nav > li > a.open {
@@ -102,6 +102,9 @@ tr.bri{
 }
 .glyphicon{
     color: #F6DC72;
+}
+.glyphicon-file{
+    color: #b4e2e0;
 }
 #nav li ul {display: none;background: #fff;}
 .brav-fix{
