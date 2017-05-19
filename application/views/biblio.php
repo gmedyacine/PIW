@@ -89,5 +89,13 @@ include('include/head.php');
         </div>
     </div>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/biblio.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/jquery.chained.min.js"></script><!-- pour les listes liées --> 
+    <script type="text/javascript">
+    $(document).ready(function(){
+    $("#lib-sous-cat").chainedTo("#list-bib");
+    });
+    
+    </script>
+	
 
     <?php include('include/footer.php'); ?>
