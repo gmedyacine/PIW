@@ -1,7 +1,9 @@
 <!-- REQUIRED SCRIPTS FILES -->
 <!-- REQUIRED BOOTSTRAP SCRIPTS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-<img id="loader" src="<?php echo base_url(); ?>assets/img/loader.svg"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     var base_url = "<?php echo base_url(); ?>";
     $('.selectpicker').selectpicker();
