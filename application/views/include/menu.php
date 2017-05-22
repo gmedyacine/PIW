@@ -1,5 +1,6 @@
 <?php ?>
 <script type="text/javascript">
+    var base_url = "<?php echo base_url(); ?>";
     var projections = <?php echo $projections; ?>;
     var id_param =<?php echo $id_param; ?>;
     var menu_bib =<?php echo $menu; ?>;
@@ -14,8 +15,10 @@
         <ul id="nav">
             <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("rapport_libelle") ?>
                 </a>
+        
                 <ul id="menu_gauche_ul">
-
+                  <input  type="text" name="recherche" id="recherche" class="form-control glyphicon" style="color: black" placeholder="&#57347;" />
+                  <div id="resultat"></div>
                 </ul>
             </li>
             <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line('biblio'); ?>
@@ -32,8 +35,8 @@
                     </a>
                     <ul id="ul_param">
 
-                        <li id="menu_users"><a href="<?php echo base_url(); ?>index.php/parametrage"><span
-                                    class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("gestion_utilisateurs") ?></a></li>
+                        <li id="menu_users"><a href="<?php echo base_url(); ?>index.php/parametrage">
+                                <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("gestion_utilisateurs") ?></a></li>
 
                         <li id="categ"><a href="<?php echo base_url(); ?>index.php/add-biblio"><span
                                     class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("gestion_biblio") ?></a></li>
