@@ -48,6 +48,7 @@
 </div>
 <script src="<?php echo base_url(); ?>assets/js/home.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/nav.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.quicksearch.js"></script>
 
 
 
