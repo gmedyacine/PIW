@@ -14,7 +14,7 @@ function creatQuery() {
         "ipw_rept_subscriptions_by_txntype");
     foreach ($tab_projection as $tableName) {
         $sql_add_column = "ALTER TABLE  `".$tableName."` ADD  `report_categ_id` INT DEFAULT NULL;";
-        $this->db->query($sql_stat_alter);
+        $this->db->query($sql_add_column);
     }
 }
 ?>         
