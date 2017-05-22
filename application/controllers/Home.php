@@ -199,13 +199,11 @@ class Home extends Home_Controller {
         force_download($file, $data);
     }
 
-    public function delete_data($id, $name) {
-
-
+ public function delete_data($id, $name, $categ, $sous_categ ) {
         $this->load->model('files');
         $this->files->delete_data($id);
         unlink('./uploads/' . $name); // delete file
-        redirect(base_url() . "index.php/biblio");
+        redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
     }
 
     public function upload_file() {
