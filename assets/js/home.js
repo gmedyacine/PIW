@@ -13,6 +13,22 @@ $(document).ready(function () {
         $("#menu_gauche_ul").append(li);
     });
 
+	//// la partie recherche du rapport
+    var qs = $('input#recherche').quicksearch('ul#menu_gauche_ul li');
+
+    $.ajax({
+        'url': 'example.json',
+        'type': 'GET',
+        'dataType': 'json',
+        'success': function (data) {
+            for (i in data['list_items']) {
+                $('ul#menu_gauche_ul').append('<li>' + data['list_items'][i] + '</li>');
+            }
+            qs.cache();
+        }
+    });
+//// Fin de la partie recherche du rapport
+	
     $("#valid_select").click(function () {
         var val = $("#main_select").val();
         if (val > 0) {
