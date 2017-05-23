@@ -81,6 +81,15 @@ Class Projection extends CI_Model {
         $ret = $this->db->list_fields($projection);
         return $ret;
     }
+	
+	public function getNameTable($id_projection) {
+        if (!array_key_exists($id_projection, $this->tab_projection_id)) {
+            return;
+        }
+        $table = $this->tab_projection_id[$id_projection]["table"];
+
+        return $table;
+    }
 
     private function validateDate($date, $format = "Y-m-d H:i:s") {
         $d = DateTime::createFromFormat($format, $date);
