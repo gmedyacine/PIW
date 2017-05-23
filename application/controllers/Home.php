@@ -268,5 +268,24 @@ class Home extends Home_Controller {
            $this->load->view("partial/table_biblio.php",$this->data);
           
     }
+	
+		 public function rename_form(){
+	    $this->load->view("renameReport",$this->data);
+		}
+		
+	 public function rename_report(){
+	    
+        $id_projection = $this->input->post('id_projection');
+		$new_name = $this->input->post('new_name');
+		$old_name = $this->projection->getNameTable($id_projection);
+	    $data = array('renamed_by' => $this->data['id_user_connected'], 'new_report_name' => $new_name, 'old_report_name' =>$old_name );
+		
+        if ($this->report->renameReport($data)) {
+            $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">Les modifications ont été effectué avec succès !! </div>');
+          }
+	 
+	  redirect(base_url() . "index.php/home/rename_form");
+	 
+	 }
 
 }
