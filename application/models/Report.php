@@ -65,6 +65,16 @@ Class Report extends CI_Model {
             return false;
         }
     }
+	
+	    function getUserReports($userId) {
+        $query = $this->db->select('*')
+                ->from("ipw_rename_report")
+                ->where('renamed_by', $userId )
+                ->get(); 
+      
+        $ret = $query->result_array();
+        return $ret;
+    }
 }
 
 ?>

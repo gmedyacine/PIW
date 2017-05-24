@@ -13,7 +13,7 @@ class MY_Controller extends CI_Controller {
 
 class Home_Controller extends MY_Controller {
 
-    protected $projections = array("1" => "STATUS CHARGEMENT",
+   	    protected $projections = array("1" => "STATUS CHARGEMENT",
         "2" => "TEMPS CHARGEMENT ",
         "3" => "COMPTE RENDU MASTERI",
         "4" => "STATUS TACHES",
@@ -24,6 +24,7 @@ class Home_Controller extends MY_Controller {
         "9" => "STATEMENT",
         "10" => "STATEMENT BIM",
         "11"=> "SUBSCRIPTIONS BY TXNTYPE");
+ 
 
     public function __construct() {
         parent::__construct();
@@ -31,15 +32,36 @@ class Home_Controller extends MY_Controller {
             redirect('login', 'refresh');
         }
         $this->load->model('biblio', '', TRUE);
+		$this->load->model('report', '', TRUE);
         $dataLogin = $this->session->userdata('logged_in');
         $this->data['id_user_connected'] = $dataLogin["id"];
         $this->data['id_param'] = 0;
         $this->data['role'] = $dataLogin["role"];
-        $this->data["projections"] = json_encode($this->projections);
+        $this->data["projections"] = json_encode($this->rename_reports());
         $this->data["menu"] = json_encode($this->biblio->fetch_menu());
         $this->data['data_categs'] = json_encode($this->biblio->fetch_categ());
         $this->data['data_sous_categs'] = json_encode($this->biblio->fetch_sous_categ());
     }
+	    
+		
+		
+    protected function rename_reports() {
+	
+	$rename = $this->report->getUserReports($this->data['id_user_connected']);
+	$new_projections=array();
+	foreach($this->projections as $key => $value)
+	{
+	  $new_projections[$key]=$value;
+	  for($i=0;$i<sizeof($rename);$i++)
+	  {  
+	    if($key == $rename[$i]['old_report_id'])
+		{
+		  $new_projections[$key] = $rename[$i]['new_report_name'];
+		}
+	  }
+	}
+	return $new_projections;
+	}
 
     protected function logout() {
         $this->session->unset_userdata('logged_in');
