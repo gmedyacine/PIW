@@ -8,6 +8,7 @@ parametrage;Settings
 date_debut;Start date 
 date_end;End date
 date_not_valide;Not valid date
+excute_filtre;Execute
 export_excute_filtre;Export excuted filtre
 export_last_day;Export last day
 export_all;Export all
@@ -47,8 +48,11 @@ objet_de_demande;Subject
 message;Message
 envoyer;Send
 msg_success;Your request has been send successfully !!
-title_login;connection login and password
-username_connexion;username
-password_connexion;password
 add_categ;Add category
 assigner_categ;Assign a category
+select_categ;Select a category
+categ_not_found;You didn't find your category ?
+create_categ;Create a new category
+remame_report;Rename your report
+select_report;Select a report
+save;Save
