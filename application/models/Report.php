@@ -25,7 +25,7 @@ Class Report extends CI_Model {
         "ipw_rept_statement_bim",
         "ipw_rept_subscriptions_by_txntype");
     foreach ($tab_projection as $tableName) {
-        $sql_add_column = "ALTER TABLE  `".$tableName."` ADD  `report_categ_id` INT DEFAULT NULL;";
+        $sql_add_column = "ALTER TABLE  `".$tableName."` ADD  `report_categ` INT DEFAULT NULL;";
         $this->db->query($sql_add_column);
     }
 }
@@ -35,14 +35,7 @@ Class Report extends CI_Model {
         $this->db->query($sql_add_column);
     }
     
-    function searchReportByName($keyword) {
 
-        $query = $this->db->query("SHOW TABLES WHERE `Tables_in_piw` LIKE '%ipw%' AND `Tables_in_piw` LIKE '%".$keyword."%'");
-        $ret = $query->result_array();
-        return $ret;
-        //return $query->num_rows();
-
-    }
 
     function deleteReportCateg($id) {
         $this->db->where("id", $id);
@@ -58,12 +51,74 @@ Class Report extends CI_Model {
         }
     }
 	
-	    function renameReport($data) {
-        if ($this->db->insert('ipw_rename_report', $data)) {
-            return true;
+	function renameReport($data) {
+		$user_id=$data['renamed_by'];
+		$report_id=$data['old_report_id'];
+		$new_report_name=$data['new_report_name'];
+		 
+		$this->db->select('*');
+        $this->db->from('ipw_rename_report');
+        $this->db->where('renamed_by',$user_id);
+		$this->db->where('old_report_id',$report_id);
+		
+        if ($this->db->count_all_results() == 0) {
+		  if($this->db->insert('ipw_rename_report', $data))
+		  {
+		    return true;
+		  }
         } else {
-            return false;
+		 if($this->db->set('new_report_name',$new_report_name)
+                    ->where('renamed_by',$user_id)
+					->where('old_report_id',$report_id)
+                    ->update('ipw_rename_report'))
+			{
+			  return true;
+			}		
         }
+    }
+
+	function createReport($data) {
+		/*$user_id=$data['renamed_by'];
+		$old_report_name=$data['old_report_name'];
+		$new_report_name=$data['new_report_name'];
+		 
+		$this->db->select('*');
+        $this->db->from('ipw_create_report');
+        $this->db->where('renamed_by',$user_id);
+		$this->db->where('old_report_name',$old_report_name);
+		
+        if ($this->db->count_all_results() == 0) {
+		 if($this->db->insert('ipw_create_report', $data))
+		  {
+		    return true;
+		  }		 
+        } else {
+		 if($this->db->set('new_report_name',$new_report_name)
+                    ->where('renamed_by',$user_id)
+					->where('old_report_id',$report_id)
+                    ->update('ipw_create_report'))
+			{
+			  return true;
+			}		
+        }*/
+		 if($this->db->insert('ipw_create_report', $data))
+		  {
+		    return true;
+		  }
+    }
+	
+	function searchReporttables() {
+
+        $query = $this->db->query("SHOW TABLES WHERE `Tables_in_piw` LIKE '%ipw_rept%' ");
+        $ret = $query->result_array();
+        return $ret;
+        //return $query->num_rows();
+
+    }
+	
+	function deleteRenamedReport($id) {
+        $this->db->where('id_rename_report', $id);
+        $this->db->delete('ipw_rename_report');
     }
 	
 	    function getUserReports($userId) {

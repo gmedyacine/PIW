@@ -1,18 +1,18 @@
-key;traduction
-main_menu;select item
-default_projection;Default projection
-rapport_libelle;Reports
+key;Key
+main_menu;Main menu
+default_projection;Reports 
+rapport_libelle;Report title
 biblio;Libraries
 logout;Logout
-parametrage;Settings
-date_debut;Start date 
-date_end;End date
-date_not_valide;Not valid date
+parametrage;Settings 
+date_debut;From date 
+date_end;Until 
+date_not_valide;Invalid date 
 excute_filtre;Execute
-export_excute_filtre;Export excuted filtre
-export_last_day;Export last day
+export_excute_filtre;Export result 
+export_last_day;Export last day 
 export_all;Export all
-export_excel;Export to Excel
+export_excel;Exporter to XLS
 add;Add
 file;File
 hour;Hour
@@ -31,7 +31,7 @@ added_by;Added by
 added_at;Added at
 delete;Delete
 bibliotheque;Library
-valider;Select
+valider;Confirm
 notification;Notification
 username;User Name
 email;E-mail
@@ -48,11 +48,12 @@ objet_de_demande;Subject
 message;Message
 envoyer;Send
 msg_success;Your request has been send successfully !!
-add_categ;Add category
-assigner_categ;Assign a category
-select_categ;Select a category
-categ_not_found;You didn't find your category ?
-create_categ;Create a new category
+title_login;connection login and password
+username_connexion;username
+password_connexion;password
 remame_report;Rename your report
 select_report;Select a report
 save;Save
+msg_add;Successfully added !!
+msg_modif;Successfully updated !!
+create_report;Create your report

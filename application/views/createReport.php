@@ -5,7 +5,8 @@ include('include/head.php');
 ?>
 
  <script type="text/javascript">
-     var projections = <?php echo $projections; ?>
+     var projections = <?php echo $projections; ?>;
+	 var rpt_tables_json = <?php echo $rpt_tables_json; ?>;
  </script>
 <body>
 
@@ -24,21 +25,21 @@ include('include/head.php');
                                     <div class="row">
                                                             <div class="panel panel-default panel-set">
                         <div class="panel-heading">
-                           <?php echo $this->lang->line("remame_report"); ?>
+                           <?php echo $this->lang->line("create_report"); ?>
                         </div>
                     
                         <div class="panel-body"> 
 
                             <div class="form-group">    
                              
-                                <?php echo form_open('home/rename_report'); ?>
+                                <?php echo form_open('home/create_report'); ?>
                                 <div class="col-sm-12">
-                                    <select  id="main_select" name="id_projection"  class="form-control" >
+                                    <select  id="rpt_select" name="old_name"  class="form-control" >
                                          
                                        </select>
                                   
 									  <br>
-                                   <input type="text" name="new_name"  placeholder="<?php echo $this->lang->line("remame_report"); ?>" required="required" class="form-control">
+                                   <input type="text" name="new_name"  placeholder="<?php echo $this->lang->line("create_report"); ?>" required="required" class="form-control">
                                      <br>
 								   <input type="submit" class="btn btn-info pull-right" value="<?php echo $this->lang->line('save'); ?>" >
                                 </div>
@@ -71,7 +72,18 @@ include('include/head.php');
 
     });
     </script>
-	
+ <script type="text/javascript">	
+
+	loadRpt();
+	    	function loadRpt() {
+        $.each(rpt_tables_json, function (i, item) {
+            $('#rpt_select').append($('<option>', {
+                value: item.Tables_in_piw,
+                text: item.Tables_in_piw
+            }));
+        });
+    }
+	</script>
 
         </div> <!-- Fin partie du tableau -->
         <!-- ROW END -->

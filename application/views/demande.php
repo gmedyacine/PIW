@@ -16,7 +16,7 @@ include('include/head.php');
         <div class="row content">
             <!-- Colonne du Menu -->
             <?php include('include/menu.php'); ?>
-            <?php echo $this->session->flashdata('msg'); ?>
+            <?php echo $this->session->flashdata('msg-success'); ?>
 
             <div class="col-md-9 "> <!-- Début partie des onglets -->
                 
