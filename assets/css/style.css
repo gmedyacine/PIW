@@ -224,3 +224,8 @@ div.dataTables_filter{
 .filterable .filters input[disabled]:-ms-input-placeholder {
     color: #333;
 }
+.scroll_ul{   
+    height:400px; 
+    overflow:hidden;
+    overflow-y:scroll;
+}

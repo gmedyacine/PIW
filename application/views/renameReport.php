@@ -16,7 +16,7 @@ include('include/head.php');
         <div class="row content">
             <!-- Colonne du Menu -->
 <?php include('include/menu.php'); ?>
-            <?php echo $this->session->flashdata('msg'); ?>
+            <?php echo $this->session->flashdata('msg-modif'); ?> 
 
             <div class="col-md-6"> <!-- Début partie du tableau -->
               

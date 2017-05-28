@@ -8,16 +8,22 @@ Class Projection extends CI_Model {
         "3" => array("table" => "ipw_crt_masteri", "date_filtre" => "date_oper", "tab_colonne" => array("programme", "date_oper", "temps_execution")),
         "4" => array("table" => "ipw_status_task", "date_filtre" => "startup_time", "tab_colonne" => array("id", "tache_id", "plan_id", "plan_name", "nom_tache", "date_reference", "startup_time", "endup_time", "elapsed", "statut", "monitor", "alias", "agent", "procedure")),
         "5" => array("table" => "ipw_taches_vega", "date_filtre" => "date_suivi", "tab_colonne" => array("id", "date_suivi", "scheduled", "tache", "num_tsk", "plan_id", "plan_name", "procedure", "libelle", "comments")),
-        "6" => array("table" => "ipw_rept_distribuicao_vendas", "date_filtre" => "date", "tab_colonne" => array("date", "vendas_agentes", "nbr_agentes_merchants", "nbr_streets", "vendas_streets", "vendas_clientes", "nbr_clients", "total_vendas", "cumulativo", "evolucao")),
-        "7" => array("table" => "ipw_rept_list_agents", "date_filtre" =>"added_at", "tab_colonne" => array("client_code", "account_id", "product_id", "account_type", "client_name", "device_identifier", "address", "locality", "district", "city", "province","added_at")),
-        "8" => array("table" => "ipw_rept_report_ledger", "date_filtre" => "date","tab_colonne" => array("date", "account_reference", "amount/100")),
-        "9" => array("table" => "ipw_rept_statement", "date_filtre" => "transaction_date", "tab_colonne" => array("account_id", "business_transcation_id", "available_balance/100", "current_balance/100", "transaction_amount", "fee", "commission_amount", "transaction_date", "transaction_type", "status")),
-        "10" => array("table" => "ipw_rept_statement_bim", "date_filtre" => "date","tab_colonne" => array("date", "bank_id", "txn_type", "txn_amount", "txn_date")),
-        "11" => array("table" => "ipw_rept_subscriptions_by_txntype", "date_filtre" => "date", "tab_colonne" => array("date", "txn_type", "txn_total", "txn_amount")));
-     
+       );
     protected $egalDateFiltre = false;
     protected $dateDebut;
     protected $dateFin;
+
+    public function __construct() {
+        $this->load->model('report', '', TRUE);
+        $tab_report_crt = $this->report->searchReporttables();
+        if (empty($tab_report_crt))
+            return;
+        foreach ($tab_report_crt as $rpt) {
+            $rest_check = $this->getColonneName($rpt["table_name"]);
+            $rest_structure = array("table" => $rpt["table_name"]) + $rest_check;
+            $this->tab_projection_id+= array($rpt["n"] => $rest_structure);
+        }
+    }
 
     public function getProjection($id_projection = "0", $date_debut = null, $date_fin = null, $per_page = 8000, $page = 0, $colone_order = null, $search_value = null) {
 
@@ -81,8 +87,8 @@ Class Projection extends CI_Model {
         $ret = $this->db->list_fields($projection);
         return $ret;
     }
-	
-	public function getNameTable($id_projection) {
+
+    public function getNameTable($id_projection) {
         if (!array_key_exists($id_projection, $this->tab_projection_id)) {
             return;
         }
@@ -152,13 +158,45 @@ Class Projection extends CI_Model {
         }
         return false;
     }
-    public function showAllReports(){
-       
-        $this->db->query("show tables from  like 'ipw%';");
-        var_dump($this->result());die;
-        foreach($this->result() as $prj){
 
+    public function showAllReports() {
+
+        $this->db->query("show tables from  like 'ipw%';");
+        var_dump($this->result());
+        die;
+        foreach ($this->result() as $prj) {
+            
         }
+    }
+
+    private function getCreatedRept() {
+        $this->db->select('*');
+        $this->db->from('ipw_create_report');
+        $req = $this->db->get();
+        $result = $req->result();
+        return $result;
+    }
+
+    private function getColonneName($table_name) {
+        $fields = $this->db->field_data($table_name);
+        $date_filtre="";
+        foreach ($fields as $field) {
+            $tab_col[] = $field->name;
+            if (in_array($field->type, array("date", "datetime", "timestamp"))) {
+                $date_filtre = $field->name;
+            }
+        }
+        if (empty($date_filtre)) {
+            $sql_add_column = "ALTER TABLE  `" . $table_name . "` ADD  default_date  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ;";
+            if ($this->db->query($sql_add_column)) {
+                
+            } else {
+                
+            }
+            $date_filtre = "default_date";
+        }
+        $ret = array("tab_colonne" => $tab_col, "date_filtre" => $date_filtre);
+        return $ret;
     }
 
 }

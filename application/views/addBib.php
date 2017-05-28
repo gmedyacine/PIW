@@ -11,7 +11,8 @@ include('include/head.php');
         <div class="row content">
             <!-- Colonne du Menu -->
             <?php include('include/menu.php'); ?>
-            <?php echo $this->session->flashdata('msg'); ?>
+		<?php echo $this->session->flashdata('msg-add'); ?> 
+            
             <div class="col-md-9 "> <!-- Début partie des onglets -->
                 <ul class="nav nav-tabs " role="tablist">
                     <li class="active">

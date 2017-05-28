@@ -155,10 +155,10 @@ class Home extends Home_Controller {
             $nom = $this->input->post('nom');
             $desc = $this->input->post('description');
             $data = array('lib_categ' => $nom, 'commentaire' => $desc, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
-            $this->biblio->add_categ($data);
-            $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">Insertion avec succès !! </div>');
+            if ($this->biblio->add_categ($data)){
+            $this->session->set_flashdata('msg-add',"<div  class='brav-fix alert alert-success text-center'>". $this->lang->line("msg_add") ."</div>");
             redirect(base_url() . "index.php/add-biblio");
-
+}
             $this->load->view("addBib");
         }
     }
@@ -168,10 +168,10 @@ class Home extends Home_Controller {
         $id_cat = $this->input->post('id_cat');
         $desc = $this->input->post('desc');
         $data = array('lib_sous_categ‏_nom' => $nom, 'lib_sous_categ‏_desc' => $desc, 'lib_sous_categ‏_categ' => $id_cat, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
-        $this->biblio->add_sous_categ($data);
-        $this->session->set_flashdata('msg', '<div class=" brav-fix alert alert-success text-center">Insertion sous categorie avec succès !! </div>');
+       if( $this->biblio->add_sous_categ($data)){
+        $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>".$this->lang->line("msg_add")."</div>");
         redirect(base_url() . "index.php/add-biblio");
-
+		}
         $this->load->view("addBib");
     }
 
@@ -184,9 +184,10 @@ class Home extends Home_Controller {
         $objet = $this->input->post('objet');
         $msg = $this->input->post('message');
         $data = array('objet' => $objet, 'message' => $msg, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
-        $this->demande->add_demande($data);
-        $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">Votre demande a été envoyé avec succès !! </div>');
+        if($this->demande->add_demande($data)){
+		$this->session->set_flashdata('msg-success', "<div  class='brav-fix alert alert-success text-center'>".$this->lang->line("msg_success")."</div>");
         redirect(base_url() . "index.php/demande");
+		}
     }
 
     public function download($file) {
@@ -267,6 +268,12 @@ class Home extends Home_Controller {
     public function rename_form() {
         $this->load->view("renameReport", $this->data);
     }
+	public function create_form() {
+	
+	    $this->data['rpt_tables_json']= json_encode($this->report->searchReporttables());
+		//var_dump($this->report->searchReporttables());die;
+	    $this->load->view("createReport", $this->data);
+       }
 
     public function rename_report() {
 
@@ -276,11 +283,33 @@ class Home extends Home_Controller {
         $data = array('renamed_by' => $this->data['id_user_connected'], 'new_report_name' => $new_name, 'old_report_name' => $old_name, "old_report_id" => $id_projection);
 
         if ($this->report->renameReport($data)) {
-            $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">Les modifications ont été effectué avec succès !! </div>');
+          $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>".$this->lang->line("msg_modif")."</div>");
             //traduction ici 
         }
 
         redirect(base_url() . "index.php/home/rename_form");
     }
+	
+	public function create_report() {
+
+       
+        $new_name = $this->input->post('new_name');
+        $old_name = $this->input->post('old_name');
+        $data = array('renamed_by' => $this->data['id_user_connected'], 'new_report_name' => $new_name, 'old_report_name' => $old_name);
+
+        if ($this->report->createReport($data)) {
+          $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>".$this->lang->line("msg_modif")."</div>"); 
+        }
+
+        redirect(base_url() . "index.php/home/create_form");
+    }
+	
+	    public function delete_renamed_report($id) {
+
+          $this->report->deleteRenamedReport($id);
+
+        redirect(base_url() . "index.php/home/rename_form");
+    }
+
 
 }
