@@ -30,6 +30,7 @@ class Home_Controller extends MY_Controller {
         $this->data['id_user_connected'] = $dataLogin["id"];
         $this->data['id_param'] = 0;
         $this->data['role'] = $dataLogin["role"];
+        $this->report->manager_report();
         $this->projections += $this->report->getCreatedRept();
         $this->data["projections"] = json_encode($this->rename_reports());
         $this->data["menu"] = json_encode($this->biblio->fetch_menu());

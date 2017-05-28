@@ -11,19 +11,18 @@ Class Report extends CI_Model {
         $ret = $query->result_array();
         return $ret;
     }
-    
+
     function getCreatedRept() {
         $query = $this->db->select('old_report_name as id, new_report_name')
                 ->from("ipw_create_report")
                 ->get(); //select * from ipw_report_categ‏
 
         $ret = $query->result_array();
-        $tab_ret=array();
-        foreach ($ret as $lineRep){
-            $tab_ret[$lineRep["id"]]= $lineRep["new_report_name"];
+        $tab_ret = array();
+        foreach ($ret as $lineRep) {
+            $tab_ret[$lineRep["id"]] = $lineRep["new_report_name"];
         }
         return $tab_ret;
-        
     }
 
     function creatQuery() {
@@ -92,9 +91,18 @@ Class Report extends CI_Model {
         }
     }
 
+    function manager_report(){
+        $sql_show="show tables where tables_in_".$this->db->database."  like 'ipw_rept%'and tables_in_".$this->db->database." not in (select report from ipw_reports_show)";
+         $query_show = $this->db->query($sql_show);
+         $ret_show = $query_show->result_array();
+         foreach ($ret_show as $key=>$ret){
+             $set=array_values($ret);
+             $ret_insert=array("report"=>$set[0] );
+             $req_ins= $this->db->insert("ipw_reports_show",$ret_insert);
+         }
+    }
     function searchReporttables() {
-
-        $query = $this->db->query("SELECT @n := @n + 1 n,table_name FROM  information_schema.TABLES, (SELECT @n := 7) m WHERE TABLE_SCHEMA =  'piw' AND table_name LIKE  'ipw_rept%' order by CREATE_TIME ASC");
+        $query = $this->db->query("SELECT id as n,report as table_name FROM ipw_reports_show");
         $ret = $query->result_array();
         return $ret;
         //return $query->num_rows();
