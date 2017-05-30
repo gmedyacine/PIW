@@ -9,7 +9,12 @@ body {
 .pad-top {
     padding-top:20px;
 }
-
+.remove-right{
+    float: right;
+    margin-right: 15px;
+    padding-top: 10px;
+    color: red !important;
+}
 .filtre_ligne
 {
     height: 30px;
@@ -114,7 +119,7 @@ tr.bri{
     z-index: 9;
 }
 #nav li ul li a {
-    display: block;
+    display: inline-block;
     background: none;
     padding: 10px 0px;
     padding-left: 0px;

@@ -112,6 +112,10 @@ Class Report extends CI_Model {
         $this->db->where('id_rename_report', $id);
         $this->db->delete('ipw_rename_report');
     }
+    function deleteCreatedReport($id) {
+        $this->db->where('old_report_name', $id);
+        $this->db->delete('ipw_create_report');
+    }
 
     function getUserReports($userId) {
         $query = $this->db->select('*')

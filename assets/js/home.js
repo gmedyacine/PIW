@@ -4,7 +4,11 @@ $(document).ready(function () {
         var option = '<option value="' + id + '">' + val + '</option>';
         $("#main_select").append(option);
 
-        var li = $("<li><a href='" + base_url + "index.php/projection/" + id + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'+ val + "</a></li>");
+        var li = $("<li>"
+                +"<a href='" + base_url + "index.php/projection/" + id + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
+                + val +'</a>'
+                +  '<span data-remove="'+id+'" class="remove-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'
+                +'</li>');
         if (id == idPrj) {
             $("#menu_gauche_ul").addClass("active");
             li.addClass("active");
@@ -13,12 +17,24 @@ $(document).ready(function () {
         $("#menu_gauche_ul").append(li);
     });
 //add "Create your report" at the end of list projections
-	  var li_rename = $("<li><a href='" + base_url + "index.php/home/rename_form'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;  Rename your report</a></li>");
-      var li_create= $("<li><a href='" + base_url + "index.php/home/create_form'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;  Create your report</a></li>");
-	  $("#menu_gauche_ul").append(li_rename).append(li_create);
+    var li_rename = $("<li><a href='" + base_url + "index.php/home/rename_form'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;  Rename your report</a></li>");
+    var li_create = $("<li><a href='" + base_url + "index.php/home/create_form'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;  Create your report</a></li>");
+    $("#menu_gauche_ul").append(li_rename).append(li_create);
 
-	  
-	//// la partie recherche du rapport
+    // supprimer un report déjà creer ou renomer 
+    $(".remove-right").click(function(){
+        var id_remove=$(this).attr("data-remove");
+       if(confirm('delete report')){
+           $.ajax({
+              url: base_url+"index.php/delete-report/"+id_remove,
+              type: "GET",
+           }).done(function(data){
+                location.reload();   
+               
+           });
+       } 
+    });
+    //// la partie recherche du rapport
     var qs = $('input#recherche').quicksearch('ul#menu_gauche_ul li');
     $.ajax({
         'url': 'example.json',
@@ -32,7 +48,7 @@ $(document).ready(function () {
         }
     });
 //// Fin de la partie recherche du rapport
-	
+
     $("#valid_select").click(function () {
         var val = $("#main_select").val();
         if (val > 0) {
@@ -52,28 +68,28 @@ $(document).ready(function () {
 
     }
 
-    
+
 });
 function loadSC(id) {
-        if (id == 0) {
-            id = $('#list-bib').val();
-        }
-        $.ajax({
-            type: "post",
-            url: base_url + "index.php/list-sc",
-            data: {id_cat: id},
-
-        }).done(function (resp) {
-            $.each(resp, function (idObj, valData) {
-                $('#lib-sous-cat').append($('<option>', {
-                    value: valData['lib_sous_id'],
-                    text: valData['lib_sous_categ‏_nom']
-                }));
-            });
-
-
-        });
+    if (id == 0) {
+        id = $('#list-bib').val();
     }
+    $.ajax({
+        type: "post",
+        url: base_url + "index.php/list-sc",
+        data: {id_cat: id},
+
+    }).done(function (resp) {
+        $.each(resp, function (idObj, valData) {
+            $('#lib-sous-cat').append($('<option>', {
+                value: valData['lib_sous_id'],
+                text: valData['lib_sous_categ‏_nom']
+            }));
+        });
+
+
+    });
+}
 function paginate(container, iteration, numPerPage) {
 //Pagination
     var currentPage = 0;
