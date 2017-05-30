@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
 ?>
-
+    <link href="<?php echo base_url(); ?>assets/css/bootstrap-chosen.css" rel="stylesheet" />
 <script type="text/javascript">
     var projections = <?php echo $projections; ?>;
     var rpt_tables_json = <?php echo $rpt_tables_json; ?>;
@@ -24,15 +24,15 @@ include('include/head.php');
                         <div class="panel-heading">
                             <?php echo $this->lang->line("create_report"); ?>
                         </div>
-
+                        
                         <div class="panel-body"> 
                             <div class="form-group">    
                                 <?php echo form_open('home/create_report'); ?>
                                 <div class="col-sm-12">
-                                    <select  id="rpt_select" name="old_name"  class="form-control" >
-
+                                    <select  id="rpt_select" name="old_name"  class="form-control chosen-select" tabindex="2" required="required">
+                                        <option value="">-- <?php echo $this->lang->line("select_report"); ?>--</option>
                                     </select>
-
+                                    <br>
                                     <br>
                                     <input type="text" name="new_name"  placeholder="<?php echo $this->lang->line("create_report"); ?>" required="required" class="form-control">
                                     <br>
@@ -78,6 +78,12 @@ include('include/head.php');
                         }));
                     });
                 }
+            </script>
+            <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('.chosen-select').chosen();
+                });
             </script>
 
         </div> <!-- Fin partie du tableau -->
