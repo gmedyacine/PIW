@@ -9,16 +9,18 @@
     var data_categs =<?php echo $data_categs; ?>;
     var data_sous_categs =<?php echo $data_sous_categs; ?>;
     var id_sous_categ =<?php echo $id_sous_categ; ?>;
+
 </script>
+
 <div class="col-md-3">    <!-- Colonne du Menu -->
     <nav id="menu_gauche">
         <ul id="nav">
             <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("rapport_libelle") ?>
                 </a>
         
-                <ul id="menu_gauche_ul">
+                <ul id="menu_gauche_ul" class="paging">
                   <input  type="text" name="recherche" id="recherche" class="form-control glyphicon" style="color: black" placeholder="&#57347;" />
-                  <div id="resultat"></div>
+
                 </ul>
             </li>
             <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line('biblio'); ?>
@@ -52,6 +54,16 @@
 <script src="<?php echo base_url(); ?>assets/js/home.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/nav.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.quicksearch.js"></script>
+<!--<script src="<?php //echo base_url(); ?>assets/js/quickpager.jquery.js"></script>-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("a#renameRpt").text('<?php echo $this->lang->line("rename_report"); ?>');
+        $("a#createRpt").text('<?php echo $this->lang->line("create_report"); ?>');
+      //  $("ul.paging").quickPager(); //Pour la pagination des rapports (menu gauche)
+
+    });
+</script>
+
 
 
 
