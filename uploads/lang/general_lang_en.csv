@@ -51,9 +51,10 @@ msg_success;Your request has been send successfully !!
 title_login;connection login and password
 username_connexion;username
 password_connexion;password
-remame_report;Rename your report
+rename_report;Rename your report
 select_report;Select a report
 save;Save
 msg_add;Successfully added !!
 msg_modif;Successfully updated !!
 create_report;Create your report
+still_char;Character(s) Remaining

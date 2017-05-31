@@ -16,7 +16,7 @@
             <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("rapport_libelle") ?>
                 </a>
         
-                <ul id="menu_gauche_ul">
+                <ul id="menu_gauche_ul"  style="-webkit-padding-start: 20px;">
                   <input  type="text" name="recherche" id="recherche" class="form-control glyphicon" style="color: black" placeholder="&#57347;" />
                   <div id="resultat"></div>
                 </ul>
@@ -52,6 +52,62 @@
 <script src="<?php echo base_url(); ?>assets/js/home.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/nav.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.quicksearch.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+    $.each(projections, function (id, val) {
+        var option = '<option value="' + id + '">' + val + '</option>';
+        $("#main_select").append(option);
+
+        var li = $("<li>"
+                +"<a href='" + base_url + "index.php/projection/" + id + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
+                + val +'</a>'
+                +  <?php if ($role != 2) { ?> '<span data-remove="'+id+'" class="remove-right glyphicon glyphicon-remove" aria-hidden="true"></span>'  <?php } ?>
+				+'</li>');
+        if (id == idPrj) {
+            $("#menu_gauche_ul").addClass("active");
+            li.addClass("active");
+
+        }
+        $("#menu_gauche_ul").append(li);
+    });
+	
+	
+    // supprimer un report déjà creer ou renomer 
+    $(".remove-right").click(function(){
+        var id_remove=$(this).attr("data-remove");
+       if(confirm('delete report')){
+           $.ajax({
+              url: base_url+"index.php/delete-report/"+id_remove,
+              type: "GET",
+           }).done(function(data){
+                location.reload();   
+               
+           });
+       } 
+    });
+	 
+	     //// la partie recherche du rapport
+    var qs = $('input#recherche').quicksearch('ul#menu_gauche_ul li');
+    $.ajax({
+        'url': 'example.json',
+        'type': 'GET',
+        'dataType': 'json',
+        'success': function (data) {
+            for (i in data['list_items']) {
+                $('ul#menu_gauche_ul').append('<li>' + data['list_items'][i] + '</li>');
+            }
+            qs.cache();
+        }
+    });
+//// Fin de la partie recherche du rapport
+        //add "Create your report" at the end of list projections
+        var li_rename = $("<li><a href='" + base_url + "index.php/home/rename_form' id='renameRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("rename_report"); ?></a></li>");
+        var li_create= $("<li><a href='" + base_url + "index.php/home/create_form' id='createRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("create_report"); ?></a></li>");
+      <?php if ($role != 2) { ?> 
+	  $("#menu_gauche_ul").append(li_rename).append(li_create);
+      <?php } ?>
+     });
+</script>
 
 
 
