@@ -16,10 +16,6 @@ $(document).ready(function () {
         }
         $("#menu_gauche_ul").append(li);
     });
-//add "Create your report" at the end of list projections
-    var li_rename = $("<li><a href='" + base_url + "index.php/home/rename_form' id='renameRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;</a></li>");
-    var li_create= $("<li><a href='" + base_url + "index.php/home/create_form' id='createRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;</a></li>");    $("#menu_gauche_ul").append(li_rename).append(li_create);
-    $("#menu_gauche_ul").append(li_rename).append(li_create);
 
     // supprimer un report déjà creer ou renomer 
     $(".remove-right").click(function(){
