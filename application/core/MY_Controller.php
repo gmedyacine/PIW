@@ -13,11 +13,7 @@ class MY_Controller extends CI_Controller {
 
 class Home_Controller extends MY_Controller {
 
-    protected $projections = array("1" => "STATUS CHARGEMENT",
-        "2" => "TEMPS CHARGEMENT ",
-        "3" => "COMPTE RENDU MASTERI",
-        "4" => "STATUS TACHES",
-        "5" => "TACHES VEGA");
+    protected $projections = array();
 
     public function __construct() {
         parent::__construct();

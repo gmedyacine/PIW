@@ -2,13 +2,7 @@
 
 Class Projection extends CI_Model {
 
-    protected $tab_projection_id = array(
-        "1" => array("table" => "ipw_charge_reports_stat", "date_filtre" => "job_date", "tab_colonne" => array("proj_code", "job_count", "job_date", "status")),
-        "2" => array("table" => "ipw_chrg_rep_temps", "date_filtre" => "date_chargement", "tab_colonne" => array("report_nom", "temps_execution", "date_chargement")),
-        "3" => array("table" => "ipw_crt_masteri", "date_filtre" => "date_oper", "tab_colonne" => array("programme", "date_oper", "temps_execution")),
-        "4" => array("table" => "ipw_status_task", "date_filtre" => "startup_time", "tab_colonne" => array("id", "tache_id", "plan_id", "plan_name", "nom_tache", "date_reference", "startup_time", "endup_time", "elapsed", "statut", "monitor", "alias", "agent", "procedure")),
-        "5" => array("table" => "ipw_taches_vega", "date_filtre" => "date_suivi", "tab_colonne" => array("id", "date_suivi", "scheduled", "tache", "num_tsk", "plan_id", "plan_name", "procedure", "libelle", "comments")),
-       );
+    protected $tab_projection_id = array();
     protected $egalDateFiltre = false;
     protected $dateDebut;
     protected $dateFin;
