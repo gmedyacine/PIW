@@ -3,10 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
 
 ?>
-    <link href="<?php echo base_url(); ?>assets/css/bootstrap-chosen.css" rel="stylesheet" />
+ <link href="<?php echo base_url(); ?>assets/css/bootstrap-chosen.css" rel="stylesheet" />
  <script type="text/javascript">
      var projections = <?php echo $projections; ?>
-     
  </script>
 <body>
 
@@ -27,21 +26,21 @@ include('include/head.php');
                         <div class="panel-heading">
                            <?php echo $this->lang->line("rename_report"); ?>
                         </div>
+                    
+                        <div class="panel-body"> 
 
-
-                        <div class="panel-body">
-                            <?php //var_dump($projections); die; ?>
-                            <div class="form-group">
-
+                            <div class="form-group">    
+                             
                                 <?php echo form_open('home/rename_report'); ?>
                                 <div class="col-sm-12">
                                     <select  id="main_select" name="id_projection"  class="form-control chosen-select" tabindex="2" required="required" >
                                         <option value="">-- <?php echo $this->lang->line("select_report"); ?>--</option>
                                        </select>
-                                  <br>
+                                      <br>
 									  <br>
-                                   <input type="text" name="new_name"  placeholder="<?php echo $this->lang->line("rename_report"); ?>" required="required" class="form-control">
-                                     <br>
+                                   <input type="text" name="new_name" id="rename" maxlength="18"   placeholder="<?php echo $this->lang->line("rename_report"); ?>" required="required" class="form-control">
+                                    <span id="rchars" style="font-size: 12px; display: inline;">18</span><p style="font-size: 12px; display: inline;"> <?php echo $this->lang->line('still_char'); ?></p>
+									<br>
 								   <input type="submit" class="btn btn-info pull-right" value="<?php echo $this->lang->line('save'); ?>" >
                                 </div>
 								
@@ -59,10 +58,15 @@ include('include/head.php');
 
 
             </div> <!-- fin pagination  -->
+            
+    <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
+             <script type="text/javascript">
+                $(document).ready(function () {
+                    $('.chosen-select').chosen();
 
-
-            <script type="text/javascript">
-
+                });
+    </script>      
+    <script type="text/javascript">
     $(document).ready(function () {
 
         window.setTimeout(function () {
@@ -73,13 +77,16 @@ include('include/head.php');
 
     });
     </script>
-           <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
-             <script type="text/javascript">
-                $(document).ready(function () {
-                    $('.chosen-select').chosen();
-
-                });
+		<script type="text/javascript">
+                $(document).ready(function () {		
+			var maxLength = 18;
+                    $('input#rename').keyup(function() {
+                        var textlen = maxLength - $(this).val().length;
+                        $('#rchars').text(textlen);
+                    });
+					  });
             </script>
+	
 
         </div> <!-- Fin partie du tableau -->
         <!-- ROW END -->

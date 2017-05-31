@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
 ?>
-    <link href="<?php echo base_url(); ?>assets/css/bootstrap-chosen.css" rel="stylesheet" />
+ <link href="<?php echo base_url(); ?>assets/css/bootstrap-chosen.css" rel="stylesheet" />
 <script type="text/javascript">
     var projections = <?php echo $projections; ?>;
     var rpt_tables_json = <?php echo $rpt_tables_json; ?>;
@@ -24,7 +24,7 @@ include('include/head.php');
                         <div class="panel-heading">
                             <?php echo $this->lang->line("create_report"); ?>
                         </div>
-                        
+
                         <div class="panel-body"> 
                             <div class="form-group">    
                                 <?php echo form_open('home/create_report'); ?>
@@ -34,7 +34,8 @@ include('include/head.php');
                                     </select>
                                     <br>
                                     <br>
-                                    <input type="text" name="new_name"  placeholder="<?php echo $this->lang->line("create_report"); ?>" required="required" class="form-control">
+                                    <input type="text" name="new_name" id="create" maxlength="18" placeholder="<?php echo $this->lang->line("create_report"); ?>" required="required" class="form-control">
+									<span id="rchars" style="font-size: 12px; display: inline;">18</span><p style="font-size: 12px; display: inline;"> <?php echo $this->lang->line('still_char'); ?></p>
                                     <br>
                                     <input type="submit" class="btn btn-info pull-right" value="<?php echo $this->lang->line('save'); ?>" >
                                 </div>
@@ -53,12 +54,15 @@ include('include/head.php');
 
 
             </div> <!-- fin pagination  -->
-
+<script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                   $('.chosen-select').chosen();
+				});
+            </script>
 
             <script type="text/javascript">
-
                 $(document).ready(function () {
-
                     window.setTimeout(function () {
                         $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
                             $(this).remove();
@@ -79,11 +83,14 @@ include('include/head.php');
                     });
                 }
             </script>
-            <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('.chosen-select').chosen();
-                });
+	<script type="text/javascript">
+                $(document).ready(function () {		
+			var maxLength = 18;
+                    $('input#create').keyup(function() {
+                        var textlen = maxLength - $(this).val().length;
+                        $('#rchars').text(textlen);
+                    });
+					  });
             </script>
 
         </div> <!-- Fin partie du tableau -->
