@@ -86,6 +86,20 @@
        } 
     });
 	 
+	     //// la partie recherche du rapport
+    var qs = $('input#recherche').quicksearch('ul#menu_gauche_ul li');
+    $.ajax({
+        'url': 'example.json',
+        'type': 'GET',
+        'dataType': 'json',
+        'success': function (data) {
+            for (i in data['list_items']) {
+                $('ul#menu_gauche_ul').append('<li>' + data['list_items'][i] + '</li>');
+            }
+            qs.cache();
+        }
+    });
+//// Fin de la partie recherche du rapport
         //add "Create your report" at the end of list projections
         var li_rename = $("<li><a href='" + base_url + "index.php/home/rename_form' id='renameRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("rename_report"); ?></a></li>");
         var li_create= $("<li><a href='" + base_url + "index.php/home/create_form' id='createRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("create_report"); ?></a></li>");
