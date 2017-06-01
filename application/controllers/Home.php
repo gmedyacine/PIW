@@ -209,7 +209,7 @@ class Home extends Home_Controller {
         $this->load->library('form_validation');
         $this->data["fetch_data"] = $this->files->fetch_data();
         $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'txt|docx|pdf|doc|';
+        $config['allowed_types'] = 'txt|docx|pdf|doc|xls';
         $config['max_size'] = '';
         $config['max_width'] = '';
         $config['max_height'] = '';

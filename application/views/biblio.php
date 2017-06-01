@@ -21,12 +21,15 @@ include('include/head.php');
             <div class="col-md-9"> <!-- Début partie des onglets -->
 
                 <!-- Tab panes -->
+				<?php if ($role != 2) { ?>
+				<div class="row">
                 <div class="panel tab-content">
+				 
                     <div style="overflow: auto;" class="tab-panel fade active in" >
                         <button type="button"  id="show-form" class="btn btn-info"><?php echo $this->lang->line("add_document"); ?></button>
-                        <div id="panel-table" class="panel" style="width: 112%;display: none; margin-right: 0 !important">
-                            <div class="panel-body" style="width: 85%">              
-                                <?php if ($role != 2) { ?>
+                        <div id="panel-table" class="panel" style="width: 100%;display: none; margin-right: 0 !important">
+                            <div class="panel-body" style="width: 100%">              
+                               
                                     <div class="form-group">
                                         <form action="<?php echo base_url(); ?>index.php/home/upload_file" method="post" enctype="multipart/form-data" >
                                             <div class="error">
@@ -76,15 +79,36 @@ include('include/head.php');
                                         </form>
                                     </div>
                                 </div>
-                            <?php } ?>
-                        </div>
-                        <div class="bg-white" id="cnt-mainTablesBib">
-                             <?php include('partial/table_biblio.php'); ?>
+                            
                         </div>
                         
+                        
                     </div>
+				
+
                 </div> <!-- Fin partie du tableau -->
-                <!-- ROW END -->
+              </div>  <!-- ROW END -->
+			  	<?php } ?>
+				
+				                <!-- Tab panes --> 
+								<div class="row">
+								
+                <div style="overflow: auto;" class="panel tab-content">
+		
+                        <div  class="panel ">
+                  <div class="panel-body" style="width: 95%">
+  
+  					<div class="bg-white" id="cnt-mainTablesBib">
+                             <?php include('partial/table_biblio.php'); ?>
+                    </div>
+  
+                        </div>
+                        </div>
+       
+                </div> <!-- Fin partie du tableau -->
+                </div><!-- ROW END -->
+				             
+								            
             </div>
         </div>
     </div>
