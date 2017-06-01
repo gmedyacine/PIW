@@ -258,3 +258,7 @@ div.dataTables_filter{
 -webkit-padding-start: 20px;
 -webkit-padding-end: 7px;
 }
+
+a.dt-button{
+padding:0.2em 1em;
+}
