@@ -85,7 +85,6 @@ tr.bri{
 #nav li {
     list-style:none;
     background: #fff;
-    padding-right: 7px;
 }
 
 #nav > li > a {
@@ -253,4 +252,9 @@ div.dataTables_filter{
     .col-md-9 {
         width: 74%;
     } 
+}
+
+#menu_gauche_ul{
+-webkit-padding-start: 20px;
+-webkit-padding-end: 7px;
 }

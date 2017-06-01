@@ -16,9 +16,9 @@
             <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("rapport_libelle") ?>
                 </a>
         
-                <ul id="menu_gauche_ul"  style="-webkit-padding-start: 20px;">
+                <ul id="menu_gauche_ul">
                   <input  type="text" name="recherche" id="recherche" class="form-control glyphicon" style="color: black" placeholder="&#57347;" />
-                  <div id="resultat"></div>
+                  
                 </ul>
             </li>
             <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line('biblio'); ?>
