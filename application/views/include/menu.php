@@ -10,15 +10,17 @@
     var data_sous_categs =<?php echo $data_sous_categs; ?>;
     var id_sous_categ =<?php echo $id_sous_categ; ?>;
 </script>
+
 <div class="col-md-3">    <!-- Colonne du Menu -->
     <nav id="menu_gauche">
         <ul id="nav">
             <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("rapport_libelle") ?>
                 </a>
-        
+
                 <ul id="menu_gauche_ul">
                   <input  type="text" name="recherche" id="recherche" class="form-control glyphicon" style="color: black" placeholder="&#57347;" />
-                  
+                    <div id="reports">
+                    </div>
                 </ul>
             </li>
             <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line('biblio'); ?>
@@ -52,6 +54,7 @@
 <script src="<?php echo base_url(); ?>assets/js/home.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/nav.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.quicksearch.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.easyPaginate.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
     $.each(projections, function (id, val) {
@@ -61,19 +64,19 @@
         var li = $("<li>"
                 +"<a href='" + base_url + "index.php/projection/" + id + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
                 + val +'</a>'
-                +  <?php if ($role != 2) { ?> '<span data-remove="'+id+'" class="remove-right glyphicon glyphicon-remove" aria-hidden="true"></span>'  <?php } ?>
+                +  <?php if ($role != 2) { ?> '<span data-remove="'+id+'" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
 				+'</li>');
         if (id == idPrj) {
             $("#menu_gauche_ul").addClass("active");
             li.addClass("active");
-
         }
-        $("#menu_gauche_ul").append(li);
+        var reports = $("#reports").append(li);
+        $("#menu_gauche_ul").append(reports);
     });
 	
 	
     // supprimer un report déjà creer ou renomer 
-    $(".remove-right").click(function(){
+    $("div#reports span.remove-right").click(function(){
         var id_remove=$(this).attr("data-remove");
        if(confirm('delete report')){
            $.ajax({
@@ -85,16 +88,17 @@
            });
        } 
     });
-	 
-	     //// la partie recherche du rapport
-    var qs = $('input#recherche').quicksearch('ul#menu_gauche_ul li');
+
+        //// la partie recherche du rapport
+    var qs = $('input#recherche').quicksearch('ul#menu_gauche_ul div#reports li');
+
     $.ajax({
-        'url': 'example.json',
+        'url': '<?php echo base_url(); ?>assets/js/example.json',
         'type': 'GET',
         'dataType': 'json',
         'success': function (data) {
             for (i in data['list_items']) {
-                $('ul#menu_gauche_ul').append('<li>' + data['list_items'][i] + '</li>');
+                $('ul#menu_gauche_ul div#reports ').append('<li>' + data['list_items'][i] + '</li>');
             }
             qs.cache();
         }
@@ -109,5 +113,15 @@
      });
 </script>
 
+<script type="text/javascript">
+    ///Pagination menu gauche
+    $(document).ready(function () {
+          $('#reports').easyPaginate({
+             paginateElement: 'li',
+             elementsPerPage: 5,
+             effect: 'default'
+          });
+    });
+</script>
 
 
