@@ -61,10 +61,11 @@ $(document).ready(function () {
                 "order": [],
                 "bProcessing": true,
                 "serverSide": true,
-                dom: 'Bfrtip',
+                dom: 'lBfrtip', // You just lack the l flag in dom. l for "length changing input control".
                 buttons: [
                     'colvis'
                 ],
+
                 "ajax": {
                     "data": {idPrj: idPrj},
                     "url": base_url + "index.php/filtre",
