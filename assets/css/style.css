@@ -268,18 +268,18 @@ button.dt-button, div.dt-button, a.dt-button{
     white-space: nowrap;
     overflow: hidden;
     background-color: #e9e9e9;
-	margin-top: 10px !important;
+    margin-top: 10px !important;
 }
 
 #menu_gauche_ul{
--webkit-padding-start: 15px;
--webkit-padding-end: 7px;
+    -webkit-padding-start: 15px;
+    -webkit-padding-end: 7px;
 }
 
 .easyPaginateNav a {
     padding:5px;
     font-size: 15px;
-   }
+}
 .easyPaginateNav a.current {
     font-weight:bold;
     text-decoration:underline;
@@ -289,4 +289,64 @@ button.dt-button, div.dt-button, a.dt-button{
     color: #fff;
     background-color: #2196F3 !important;
     border-color: #f3f3f3 !important;
+}
+.btn-bleu {
+    float: right;
+    margin-right: 10;
+}
+
+h1, 
+.h1, 
+h2, 
+.h2, 
+h3, 
+.h3 {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+h2, .h2 {
+    font-size: 20px;
+}
+
+p {
+    margin: 0 0 1px;
+}
+
+.row {
+    margin-right: -10px;
+    margin-left: -25px;
+}
+
+.col-lg-4 {
+    width: 45%;
+    margin-left: 1px;
+}
+
+.form-group {
+    margin-bottom: 1px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #333;
+}
+
+.btn-info:hover,
+.btn-info:focus,
+.btn-info.focus,
+.btn-info:active,
+.btn-info.active,
+.open > .dropdown-toggle.btn-info {
+    color: #fff;
+    /*background-color: #31b0d5;*/
+    background-color: #2196F3;
+    border-color: #269abc;
+}
+
+.panel-body {
+    padding: 1px;
 }
