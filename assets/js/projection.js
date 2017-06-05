@@ -106,7 +106,12 @@ $(document).ready(function () {
                                 filename: projections[idPrj] + date_string()
                             });
                         }
-                        $("#mainTables").DataTable();
+                        $("#mainTables").DataTable({
+                            dom: 'lBfrtip', // You just lack the l flag in dom. l for "length changing input control".
+                            buttons: [
+                                'colvis'
+                            ]
+                        });
                     });
 
 
@@ -115,7 +120,6 @@ $(document).ready(function () {
 
             var date_debut = date_now();
             var date_fin = date_now();
-
 
             $.ajax({
                 dataType: 'json',
@@ -148,7 +152,12 @@ $(document).ready(function () {
                                 filename: projections[idPrj] + date_string()
                             });
                         }
-                        $("#mainTables").DataTable();
+                        $("#mainTables").DataTable({
+                            dom: 'lBfrtip', // You just lack the l flag in dom. l for "length changing input control".
+                            buttons: [
+                                'colvis'
+                            ]
+                        });
                     });
 
             //////////////// export filtre ///////////////
@@ -181,7 +190,12 @@ $(document).ready(function () {
                                 filename: projections[idPrj] + date_string()
                             });
                         }
-                        $("#mainTables").DataTable();
+                        $("#mainTables").DataTable({
+                            dom: 'lBfrtip', // You just lack the l flag in dom. l for "length changing input control".
+                            buttons: [
+                                'colvis'
+                            ]
+                        });
                     });
 
 
