@@ -34,7 +34,7 @@ include('include/head.php');
                                 <?php echo form_open('home/rename_report'); ?>
                                 <div class="col-sm-12">
                                     <select  id="main_select" name="id_projection"  class="form-control chosen-select" tabindex="2" required="required" >
-                                        <option value="">-- <?php echo $this->lang->line("select_report"); ?>--</option>
+                                        <option value="">-- <?php echo $this->lang->line("select_report"); ?>--</option> 
                                        </select>
                                       <br>
 									  <br>
@@ -62,10 +62,9 @@ include('include/head.php');
     <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
              <script type="text/javascript">
                 $(document).ready(function () {
-                      $(".chosen-select").chosen({
+                    $(".chosen-select").chosen({
 			         search_contains: true
                   });
-
                 });
     </script>      
     <script type="text/javascript">
