@@ -58,7 +58,7 @@ include('include/head.php');
             <script type="text/javascript">
                 $(document).ready(function () {
                    $(".chosen-select").chosen({
-			         enable_split_word_search: false
+			         search_contains: true
                   });
 				});
             </script>
