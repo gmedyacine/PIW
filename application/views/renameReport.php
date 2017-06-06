@@ -62,7 +62,9 @@ include('include/head.php');
     <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
              <script type="text/javascript">
                 $(document).ready(function () {
-                    $('.chosen-select').chosen();
+                      $(".chosen-select").chosen({
+			         search_contains: true
+                  });
 
                 });
     </script>      
