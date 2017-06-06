@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
 
 ?>
- <link href="<?php echo base_url(); ?>assets/css/jquery-editable-select.min.css" rel="stylesheet" />
+ <link href="<?php echo base_url(); ?>assets/css/bootstrap-chosen.css" rel="stylesheet" />
  <script type="text/javascript">
      var projections = <?php echo $projections; ?>
  </script>
@@ -33,8 +33,8 @@ include('include/head.php');
                              
                                 <?php echo form_open('home/rename_report'); ?>
                                 <div class="col-sm-12">
-                                    <select  id="main_select" name="id_projection"  class="form-control chosen-select" placeholder="-- <?php echo $this->lang->line("select_report"); ?>--" tabindex="2" required="required" >
-                                        
+                                    <select  id="main_select" name="id_projection"  class="form-control chosen-select" tabindex="2" required="required" >
+                                        <option value="">-- <?php echo $this->lang->line("select_report"); ?>--</option>
                                        </select>
                                       <br>
 									  <br>
@@ -59,10 +59,10 @@ include('include/head.php');
 
             </div> <!-- fin pagination  -->
             
-    <script src="<?php echo base_url(); ?>assets/js/jquery-editable-select.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
              <script type="text/javascript">
                 $(document).ready(function () {
-                    $('.chosen-select').editableSelect();
+                    $('.chosen-select').chosen();
 
                 });
     </script>      
