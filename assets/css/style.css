@@ -341,10 +341,10 @@ p {
 .btn-info:active,
 .btn-info.active,
 .open > .dropdown-toggle.btn-info {
-    color: #fff;
+    color: #fff !important;
     /*background-color: #31b0d5;*/
-    background-color: #2196F3;
-    border-color: #269abc;
+    background-color: #2196F3 !important;
+    border-color: #269abc !important;
 }
 
 .panel-body {
