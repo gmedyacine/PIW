@@ -50,5 +50,7 @@ $(document).ready(function () {
             $(val).addClass("active");
         }
     });
-
+    
+  // supprimer un report déjà creer ou renomer 
+  
 });
