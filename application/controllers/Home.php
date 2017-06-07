@@ -215,7 +215,7 @@ class Home extends Home_Controller {
         $config['max_height'] = '';
         $this->load->library('upload', $config);
 
-        if (!$this->upload->do_upload('new_file')) {
+        if (!$this->upload->do_upload('newFile')) {
             $error = array('error' => $this->upload->display_errors());
             $this->data['error_upload'] = $error;
             $this->load->view('biblio', $this->data);
@@ -225,7 +225,7 @@ class Home extends Home_Controller {
             $name = $upload_data['file_name'];
             if (empty($row_id)) {
                 $this->form_validation->set_rules('job', 'Job', 'trim|required|xss_clean');
-                $this->form_validation->set_rules('heure_lib', 'heure_lib', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('heureLib', 'heure_lib', 'trim|required|xss_clean');
                 $this->form_validation->set_rules('calender', 'Calender', 'trim|required|xss_clean');
                 $this->form_validation->set_rules('vega', 'Vega', 'required|xss_clean');
 
@@ -233,10 +233,10 @@ class Home extends Home_Controller {
                     $this->load->view('biblio', $this->data);
                 } else {
                     $calender = $this->input->post('calender');
-                    $heure_lib = $this->input->post('heure_lib');
+                    $heure_lib = $this->input->post('heureLib');
                     $job = $this->input->post('job');
-                    $categ = $this->input->post("lib_cat");
-                    $sous_categ = $this->input->post("lib_sous_cat");
+                    $categ = $this->input->post("libCat");
+                    $sous_categ = $this->input->post("libSousCat");
                     $vega = $this->input->post('vega');
                     $data_to_add = array("job" => $job, "calendrier" => $calender, "heure_lib" => $heure_lib, "vega" => $vega, "lib_categ_id" => $categ, "lib_sous_categ_id" => $sous_categ, "nom_fichier" => $name);
                     $this->files->add_file($data_to_add);
