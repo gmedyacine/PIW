@@ -18,9 +18,11 @@
                 </a>
 
                 <ul id="menu_gauche_ul">
-                  <input  type="text" name="recherche" id="recherche" class="form-control glyphicon" style="color: black" placeholder="&#57347;" />
+				
+                    <input  type="text" name="recherche" id="recherche" data-filter-list="#reports" class="form-control glyphicon" style="color: black" placeholder="&#57347;" />
                     <div id="reports">
                     </div>
+					
                 </ul>
             </li>
             <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line('biblio'); ?>
@@ -45,82 +47,75 @@
                     </ul>
                 </li>
             <?php } ?>
-                
-                  <li><a href="<?php echo base_url(); ?>index.php/demande"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("demande_specifique"); ?></a>
-                  </li>
+
+            <li><a href="<?php echo base_url(); ?>index.php/demande"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("demande_specifique"); ?></a>
+            </li>
         </ul>
     </nav>
 </div>
 <script src="<?php echo base_url(); ?>assets/js/home.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/nav.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery.quicksearch.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.easyPaginate.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.filter-list.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
-    $.each(projections, function (id, val) {
-        var option = '<option value="' + id + '">' + val + '</option>';
-        $("#main_select").append(option);
+        $.each(projections, function (id, val) {
+            var option = '<option value="' + id + '">' + val + '</option>';
+            $("#main_select").append(option);
 
-        var li = $("<li>"
-                +"<a href='" + base_url + "index.php/projection/" + id + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
-                + val +'</a>'
-                +  <?php if ($role != 2) { ?> '<span data-remove="'+id+'" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
-				+'</li>');
-        if (id == idPrj) {
-            $("#menu_gauche_ul").addClass("active");
-            li.addClass("active");
-        }
-        var reports = $("#reports").append(li);
-        $("#menu_gauche_ul").append(reports);
-    });
-	
-	
-    // supprimer un report déjà creer ou renomer 
-    $(document).on("click", '.remove-right',function() {
-        var id_remove=$(this).attr("data-remove");
-       if(confirm('delete report')){
-           $.ajax({
-              url: base_url+"index.php/delete-report/"+id_remove,
-              type: "GET",
-           }).done(function(data){
-                location.reload();   
-               
-           });
-       } 
-    });
-
-        //// la partie recherche du rapport
-    var qs = $('input#recherche').quicksearch('ul#menu_gauche_ul div#reports li');
-
-    $.ajax({
-        'url': '<?php echo base_url(); ?>assets/js/example.json',
-        'type': 'GET',
-        'dataType': 'json',
-        'success': function (data) {
-            for (i in data['list_items']) {
-                $('ul#menu_gauche_ul div#reports ').append('<li>' + data['list_items'][i] + '</li>');
+            var li = $("<li class='report'>"
+                    + "<a href='" + base_url + "index.php/projection/" + id + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
+                    + val + '</a>'
+                    + <?php if ($role != 2) { ?> '<span data-remove="' + id + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
+            + '</li>');
+            if (id == idPrj) {
+                $("#menu_gauche_ul").addClass("active");
+                li.addClass("active");
             }
-            qs.cache();
-        }
-    });
-//// Fin de la partie recherche du rapport
+            var reports = $("#reports").append(li);
+            $("#menu_gauche_ul").append(reports);
+        });
+       
         //add "Create your report" at the end of list projections
         var li_rename = $("<li><a href='" + base_url + "index.php/home/rename_form' id='renameRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("rename_report"); ?></a></li>");
-        var li_create= $("<li><a href='" + base_url + "index.php/home/create_form' id='createRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("create_report"); ?></a></li>");
-      <?php if ($role != 2) { ?> 
-	  $("#menu_gauche_ul").append(li_rename).append(li_create);
-      <?php } ?>
-     });
+        var li_create = $("<li><a href='" + base_url + "index.php/home/create_form' id='createRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("create_report"); ?></a></li>");
+<?php if ($role != 2) { ?>
+            $("#menu_gauche_ul").append(li_rename).append(li_create);
+<?php } ?>
+    });
 </script>
 
 <script type="text/javascript">
     ///Pagination menu gauche
     $(document).ready(function () {
-          $('#reports').easyPaginate({
-             paginateElement: 'li',
-             elementsPerPage: 5,
-             effect: 'default'
-          });
+        $('#reports').easyPaginate({   //// la partie pagination menu gauche
+            paginateElement: 'li',
+            elementsPerPage: 5,
+            effect: 'default'
+        });
+		});
+</script>
+<script type="text/javascript">
+     $(document).ready(function() {
+$('#recherche').filterList();   //// la partie recherche du rapport
+});
+</script>
+<script type="text/javascript">
+     $(document).ready(function () {
+        $(document).on("click", '.remove-right',function() {  //// la partie suppression du rapport
+            var id_remove = $(this).attr("data-remove");
+            if (confirm('delete report')) {
+                $.ajax({
+                    url: base_url + "index.php/delete-report/" + id_remove,
+                    type: "GET",
+                }).done(function (data) {
+                    location.reload();
+
+                });
+            }
+        });
+
     });
 </script>
 
