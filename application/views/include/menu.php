@@ -76,7 +76,7 @@
 	
 	
     // supprimer un report déjà creer ou renomer 
-    $("div#reports span.remove-right").click(function(){
+    $(document).on("click", '.remove-right',function() {
         var id_remove=$(this).attr("data-remove");
        if(confirm('delete report')){
            $.ajax({
