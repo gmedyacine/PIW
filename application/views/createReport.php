@@ -6,6 +6,8 @@ include('include/head.php');
 <script type="text/javascript">
     var projections = <?php echo $projections; ?>;
     var rpt_tables_json = <?php echo $rpt_tables_json; ?>;
+	var msg_required = "<?php echo $this->lang->line("required_field"); ?>";
+	var msg_max_18 = "<?php echo $this->lang->line("max_length_18"); ?>";
 </script>
 <body>
 
@@ -27,15 +29,15 @@ include('include/head.php');
 
                         <div class="panel-body"> 
                             <div class="form-group">    
-                                <?php echo form_open('home/create_report'); ?>
+                                <form action="<?php echo base_url(); ?>index.php/home/create_report" method="post" id="createReport">
                                 <div class="col-sm-12">
                                     <select  id="rpt_select" name="old_name"  class="form-control chosen-select" tabindex="2" required="required">
                                         <option value="">-- <?php echo $this->lang->line("select_report"); ?>--</option>   
                                     </select>
                                     <br>
                                     <br>
-                                    <input type="text" name="new_name" id="create" maxlength="18" placeholder="<?php echo $this->lang->line("create_report"); ?>" required="required" class="form-control">
-									<span id="rchars" style="font-size: 12px; display: inline;">18</span><p style="font-size: 12px; display: inline;"> <?php echo $this->lang->line('still_char'); ?></p>
+                                    <input type="text" name="new_name" id="create" placeholder="<?php echo $this->lang->line("create_report"); ?>" required="required" class="form-control">
+			
                                     <br>
                                     <input type="submit" class="btn btn-info pull-right" value="<?php echo $this->lang->line('save'); ?>" >
                                 </div>
@@ -54,6 +56,9 @@ include('include/head.php');
 
 
             </div> <!-- fin pagination  -->
+			 
+	 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+             <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/validateCreateReport.js"></script>       
 <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
             <script type="text/javascript">
                 $(document).ready(function () {
@@ -85,16 +90,9 @@ include('include/head.php');
                     });
                 }
             </script>
-	<script type="text/javascript">
-                $(document).ready(function () {		
-			var maxLength = 18;
-                    $('input#create').keyup(function() {
-                        var textlen = maxLength - $(this).val().length;
-                        $('#rchars').text(textlen);
-                    });
-					  });
-            </script>
 
+   <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+             <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/validateCreateReport.js"></script>
         </div> <!-- Fin partie du tableau -->
         <!-- ROW END -->
 
