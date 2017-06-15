@@ -40,7 +40,7 @@ include('include/head.php');
 
                                             <label  class="label_calender control-label col-sm-2" for="calender"><?php echo $this->lang->line("calendar"); ?></label>
                                             <div class="nom col-sm-10">
-                                                <input name="calender"  type="text"   class="form-control datepicker" >
+                                                <input name="calender"  type="text"  value="<?php echo date('d/m/Y ', time())?>" class="form-control datepicker" >
                                                 </br>
                                             </div>
 
@@ -67,7 +67,7 @@ include('include/head.php');
                                             </div>
                                             <label  class="heur_lib control-label col-sm-2" for="heure_lib"><?php echo $this->lang->line("hour"); ?></label>
                                             <div class="nom col-sm-10">
-                                                <input name="heureLib"  type="text" value="<?php echo set_value('heure_lib'); ?>" class="form-control" >
+                                                <input name="heureLib"  type="text" value="Document" class="form-control" >
                                                 </br>
                                             </div>
                                             <label class="control-label col-sm-2" for="file"><?php echo $this->lang->line("file"); ?></label>
