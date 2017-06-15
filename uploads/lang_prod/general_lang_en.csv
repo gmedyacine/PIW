@@ -8,7 +8,7 @@ parametrage;Settings
 date_debut;From date 
 date_end;Until 
 date_not_valide;Invalid date 
-execute_filtre;Execute
+excute_filtre;Execute
 export_excute_filtre;Export result 
 export_last_day;Export last day 
 export_all;Export all
@@ -51,3 +51,12 @@ msg_success;Your request has been send successfully !!
 title_login;connection login and password
 username_connexion;username
 password_connexion;password
+rename_report;Rename your report
+select_report;Select a report
+save;Save
+msg_add;Successfully added !!
+msg_modif;Successfully updated !!
+create_report;Create your report
+still_char;Character(s) Remaining
+required_field;This field is required !
+max_length_18;Max length is 18 characters
