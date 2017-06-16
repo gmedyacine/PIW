@@ -20,7 +20,7 @@
                 <ul id="menu_gauche_ul">
 				
                     <input  type="text" name="recherche" id="recherche" data-filter-list="#reports" class="form-control glyphicon" style="color: black" placeholder="&#57347;" />
-                    <div id="reports">
+                    <div id="reports"  class="scroll_ul">
                     </div>
 					
                 </ul>
@@ -55,7 +55,6 @@
 </div>
 <script src="<?php echo base_url(); ?>assets/js/home.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/nav.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery.easyPaginate.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.filter-list.js"></script>
 
 <script type="text/javascript">
@@ -86,16 +85,6 @@
     });
 </script>
 
-<script type="text/javascript">
-    ///Pagination menu gauche
-    $(document).ready(function () {
-        $('#reports').easyPaginate({   //// la partie pagination menu gauche
-            paginateElement: 'li',
-            elementsPerPage: 5,
-            effect: 'default'
-        });
-		});
-</script>
 <script type="text/javascript">
      $(document).ready(function() {
 $('#recherche').filterList();   //// la partie recherche du rapport
