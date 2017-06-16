@@ -305,9 +305,16 @@ class Home extends Home_Controller {
         redirect(base_url() . "index.php/home/create_form");
     }
 
+  	public function delete_report($id) {
+	 $data = array('deleted_by' => $this->data['id_user_connected'], 'id_report' => $id);
+	 $this->report->saveDeletedReport($data);
+    }
+
     public function delete_report_menu($id) {
         $this->report->deleteCreatedReport($id);
         $this->report->deleteRenamedReport($id);
+		$this->delete_report($id);
+		
         echo json_encode("delete-ok");die;
     }
 
