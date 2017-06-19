@@ -62,10 +62,10 @@
         $.each(projections, function (id, val) {
             var option = '<option value="' + id + '">' + val + '</option>';
             $("#main_select").append(option);
-          if (val.length > 19) val=val.substring(0, 19)+ '...';
+          if (val.length > 19) var report=val.substring(0, 19)+ '...';
             var li = $("<li class='report'>"
                     + "<a href='" + base_url + "index.php/projection/" + id + "' data-toggle='tooltip' data-placement='right' title='"+ val +"'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
-                    +val + '</a>'
+                    + report + '</a>'
                     + <?php if ($role != 2) { ?> '<span data-remove="' + id + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
             + '</li>');
             if (id == idPrj) {
