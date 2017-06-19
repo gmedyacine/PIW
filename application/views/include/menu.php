@@ -62,7 +62,8 @@
         $.each(projections, function (id, val) {
             var option = '<option value="' + id + '">' + val + '</option>';
             $("#main_select").append(option);
-          if (val.length > 19) var report=val.substring(0, 19)+ '...';
+			var report=val;
+          if (val.length > 19) report=val.substring(0, 19)+ '...';
             var li = $("<li class='report'>"
                     + "<a href='" + base_url + "index.php/projection/" + id + "' data-toggle='tooltip' data-placement='right' title='"+ val +"'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
                     + report + '</a>'
