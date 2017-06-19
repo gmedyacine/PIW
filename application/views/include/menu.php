@@ -59,14 +59,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        function minLengh(val){
-            if(val.lengh >19){
-              res=val.substring(0, 19) + '...' ;
-            }
-            else {
-                res=val;
-            }
-        }
         $.each(projections, function (id, val) {
             var option = '<option value="' + id + '">' + val + '</option>';
             $("#main_select").append(option);
