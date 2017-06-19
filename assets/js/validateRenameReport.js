@@ -21,14 +21,14 @@ $(document).ready(function () {
     // id_projection: "required",
      new_name: {
 	      required: true,
-	     maxlength: 18
+	 
 	      }
 	 },
    messages: {
   //  id_projection: msg_required,
      new_name: {
 	      required: msg_required,
-	      maxlength: msg_max_18
+	    
 	      	 } 
    }
 });

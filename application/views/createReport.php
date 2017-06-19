@@ -7,7 +7,7 @@ include('include/head.php');
     var projections = <?php echo $projections; ?>;
     var rpt_tables_json = <?php echo $rpt_tables_json; ?>;
 	var msg_required = "<?php echo $this->lang->line("required_field"); ?>";
-	var msg_max_18 = "<?php echo $this->lang->line("max_length_18"); ?>";
+	
 </script>
 <body>
 

@@ -20,15 +20,13 @@ $(document).ready(function () {
    rules: {
      old_name: "required",
      new_name: {
-	      required: true,
-	     maxlength: 18
+	      required: true
 	      }
 	 },
    messages: {
     old_name: msg_required,
      new_name: {
-	      required: msg_required,
-	      maxlength: msg_max_18
+	      required: msg_required
 	      	 } 
    }
 });

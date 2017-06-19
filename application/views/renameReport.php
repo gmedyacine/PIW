@@ -7,7 +7,7 @@ include('include/head.php');
  <script type="text/javascript">
      var projections = <?php echo $projections; ?>;
 	 var msg_required = "<?php echo $this->lang->line("required_field"); ?>";
-	 var msg_max_18 = "<?php echo $this->lang->line("max_length_18"); ?>"; 
+	 
  </script>
 <body>
 
