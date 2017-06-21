@@ -203,8 +203,9 @@ class Home extends Home_Controller {
         redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
     }
 
- /************** Upload_multi_file*************/
+  /************** Upload_multi_file*************/
 	public function upload_file() {     
+	//var_dump($_FILES['newFiles'][file_ext]); die;  
         $this->data["fetch_data"] = $this->files->fetch_data();
 		
         $config['upload_path'] = './uploads/';
@@ -226,10 +227,11 @@ class Home extends Home_Controller {
 
                 if($this->upload->do_upload('userFile')){
                     $fileData = $this->upload->data();
+					$ext= $fileData['file_ext'];
                     $uploadData[$i]['nom_fichier'] = $fileData['file_name'];
                     $uploadData[$i]['calendrier'] = $this->input->post('calender');
                     $uploadData[$i]['heure_lib'] = $this->input->post('heureLib');
-                    $uploadData[$i]['job'] = $this->input->post('job');         //$fileData['file_name'];
+                    $uploadData[$i]['job'] = basename($fileData['file_name'],$ext);         
                     $uploadData[$i]['lib_categ_id'] = $this->input->post("libCat");
                     $uploadData[$i]['lib_sous_categ_id'] = $this->input->post("libSousCat");
                     $uploadData[$i]['vega'] = $this->input->post('vega');
@@ -266,7 +268,9 @@ class Home extends Home_Controller {
 			$sous_categ= $this->input->post('id_sous_categ');
             $upload_data = $this->upload->data();        // récupérer les donnée du fichier uploadé
             $name = $upload_data['file_name'];           // garder le nom du fichier dans la variable $name
-            $this->files->update_file($row_id, $name);
+			$ext= $upload_data['file_ext'];              // garder l'extension du fichier dans la variable $ext
+			$title = basename($name,$ext);               // garder le nom du fichier sans extension dans la variable $title
+            $this->files->update_file($row_id, $name, $title);
              redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
 	   }
 	 }
