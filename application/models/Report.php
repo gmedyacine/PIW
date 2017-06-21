@@ -43,9 +43,9 @@ Class Report extends CI_Model {
         }
     }
 
-    function assignCateg($idReport, $idCateg) {
-        $sql_assign_categ = "ALTER TABLE  `" . $tableName . "` ADD  `report_categ_id` INT DEFAULT NULL;";
-        $this->db->query($sql_add_column);
+    function assignCateg($tableName,$idCateg) {
+        $sql_assign_categ = "UPDATE `".$tableName."` SET  `report_categ_id` =  ".$idCateg.";";
+        $this->db->query($sql_assign_categ);
     }
 
     function deleteReportCateg($id) {

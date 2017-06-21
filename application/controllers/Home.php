@@ -343,5 +343,30 @@ class Home extends Home_Controller {
 		
         echo json_encode("delete-ok");die;
     }
+	
+	public function add_report_categ(){
+        $nom_report_categ = $this->input->post('nom_report_categ');
+        $id_projection = $this->input->post('id_projection');
+        
+        $data = array('nom_report_categ' => $nom_report_categ, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
+        if ($this->report->addReportCateg($data)) {
+            $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">La categorie a été créée avec succès !! </div>');
+          }
+
+        redirect(base_url() . "index.php/projection/".$id_projection);
+        
+    }
+	
+    public function assign_categ(){
+        
+        $id_categ = $this->input->post('report_categ');
+        $id_report= $this->input->post('report_id');
+
+		$table_name = $this->projection->getNameTable($id_report);
+			
+	    $this->report->assignCateg($table_name,$id_categ);
+		redirect(base_url() . "index.php/projection/".$id_report);
+    
+    }	
 
 }
