@@ -7,6 +7,7 @@ include('include/head.php');
         var $ = jQuery.noConflict();
         var lib_dossier="<?php echo $this->lang->line("lib_dossier"); ?>";
         var lib_insert_date="<?php echo $this->lang->line("lib_insert_date"); ?>";
+        var msg = "<?php echo $this->lang->line("required_field"); ?>";
     </script>
     <div class="container-fluid">
 
@@ -31,45 +32,47 @@ include('include/head.php');
                             <div class="panel-body" style="width: 100%">              
                                
                                     <div class="form-group">
-                                        <form action="<?php echo base_url(); ?>index.php/home/upload_file" method="post" enctype="multipart/form-data" >
+                                        <form action="<?php echo base_url(); ?>index.php/home/upload_file" method="post" id="addDocForm" enctype="multipart/form-data" >
                                             <div class="error">
                                                 <?php echo validation_errors(); ?>
                                                 <?php echo isset($error_upload) ? $error_upload['error'] : ""; ?>
                                             </div>
+
                                             <label  class="label_calender control-label col-sm-2" for="calender"><?php echo $this->lang->line("calendar"); ?></label>
                                             <div class="nom col-sm-10">
-                                                <input name="calender" type="text" value="<?php echo set_value('calender'); ?>" class="form-control" >
+                                                <input name="calender"  type="text"  value="<?php echo date('d/m/Y ', time())?>" class="form-control datepicker" >
                                                 </br>
                                             </div>
+
                                             <label class="control-label col-sm-2" for="lib_cat"><?php echo $this->lang->line("biblio"); ?></label>
                                             <div class="nom col-sm-10">
-                                                <select name="lib_cat" class="form-control"  id="list-bib"></select>
+                                                <select name="libCat"  class="form-control"  id="list-bib"></select>
                                                 </br>
                                             </div>
                                             <label class="control-label col-sm-2" for="lib_sous_cat"><?php echo $this->lang->line("sous_lib"); ?></label>
                                             <div class="nom col-sm-10">
-                                                <select name="lib_sous_cat" class="form-control"  id="lib-sous-cat"></select>
+                                                <select name="libSousCat"  class="form-control"  id="lib-sous-cat"></select>
                                                 </br>
                                             </div>
 
                                             <label class="control-label col-sm-2" for="job"><?php echo $this->lang->line("title"); ?></label>
                                             <div class="nom col-sm-10">
-                                                <input name="job" type="text" value="<?php echo set_value('job'); ?>" class="form-control" >
+                                                <input name="job"  type="text" value="<?php echo set_value('job'); ?>" class="form-control" >
                                                 </br>
                                             </div>
                                             <label class="control-label col-sm-2" for="vega"><?php echo $this->lang->line("categorie"); ?></label>
                                             <div class="nom col-sm-10">
-                                                <input name="vega" type="text" value="<?php echo set_value('vega'); ?>" class="form-control" >
+                                                <input name="vega"  type="text" value="<?php echo set_value('vega'); ?>" class="form-control" >
                                                 </br>
                                             </div>
                                             <label  class="heur_lib control-label col-sm-2" for="heure_lib"><?php echo $this->lang->line("hour"); ?></label>
                                             <div class="nom col-sm-10">
-                                                <input name="heure_lib" type="text" value="<?php echo set_value('heure_lib'); ?>" class="form-control" >
+                                                <input name="heureLib"  type="text" value="Document" class="form-control" >
                                                 </br>
                                             </div>
                                             <label class="control-label col-sm-2" for="file"><?php echo $this->lang->line("file"); ?></label>
                                             <div class="tel col-sm-8">
-                                                <input type="file" name="new_file" class="form-control" >
+                                                <input type="file" name="newFile"  class="form-control" >
                                                 </br>
                                             </div>
                                             <div class="upload col-sm-2">
@@ -112,13 +115,20 @@ include('include/head.php');
             </div>
         </div>
     </div>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/validateDocForm.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/biblio.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/jquery.chained.min.js"></script><!-- pour les listes liées --> 
+	<script src="<?php echo base_url(); ?>assets/js/jquery.chained.min.js"></script><!-- pour les listes liées -->
      <script type="text/javascript">
      $(document).ready(function(){
      $("#lib-sous-cat").chainedTo("#list-bib");
      });
-     
      </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $('.datepicker').datepicker({dateFormat: 'dd/mm/yy'});
+        });
+    </script>
+    
 	
     <?php include('include/footer.php'); ?>

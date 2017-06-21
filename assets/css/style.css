@@ -12,6 +12,7 @@ body {
 .remove-right{
     float: right;
     padding-top: 5px;
+	padding-right: 2px;
     color: red !important;
 }
 .filtre_ligne
@@ -193,6 +194,10 @@ div.dataTables_filter{
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
     box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
 }
+.help-block{
+    font-size:70% !important;
+    color:red !important;
+}
 #msg_error{
     font-size:70%;
     color:red;
@@ -229,10 +234,34 @@ div.dataTables_filter{
 .filterable .filters input[disabled]:-ms-input-placeholder {
     color: #333;
 }
-.scroll_ul{   
-    height:400px; 
+.scroll_ul{  
+    margin-top: 5px; 
+    height:135px; 
     overflow:hidden;
     overflow-y:scroll;
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 8px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #CCC;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #CCC; 
 }
 
 .table > thead > tr > th,
@@ -341,12 +370,24 @@ p {
 .btn-info:active,
 .btn-info.active,
 .open > .dropdown-toggle.btn-info {
-    color: #fff !important;
+    color: #fff;
     /*background-color: #31b0d5;*/
-    background-color: #2196F3 !important;
-    border-color: #269abc !important;
+    background-color: #2196F3;
+    border-color: #269abc;
 }
 
 .panel-body {
     padding: 1px;
+}
+
+.pagination>li>a {
+    position: relative;
+    float: left;
+    padding: 1px 6px !important;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
 }

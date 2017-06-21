@@ -58,3 +58,4 @@ msg_add;Successfully added !!
 msg_modif;Successfully updated !!
 create_report;Create your report
 still_char;Character(s) Remaining
+required_field;This field is required !

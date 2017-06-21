@@ -18,9 +18,11 @@
                 </a>
 
                 <ul id="menu_gauche_ul">
-                    <input  type="text" name="recherche" id="recherche" class="form-control glyphicon" style="color: black" placeholder="&#57347;" />
-                    <div id="reports">
+				
+                    <input  type="text" name="recherche" id="recherche" data-filter-list="#reports" class="form-control glyphicon" style="color: black" placeholder="&#57347;" />
+                    <div id="reports"  class="scroll_ul">
                     </div>
+					
                 </ul>
             </li>
             <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line('biblio'); ?>
@@ -53,18 +55,19 @@
 </div>
 <script src="<?php echo base_url(); ?>assets/js/home.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/nav.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery.quicksearch.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery.easyPaginate.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.filter-list.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $.each(projections, function (id, val) {
             var option = '<option value="' + id + '">' + val + '</option>';
             $("#main_select").append(option);
-
-            var li = $("<li>"
-                    + "<a href='" + base_url + "index.php/projection/" + id + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
-                    + val + '</a>'
-                    + <?php if ($role != 2) { ?> '<span data-remove="' + id + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
+			var report=val;
+          if (val.length > 19) report=val.substring(0, 19)+ '...';
+            var li = $("<li class='report'>"
+                    + "<a href='" + base_url + "index.php/projection/" + id + "' data-toggle='tooltip' data-placement='right' title='"+ val +"'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
+                    + report + '</a>'
+                    + <?php if ($role != 2) { ?> '<span data-remove="' + id + '" class="remove-right glyphicon glyphicon-trash" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
             + '</li>');
             if (id == idPrj) {
                 $("#menu_gauche_ul").addClass("active");
@@ -98,15 +101,18 @@
 </script>
 
 <script type="text/javascript">
-    ///Pagination menu gauche
-    $(document).ready(function () {
-        $('#reports').easyPaginate({
-            paginateElement: 'li',
-            elementsPerPage: 5,
-            effect: 'default'
-        });
-
-        $(".remove-right").click(function () {
+     $(document).ready(function() {
+$('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+<script type="text/javascript">
+     $(document).ready(function() {
+$('#recherche').filterList();   //// la partie recherche du rapport
+});
+</script>
+<script type="text/javascript">
+     $(document).ready(function () {
+        $(document).on("click", '.remove-right',function() {  //// la partie suppression du rapport
             var id_remove = $(this).attr("data-remove");
             if (confirm('delete report')) {
                 $.ajax({

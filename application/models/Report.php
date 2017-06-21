@@ -102,7 +102,8 @@ Class Report extends CI_Model {
          }
     }
     function searchReporttables() {
-        $query = $this->db->query("SELECT id as n,report as table_name FROM ipw_reports_show");
+        $query = $this->db->query("SELECT id as n,report as table_name FROM ipw_reports_show WHERE id NOT IN
+                    (SELECT id_report FROM ipw_delete_report)");
         $ret = $query->result_array();
         return $ret;
         //return $query->num_rows();
@@ -112,10 +113,16 @@ Class Report extends CI_Model {
         $this->db->where('id_rename_report', $id);
         $this->db->delete('ipw_rename_report');
     }
-    function deleteCreatedReport($id) {
+   function deleteCreatedReport($id) {
         $this->db->where('old_report_name', $id);
         $this->db->delete('ipw_create_report');
+    } 
+	function saveDeletedReport($data) {
+        if ($this->db->insert('ipw_delete_report', $data)) {
+            return true;
+        }
     }
+	
 
     function getUserReports($userId) {
         $query = $this->db->select('*')
