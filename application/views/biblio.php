@@ -24,6 +24,7 @@ include('include/head.php');
                 <!-- Tab panes -->
 				<?php if ($role != 2) { ?>
 				<div class="row">
+				
                 <div class="panel tab-content">
 				 
                     <div style="overflow: auto;" class="tab-panel fade active in" >
@@ -72,11 +73,11 @@ include('include/head.php');
                                             </div>
                                             <label class="control-label col-sm-2" for="file"><?php echo $this->lang->line("file"); ?></label>
                                             <div class="tel col-sm-8">
-                                                <input type="file" name="newFile"  class="form-control" >
+                                                <input type="file"  name="newFiles[]" class="form-control" multiple/>
                                                 </br>
                                             </div>
                                             <div class="upload col-sm-2">
-                                                <input class="btn btn-success pull-right" type="submit" value="<?php echo $this->lang->line("add"); ?>"/>
+                                                <input class="btn btn-success pull-right" type="submit" name="fileSubmit" value="<?php echo $this->lang->line("add"); ?>"/>
                                             </div>
 
                                         </form>

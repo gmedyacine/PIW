@@ -203,51 +203,73 @@ class Home extends Home_Controller {
         redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
     }
 
-    public function upload_file() {
-        $this->load->helper(array('form'));
-        $this->load->helper('security');
-        $this->load->library('form_validation');
+ /************** Upload_multi_file*************/
+	public function upload_file() {     
         $this->data["fetch_data"] = $this->files->fetch_data();
+		
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'txt|docx|pdf|doc|xls';
         $config['max_size'] = '';
         $config['max_width'] = '';
         $config['max_height'] = '';
         $this->load->library('upload', $config);
+		$this->upload->initialize($config);
+     		
+		if($this->input->post('fileSubmit') && !empty($_FILES['newFiles']['name'])){
+            $filesCount = count($_FILES['newFiles']['name']);
+            for($i = 0; $i < $filesCount; $i++){
+                $_FILES['userFile']['name'] = $_FILES['newFiles']['name'][$i];
+                $_FILES['userFile']['type'] = $_FILES['newFiles']['type'][$i];
+                $_FILES['userFile']['tmp_name'] = $_FILES['newFiles']['tmp_name'][$i];
+                $_FILES['userFile']['error'] = $_FILES['newFiles']['error'][$i];
+                $_FILES['userFile']['size'] = $_FILES['newFiles']['size'][$i];
 
-        if (!$this->upload->do_upload('newFile')) {
-            $error = array('error' => $this->upload->display_errors());
-            $this->data['error_upload'] = $error;
-            $this->load->view('biblio', $this->data);
-        } else {
-            $row_id = $this->input->post('row_id');
-            $upload_data = $this->upload->data();
-            $name = $upload_data['file_name'];
-            if (empty($row_id)) {
-                $this->form_validation->set_rules('job', 'Job', 'trim|required|xss_clean');
-                $this->form_validation->set_rules('heureLib', 'heure_lib', 'trim|required|xss_clean');
-                $this->form_validation->set_rules('calender', 'Calender', 'trim|required|xss_clean');
-                $this->form_validation->set_rules('vega', 'Vega', 'required|xss_clean');
-
-                if ($this->form_validation->run() == FALSE) {
-                    $this->load->view('biblio', $this->data);
-                } else {
-                    $calender = $this->input->post('calender');
-                    $heure_lib = $this->input->post('heureLib');
-                    $job = $this->input->post('job');
-                    $categ = $this->input->post("libCat");
-                    $sous_categ = $this->input->post("libSousCat");
-                    $vega = $this->input->post('vega');
-                    $data_to_add = array("job" => $job, "calendrier" => $calender, "heure_lib" => $heure_lib, "vega" => $vega, "lib_categ_id" => $categ, "lib_sous_categ_id" => $sous_categ, "nom_fichier" => $name);
-                    $this->files->add_file($data_to_add);
-                    redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
+                if($this->upload->do_upload('userFile')){
+                    $fileData = $this->upload->data();
+                    $uploadData[$i]['nom_fichier'] = $fileData['file_name'];
+                    $uploadData[$i]['calendrier'] = $this->input->post('calender');
+                    $uploadData[$i]['heure_lib'] = $this->input->post('heureLib');
+                    $uploadData[$i]['job'] = $this->input->post('job');         //$fileData['file_name'];
+                    $uploadData[$i]['lib_categ_id'] = $this->input->post("libCat");
+                    $uploadData[$i]['lib_sous_categ_id'] = $this->input->post("libSousCat");
+                    $uploadData[$i]['vega'] = $this->input->post('vega');
+					
                 }
-            } else {
-                $this->files->update_file($row_id, $name);
-                redirect('biblio', 'refresh');
             }
-        }
+			if(!empty($uploadData)){
+                //Insert file information into the database
+             		
+				$this->files->add_file($uploadData);
+				$categ = $this->input->post("libCat");
+                $sous_categ = $this->input->post("libSousCat");				
+                redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
+			}
+            }                   
     }
+
+	
+    /************** Upload file from table biblio*************/
+	 public function upload_extra_file() {
+	       $this->load->helper(array('form'));
+	       $this->data["fetch_data"] = $this->files->fetch_data();
+           $config['upload_path'] = './uploads/';
+           $config['allowed_types'] = 'txt|docx|pdf|doc|xls';
+           $config['max_size'] = '';
+           $config['max_width'] = '';
+           $config['max_height'] = '';
+           $this->load->library('upload', $config);
+		   $this->upload->initialize($config);
+		   
+	  if($this->upload->do_upload('extraFile')){
+	        $row_id = $this->input->post('row_id');      //récupérer la ligne du tableau depuis laquelle se fait l'upload
+			$categ= $this->input->post('id_categ');
+			$sous_categ= $this->input->post('id_sous_categ');
+            $upload_data = $this->upload->data();        // récupérer les donnée du fichier uploadé
+            $name = $upload_data['file_name'];           // garder le nom du fichier dans la variable $name
+            $this->files->update_file($row_id, $name);
+             redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
+	   }
+	 }
 
     public function list_scat() {
         $id_cat = $this->input->post('id_cat');
