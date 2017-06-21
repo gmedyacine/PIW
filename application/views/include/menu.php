@@ -67,7 +67,7 @@
             var li = $("<li class='report'>"
                     + "<a href='" + base_url + "index.php/projection/" + id + "' data-toggle='tooltip' data-placement='right' title='"+ val +"'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
                     + report + '</a>'
-                    + <?php if ($role != 2) { ?> '<span data-remove="' + id + '" class="remove-right glyphicon glyphicon-trash" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
+                    + <?php if ($role != 2) { ?> '<span data-remove="' + id + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
             + '</li>');
             if (id == idPrj) {
                 $("#menu_gauche_ul").addClass("active");
@@ -76,21 +76,7 @@
             var reports = $("#reports").append(li);
             $("#menu_gauche_ul").append(reports);
         });
-        //// la partie recherche du rapport
-        var qs = $('input#recherche').quicksearch('ul#menu_gauche_ul div#reports li');
 
-        $.ajax({
-            'url': '<?php echo base_url(); ?>assets/js/example.json',
-            'type': 'GET',
-            'dataType': 'json',
-            'success': function (data) {
-                for (i in data['list_items']) {
-                    $('ul#menu_gauche_ul div#reports ').append('<li>' + data['list_items'][i] + '</li>');
-                }
-                qs.cache();
-            }
-        });
-//// Fin de la partie recherche du rapport
         //add "Create your report" at the end of list projections
         var li_rename = $("<li><a href='" + base_url + "index.php/home/rename_form' id='renameRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("rename_report"); ?></a></li>");
         var li_create = $("<li><a href='" + base_url + "index.php/home/create_form' id='createRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("create_report"); ?></a></li>");
