@@ -11,7 +11,17 @@ Class Report extends CI_Model {
         $ret = $query->result_array();
         return $ret;
     }
+function getAllReportSubCateg() {
+        $query = $this->db->select('*')
+                ->from("ipw_report_sous_categ")
+				->join("ipw_report_categ", 'ipw_report_categ.id_report_categ = report_categ')
+                //->join("piw_users", 'piw_users.id = added_by')
+                ->get(); //select * from ipw_report_categ‏
 
+        $ret = $query->result_array();
+        return $ret;
+    }
+	
     function getCreatedRept() {
         $query = $this->db->select('old_report_name as id, new_report_name')
                 ->from("ipw_create_report")
@@ -55,6 +65,14 @@ Class Report extends CI_Model {
 
     function addReportCateg($data) {
         if ($this->db->insert('ipw_report_categ', $data)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+	
+	function addReportSousCateg($data) {
+        if ($this->db->insert('ipw_report_sous_categ', $data)) {
             return true;
         } else {
             return false;

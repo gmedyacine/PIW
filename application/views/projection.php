@@ -9,6 +9,7 @@ include('include/dataTables.php');
     var lastDate = <?php echo (string)$lastDate; ?>;
     var dataNameColonne = <?php echo $dataNameColonne; ?>;
 	var report_categ_json = <?php echo $report_categ_json; ?>;
+	var report_sous_categ_json = <?php echo $report_sous_categ_json; ?>;
 </script>
 <body>
 
@@ -47,53 +48,10 @@ include('include/dataTables.php');
                     </div>
                 </div>
             </fieldset>
-			<div class="row">
-                                                            <div class="panel panel-default panel-set">
-                        <div class="panel-heading">
-                           <?php echo $this->lang->line("assigner_categ"); ?>
-                        </div>
-                    
-                        <div class="panel-body"> 
-
-                            <div class="form-group">    
-                             
-                                <?php echo form_open('home/assign_categ'); ?>
-                                <div class="col-sm-10">
-                                    <select id="select_report_categ" name="report_categ" class="form-control" >
-                                           <option value="0">-- <?php echo $this->lang->line('select_categ'); ?> --</option>
-                                       </select>
-                                    <input type="hidden" name="report_id" value="<?php echo $id_projection; ?>">
-                                    <p style="font-size: 12px; display: inline;"><?php echo $this->lang->line('categ_not_found'); ?></p><a href="#" id="add_categ" style="font-size: 12px; display: inline;"> <?php echo $this->lang->line('create_categ'); ?></a>
-                                    <br>
-                                </div>
-                                <div class="col-sm-2">
-                                    <input type="submit" id="btn_select_report_categ" class="btn btn-info pull-right" value="<?php echo $this->lang->line('valider'); ?>" >
-                                </div>
-                                </form>    
-                               
-                            </div>
-                           
-                            <div id="addReportCat" class="form-group">  
-                                <?php echo form_open('home/add_report_categ'); ?>
-                                  <form action="" method="post">  
-                                <div class="col-sm-10">
-                               <br>
-                               <input type="text" name="nom_report_categ" required="required" class="form-control">
-                                     <br>
-                                    <input type="hidden" name="id_projection" value="<?php echo $id_projection; ?> "> 
-                                </div>
-                                <div class="col-sm-2">
-                                 <br>
-                                   <input type="submit" id="btn_add_categ" class="btn btn-info pull-right" value="<?php echo $this->lang->line('add_categ'); ?> ">
-                                    
-                                </div>
-                                 </form> 
-                            </div>
-                          
-                        </div>
-                    </div>
-                  
-                    </div>
+			
+			<?php include('partial/assignCateg.php'); ?>
+			
+			
             <div class="row ">       <!-- Début titre du tableau et lien export excel-->
                 <div id="panel-table" class="panel panel-default panel-reduit-5">
                     <div class="panel-body">
@@ -135,21 +93,25 @@ include('include/dataTables.php');
                 </div>
             </div>
 
-
         </div> <!-- fin pagination  -->
-        <script src="<?php echo base_url(); ?>assets/js/projection.js"></script>
-             <script src="<?php echo base_url(); ?>assets/js/reportCateg.js"></script>
-            <script>$('.dropdown-toggle').dropdown()</script>
-                <script type="text/javascript">
+		
+        <script src="<?php echo base_url(); ?>assets/js/projection.js"></script>			 
+		<script src="<?php echo base_url(); ?>assets/js/jquery.chained.min.js"></script><!-- pour les listes liées -->
+		<script src="<?php echo base_url(); ?>assets/js/reportCateg.js"></script>
+   
+            <script>$('.dropdown-toggle').dropdown(); 
+			</script>
+			
+ <script type="text/javascript">
 
     $(document).ready(function () {
-
+	
         window.setTimeout(function () {
             $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
                 $(this).remove();
             });
         }, 1000);
-
+					
     });
     </script>
      </div> <!-- Fin partie du tableau -->

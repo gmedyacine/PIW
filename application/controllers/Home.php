@@ -41,6 +41,8 @@ class Home extends Home_Controller {
         $this->data["title"] = "Afficher Ma projection";
         $lastDate = $retPrj["lastDate"];
         $this->data['lastDate'] = json_encode($lastDate);
+		$this->data['report_categ_json']=json_encode($this->report->getAllReportCateg());
+		$this->data['report_sous_categ_json']=json_encode($this->report->getAllReportSubCateg());
         $this->load->view("projection", $this->data);
     }
 
@@ -357,7 +359,22 @@ class Home extends Home_Controller {
         
     }
 	
-    public function assign_categ(){
+	public function add_report_sous_categ(){
+	    
+        $report_categ_id = $this->input->post('reportCat');
+        $nom_report_sous_categ = $this->input->post('nom_report_sous_categ');
+        $id_projection = $this->input->post('id_projection');
+        
+        $data = array('report_categ' => $report_categ_id,'nom_report_sous_categ' => $nom_report_sous_categ, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
+        if ($this->report->addReportSousCateg($data)) {
+            $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">La categorie a été créée avec succès !! </div>');
+          }
+
+        redirect(base_url() . "index.php/projection/".$id_projection);
+        
+    }
+	
+	public function assign_categ(){
         
         $id_categ = $this->input->post('report_categ');
         $id_report= $this->input->post('report_id');
@@ -367,6 +384,6 @@ class Home extends Home_Controller {
 	    $this->report->assignCateg($table_name,$id_categ);
 		redirect(base_url() . "index.php/projection/".$id_report);
     
-    }	
-
+    }
+    
 }
