@@ -23,7 +23,7 @@
                     
                     <div class="col-md-12">
                         
-						<select  id="reportCat" name="reportCat"  class="form-control" >
+						<select  id="reportCat" name="nom_report_categ"  class="form-control" >
                             <option value="">--<?php echo $this->lang->line('select_categ'); ?>--</option>
                             
                         </select>
@@ -33,7 +33,7 @@
                 <div class="row form-group">
                     
                     <div class="col-md-12">
-                        <input type="text" name="nom_report_categ" required="required" placeholder="--<?php echo $this->lang->line('sub_cat_name'); ?>--" class="form-control"  >
+                        <input type="text" name="nom_report_sous_categ" required="required" placeholder="--<?php echo $this->lang->line('sub_cat_name'); ?>--" class="form-control"  >
                         <span class="error"></span>
                     </div>
 
