@@ -375,15 +375,22 @@ class Home extends Home_Controller {
     }
 	
 	public function assign_categ(){
-        
-        $id_categ = $this->input->post('report_sous_categ');
+        $id_categ = $this->input->post('report_categ');
+		$id_sous_categ = $this->input->post('report_sous_categ');
         $id_report= $this->input->post('report_id');
-        
-		$table_name = $this->projection->getNameTable($id_report);
+     	$table_name = $this->projection->getNameTable($id_report);
+		
+		if($id_sous_categ == null){
+		$id_sous_categ = 0 ;
+		}
 			
-	    $this->report->assignCateg($table_name,$id_categ);
+	    $this->report->assignCateg($table_name,$id_categ, $id_sous_categ);
 		redirect(base_url() . "index.php/projection/".$id_report);
-    
+    }
+	
+	public function addColumn(){  //pour ajouter les colonnes "$id_categ" et "id_sous_categ" aux tables rapport
+	
+	  $this->report->creatQuery();
     }
     
 }

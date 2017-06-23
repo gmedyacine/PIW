@@ -21,7 +21,7 @@
 									
                                 </div>
 								<div class="col-sm-10">
-                                    <select id="select_report_sous_categ" name="report_sous_categ" class="form-control" required >
+                                    <select id="select_report_sous_categ" name="report_sous_categ" class="form-control" >
                                            <option value="">-- <?php echo $this->lang->line('select_sub_categ'); ?> --</option>
                                        </select>
                                     <input type="hidden" name="report_id" value="<?php echo $id_projection; ?>">
