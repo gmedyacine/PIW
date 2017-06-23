@@ -376,9 +376,9 @@ class Home extends Home_Controller {
 	
 	public function assign_categ(){
         
-        $id_categ = $this->input->post('report_categ');
+        $id_categ = $this->input->post('report_sous_categ');
         $id_report= $this->input->post('report_id');
-
+        
 		$table_name = $this->projection->getNameTable($id_report);
 			
 	    $this->report->assignCateg($table_name,$id_categ);

@@ -23,7 +23,7 @@
                     
                     <div class="col-md-12">
                         
-						<select  id="reportCat" name="nom_report_categ"  class="form-control" >
+						<select  id="reportCat" name="nom_report_categ"  class="form-control" required>
                             <option value="">--<?php echo $this->lang->line('select_categ'); ?>--</option>
                             
                         </select>
