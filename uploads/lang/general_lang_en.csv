@@ -59,3 +59,16 @@ msg_modif;Successfully updated !!
 create_report;Create your report
 still_char;Character(s) Remaining
 required_field;This field is required !
+add_categ;Create category
+add_sub_categ;Create Sub-category
+assigner_categ;Assign a category
+select_categ;Select a category
+categ_not_found;You didn't find your category ?
+create_new;Create new one
+select_sub_categ;Select a sub-category
+sub_categ_not_found;You didn't find your sub-category ?
+create_new_cat;Create a new category
+create_new_sub_cat;Create a new sub-category
+report_cat;Report Category
+sub_cat_name;Sub-category name
+cat_name;Category name

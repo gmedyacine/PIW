@@ -25,13 +25,15 @@ Class Files extends CI_Model {
         $this->db->delete("ipw_files");
     }
 
-    function update_file($id, $name) {
+    function update_file($id, $name, $title) {
         $this->db->where('id', $id);
-        $this->db->update('ipw_files', array("nom_fichier" => $name));
+        $this->db->update('ipw_files', array("nom_fichier" => $name, "job"=> $title ));
     }
 
-    function add_file($data_to_add=array()) {
-        $this->db->insert('ipw_files', $data_to_add);
+    function add_file($data = array()) {
+        //$this->db->insert('ipw_files', $data_to_add);
+		$insert = $this->db->insert_batch('ipw_files',$data);
+        return $insert?true:false;
     }
 
     function delete_file($file_path) {

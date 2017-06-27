@@ -24,7 +24,7 @@ $("#addDocForm").validate({
         job: "required",
         vega: "required",
         heureLib: "required",
-        newFile: "required"
+        "newFiles[]": "required"
         
     },
     messages: {
@@ -34,7 +34,7 @@ $("#addDocForm").validate({
         job: msg,
         vega:msg,
         heureLib: msg,
-        newFile: msg 
+        "newFiles[]": msg 
 
     }
 });

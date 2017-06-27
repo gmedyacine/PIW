@@ -8,6 +8,8 @@ include('include/dataTables.php');
     var dataTable = <?php echo $dataTable; ?>;
     var lastDate = <?php echo (string)$lastDate; ?>;
     var dataNameColonne = <?php echo $dataNameColonne; ?>;
+	var report_categ_json = <?php echo $report_categ_json; ?>;
+	var report_sous_categ_json = <?php echo $report_sous_categ_json; ?>;
 </script>
 <body>
 
@@ -46,6 +48,10 @@ include('include/dataTables.php');
                     </div>
                 </div>
             </fieldset>
+			
+			<?php include('partial/assignCateg.php'); ?>
+			
+			
             <div class="row ">       <!-- Début titre du tableau et lien export excel-->
                 <div id="panel-table" class="panel panel-default panel-reduit-5">
                     <div class="panel-body">
@@ -87,9 +93,27 @@ include('include/dataTables.php');
                 </div>
             </div>
 
-
         </div> <!-- fin pagination  -->
-        <script src="<?php echo base_url(); ?>assets/js/projection.js"></script>
+		
+        <script src="<?php echo base_url(); ?>assets/js/projection.js"></script>			 
+		<script src="<?php echo base_url(); ?>assets/js/jquery.chained.min.js"></script><!-- pour les listes liées -->
+		<script src="<?php echo base_url(); ?>assets/js/reportCateg.js"></script>
+   
+            <script>$('.dropdown-toggle').dropdown(); 
+			</script>
+			
+ <script type="text/javascript">
+
+    $(document).ready(function () {
+	
+        window.setTimeout(function () {
+            $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                $(this).remove();
+            });
+        }, 1000);
+					
+    });
+    </script>
      </div> <!-- Fin partie du tableau -->
     <!-- ROW END -->
 
