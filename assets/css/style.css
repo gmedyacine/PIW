@@ -406,3 +406,9 @@ p {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
 }
+
+.categRept {
+overflow: hidden; 
+color:transparent; 
+display: none;
+}

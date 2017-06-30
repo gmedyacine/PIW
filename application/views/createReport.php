@@ -7,6 +7,7 @@ include('include/head.php');
     var projections = <?php echo $projections; ?>;
     var rpt_tables_json = <?php echo $rpt_tables_json; ?>;
 	var msg_required = "<?php echo $this->lang->line("required_field"); ?>";
+        var report_categ_json = <?php echo $report_categ_json; ?>;
 	
 </script>
 <body>
@@ -31,8 +32,13 @@ include('include/head.php');
                             <div class="form-group">    
                                 <form action="<?php echo base_url(); ?>index.php/home/create_report" method="post" id="createReport">
                                 <div class="col-sm-12">
-                                    <select  id="rpt_select" name="old_name"  class="form-control chosen-select" tabindex="2" required="required">
-                                        <option value="">-- <?php echo $this->lang->line("select_report"); ?>--</option>   
+                                    <select id="select_report_categ" name="report_categ" class="form-control" required >
+                                        <option value="">-- <?php echo $this->lang->line('select_categ'); ?> --</option>
+                                    </select>
+                                    <br>
+                                   
+                                    <select  id="rpt_select" name="old_name"  class="form-control chosen-select" tabindex="2" required>
+                                           
                                     </select>
                                     <br>
                                     <br>
@@ -58,7 +64,8 @@ include('include/head.php');
             </div> <!-- fin pagination  -->
 			 
 	 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
-             <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/validateCreateReport.js"></script>       
+             <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/validateCreateReport.js"></script> 
+             <script src="<?php echo base_url(); ?>assets/js/reportCateg.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
             <script type="text/javascript">
                 $(document).ready(function () {

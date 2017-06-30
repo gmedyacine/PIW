@@ -18,13 +18,18 @@ $(document).ready(function () {
     });
 	$("#createReport").validate({
    rules: {
-     old_name: "required",
+     
+     old_name: {
+	      required: true
+	      },
      new_name: {
 	      required: true
 	      }
 	 },
    messages: {
-    old_name: msg_required,
+    old_name: {
+	      required: msg_required
+	      	 },
      new_name: {
 	      required: msg_required
 	      	 } 

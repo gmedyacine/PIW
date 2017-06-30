@@ -41,8 +41,6 @@ class Home extends Home_Controller {
         $this->data["title"] = "Afficher Ma projection";
         $lastDate = $retPrj["lastDate"];
         $this->data['lastDate'] = json_encode($lastDate);
-		$this->data['report_categ_json']=json_encode($this->report->getAllReportCateg());
-		$this->data['report_sous_categ_json']=json_encode($this->report->getAllReportSubCateg());
         $this->load->view("projection", $this->data);
     }
 
@@ -204,77 +202,77 @@ class Home extends Home_Controller {
         redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
     }
 
-  /************** Upload_multi_file*************/
-	public function upload_file() {     
-	//var_dump($_FILES['newFiles'][file_ext]); die;  
+    /*     * ************ Upload_multi_file************ */
+
+    public function upload_file() {
+        //var_dump($_FILES['newFiles'][file_ext]); die;  
         $this->data["fetch_data"] = $this->files->fetch_data();
-		
+
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'txt|docx|pdf|doc|xls';
         $config['max_size'] = '';
         $config['max_width'] = '';
         $config['max_height'] = '';
         $this->load->library('upload', $config);
-		$this->upload->initialize($config);
-     		
-		if($this->input->post('fileSubmit') && !empty($_FILES['newFiles']['name'])){
+        $this->upload->initialize($config);
+
+        if ($this->input->post('fileSubmit') && !empty($_FILES['newFiles']['name'])) {
             $filesCount = count($_FILES['newFiles']['name']);
-            for($i = 0; $i < $filesCount; $i++){
+            for ($i = 0; $i < $filesCount; $i++) {
                 $_FILES['userFile']['name'] = $_FILES['newFiles']['name'][$i];
                 $_FILES['userFile']['type'] = $_FILES['newFiles']['type'][$i];
                 $_FILES['userFile']['tmp_name'] = $_FILES['newFiles']['tmp_name'][$i];
                 $_FILES['userFile']['error'] = $_FILES['newFiles']['error'][$i];
                 $_FILES['userFile']['size'] = $_FILES['newFiles']['size'][$i];
 
-                if($this->upload->do_upload('userFile')){
+                if ($this->upload->do_upload('userFile')) {
                     $fileData = $this->upload->data();
-					$ext= $fileData['file_ext'];
+                    $ext = $fileData['file_ext'];
                     $uploadData[$i]['nom_fichier'] = $fileData['file_name'];
                     $uploadData[$i]['calendrier'] = $this->input->post('calender');
                     $uploadData[$i]['heure_lib'] = $this->input->post('heureLib');
-                    $uploadData[$i]['job'] = basename($fileData['file_name'],$ext);         
+                    $uploadData[$i]['job'] = basename($fileData['file_name'], $ext);
                     $uploadData[$i]['lib_categ_id'] = $this->input->post("libCat");
                     $uploadData[$i]['lib_sous_categ_id'] = $this->input->post("libSousCat");
                     $uploadData[$i]['vega'] = $this->input->post('vega');
-					
                 }
             }
-			if(!empty($uploadData)){
+            if (!empty($uploadData)) {
                 //Insert file information into the database
-             		
-				$this->files->add_file($uploadData);
-				$categ = $this->input->post("libCat");
-                $sous_categ = $this->input->post("libSousCat");				
+
+                $this->files->add_file($uploadData);
+                $categ = $this->input->post("libCat");
+                $sous_categ = $this->input->post("libSousCat");
                 redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
-			}
-            }                   
+            }
+        }
     }
 
-	
-    /************** Upload file from table biblio*************/
-	 public function upload_extra_file() {
-	       $this->load->helper(array('form'));
-	       $this->data["fetch_data"] = $this->files->fetch_data();
-           $config['upload_path'] = './uploads/';
-           $config['allowed_types'] = 'txt|docx|pdf|doc|xls';
-           $config['max_size'] = '';
-           $config['max_width'] = '';
-           $config['max_height'] = '';
-           $this->load->library('upload', $config);
-		   $this->upload->initialize($config);
-		   
-	  if($this->upload->do_upload('extraFile')){
-	        $row_id = $this->input->post('row_id');      //récupérer la ligne du tableau depuis laquelle se fait l'upload
-			$categ= $this->input->post('id_categ');
-			$sous_categ= $this->input->post('id_sous_categ');
+    /*     * ************ Upload file from table biblio************ */
+
+    public function upload_extra_file() {
+        $this->load->helper(array('form'));
+        $this->data["fetch_data"] = $this->files->fetch_data();
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'txt|docx|pdf|doc|xls';
+        $config['max_size'] = '';
+        $config['max_width'] = '';
+        $config['max_height'] = '';
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload('extraFile')) {
+            $row_id = $this->input->post('row_id');      //récupérer la ligne du tableau depuis laquelle se fait l'upload
+            $categ = $this->input->post('id_categ');
+            $sous_categ = $this->input->post('id_sous_categ');
             $upload_data = $this->upload->data();        // récupérer les donnée du fichier uploadé
             $name = $upload_data['file_name'];           // garder le nom du fichier dans la variable $name
-			$ext= $upload_data['file_ext'];              // garder l'extension du fichier dans la variable $ext
-			$title = basename($name,$ext);               // garder le nom du fichier sans extension dans la variable $title
+            $ext = $upload_data['file_ext'];              // garder l'extension du fichier dans la variable $ext
+            $title = basename($name, $ext);               // garder le nom du fichier sans extension dans la variable $title
             $this->files->update_file($row_id, $name, $title);
-             redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
-	   }
-	 }
+            redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
+        }
+    }
 
     public function list_scat() {
         $id_cat = $this->input->post('id_cat');
@@ -308,7 +306,7 @@ class Home extends Home_Controller {
         $id_projection = $this->input->post('id_projection');
         $new_name = $this->input->post('new_name');
         $old_name = $this->projection->getNameTable($id_projection);
-        $data = array('renamed_by' => $this->data['id_user_connected'], 'new_report_name' => $new_name, 'old_report_name' => $old_name, "old_report_id" => $id_projection);
+        $data = array('renamed_by' => $this->data['id_user_connected'], 'new_report_name' => $new_name, 'old_report_name' => $id_projection);
 
         if ($this->report->renameReport($data)) {
             $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_modif") . "</div>");
@@ -319,11 +317,10 @@ class Home extends Home_Controller {
     }
 
     public function create_report() {
-
-
+        $report_categ = $this->input->post('report_categ');
         $new_name = $this->input->post('new_name');
         $old_name = $this->input->post('old_name');
-        $data = array('renamed_by' => $this->data['id_user_connected'], 'new_report_name' => $new_name, 'old_report_name' => $old_name);
+        $data = array('renamed_by' => $this->data['id_user_connected'], 'new_report_name' => $new_name, 'old_report_name' => $old_name, 'report_categ' => $report_categ);
 
         if ($this->report->createReport($data)) {
             $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_modif") . "</div>");
@@ -332,65 +329,55 @@ class Home extends Home_Controller {
         redirect(base_url() . "index.php/home/create_form");
     }
 
-  	public function delete_report($id) {
-	 $data = array('deleted_by' => $this->data['id_user_connected'], 'id_report' => $id);
-	 $this->report->saveDeletedReport($data);
+    public function delete_report($id) {
+        $data = array('deleted_by' => $this->data['id_user_connected'], 'id_report' => $id);
+        $this->report->saveDeletedReport($data);
     }
 
     public function delete_report_menu($id) {
         $this->report->deleteCreatedReport($id);
-        $this->report->deleteRenamedReport($id);
-		$this->delete_report($id);
-		
-        echo json_encode("delete-ok");die;
+        $this->delete_report($id);
+
     }
-	
-	public function add_report_categ(){
+
+    public function add_report_categ() {
         $nom_report_categ = $this->input->post('nom_report_categ');
         $id_projection = $this->input->post('id_projection');
-        
+
         $data = array('nom_report_categ' => $nom_report_categ, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
         if ($this->report->addReportCateg($data)) {
             $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">La categorie a été créée avec succès !! </div>');
-          }
+        }
 
-        redirect(base_url() . "index.php/projection/".$id_projection);
-        
+        redirect(base_url() . "index.php/projection/" . $id_projection);
     }
-	
-	public function add_report_sous_categ(){
-	    
+
+    public function add_report_sous_categ() {
+
         $report_categ_id = $this->input->post('nom_report_categ');
         $nom_report_sous_categ = $this->input->post('nom_report_sous_categ');
         $id_projection = $this->input->post('id_projection');
-        
-        $data = array('report_categ' => $report_categ_id,'nom_report_sous_categ' => $nom_report_sous_categ, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
-       
-	   if ($this->report->addReportSousCateg($data)) {
-            $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">La categorie a été créée avec succès !! </div>');
-          }
 
-        redirect(base_url() . "index.php/projection/".$id_projection);
-       
+        $data = array('report_categ' => $report_categ_id, 'nom_report_sous_categ' => $nom_report_sous_categ, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
+
+        if ($this->report->addReportSousCateg($data)) {
+            $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">La categorie a été créée avec succès !! </div>');
+        }
+
+        redirect(base_url() . "index.php/projection/" . $id_projection);
     }
-	
-	public function assign_categ(){
+
+    public function assign_categ() {
         $id_categ = $this->input->post('report_categ');
-		$id_sous_categ = $this->input->post('report_sous_categ');
-        $id_report= $this->input->post('report_id');
-     	$table_name = $this->projection->getNameTable($id_report);
-		
-		if($id_sous_categ == null){
-		$id_sous_categ = 0 ;
-		}
-			
-	    $this->report->assignCateg($table_name,$id_categ, $id_sous_categ);
-		redirect(base_url() . "index.php/projection/".$id_report);
+        $id_sous_categ = $this->input->post('report_sous_categ');
+        $id_report = $this->input->post('report_id');
+
+        if ($id_sous_categ == null) {
+            $id_sous_categ = 0;
+        }
+        $this->report->assignCateg($id_report, $id_categ, $id_sous_categ);
+             
+        redirect(base_url() . "index.php/projection/" . $id_report);
     }
-	
-	public function addColumn(){  //pour ajouter les colonnes "$id_categ" et "id_sous_categ" aux tables rapport
-	
-	  $this->report->creatQuery();
-    }
-    
+
 }

@@ -2,6 +2,7 @@
 <script type="text/javascript">
     var base_url = "<?php echo base_url(); ?>";
     var projections = <?php echo $projections; ?>;
+    var projectionsFull = <?php echo $projectionsFull; ?>;
     var id_param =<?php echo $id_param; ?>;
     var menu_bib =<?php echo $menu; ?>;
     var id_categ =<?php echo $id_categ; ?>;
@@ -9,9 +10,11 @@
     var data_categs =<?php echo $data_categs; ?>;
     var data_sous_categs =<?php echo $data_sous_categs; ?>;
     var id_sous_categ =<?php echo $id_sous_categ; ?>;
+      
 </script>
 
 <div class="col-md-3">    <!-- Colonne du Menu -->
+        
     <nav id="menu_gauche">
         <ul id="nav">
             <li><a href="#" class=""><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $this->lang->line("rapport_libelle") ?>
@@ -59,17 +62,19 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $.each(projections, function (id, val) {
-            var option = '<option value="' + id + '">' + val + '</option>';
+        
+        $.each(projectionsFull, function (id, val) {
+            var option = '<option value="' + val.old_report_name + '">' + val.new_report_name + '</option>';
             $("#main_select").append(option);
-			var report=val;
-          if (val.length > 19) report=val.substring(0, 19)+ '...';
+			var report=val.new_report_name;
+          if (val.new_report_name.length > 19) report=val.new_report_name.substring(0, 19)+ '...';
             var li = $("<li class='report'>"
-                    + "<a href='" + base_url + "index.php/projection/" + id + "' data-toggle='tooltip' data-placement='right' title='"+ val +"'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
+                    + "<a href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='Category: "+ val.nom_report_categ +" <br> Report: "+ val.new_report_name +"'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
                     + report + '</a>'
-                    + <?php if ($role != 2) { ?> '<span data-remove="' + id + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
+                    + '<span class="categRept"> "'+ val.nom_report_categ +'" </span> '
+                    + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
             + '</li>');
-            if (id == idPrj) {
+            if (val.old_report_name == idPrj) {
                 $("#menu_gauche_ul").addClass("active");
                 li.addClass("active");
             }
@@ -105,7 +110,7 @@ $('#recherche').filterList();   //// la partie recherche du rapport
                     url: base_url + "index.php/delete-report/" + id_remove,
                     type: "GET",
                 }).done(function (data) {
-                    location.reload();
+                    location.replace(base_url + "index.php/home");
 
                 });
             }

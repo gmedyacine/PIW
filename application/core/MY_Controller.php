@@ -27,26 +27,14 @@ class Home_Controller extends MY_Controller {
         $this->data['id_param'] = 0;
         $this->data['role'] = $dataLogin["role"];
         $this->report->manager_report();
-        $this->projections += $this->report->getCreatedRept();
-        $this->data["projections"] = json_encode($this->rename_reports());
+         $this->data["projections"] = json_encode($this->report->getCreatedRept());
+        $this->data["projectionsFull"] = json_encode($this->report->getCreatedReptFull());
         $this->data["menu"] = json_encode($this->biblio->fetch_menu());
         $this->data['data_categs'] = json_encode($this->biblio->fetch_categ());
         $this->data['data_sous_categs'] = json_encode($this->biblio->fetch_sous_categ());
-    }
-
-    protected function rename_reports() {
-
-        $rename = $this->report->getUserReports($this->data['id_user_connected']);
-        $new_projections = array();
-        foreach ($this->projections as $key => $value) {
-            $new_projections[$key] = $value;
-            for ($i = 0; $i < sizeof($rename); $i++) {
-                if ($key == $rename[$i]['old_report_id']) {
-                    $new_projections[$key] = $rename[$i]['new_report_name'];
-                }
-            }
-        }
-        return $new_projections;
+        $this->data['report_categ_json'] = json_encode($this->report->getAllReportCateg());
+        $this->data['report_sous_categ_json'] = json_encode($this->report->getAllReportSubCateg());
+        
     }
 
     protected function logout() {
