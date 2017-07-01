@@ -209,13 +209,12 @@ class Home extends Home_Controller {
         $this->data["fetch_data"] = $this->files->fetch_data();
 
         $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'txt|docx|pdf|doc|xls';
+        $config['allowed_types'] = 'txt|docx|pdf|doc|xls|xlsx';
         $config['max_size'] = '';
         $config['max_width'] = '';
         $config['max_height'] = '';
         $this->load->library('upload', $config);
-        $this->upload->initialize($config);
-
+       
         if ($this->input->post('fileSubmit') && !empty($_FILES['newFiles']['name'])) {
             $filesCount = count($_FILES['newFiles']['name']);
             for ($i = 0; $i < $filesCount; $i++) {
@@ -254,7 +253,7 @@ class Home extends Home_Controller {
         $this->load->helper(array('form'));
         $this->data["fetch_data"] = $this->files->fetch_data();
         $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'txt|docx|pdf|doc|xls';
+        $config['allowed_types'] = 'txt|docx|pdf|doc|xls|xlsx';
         $config['max_size'] = '';
         $config['max_width'] = '';
         $config['max_height'] = '';
