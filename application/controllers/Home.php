@@ -258,7 +258,7 @@ class Home extends Home_Controller {
         $config['max_width'] = '';
         $config['max_height'] = '';
         $this->load->library('upload', $config);
-        $this->upload->initialize($config);
+        
 
         if ($this->upload->do_upload('extraFile')) {
             $row_id = $this->input->post('row_id');      //récupérer la ligne du tableau depuis laquelle se fait l'upload
