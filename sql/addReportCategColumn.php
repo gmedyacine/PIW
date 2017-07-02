@@ -15,4 +15,5 @@ function creatQuery() {
 		 $this->db->query($sql_add_column_sous_cat);
     }
 }
+
 ?>         

@@ -30,7 +30,7 @@ ADD  `lib_sous_categ_id` INT NOT NULL DEFAULT  '0';";
   `nom_fichier` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;";
-      //  $this->db->query($query_creat);
+        //  $this->db->query($query_creat);
 
         $query_insert = "INSERT INTO `ipw_files` (`id`, `calendrier`, `job`, `vega`, `nom_fichier`) VALUES
 (1, 'LUNDI_AU_SAMEDI', 'JOB_1_UNIX', 'Vega', 'cdc_site1.docx'),
@@ -59,7 +59,7 @@ ADD  `lib_sous_categ_id` INT NOT NULL DEFAULT  '0';";
 
     public function getAllUsers() {
         $this->db->select('id,username,mail,num_tel,notif_mail,notif_sms,sup_user');
-        $this->db->where_not_in('id',1);
+        $this->db->where_not_in('id', 1);
         $this->db->from('piw_users');
         $query = $this->db->get();
         $res = $query->result();
@@ -70,6 +70,22 @@ ADD  `lib_sous_categ_id` INT NOT NULL DEFAULT  '0';";
         $this->db->where('id', $id);
         $this->db->delete('piw_users');
         return true;
+    }
+
+    public function alterTableProjection() {
+        $sql_show = "show tables where tables_in_" . $this->db->database . "  like 'ipw_rept%'";
+        $query_show = $this->db->query($sql_show);
+        $ret_show = $query_show->result_array();
+
+        foreach ($ret_show as $key => $ret) {
+            $set = array_values($ret);
+            $tableName = $set[0];
+
+            $sql_add_column_cat = "ALTER TABLE  `" . $tableName . "` ADD  `report_categ` INT DEFAULT NULL;";
+            $sql_add_column_sous_cat = "ALTER TABLE  `" . $tableName . "` ADD  `report_sous_categ` INT DEFAULT NULL;";
+            $this->db->query($sql_add_column_cat);
+            $this->db->query($sql_add_column_sous_cat);
+        }
     }
 
 }
