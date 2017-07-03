@@ -22,7 +22,7 @@
 
                 <ul id="menu_gauche_ul">
 				
-                    <input  type="text" name="recherche" id="recherche" data-filter-list="#reports" class="form-control glyphicon" style="color: black" placeholder="&#57347;" />
+                    <input  type="text" name="recherche" id="recherche" data-filter-list="#reports" class="form-control glyphicon" style="color: black; font-family: arial; font-size:70%;" placeholder="<?php echo $this->lang->line('search_by'); ?>" />
                     <div id="reports"  class="scroll_ul">
                     </div>
 					
