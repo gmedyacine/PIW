@@ -205,14 +205,12 @@ class Home extends Home_Controller {
     /*     * ************ Upload_multi_file************ */
 
     public function upload_file() {
-        //var_dump($_FILES['newFiles'][file_ext]); die;  
+        //var_dump($_FILES['newFiles']['name']); die;  
         $this->data["fetch_data"] = $this->files->fetch_data();
 
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'txt|docx|pdf|doc|xls|xlsx';
         $config['max_size'] = '';
-        $config['max_width'] = '';
-        $config['max_height'] = '';
         $this->load->library('upload', $config);
        
         if ($this->input->post('fileSubmit') && !empty($_FILES['newFiles']['name'])) {
@@ -234,13 +232,16 @@ class Home extends Home_Controller {
                     $uploadData[$i]['lib_categ_id'] = $this->input->post("libCat");
                     $uploadData[$i]['lib_sous_categ_id'] = $this->input->post("libSousCat");
                     $uploadData[$i]['vega'] = $this->input->post('vega');
-                }
+					$msg_upload = 'file/s uploaded successfuly';
+                } else {
+				    echo $this->upload->display_errors();					
+				}
             }
             if (!empty($uploadData)) {
                 //Insert file information into the database
 
                 $this->files->add_file($uploadData);
-                $categ = $this->input->post("libCat");
+				$categ = $this->input->post("libCat");
                 $sous_categ = $this->input->post("libSousCat");
                 redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
             }
@@ -255,10 +256,8 @@ class Home extends Home_Controller {
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'txt|docx|pdf|doc|xls|xlsx';
         $config['max_size'] = '';
-        $config['max_width'] = '';
-        $config['max_height'] = '';
         $this->load->library('upload', $config);
-        
+        $this->upload->initialize($config);
 
         if ($this->upload->do_upload('extraFile')) {
             $row_id = $this->input->post('row_id');      //récupérer la ligne du tableau depuis laquelle se fait l'upload
@@ -312,20 +311,26 @@ class Home extends Home_Controller {
             //traduction ici 
         }
 
-        redirect(base_url() . "index.php/home/rename_form");
+        redirect("rename-report");
     }
 
     public function create_report() {
         $report_categ = $this->input->post('report_categ');
+		$report_sous_categ = $this->input->post('report_sous_categ');
         $new_name = $this->input->post('new_name');
         $old_name = $this->input->post('old_name');
-        $data = array('renamed_by' => $this->data['id_user_connected'], 'new_report_name' => $new_name, 'old_report_name' => $old_name, 'report_categ' => $report_categ);
+		
+		if ($id_sous_categ == null || $id_sous_categ == '' ) {
+            $id_sous_categ = 0;
+			}
+		
+        $data = array('renamed_by' => $this->data['id_user_connected'], 'new_report_name' => $new_name, 'old_report_name' => $old_name, 'report_categ' => $report_categ, 'report_sous_categ' => $report_sous_categ);
 
         if ($this->report->createReport($data)) {
             $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_modif") . "</div>");
         }
 
-        redirect(base_url() . "index.php/home/create_form");
+        redirect("create-report");
     }
 
     public function delete_report($id) {
@@ -348,7 +353,7 @@ class Home extends Home_Controller {
             $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">La categorie a été créée avec succès !! </div>');
         }
 
-        redirect(base_url() . "index.php/projection/" . $id_projection);
+        redirect("create-report");
     }
 
     public function add_report_sous_categ() {
@@ -363,20 +368,7 @@ class Home extends Home_Controller {
             $this->session->set_flashdata('msg', '<div  class="brav-fix alert alert-success text-center">La categorie a été créée avec succès !! </div>');
         }
 
-        redirect(base_url() . "index.php/projection/" . $id_projection);
-    }
-
-    public function assign_categ() {
-        $id_categ = $this->input->post('report_categ');
-        $id_sous_categ = $this->input->post('report_sous_categ');
-        $id_report = $this->input->post('report_id');
-
-        if ($id_sous_categ == null) {
-            $id_sous_categ = 0;
-        }
-        $this->report->assignCateg($id_report, $id_categ, $id_sous_categ);
-             
-        redirect(base_url() . "index.php/projection/" . $id_report);
+        redirect("create-report");
     }
 
 }

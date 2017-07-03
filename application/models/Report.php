@@ -44,13 +44,6 @@ function getAllReportSubCateg() {
         $ret = $query->result_array();
         return $ret; // return all fields of table : ipw_create_report
     }
-
-    function assignCateg($idReport,$idCateg, $idSousCateg) {
-        $sql_assign_categ = "UPDATE `ipw_create_report` SET  `report_categ` =  ".$idCateg." WHERE `old_report_name` = ".$idReport.";";
-	$sql_assign_sous_categ = "UPDATE `ipw_create_report` SET  `report_sous_categ` =  ".$idSousCateg." WHERE `old_report_name` = ".$idReport.";";
-        $this->db->query($sql_assign_categ);
-	$this->db->query($sql_assign_sous_categ);
-    }
     
     function deleteReportCateg($id) {
         $this->db->where("id", $id);
@@ -78,6 +71,7 @@ function getAllReportSubCateg() {
         $report_id = $data['old_report_name'];
         $new_report_name = $data['new_report_name'];
         $report_categ= $data['report_categ'];
+		$report_sous_categ= $data['report_sous_categ'];
 
         $this->db->select('*');
         $this->db->from('ipw_create_report');
@@ -90,6 +84,7 @@ function getAllReportSubCateg() {
         } else {
             if ($this->db->set('new_report_name', $new_report_name)
                             ->set('report_categ', $report_categ)
+							->set('report_sous_categ', $report_sous_categ)
                             ->where('old_report_name', $report_id)
                             ->update('ipw_create_report')) {
                 return true;
