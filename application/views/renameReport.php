@@ -36,7 +36,7 @@ include('include/head.php');
                                <form action="<?php echo base_url(); ?>index.php/home/rename_report" method="post" id="renameReport">
                                 <div class="col-sm-12">
                                     <select  id="main_select" name="id_projection"  class="form-control chosen-select" tabindex="2" required="required" >
-                                        <option value="">-- <?php echo $this->lang->line("select_report"); ?>--</option> 
+                                        
                                        </select>
                                       <br>
 									  <br>
