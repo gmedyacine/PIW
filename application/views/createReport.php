@@ -6,6 +6,8 @@ include('include/head.php');
 <script type="text/javascript">
     var projections = <?php echo $projections; ?>;
     var rpt_tables_json = <?php echo $rpt_tables_json; ?>;
+	var rpt_allow_tables = <?php echo $rpt_allow_tables; ?>;
+	
 	var msg_required = "<?php echo $this->lang->line("required_field"); ?>";
         var report_categ_json = <?php echo $report_categ_json; ?>;
 			var report_sous_categ_json = <?php echo $report_sous_categ_json; ?>;
@@ -102,7 +104,7 @@ include('include/head.php');
 
                 loadRpt();
                 function loadRpt() {
-                    $.each(rpt_tables_json, function (i, item) {
+                    $.each(rpt_allow_tables, function (i, item) {
                         $('#rpt_select').append($('<option>', {
                             value: item.n,
                             text: item.table_name

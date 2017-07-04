@@ -72,3 +72,4 @@ create_new_sub_cat;Create a new group
 report_cat;Report Category
 sub_cat_name;Group name
 cat_name;Category name
+search_by;Search by report, category or group

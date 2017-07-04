@@ -10,6 +10,7 @@
     var data_categs =<?php echo $data_categs; ?>;
     var data_sous_categs =<?php echo $data_sous_categs; ?>;
     var id_sous_categ =<?php echo $id_sous_categ; ?>;
+	var menu_report = <?php echo $menu_report; ?>;
       
 </script>
 
@@ -62,7 +63,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        
+
         $.each(projectionsFull, function (id, val) {
             var option = '<option value="' + val.old_report_name + '">' + val.new_report_name + '</option>';
             $("#main_select").append(option);
@@ -71,7 +72,7 @@
             var li = $("<li class='report'>"
                     + "<a href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='Category: "+ val.nom_report_categ +" <br> Report: "+ val.new_report_name +"'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
                     + report + '</a>'
-                    + '<span class="categRept"> "'+ val.nom_report_categ +'" </span> '
+                    + '<span class="categRept"> "'+ val.nom_report_categ +'" </span> <span class="groupRept"> "'+ val.nom_report_sous_categ +'" </span>'
                     + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
             + '</li>');
             if (val.old_report_name == idPrj) {

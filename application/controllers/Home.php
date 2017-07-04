@@ -295,6 +295,7 @@ class Home extends Home_Controller {
     public function create_form() {
 
         $this->data['rpt_tables_json'] = json_encode($this->report->searchReporttables());
+		  $this->data['rpt_allow_tables'] = json_encode($this->report->searchAllowReport());
         //var_dump($this->report->searchReporttables());die;
         $this->load->view("createReport", $this->data);
     }
