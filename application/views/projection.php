@@ -7,8 +7,7 @@ include('include/dataTables.php');
 <script type="text/javascript">
     var dataTable = <?php echo $dataTable; ?>;
     var lastDate = <?php echo (string)$lastDate; ?>;
-    var dataNameColonne = <?php echo $dataNameColonne; ?>;
-	
+    var dataNameColonne = <?php echo $dataNameColonne; ?>;	
 </script>
 <body>
 

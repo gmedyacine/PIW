@@ -10,8 +10,9 @@
     var data_categs =<?php echo $data_categs; ?>;
     var data_sous_categs =<?php echo $data_sous_categs; ?>;
     var id_sous_categ =<?php echo $id_sous_categ; ?>;
-	var menu_report = <?php echo $menu_report; ?>;
-      
+    var menu_report = <?php echo $menu_report; ?>;
+    //   var idCatRept = <?php //echo intval($idCatRept); ?>;
+        
 </script>
 
 <div class="col-md-3">    <!-- Colonne du Menu -->
@@ -63,6 +64,33 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+       ///////////******************les dossiers des rapports au menu gauche ***********************////////////
+        $.each(menu_report, function (i, menu) {
+        var ul_sm = $("<ul>");
+        $.each(menu.group_menu, function (i, s_mn) {
+            var url_s = base_url + "index.php/home/report/" + menu.id_menu + "/" + s_mn.id_report_sous_categ;
+        var url_s = base_url + "index.php/home/report/" + menu.id_menu + "/" + s_mn.id_report_sous_categ;    
+        ul_sm.append(
+                    $("<li>").attr("id", s_mn.id_report_sous_categ).append($("<a>").attr("href", url_s).html('<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;'+s_mn["nom_report_sous_categ"])));
+        });
+        var url = base_url + "index.php/home/report/" + menu.id_menu;
+        var elem = $("<li>").attr("id", menu.id_menu).append($("<a>").attr("href", url).html('<div><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;'+menu.report_menu+"</div>").append(ul_sm));
+        $("#reports").append(elem);
+    });
+    $.each($("#reports li"), function (id, val) {
+        var idElem = $(val).attr("id");
+        if (idElem == 1) {
+            $("#reports").addClass("active");
+            $.each($("#reports").find("li"), function (i, ele) {
+                if ($(ele).attr("id") == 1) {
+                    $(ele).find("ul").addClass("active");
+                    $(ele).find("div").addClass("active"); 
+                }
+            });
+           // $(val).addClass("active");
+        }
+    });
+///////////****************** Fin les dossiers des rapports au menu gauche ***********************/////////////
 
         $.each(projectionsFull, function (id, val) {
             var option = '<option value="' + val.old_report_name + '">' + val.new_report_name + '</option>';
