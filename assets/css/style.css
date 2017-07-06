@@ -288,7 +288,7 @@ button.dt-button, div.dt-button, a.dt-button{
 }
 
 li.report{
-    -webkit-padding-start: 15px;
+    -webkit-padding-start: 15px;    
 }
 
 .easyPaginateNav a {
@@ -393,13 +393,8 @@ p {
     background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
 }
 
-.categRept{
-overflow: hidden; 
-color:transparent; 
-display: none;
-}
 
-.groupRept {
+.hidden_cl {
 overflow: hidden; 
 color:transparent; 
 display: none;

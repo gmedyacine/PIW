@@ -183,7 +183,7 @@ Class Report extends CI_Model {
         foreach ($menu as $report) {
             $ret[] = array("id_menu" => $report["id_report_categ"],
                 "report_menu" => $report["nom_report_categ"],
-                "report" => $this->getCreatedReptFullByCat($report["id_report_categ"]));
+                "sous_menu" => $this->getCreatedReptFullByCat($report["id_report_categ"]));
         }
         return $ret;
     }
