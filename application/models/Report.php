@@ -11,10 +11,22 @@ Class Report extends CI_Model {
         $ret = $query->result_array();
         return $ret;
     }
-function getAllReportSubCateg() {
+    function getAllReportSubCateg() {
         $query = $this->db->select('*')
                 ->from("ipw_report_sous_categ")
 		->join("ipw_report_categ", 'ipw_report_categ.id_report_categ = report_categ')
+                //->join("piw_users", 'piw_users.id = added_by')
+                ->get(); //select * from ipw_report_categ‏
+
+        $ret = $query->result_array();
+        return $ret;
+    }
+	
+	function getAllReportSubCategById($id) {
+        $query = $this->db->select('*')
+                ->from("ipw_report_sous_categ")
+				->where('report_categ',$id)
+		        ->join("ipw_report_categ", 'ipw_report_categ.id_report_categ = report_categ')
                 //->join("piw_users", 'piw_users.id = added_by')
                 ->get(); //select * from ipw_report_categ‏
 
@@ -39,6 +51,7 @@ function getAllReportSubCateg() {
         $query = $this->db->select('*')
                 ->from("ipw_create_report")
                 ->join("ipw_report_categ", 'ipw_report_categ.id_report_categ = report_categ')
+				->join("ipw_report_sous_categ", 'ipw_report_sous_categ.id_report_sous_categ = report_sous_categ')
                 ->get(); //select * from ipw_report_categ‏
 
         $ret = $query->result_array();
@@ -131,6 +144,14 @@ function getAllReportSubCateg() {
         return $ret;
         //return $query->num_rows();
     }
+	
+	function searchAllowReport() {
+        $query = $this->db->query("SELECT id as n,report as table_name FROM ipw_reports_show WHERE id NOT IN
+                    (SELECT id_report FROM ipw_delete_report UNION SELECT old_report_name FROM ipw_create_report)");
+        $ret = $query->result_array();
+        return $ret;
+        //return $query->num_rows();
+    }
     
     function deleteCreatedReport($id) {
         $this->db->where('old_report_name', $id);
@@ -140,6 +161,16 @@ function getAllReportSubCateg() {
         if ($this->db->insert('ipw_delete_report', $data)) {
             return true;
         }
+    }
+	
+	function fetch_menu_report(){
+       $menu= $this->getAllReportCateg();
+       foreach ($menu as $report){
+           $ret[]=array("id_menu"=>$report["id_report_categ"],
+               "report_menu"=>$report["nom_report_categ"],
+               "group_menu"=> $this->getAllReportSubCategById($report["id_report_categ"]));
+       }
+       return $ret; 
     }
 }
 

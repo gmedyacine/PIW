@@ -43,6 +43,14 @@ class Home extends Home_Controller {
         $this->data['lastDate'] = json_encode($lastDate);
         $this->load->view("projection", $this->data);
     }
+    
+    public function report($id_categ_report, $id_group_report = 0) {
+        $data = $this->data;
+        $data["idCatRept"] = json_encode($id_categ_report);
+        $data["idGrpRept"] = json_encode($id_group_report);
+
+        $this->load->view("projection", $data);
+    }
 
     public function excuteFiltre() {
         $date_debut = $this->input->post('date_debut');
@@ -232,16 +240,14 @@ class Home extends Home_Controller {
                     $uploadData[$i]['lib_categ_id'] = $this->input->post("libCat");
                     $uploadData[$i]['lib_sous_categ_id'] = $this->input->post("libSousCat");
                     $uploadData[$i]['vega'] = $this->input->post('vega');
-					$msg_upload = 'file/s uploaded successfuly';
-                } else {
-				    echo $this->upload->display_errors();					
-				}
+					
+                }
             }
             if (!empty($uploadData)) {
                 //Insert file information into the database
 
                 $this->files->add_file($uploadData);
-				$categ = $this->input->post("libCat");
+		$categ = $this->input->post("libCat");
                 $sous_categ = $this->input->post("libSousCat");
                 redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
             }
@@ -295,6 +301,7 @@ class Home extends Home_Controller {
     public function create_form() {
 
         $this->data['rpt_tables_json'] = json_encode($this->report->searchReporttables());
+		  $this->data['rpt_allow_tables'] = json_encode($this->report->searchAllowReport());
         //var_dump($this->report->searchReporttables());die;
         $this->load->view("createReport", $this->data);
     }

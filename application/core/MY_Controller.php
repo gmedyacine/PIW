@@ -27,13 +27,14 @@ class Home_Controller extends MY_Controller {
         $this->data['id_param'] = 0;
         $this->data['role'] = $dataLogin["role"];
         $this->report->manager_report();
-         $this->data["projections"] = json_encode($this->report->getCreatedRept());
+        $this->data["projections"] = json_encode($this->report->getCreatedRept());
         $this->data["projectionsFull"] = json_encode($this->report->getCreatedReptFull());
         $this->data["menu"] = json_encode($this->biblio->fetch_menu());
         $this->data['data_categs'] = json_encode($this->biblio->fetch_categ());
         $this->data['data_sous_categs'] = json_encode($this->biblio->fetch_sous_categ());
         $this->data['report_categ_json'] = json_encode($this->report->getAllReportCateg());
         $this->data['report_sous_categ_json'] = json_encode($this->report->getAllReportSubCateg());
+	$this->data["menu_report"] = json_encode($this->report->fetch_menu_report());
         
     }
 

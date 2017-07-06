@@ -384,7 +384,13 @@ p {
     background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
 }
 
-.categRept {
+.categRept{
+overflow: hidden; 
+color:transparent; 
+display: none;
+}
+
+.groupRept {
 overflow: hidden; 
 color:transparent; 
 display: none;
