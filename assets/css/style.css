@@ -277,9 +277,18 @@ button.dt-button, div.dt-button, a.dt-button{
     margin-top: 10px !important;
 }
 
-#menu_gauche_ul{
+#menu_gauche_ul {
     -webkit-padding-start: 15px;
     -webkit-padding-end: 7px;
+}
+
+#reports {
+    -webkit-padding-start: 15px;
+
+}
+
+li.report{
+    -webkit-padding-start: 15px;
 }
 
 .easyPaginateNav a {

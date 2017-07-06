@@ -70,31 +70,33 @@
             $("#main_select").append(option);
             });
         ///////////******************les dossiers des rapports au menu gauche ***********************////////////
+        
         $.each(menu_report, function (i, menu) {
             var ul_sm = $("<ul>");
-            $.each(projectionsFull, function (id, val) {
+            var elem = $("<li>").attr("id", menu.id_menu).append($("<a>").html('<div><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;' + menu.report_menu + "</div>").append(ul_sm));
+            $("#reports").append(elem);
+            
+            $.each(menu.report, function (id, val) {
             var report = val.new_report_name;
-            if (val.new_report_name.length > 19)
-                report = val.new_report_name.substring(0, 19) + '...';
+            if (val.new_report_name.length > 11)
+                report = val.new_report_name.substring(0, 11) + '...';
             var li = $("<li class='report'>"
-                    + "<a href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='Group: " + val.nom_report_sous_categ + " <br> Report: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
+                    + "<a href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='Category: " + val.nom_report_categ + " <br> Group: " + val.nom_report_sous_categ + " <br> Report: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
                     + report + '</a>'
                     + '<span class="categRept"> "' + val.nom_report_categ + '" </span> <span class="groupRept"> "' + val.nom_report_sous_categ + '" </span>'
                     + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
             + '</li>');
-            
            
             if (val.old_report_name == idPrj && val.report_categ == menu.id_menu ) {
                 $("#menu_gauche_ul").addClass("active");
                  ul_sm.append(li);
-                ul_sm.addClass("active");
+                li.addClass("active");
                 
             }
-            //var reports = $("#reports").append(li);
-            //$("#menu_gauche_ul").append(reports);
+            var reports = $("#reports").append(li);
+            $("#menu_gauche_ul").append(reports);
         });
-            var elem = $("<li>").attr("id", menu.id_menu).append($("<a>").html('<div><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;' + menu.report_menu + "</div>").append(ul_sm));
-            $("#reports").append(elem).addClass("active");;
+           
         });
         
 ///////////****************** Fin les dossiers des rapports au menu gauche ***********************/////////////
