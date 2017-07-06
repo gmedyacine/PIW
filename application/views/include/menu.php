@@ -96,6 +96,7 @@
             var reports = $("#reports").append(li);
             $("#menu_gauche_ul").append(reports);
         });
+        
            
         });
         
