@@ -25,8 +25,8 @@ Class Report extends CI_Model {
 	function getAllReportSubCategById($id) {
         $query = $this->db->select('*')
                 ->from("ipw_report_sous_categ")
-				->where('report_categ',$id)
-		        ->join("ipw_report_categ", 'ipw_report_categ.id_report_categ = report_categ')
+		->where('report_categ',$id)
+		->join("ipw_report_categ", 'ipw_report_categ.id_report_categ = report_categ')
                 //->join("piw_users", 'piw_users.id = added_by')
                 ->get(); //select * from ipw_report_categ‏
 
@@ -51,7 +51,19 @@ Class Report extends CI_Model {
         $query = $this->db->select('*')
                 ->from("ipw_create_report")
                 ->join("ipw_report_categ", 'ipw_report_categ.id_report_categ = report_categ')
-				->join("ipw_report_sous_categ", 'ipw_report_sous_categ.id_report_sous_categ = report_sous_categ')
+	        ->join("ipw_report_sous_categ", 'ipw_report_sous_categ.id_report_sous_categ = report_sous_categ')
+                ->get(); //select * from ipw_report_categ‏
+
+        $ret = $query->result_array();
+        return $ret; // return all fields of table : ipw_create_report
+    }
+    
+    function getCreatedReptFullByCat($id) {
+        $query = $this->db->select('*')
+                ->from("ipw_create_report")
+                ->where('ipw_create_report.report_categ',$id)
+                ->join("ipw_report_categ", 'ipw_report_categ.id_report_categ = report_categ')
+	        ->join("ipw_report_sous_categ", 'ipw_report_sous_categ.id_report_sous_categ = report_sous_categ')
                 ->get(); //select * from ipw_report_categ‏
 
         $ret = $query->result_array();
@@ -168,7 +180,7 @@ Class Report extends CI_Model {
        foreach ($menu as $report){
            $ret[]=array("id_menu"=>$report["id_report_categ"],
                "report_menu"=>$report["nom_report_categ"],
-               "group_menu"=> $this->getAllReportSubCategById($report["id_report_categ"]));
+               "report"=> $this->getCreatedReptFullByCat($report["id_report_categ"]));
        }
        return $ret; 
     }

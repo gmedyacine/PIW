@@ -51,6 +51,7 @@ class Home extends Home_Controller {
 
         $this->load->view("projection", $data);
     }
+     
 
     public function excuteFiltre() {
         $date_debut = $this->input->post('date_debut');
