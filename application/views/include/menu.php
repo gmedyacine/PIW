@@ -90,13 +90,13 @@
 
                 if (val.old_report_name == idPrj && val.report_categ == menu.id_menu) {
                     $("#menu_gauche_ul").addClass("active");
-
+                      ul_sm.append(li);
                     $.each($("#reports").find("li"), function (i, ele) {
                         if ($(ele).attr("id_cat") == menu.id_menu) {
                             $(ele).removeClass("hidden_cl");
                         }
                     });
-                    ul_sm.append(li);
+                   
                     li.addClass("active");
 
 
@@ -116,6 +116,7 @@
                     $.each($("#reports").find("li"), function (i, ele) {
                         if ($(ele).attr("id_cat") == id_categ_rept) {
                             $(ele).removeClass("hidden_cl");
+                            
                         }
                     });
                     //$(val).addClass("active");
