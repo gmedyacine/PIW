@@ -11,7 +11,7 @@
     var data_sous_categs =<?php echo $data_sous_categs; ?>;
     var id_sous_categ =<?php echo $id_sous_categ; ?>;
     var menu_report = <?php echo $menu_report; ?>;
-    //   var idCatRept = <?php //echo intval($idCatRept);            ?>;
+    //   var idCatRept = <?php //echo intval($idCatRept);           ?>;
 
 </script>
 
@@ -26,7 +26,6 @@
 
                     <input  type="text" name="recherche" id="recherche" data-filter-list="#reports" class="form-control glyphicon" style="color: black; font-family: arial; font-size:70%;" placeholder="<?php echo $this->lang->line('search_by'); ?>" />
                     <div id="reports"  class="scroll_ul">
-                        
                     </div>
 
                 </ul>
@@ -65,31 +64,39 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-
+        
         $.each(projectionsFull, function (id, val) {
             var option = '<option value="' + val.old_report_name + '">' + val.new_report_name + '</option>';
             $("#main_select").append(option);
-        });
+            });
         ///////////******************les dossiers des rapports au menu gauche ***********************////////////
         $.each(menu_report, function (i, menu) {
             var ul_sm = $("<ul>");
-            $.each(menu.report, function (i, val) { //pour chaque sous menu
-             var li = $("<li class='report'>"
-                        + "<a href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='Group: " + val.nom_report_sous_categ + " <br> Report: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
-                        + report + '</a>'
-                        + '<span class="categRept"> "' + val.nom_report_categ + '" </span> <span class="groupRept"> "' + val.nom_report_sous_categ + '" </span>'
-                        + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
-                + '</li>');  
-            ul_sm.append(li);
+            $.each(projectionsFull, function (id, val) {
+            var report = val.new_report_name;
+            if (val.new_report_name.length > 19)
+                report = val.new_report_name.substring(0, 19) + '...';
+            var li = $("<li class='report'>"
+                    + "<a href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='Group: " + val.nom_report_sous_categ + " <br> Report: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
+                    + report + '</a>'
+                    + '<span class="categRept"> "' + val.nom_report_categ + '" </span> <span class="groupRept"> "' + val.nom_report_sous_categ + '" </span>'
+                    + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
+            + '</li>');
+            
+           
+            if (val.old_report_name == idPrj && val.report_categ == menu.id_menu ) {
+                $("#menu_gauche_ul").addClass("active");
+                 ul_sm.append(li);
+                ul_sm.addClass("active");
+                
+            }
+            //var reports = $("#reports").append(li);
+            //$("#menu_gauche_ul").append(reports);
         });
-        var url = base_url + "index.php/report/" + menu.id_menu;
+            var elem = $("<li>").attr("id", menu.id_menu).append($("<a>").html('<div><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;' + menu.report_menu + "</div>").append(ul_sm));
+            $("#reports").append(elem).addClass("active");;
+        });
         
-        var elem = $("<li>").attr("id", menu.id_menu).append($("<a>").attr("href", url).html('<div><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;' + menu.report_menu + "</div>").append(ul_sm));
-            $("#reports").append(elem);
-
-        });
-   
-
 ///////////****************** Fin les dossiers des rapports au menu gauche ***********************/////////////
 
         //add "Create your report" at the end of list projections
