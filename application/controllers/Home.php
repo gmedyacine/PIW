@@ -43,7 +43,7 @@ class Home extends Home_Controller {
         $this->data['lastDate'] = json_encode($lastDate);
         $this->load->view("projection", $this->data);
     }
-    
+
     public function report($id_categ_report, $id_group_report = 0) {
         $data = $this->data;
         $data["idCatRept"] = json_encode($id_categ_report);
@@ -51,7 +51,6 @@ class Home extends Home_Controller {
 
         $this->load->view("projection", $data);
     }
-     
 
     public function excuteFiltre() {
         $date_debut = $this->input->post('date_debut');
@@ -221,7 +220,7 @@ class Home extends Home_Controller {
         $config['allowed_types'] = 'txt|docx|pdf|doc|xls|xlsx';
         $config['max_size'] = '';
         $this->load->library('upload', $config);
-       
+
         if ($this->input->post('fileSubmit') && !empty($_FILES['newFiles']['name'])) {
             $filesCount = count($_FILES['newFiles']['name']);
             for ($i = 0; $i < $filesCount; $i++) {
@@ -241,14 +240,13 @@ class Home extends Home_Controller {
                     $uploadData[$i]['lib_categ_id'] = $this->input->post("libCat");
                     $uploadData[$i]['lib_sous_categ_id'] = $this->input->post("libSousCat");
                     $uploadData[$i]['vega'] = $this->input->post('vega');
-					
                 }
             }
             if (!empty($uploadData)) {
                 //Insert file information into the database
 
                 $this->files->add_file($uploadData);
-		$categ = $this->input->post("libCat");
+                $categ = $this->input->post("libCat");
                 $sous_categ = $this->input->post("libSousCat");
                 redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
             }
@@ -302,7 +300,7 @@ class Home extends Home_Controller {
     public function create_form() {
 
         $this->data['rpt_tables_json'] = json_encode($this->report->searchReporttables());
-		  $this->data['rpt_allow_tables'] = json_encode($this->report->searchAllowReport());
+        $this->data['rpt_allow_tables'] = json_encode($this->report->searchAllowReport());
         //var_dump($this->report->searchReporttables());die;
         $this->load->view("createReport", $this->data);
     }
@@ -324,14 +322,14 @@ class Home extends Home_Controller {
 
     public function create_report() {
         $report_categ = $this->input->post('report_categ');
-		$report_sous_categ = $this->input->post('report_sous_categ');
+        $report_sous_categ = $this->input->post('report_sous_categ');
         $new_name = $this->input->post('new_name');
         $old_name = $this->input->post('old_name');
-		
-		if ($id_sous_categ == null || $id_sous_categ == '' ) {
+
+        if ($id_sous_categ == null || $id_sous_categ == '') {
             $id_sous_categ = 0;
-			}
-		
+        }
+
         $data = array('renamed_by' => $this->data['id_user_connected'], 'new_report_name' => $new_name, 'old_report_name' => $old_name, 'report_categ' => $report_categ, 'report_sous_categ' => $report_sous_categ);
 
         if ($this->report->createReport($data)) {
@@ -349,7 +347,6 @@ class Home extends Home_Controller {
     public function delete_report_menu($id) {
         $this->report->deleteCreatedReport($id);
         $this->delete_report($id);
-
     }
 
     public function add_report_categ() {

@@ -11,7 +11,9 @@
     var data_sous_categs =<?php echo $data_sous_categs; ?>;
     var id_sous_categ =<?php echo $id_sous_categ; ?>;
     var menu_report = <?php echo $menu_report; ?>;
-    //   var idCatRept = <?php //echo intval($idCatRept);           ?>;
+    var label_cat = <?php echo $this->lang->line("categorie"); ?>;
+    var label_group = <?php echo $this->lang->line("sub_cat_rept"); ?>;
+    var label_report = <?php echo $this->lang->line("report"); ?>;
 
 </script>
 
@@ -81,7 +83,7 @@
             if (val.new_report_name.length > 11)
                 report = val.new_report_name.substring(0, 11) + '...';
             var li = $("<li class='report'>"
-                    + "<a href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='Category: " + val.nom_report_categ + " <br> Group: " + val.nom_report_sous_categ + " <br> Report: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
+                    + "<a href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='<?php echo $this->lang->line("categorie"); ?>: " + val.nom_report_categ + " <br> <?php echo $this->lang->line("sub_cat_rept"); ?>: " + val.nom_report_sous_categ + " <br> <?php echo $this->lang->line("report"); ?>: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
                     + report + '</a>'
                     + '<span class="categRept"> "' + val.nom_report_categ + '" </span> <span class="groupRept"> "' + val.nom_report_sous_categ + '" </span>'
                     + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
@@ -96,7 +98,6 @@
             var reports = $("#reports").append(li);
             $("#menu_gauche_ul").append(reports);
         });
-        
            
         });
         
