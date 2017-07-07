@@ -376,4 +376,9 @@ class Home extends Home_Controller {
         redirect("create-report");
     }
 
+    // executer cette fonction pour supprimer les colonnes report_categ et report_sous_categ des tables report
+  public function drop_column() {
+    $this->report->dropQuery()  ;
+  }  
+
 }

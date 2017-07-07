@@ -89,7 +89,7 @@
                         + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-trash" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
                 + '</li>');
                 li.addClass("hidden_cl");
-                
+
                 if (val.old_report_name == idPrj && val.report_categ == menu.id_menu) {
                     $("#menu_gauche_ul").addClass("active");
                     ul_sm.append(li);
@@ -156,11 +156,10 @@
         var id_cat;
         $.each($("#reports").find("li"), function (id, val) {
             // trouver le rapport active pour récupérer son id_categ
-            if ($(val).attr("id_rept") == idPrj ) {
-               $("#menu_gauche_ul").addClass("active");
+            if ($(val).attr("id_rept") == idPrj) {
+                $("#menu_gauche_ul").addClass("active");
                 $(val).addClass("active");
                 id_cat = $(val).attr("id_cat");
-                
             }
             // enlever le class hidden de tous les rapports de la categ 
             $.each($(val), function (id, report) {
