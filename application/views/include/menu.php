@@ -68,14 +68,16 @@
             var option = '<option value="' + val.old_report_name + '">' + val.new_report_name + '</option>';
             $("#main_select").append(option);
         });
-        ///////////******************les dossiers des rapports au menu gauche ***********************////////////
 
+        ////////// Menu gauche des rapports ////////////
+
+        // construction des dossier categories
         $.each(menu_report, function (i, menu) {
             var ul_sm = $("<ul>");
             var elem = $("<li>").attr("id", menu.id_menu).addClass("categ_rept").append($("<a>").html('<div><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;' + menu.report_menu + "</div>").append(ul_sm));
             $("#reports").append(elem);
 
-
+            //construction des rapports
             $.each(menu.sous_menu, function (id, val) {
                 var report = val.new_report_name;
                 if (val.new_report_name.length > 11)
@@ -87,38 +89,32 @@
                         + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-trash" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
                 + '</li>');
                 li.addClass("hidden_cl");
-
+                
                 if (val.old_report_name == idPrj && val.report_categ == menu.id_menu) {
                     $("#menu_gauche_ul").addClass("active");
                     ul_sm.append(li);
-                    $.each($("#reports").find("li"), function (i, ele) {
-                        if ($(ele).attr("id_cat") == menu.id_menu) {
-                            $(ele).removeClass("hidden_cl");
-                        }
-                    });
-
                     li.addClass("active");
-
-
                 }
                 var reports = $("#reports").append(li);
                 $("#menu_gauche_ul").append(reports);
             });
-        });
+        });  // Fin construction des dossier categories 
 
+
+////////// hide/show reports ////////////
 
         $(document).on("click", '.categ_rept', function () {
             var id_categ_rept = $(this).attr("id");
             $.each($("#reports").find("li"), function (id, val) {
                 if ($(val).attr("id_cat") == id_categ_rept && $(val).hasClass("hidden_cl")) {
                     $(val).removeClass("hidden_cl");
-                } else if ($(val).attr("id_cat") == id_categ_rept && !$(val).hasClass("hidden_cl")) {
+                } else if (($(val).attr("id_cat") == id_categ_rept && !$(val).hasClass("hidden_cl")) || ($(val).attr("id_cat") == id_categ_rept && $(val).hasClass("active"))) {
                     $(val).addClass("hidden_cl");
                 }
             });
         });
 
-///////////****************** Fin les dossiers des rapports au menu gauche ***********************/////////////
+////////// hide/show reports ////////////
 
         //add "Create your report" at the end of list projections
         var li_rename = $("<li><a href='" + base_url + "index.php/rename-report' id='renameRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("rename_report"); ?></a></li>");
@@ -126,7 +122,9 @@
 <?php if ($role != 2) { ?>
             $("#menu_gauche_ul").append(li_rename).append(li_create);
 <?php } ?>
-    });</script>
+    });
+////////// Fin Menu gauche des rapports ////////////        
+</script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -150,6 +148,25 @@
                 });
             }
         });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var id_cat;
+        $.each($("#reports > li"), function (id, val) {
+            // trouver le rapport active pour récupérer son id_categ
+            if ($(val).hasClass("active")) {
+                id_cat = $(val).attr("id_cat");
+            }
+            // enlever le class hidden de tous les rapports de la categ 
+            $.each($(val), function (id, report) {
+                if ($(report).attr("id_cat") == id_cat) {
+                    $(report).removeClass("hidden_cl");
+                }
+            });
+        });
+
     });
 </script>
 
