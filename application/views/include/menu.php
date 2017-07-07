@@ -161,13 +161,14 @@
                 $(val).addClass("active");
                 id_cat = $(val).attr("id_cat");
             }
-            // enlever le class hidden de tous les rapports de la categ 
-            $.each($(val), function (id, report) {
+        });
+        
+         // enlever le class hidden de tous les rapports de la categ 
+            $.each($("#reports").find("li"), function (id, report) {
                 if ($(report).attr("id_cat") == id_cat) {
                     $(report).removeClass("hidden_cl");
                 }
             });
-        });
 
     });
 </script>
