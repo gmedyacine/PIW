@@ -84,19 +84,19 @@
                         + "<a href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='<?php echo $this->lang->line("categorie"); ?>: " + val.nom_report_categ + " <br> <?php echo $this->lang->line("sub_cat_rept"); ?>: " + val.nom_report_sous_categ + " <br> <?php echo $this->lang->line("report"); ?>: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
                         + report + '</a>'
                         + '<span class="hidden_cl"> "' + val.nom_report_categ + '" </span> <span class="hidden_cl"> "' + val.nom_report_sous_categ + '" </span>'
-                        + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
+                        + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-trash" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
                 + '</li>');
                 li.addClass("hidden_cl");
 
                 if (val.old_report_name == idPrj && val.report_categ == menu.id_menu) {
                     $("#menu_gauche_ul").addClass("active");
-                      ul_sm.append(li);
+                    ul_sm.append(li);
                     $.each($("#reports").find("li"), function (i, ele) {
                         if ($(ele).attr("id_cat") == menu.id_menu) {
                             $(ele).removeClass("hidden_cl");
                         }
                     });
-                   
+
                     li.addClass("active");
 
 
@@ -109,17 +109,11 @@
 
         $(document).on("click", '.categ_rept', function () {
             var id_categ_rept = $(this).attr("id");
-            //alert (id_categ_rept);
-            $.each(projectionsFull, function (id, val) {
-                if (val.id_report_categ == id_categ_rept) {
-                    // alert (id_categ_rept);
-                    $.each($("#reports").find("li"), function (i, ele) {
-                        if ($(ele).attr("id_cat") == id_categ_rept) {
-                            $(ele).removeClass("hidden_cl");
-                            
-                        }
-                    });
-                    //$(val).addClass("active");
+            $.each($("#reports").find("li"), function (id, val) {
+                if ($(val).attr("id_cat") == id_categ_rept && $(val).hasClass("hidden_cl")) {
+                    $(val).removeClass("hidden_cl");
+                } else if ($(val).attr("id_cat") == id_categ_rept && !$(val).hasClass("hidden_cl")) {
+                    $(val).addClass("hidden_cl");
                 }
             });
         });
