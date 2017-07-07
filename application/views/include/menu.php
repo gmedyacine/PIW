@@ -82,7 +82,7 @@
                 var report = val.new_report_name;
                 if (val.new_report_name.length > 11)
                     report = val.new_report_name.substring(0, 11) + '...';
-                var li = $("<li class='report' id_cat='" + val.id_report_categ + "'>"
+                var li = $("<li id_rept='" + val.old_report_name + "' class='report' id_cat='" + val.id_report_categ + "'>"
                         + "<a href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='<?php echo $this->lang->line("categorie"); ?>: " + val.nom_report_categ + " <br> <?php echo $this->lang->line("sub_cat_rept"); ?>: " + val.nom_report_sous_categ + " <br> <?php echo $this->lang->line("report"); ?>: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
                         + report + '</a>'
                         + '<span class="hidden_cl"> "' + val.nom_report_categ + '" </span> <span class="hidden_cl"> "' + val.nom_report_sous_categ + '" </span>'
@@ -154,10 +154,13 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var id_cat;
-        $.each($("#reports > li"), function (id, val) {
+        $.each($("#reports").find("li"), function (id, val) {
             // trouver le rapport active pour récupérer son id_categ
-            if ($(val).hasClass("active")) {
+            if ($(val).attr("id_rept") == idPrj ) {
+               $("#menu_gauche_ul").addClass("active");
+                $(val).addClass("active");
                 id_cat = $(val).attr("id_cat");
+                
             }
             // enlever le class hidden de tous les rapports de la categ 
             $.each($(val), function (id, report) {
