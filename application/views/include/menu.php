@@ -90,11 +90,7 @@
                 + '</li>');
                 li.addClass("hidden_cl");
 
-                if (val.old_report_name == idPrj && val.report_categ == menu.id_menu) {
-                    $("#menu_gauche_ul").addClass("active");
-                    ul_sm.append(li);
-                    li.addClass("active");
-                }
+                
                 var reports = $("#reports").append(li);
                 $("#menu_gauche_ul").append(reports);
             });
