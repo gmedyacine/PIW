@@ -282,13 +282,8 @@ button.dt-button, div.dt-button, a.dt-button{
     -webkit-padding-end: 7px;
 }
 
-#reports {
-    -webkit-padding-start: 15px;
-
-}
-
 li.report{
-    -webkit-padding-start: 15px;    
+    -webkit-padding-start: 7px;    
 }
 
 .easyPaginateNav a {

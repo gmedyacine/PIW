@@ -10,7 +10,6 @@
     var data_categs =<?php echo $data_categs; ?>;
     var data_sous_categs =<?php echo $data_sous_categs; ?>;
     var id_sous_categ =<?php echo $id_sous_categ; ?>;
-    var menu_report = <?php echo $menu_report; ?>;
 
 </script>
 
@@ -71,46 +70,27 @@
 
         ////////// Menu gauche des rapports ////////////
 
-        // construction des dossier categories
-        $.each(menu_report, function (i, menu) {
-            var ul_sm = $("<ul>");
-            var elem = $("<li>").attr("id", menu.id_menu).addClass("categ_rept").append($("<a>").html('<div><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;' + menu.report_menu + "</div>").append(ul_sm));
-            $("#reports").append(elem);
 
-            //construction des rapports
-            $.each(menu.sous_menu, function (id, val) {
-                var report = val.new_report_name;
-                if (val.new_report_name.length > 11)
-                    report = val.new_report_name.substring(0, 11) + '...';
-                var li = $("<li id_rept='" + val.old_report_name + "' class='report' id_cat='" + val.id_report_categ + "'>"
-                        + "<a href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='<?php echo $this->lang->line("categorie"); ?>: " + val.nom_report_categ + " <br> <?php echo $this->lang->line("sub_cat_rept"); ?>: " + val.nom_report_sous_categ + " <br> <?php echo $this->lang->line("report"); ?>: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
-                        + report + '</a>'
-                        + '<span class="hidden_cl"> "' + val.nom_report_categ + '" </span> <span class="hidden_cl"> "' + val.nom_report_sous_categ + '" </span>'
-                        + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-trash" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
-                + '</li>');
-                li.addClass("hidden_cl");
+        //construction des rapports
+        $.each(projectionsFull, function (id, val) {
+            var report = val.new_report_name;
+            if (val.new_report_name.length > 18)
+                report = val.new_report_name.substring(0, 15) + '...';
+            var li = $("<li id_rept='" + val.old_report_name + "' class='report' id_cat='" + val.id_report_categ + "'>"
+                    + "<a href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='<?php echo $this->lang->line("categorie"); ?>: " + val.nom_report_categ + " <br> <?php echo $this->lang->line("sub_cat_rept"); ?>: " + val.nom_report_sous_categ + " <br> <?php echo $this->lang->line("report"); ?>: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
+                    + report + '</a>'
+                    + '<span class="hidden_cl"> "' + val.nom_report_categ + '" </span> <span class="hidden_cl"> "' + val.nom_report_sous_categ + '" </span>'
+                    + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-trash" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
+            + '</li>');
 
-                
-                var reports = $("#reports").append(li);
-                $("#menu_gauche_ul").append(reports);
-            });
-        });  // Fin construction des dossier categories 
+            if (val.old_report_name == idPrj) {
+                $("#menu_gauche_ul").addClass("active");
+                li.addClass("active");
+            }
 
-
-////////// hide/show reports ////////////
-
-        $(document).on("click", '.categ_rept', function () {
-            var id_categ_rept = $(this).attr("id");
-            $.each($("#reports").find("li"), function (id, val) {
-                if ($(val).attr("id_cat") == id_categ_rept && $(val).hasClass("hidden_cl")) {
-                    $(val).removeClass("hidden_cl");
-                } else if (($(val).attr("id_cat") == id_categ_rept && !$(val).hasClass("hidden_cl")) || ($(val).attr("id_cat") == id_categ_rept && $(val).hasClass("active"))) {
-                    $(val).addClass("hidden_cl");
-                }
-            });
+            var reports = $("#reports").append(li);
+            $("#menu_gauche_ul").append(reports);
         });
-
-////////// hide/show reports ////////////
 
         //add "Create your report" at the end of list projections
         var li_rename = $("<li><a href='" + base_url + "index.php/rename-report' id='renameRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("rename_report"); ?></a></li>");
@@ -147,26 +127,6 @@
     });
 </script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        var id_cat;
-        $.each($("#reports").find("li"), function (id, val) {
-            // trouver le rapport active pour récupérer son id_categ
-            if ($(val).attr("id_rept") == idPrj) {
-                $("#menu_gauche_ul").addClass("active");
-                $(val).addClass("active");
-                id_cat = $(val).attr("id_cat");
-            }
-        });
-        
-         // enlever le class hidden de tous les rapports de la categ 
-            $.each($("#reports").find("li"), function (id, report) {
-                if ($(report).attr("id_cat") == id_cat) {
-                    $(report).removeClass("hidden_cl");
-                }
-            });
 
-    });
-</script>
 
 
