@@ -280,9 +280,13 @@ button.dt-button, div.dt-button, a.dt-button{
     margin-top: 10px !important;
 }
 
-#menu_gauche_ul{
-    -webkit-padding-start: 15px;
+#menu_gauche_ul {
+    -webkit-padding-start: 10px;
     -webkit-padding-end: 7px;
+}
+
+li.report{
+    -webkit-padding-start: 7px;    
 }
 
 .easyPaginateNav a {
@@ -387,13 +391,8 @@ p {
     background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
 }
 
-.categRept{
-overflow: hidden; 
-color:transparent; 
-display: none;
-}
 
-.groupRept {
+.hidden_cl {
 overflow: hidden; 
 color:transparent; 
 display: none;
