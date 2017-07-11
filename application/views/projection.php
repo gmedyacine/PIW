@@ -1,86 +1,115 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
-?>﻿
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery.dataTables.min.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery.table2excel.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+include('include/dataTables.php');
+?>
 
 <script type="text/javascript">
     var dataTable = <?php echo $dataTable; ?>;
-    var dataNameColonne = <?php echo $dataNameColonne; ?>;
+    var lastDate = <?php echo (string)$lastDate; ?>;
+    var dataNameColonne = <?php echo $dataNameColonne; ?>;	
 </script>
 <body>
 
-    <div class="container-fluid">
-        <?php include('include/header.php'); ?>
+<div class="container-fluid">
+    <?php include('include/header.php'); ?>
 
-        <!-- ROW END -->
-        <div class="row content">
-            <!-- Colonne du Menu -->
-            <?php include('include/menu.php'); ?>
+    <!-- ROW END -->
+    <div class="row content">
+        <!-- Colonne du Menu -->
+        <?php include('include/menu.php'); ?>
 
-            <div class="col-md-9"> <!-- Début partie du tableau -->
-                <fieldset class="group-border">
-                    <div class="row">
-                        <div id="panel-table" class="panel panel-default">
-                            <div class="panel-body">
+        <div class="col-md-9"> <!-- Début partie du tableau -->
+            <fieldset class="group-border">
+                <div class="row">
+                    <div id="panel-table" class="panel panel-default">
+                        <div class="panel-body">
 
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <p>Date de début<input type="text"  class="datepicker filtre_ligne" id="date_debut_filtre" /></p>
-                                    </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <p><?php echo $this->lang->line("date_debut"); ?><input type="text"
+                                                                                            class="datepicker filtre_ligne"
+                                                                                            id="date_debut_filtre"/></p>
+                                    <span id="msg_error"><?php echo $this->lang->line("date_not_valide"); ?></span>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <p>Date de fin<input type="text"  class="datepicker filtre_ligne" id="date_fin_filtre" /></p>
-                                    </div>
-                                </div>
-                                <a id="filtre_date" href="#" class="btn-bleu-filtre btn btn-info">Excuter le filtre </a>
                             </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <p><?php echo $this->lang->line("date_end"); ?><input type="text"
+                                                                                          class="datepicker filtre_ligne"
+                                                                                          id="date_fin_filtre"/></p>
+                                </div>
+                            </div>
+                            <a id="filtre_date" href="#"
+                               class="btn-bleu-filtre btn btn-info"><?php echo $this->lang->line("excute_filtre"); ?></a>
                         </div>
                     </div>
-                </fieldset>
-                <div class="row ">       <!-- Début titre du tableau et lien export excel-->
-                    <div id="panel-table" class="panel panel-default panel-reduit-5">
-                        <div class="panel-body">
-                            <div class="col-6 pull-left">
-                                <H2>Titre du tableau</H2>
-                            </div>
-                            <div class="col-6 pull-right">
-                                <a id="exportExcel" class="btn icon-btn btn-success" href="#">
-                                    <span class="glyphicon btn-glyphicon glyphicon-share img-circle text-info"></span>
-                                    Export Excel
-                                </a>
-                            </div>
-
-                        </div> <!-- Fin titre du tableau et lien export excel-->
-
-                        <div class="row "> <!-- Début tableau  -->
-
-                            <table id="mainTables" class="table cell-border dataTable" cellspacing="0" width="100%"> 
-                                <thead class="" > 
-
-                                </thead> 
-                                <tbody> 
-
-
-                                </tbody> 
-                            </table>
-
-
-                        </div> <!-- Fin tableau -->
-                    </div>
                 </div>
+            </fieldset>
+						
+			
+            <div class="row ">       <!-- Début titre du tableau et lien export excel-->
+                <div id="panel-table" class="panel panel-default panel-reduit-5">
+                    <div class="panel-body">
+                        <div class="col-6 pull-left ">
+                            <H2>Titre du tableau</H2>
+                        </div>
+                        <div class="col-6 pull-right dropdown">
+                            <button class="btn icon-btn btn-success dropdown-toggle" type="button" id="dropdownMenu1"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <span class="glyphicon btn-glyphicon glyphicon-share img-circle text-info"></span>
+                                <?php echo $this->lang->line("export_excel"); ?>
+                                <span class="caret"></span>
+                            </button>
 
 
-            </div> <!-- fin pagination  -->
-            <script src="<?php echo base_url(); ?>assets/js/projection.js"></script>
-        </div> <!-- Fin partie du tableau -->
-        <!-- ROW END -->
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a id="exportExcelFiltre"
+                                       href="#"><?php echo $this->lang->line("export_excute_filtre"); ?></a></li>
+                                <li><a id="exportExcelToDay"
+                                       href="#"><?php echo $this->lang->line("export_last_day"); ?></a></li>
+                                <li><a id="exportExcelAll" href="#"><?php echo $this->lang->line("export_all"); ?></a>
+                                </li>
 
-    </div>
-    <?php include('include/footer.php'); ?>
+                            </ul>
+                        </div>
+
+                    </div> <!-- Fin titre du tableau et lien export excel-->
+
+                        <table id="mainTables" class="table cell-border" cellspacing="0" width="100%"> 
+                            <thead class="" > 
+
+                        </thead>
+                            <tbody> 
+
+
+                            </tbody> 
+                    </table>
+
+                </div>
+            </div>
+
+        </div> <!-- fin pagination  -->
+		
+        <script src="<?php echo base_url(); ?>assets/js/projection.js"></script>			 
+		   
+            <script>$('.dropdown-toggle').dropdown(); 
+			</script>
+			
+ <script type="text/javascript">
+
+    $(document).ready(function () {
+	
+        window.setTimeout(function () {
+            $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                $(this).remove();
+            });
+        }, 1000);
+					
+    });
+    </script>
+     </div> <!-- Fin partie du tableau -->
+    <!-- ROW END -->
+
+</div>
+<?php include('include/footer.php'); ?>

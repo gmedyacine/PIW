@@ -1,0 +1,53 @@
+key;traduction
+main_menu;Menu principal
+default_projection;default projection
+rapport_libelle;Reports
+biblio;Bibliotheque
+logout;Deconnecter
+parametrage;Parametrage
+date_debut;date de debut
+date_end;date de fin 
+date_not_valide;Date non valide
+execute_filtre;Execute
+export_excute_filtre;Export execute filtre
+export_last_day;export dernier jour
+export_all;Export tout
+export_excel;Export vers XLS
+add;Add document
+file;Fichier
+hour;Heure
+categorie;Categorie
+title;Sous categorie
+sous_lib;Sous Bibliotheque 
+add_document;Inserer Document
+calendar;Calendrier 
+lib_dossier;Nom Dossier
+lib_insert_date;Date insertion
+add_lib;Ajouter  Bibliotheque 
+add_sub_lib;Ajouter sous-biliotheque
+name;Nom  
+description;Description
+added_by;Rajoute par
+added_at;Rajoute le
+delete;Effacer
+bibliotheque;Bibliotheque
+valider;Valider
+notification;Notification 
+username;Nom utilisatuer
+email;Email
+tel;Telephone
+admin;admin
+oper;oper
+notif_mail;Mail notification
+notif_sms;SMS notification
+gestion_utilisateurs;Gestion utilisateurs
+gestion_biblio;Gestion bibliotheques
+demande_specifique;Demande specifique
+liste_des_demandes;Lieste de demandes
+objet_de_demande;Objet de la demande
+message;Message
+envoyer;Envoyer
+msg_success;msg_sucess
+title_login;Login 
+username_connexion;Nom de l'utilisatuer 
+password_connexion;Mot de passe 

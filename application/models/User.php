@@ -3,7 +3,7 @@
 Class User extends CI_Model {
 
     function login($username, $password) {
-        $this->db->select('id, username, password');
+        $this->db->select('id, username, password,sup_user as role');
         $this->db->from('piw_users');
         $this->db->where('username', $username);
         $this->db->where('password', MD5($password));
@@ -19,25 +19,24 @@ Class User extends CI_Model {
     }
 
     function creatQuery() {
-        $sql_stat_drop = "DROP TABLE IF EXISTS piw_users;";
-        $this->db->query($sql_stat_drop);
-        $query_creat = "CREATE TABLE IF NOT EXISTS `piw_users` (
-  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
-  `username` varchar(10) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `mail` varchar(100) NOT NULL,
-  `num_tel` varchar(15) NOT NULL,
-  `notif_mail` tinyint(1) NOT NULL,
-  `notif_sms` tinyint(1) NOT NULL,
-  `sup_user` tinyint(1) NOT NULL,
+        $sql_stat_alter = "ALTER TABLE  `ipw_files` ADD  `lib_categ_id` INT NOT NULL DEFAULT  '0',
+ADD  `lib_sous_categ_id` INT NOT NULL DEFAULT  '0';";
+        $this->db->query($sql_stat_alter);
+        $query_creat = "CREATE TABLE IF NOT EXISTS `ipw_files` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `calendrier` varchar(200) NOT NULL,
+  `job` varchar(200) NOT NULL,
+  `vega` varchar(200) NOT NULL,
+  `nom_fichier` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;";
-        $this->db->query($query_creat);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;";
+        //  $this->db->query($query_creat);
 
-        $query_insert = "INSERT INTO `piw_users` (`id`, `username`, `password`, `mail`, `num_tel`, `notif_mail`, `notif_sms`, `sup_user`) VALUES
-(1, 'sup_user', '5ddd2ef311a9bd6179dac0c21502f47e', '', '0', 0, 0, 1),
-(7, 'farid', '10fadc2981c5d4e062a690518b7f14e2', 'gmedyacine@gmail.com', '0716154343', 1, 1, 0);";
-        $this->db->query($query_insert);
+        $query_insert = "INSERT INTO `ipw_files` (`id`, `calendrier`, `job`, `vega`, `nom_fichier`) VALUES
+(1, 'LUNDI_AU_SAMEDI', 'JOB_1_UNIX', 'Vega', 'cdc_site1.docx'),
+(3, 'JEUDI', 'JOB_3_WIN7', 'Vega', 'JOB_3_WIN7.doc'),
+(4, 'SAMEDI', 'JOB_4_LINUX', 'Vega', 'JOB_4_LINUX.txt');";
+        //$this->db->query($query_insert);
     }
 
     public function insertUser($uname, $mail, $tel, $notif_mail = 1, $notif_sms = 1, $sup_user = 0) {
@@ -48,7 +47,7 @@ Class User extends CI_Model {
             'num_tel' => $tel,
             'notif_mail' => !empty($notif_mail),
             'notif_sms' => !empty($notif_sms),
-            'sup_user' => !empty($sup_user));
+            'sup_user' => $sup_user);
 
         $this->db->insert('piw_users', $user_to_add);
         return true;
@@ -60,6 +59,7 @@ Class User extends CI_Model {
 
     public function getAllUsers() {
         $this->db->select('id,username,mail,num_tel,notif_mail,notif_sms,sup_user');
+        $this->db->where_not_in('id', 1);
         $this->db->from('piw_users');
         $query = $this->db->get();
         $res = $query->result();
@@ -70,6 +70,22 @@ Class User extends CI_Model {
         $this->db->where('id', $id);
         $this->db->delete('piw_users');
         return true;
+    }
+
+    public function alterTableProjection() {
+        $sql_show = "show tables where tables_in_" . $this->db->database . "  like 'ipw_rept%'";
+        $query_show = $this->db->query($sql_show);
+        $ret_show = $query_show->result_array();
+
+        foreach ($ret_show as $key => $ret) {
+            $set = array_values($ret);
+            $tableName = $set[0];
+
+            $sql_add_column_cat = "ALTER TABLE  `" . $tableName . "` ADD  `report_categ` INT DEFAULT NULL;";
+            $sql_add_column_sous_cat = "ALTER TABLE  `" . $tableName . "` ADD  `report_sous_categ` INT DEFAULT NULL;";
+            $this->db->query($sql_add_column_cat);
+            $this->db->query($sql_add_column_sous_cat);
+        }
     }
 
 }
