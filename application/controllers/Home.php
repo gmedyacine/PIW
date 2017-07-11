@@ -33,7 +33,7 @@ class Home extends Home_Controller {
     public function projection($id) {
 
         $retPrj = $this->projection->getProjection($id);
-        $dataPrj = $retPrj["data"];
+        $dataPrj = empty($retPrj["data"]) ? array(): $retPrj["data"];
         $dataColonneNames = $this->projection->getNameColonne($id);
         $this->data["dataTable"] = json_encode($dataPrj);
         $this->data["dataNameColonne"] = json_encode($dataColonneNames);

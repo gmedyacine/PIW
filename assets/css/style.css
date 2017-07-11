@@ -136,6 +136,9 @@ tr.bri{
 #nav li ul.active li.active a {
     background: rgba(209, 224, 247, 0.54);
 }
+#nav #reports .open{
+    display: block;
+}
 #menu_gauche .active
 {
     /* background: #394963; */
