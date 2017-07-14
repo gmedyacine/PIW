@@ -59,69 +59,78 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-    $.each(menu_report, function (i, menu) {
-    var ul_sm = $("<ul>");
+        $.each(menu_report, function (i, menu) {
+            var ul_sm = $("<ul id='reports-list'>");
             $.each(projectionsFull, function (index, val) {
-            var  classOpn ="";
-            if (val.id_report_categ == menu.id_menu) {
-            var report = val.new_report_name;
-            if(val.old_report_name==idPrj)    classOpn="open";
-                    if (val.new_report_name.length > 19)  report = val.new_report_name.substring(0, 19) + '...';
-                    var linkToRpt = $("<li  id='"+val.old_report_name+"' class='report "+classOpn+"'>"
-                            + "<a id='"+val.old_report_name+"' href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='Category: " + val.nom_report_categ + " <br> Report: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
+                var classOpn = "";
+                if (val.id_report_categ == menu.id_menu) {
+                    var report = val.new_report_name;
+
+                    if (val.new_report_name.length > 19)
+                        report = val.new_report_name.substring(0, 19) + '...';
+                    var linkToRpt = $("<li  id='" + val.old_report_name + "' class='report " + classOpn + "'>"
+                            + "<a id='" + val.old_report_name + "' href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='<?php echo $this->lang->line("categorie"); ?>: " + val.nom_report_categ + " <br> <?php echo $this->lang->line("sub_cat_rept"); ?>: " + val.nom_report_sous_categ + " <br> <?php echo $this->lang->line("report"); ?>: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
                             + report + '</a>'
-                            + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
+                            + '<span class="hidden_cl"> "' + val.nom_report_categ + '" </span> <span class="hidden_cl"> "' + val.nom_report_sous_categ + '" </span>'  // pour detecter la recherche par categ et par group
+                            + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-trash" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
                     + '</li>');
-                    $('#menu_gauche_ul').css('display','block !important').addClass("show").show();
-                    ul_sm.addClass("open").append(linkToRpt).show();
-              }
+                    if (val.old_report_name == idPrj) {
+                        classOpn = "open";
+                        $('#menu_gauche_ul').css('display', 'block !important').addClass("open").show();
+                        ul_sm.append(linkToRpt).show();
+                        linkToRpt.addClass("active").addClass("open");
+                    } else {
+                        $('#menu_gauche_ul').css('display', 'block !important');
+                        ul_sm.append(linkToRpt);
+                    }
+                }
             });
-            // var url = base_url + "index.php/home/report/" + menu.id_menu;
+
             var elem = $("<li>").attr("id", menu.id_menu).append(
-                $('<a>').addClass("categ_rept")
-                        .attr('href', '#')
-                        .append('<div><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;' + menu.report_menu + '</div>')
-                        .click(function(){
-                           if (!$(this).hasClass("open")) {
-            // hide any open menus and remove all other classes
+                    $('<a>').addClass("categ_rept")
+                    //.attr('href', '#')
+                    .append('<div><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;' + menu.report_menu + '</div>')
+                    .click(function () {
+                        if (!$(this).hasClass("open")) {
+                            // hide any open menus and remove all other classes
                             $(".categ_rept ul").slideUp(350);
                             $(".categ_rept").removeClass("open");
                             $(this).next("ul").show();
                             $(this).addClass("open");
-                 } else if ($(this).hasClass("open")) {
-                         $(this).removeClass("open");
-                         $(this).next("ul").slideUp(350);
+                        } else if ($(this).hasClass("open")) {
+                            $(this).removeClass("open");
+                            $(this).next("ul").slideUp(350);
                         }
-                  })
-            )
-            .append(ul_sm);
+                    })
+                    )
+                    .append(ul_sm);
             $("#reports").append(elem);
-    });
-   
-     
-            //add "Create your report" at the end of list projections
-<?php if ($role != 2) { ?>
-        var li_rename = $("<li><a href='" + base_url + "index.php/rename-report' id='renameRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("rename_report"); ?></a></li>");
-                var li_create = $("<li><a href='" + base_url + "index.php/create-report' id='createRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("create_report"); ?></a></li>");
-                $("#menu_gauche_ul").append(li_rename).append(li_create);
-<?php } ?>
-    $('[data-toggle="tooltip"]').tooltip();
-            $('#recherche').filterList();
-            $(document).on("click", '.remove-right', function () {
+        });
 
-    var id_remove = $(this).attr("data-remove");
+
+        //add "Create your report" at the end of list projections
+<?php if ($role != 2) { ?>
+            var li_rename = $("<li><a href='" + base_url + "index.php/rename-report' id='renameRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("rename_report"); ?></a></li>");
+            var li_create = $("<li><a href='" + base_url + "index.php/create-report' id='createRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("create_report"); ?></a></li>");
+            $("#menu_gauche_ul").append(li_rename).append(li_create);
+<?php } ?>
+        $('[data-toggle="tooltip"]').tooltip();
+        $('#recherche').filterList();
+        $(document).on("click", '.remove-right', function () {
+
+            var id_remove = $(this).attr("data-remove");
             if (confirm('delete report')) {
-    $.ajax({
-    url: base_url + "index.php/delete-report/" + id_remove,
-            type: "GET"
-    }).done(function (data) {
-    location.replace(base_url + "index.php/home");
+                $.ajax({
+                    url: base_url + "index.php/delete-report/" + id_remove,
+                    type: "GET"
+                }).done(function (data) {
+                    location.replace(base_url + "index.php/home");
+                });
+            }
+        });
+
     });
-     }
-      });
-     
-    });
-    
+
 </script>
 <script src="<?php echo base_url(); ?>assets/js/home.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/nav.js"></script>

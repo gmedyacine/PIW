@@ -133,15 +133,22 @@ tr.bri{
 #nav li ul.active{
     display: block;
 }
-#nav li ul.active li.active a {
+#nav #reports li .report.open.active {
+    display: block;
     background: rgba(209, 224, 247, 0.54);
 }
 #nav #reports .open{
     display: block;
+   
 }
+
+
 #menu_gauche .active
 {
     /* background: #394963; */
+}
+.report li.active{
+background: rgba(209, 224, 247, 0.54);
 }
 .tab-panel {
     background: #F5F5F5;
@@ -285,10 +292,12 @@ button.dt-button, div.dt-button, a.dt-button{
     -webkit-padding-end: 7px;
 }
 
-li.report{
-    -webkit-padding-start: 7px;    
+#reports{
+    -webkit-padding-start: 15px;    
 }
-
+#reports-list{
+    -webkit-padding-start: 20px;
+}
 .easyPaginateNav a {
     padding:5px;
     font-size: 15px;
