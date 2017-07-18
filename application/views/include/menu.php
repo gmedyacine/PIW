@@ -79,15 +79,16 @@
             if(val.old_report_name==idPrj)    classOpn="open";
                     if (val.new_report_name.length > 19)  report = val.new_report_name.substring(0, 19) + '...';
                     var linkToRpt = $("<li  id='"+val.old_report_name+"' class='report "+classOpn+"'>"
-                            + "<a id='"+val.old_report_name+"' href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='Category: " + val.nom_report_categ + " <br> Report: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
+                            + "<a id='" + val.old_report_name + "' href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' title='<?php echo $this->lang->line("categorie"); ?>: " + val.nom_report_categ + " <br> <?php echo $this->lang->line("sub_cat_rept"); ?>: " + val.nom_report_sous_categ + " <br> <?php echo $this->lang->line("report"); ?>: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
                             + report + '</a>'
+							  + '<span class="hidden_cl"> "' + val.nom_report_categ + '" </span> <span class="hidden_cl"> "' + val.nom_report_sous_categ + '" </span>'  // pour detecter la recherche par categ et par group
                             + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
                     + '</li>');
                     /*$('#menu_gauche_ul').css('display','block !important').addClass("show").show();*/
                     ul_sm.addClass("open").append(linkToRpt).show();
               }
             });
-            // var url = base_url + "index.php/home/report/" + menu.id_menu;
+         
             var elem = $("<li>").attr("id", menu.id_menu).append(
                 $('<a>').addClass("categ_rept")
                         .attr('href', '#')
