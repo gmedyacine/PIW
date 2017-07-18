@@ -9,16 +9,19 @@ include('include/head.php');
 </script>
 <body>
 
-    <div class="container-fluid">
+    <div class="am-wrapper">
         <?php include('include/header.php'); ?>
 
         <!-- ROW start -->
-        <div class="row content">
+         
             <!-- Colonne du Menu -->
             <?php include('include/menu.php'); ?>
-            <?php echo $this->session->flashdata('msg-success'); ?>
 
-            <div class="col-md-9 "> <!-- Début partie des onglets -->
+            <?php echo $this->session->flashdata('msg-success'); ?>
+        <div class="am-content">
+        <div class="main-content">
+            <div class="row">
+            <div class="col-sm-12"> <!-- Début partie des onglets -->
                 
               
                 <ul class="nav nav-tabs">
@@ -34,30 +37,33 @@ include('include/head.php');
 
                     <div id="demande" class="tab-pane tab-panel fade in active">
                         <div id="panel-table" class="panel panel-default">
-                            <div class="panel-body">
+                            <div class="panel-body form-horizontal col-md-8 col-sm-12 col-xs-12">
                               
                                 <div class="form-group">
                                
                                    <?php echo form_open('home/addDemande'); ?>
                                     <!--<form action="#" method="post"> -->
+                                    <div class="form-group">
 
                                         <label class="control-label col-sm-2" for="objet"><?php echo $this->lang->line("objet_de_demande"); ?></label>
                                         <div class="nom col-sm-10">
                                             <input name="objet" type="text"  required="required" class="form-control " >
-                                            </br>
+                                            
+                                        </div>
                                         </div>
 
-                                        </br>
+                                        <div class="form-group">
                                         <label class="control-label col-sm-2" for="description"><?php echo $this->lang->line("message"); ?> </label>
                                         <div class="desc col-sm-10">
                                             <textarea rows="8" name="message" required="required"  class="form-control " > </textarea>
-                                            </br>
+                                            
+                                        </div>
                                         </div>
 
 
 
                                         <div class="add">
-                                            <input class="btn btn-success pull-right" type="submit" value="<?php echo $this->lang->line("envoyer"); ?>"/>
+                                            <input class="btn btn-primary pull-right" type="submit" value="<?php echo $this->lang->line("envoyer"); ?>"/>
                                         </div>
                                         
 
@@ -66,7 +72,7 @@ include('include/head.php');
                                 </div>
 
                             </div>
-                            
+                            <div class="clear"></div>
                         </div>
       
                     </div>
@@ -76,7 +82,7 @@ include('include/head.php');
             <div class="panel-heading">
                 <h3 class="panel-title"><?php echo $this->lang->line("liste_des_demandes"); ?></h3>
                 <div class="pull-right">
-                    <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                    <button class="btn btn-primary  btn-filter"><span class="s7-filter"></span> Filter</button>
                 </div>
             </div>
             <table id="tabDemande" class="table">
@@ -104,7 +110,7 @@ include('include/head.php');
 
         </div>
     </div>
-
+</div></div>
     <script type="text/javascript">
 
     $(document).ready(function () {

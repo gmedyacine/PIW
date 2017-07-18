@@ -52,4 +52,9 @@ $(document).ready(function () {
 
     // supprimer un report déjà creer ou renomer 
 
+$('.am-toggle-left-sidebar').click(function(e) {
+        e.preventDefault();
+        $('body').toggleClass('open-left-sidebar am-animate');
+    });
+
 });

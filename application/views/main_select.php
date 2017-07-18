@@ -7,15 +7,17 @@ include('include/head.php');
  </script>
     <body>
 
-        <div class="container-fluid">
+        <div class="am-wrapper">
           <?php include('include/header.php'); ?>
 
             <!-- ROW END -->
-             <div class="row content">
-                       <!-- Colonne du Menu -->
-                         <?php include('include/menu.php'); ?>
+              
+                        
+             <?php include('include/menu.php'); ?>
+             <div class="am-content">
+             <div class="main-content">
                 <div class="col-sm-6">
-                    <div class="panel panel-info panel-set">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <?php echo $this->lang->line('main_menu'); ?>
                         </div>
@@ -24,26 +26,23 @@ include('include/head.php');
 
                             <div class="form-group">        
 
-                                <div class="col-sm-12">
+                                 
                                     <select id="main_select" class="form-control" >
                                            <option value="0">-- <?php echo $this->lang->line('default_projection'); ?> --</option>
                                        </select>
-                                </div>
+                                 
 
-                            </div>
-                            </br>
-                            </br>
-                            </br>
-                            </br>
-                            <a href="#" id="valid_select" class="btn btn-info pull-right"><?php echo $this->lang->line('valider'); ?> </a>
-                            </br>
+                             
 
 
                         </div>
+
+                            <a href="#" id="valid_select" class="btn btn-primary pull-right"><?php echo $this->lang->line('valider'); ?> </a>
+                              
                     </div>
                 </div>
             </div>
             <!-- ROW END -->
-
+</div>
         </div>
   <?php    include('include/footer.php');   ?>

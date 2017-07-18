@@ -15,18 +15,20 @@ include('include/head.php');
 </script>
 <body>
 
-    <div class="container-fluid">
+    <div class="am-wrapper">
         <?php include('include/header.php'); ?>
 
         <!-- ROW END -->
-        <div class="row content">
+         
             <!-- Colonne du Menu -->
             <?php include('include/menu.php'); ?>
+           <div class="am-content">
+           <div class="main-content">
             <?php echo $this->session->flashdata('msg-modif'); ?> 
 
             <div class="col-md-6"> <!-- Début partie du tableau -->
                 <div class="row">
-                    <div class="panel panel-default panel-set">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <?php echo $this->lang->line("create_report"); ?>
                         </div>
@@ -36,26 +38,30 @@ include('include/head.php');
                                 <form action="<?php echo base_url(); ?>index.php/home/create_report" method="post" id="createReport">
                                 <div class="col-sm-12">
                                     									
-																	   
+									<div class="form-group">								   
                                     <select  id="rpt_select" name="old_name"  class="form-control chosen-select" tabindex="2" required>
                                            
                                     </select>
-                                    <br>
-                                    <br>
+                                    </div>
+                                     <div class="form-group">
                                     <input type="text" name="new_name" id="create" placeholder="<?php echo $this->lang->line("create_report"); ?>" required="required" class="form-control">
-                                    <br>
+                                    </div> 
+                                    <div class="form-group">
 									<select id="select_report_categ" name="report_categ" class="form-control" required >
                                          <option value="">-- <?php echo $this->lang->line('select_categ'); ?> --</option>
                                     </select>
                                          <p style="font-size: 12px; display: inline;"><?php echo $this->lang->line('categ_not_found'); ?></p><a href="#" id="add_categ" data-toggle="modal" onclick=" $('#addCateg').modal('show')" style="font-size: 12px; display: inline;"> <?php echo $this->lang->line('create_new'); ?></a>
-                                    <br>
-								
+                                    </div>
+								<div class="form-group">
                                    <select id="select_report_sous_categ" name="report_sous_categ" class="form-control" >
                                          <option value="">-- <?php echo $this->lang->line('select_sub_categ'); ?> --</option>
                                    </select>
                                          <p style="font-size: 12px; display: inline;"><?php echo $this->lang->line('sub_categ_not_found'); ?></p><a href="#" id="add_sous_categ" data-toggle="modal" onclick=" $('#addSubCateg').modal('show')" style="font-size: 12px; display: inline;"> <?php echo $this->lang->line('create_new'); ?></a>
-                                   <br>
-                                    <input type="submit" class="btn btn-info pull-right" value="<?php echo $this->lang->line('save'); ?>" >
+                                    </div>
+                                    <div class="text-right">
+                                         <input type="submit" class="btn btn-space btn-primary" value="<?php echo $this->lang->line('save'); ?>" >
+                                   </div>
+                                    
                                 </div>
 
 
@@ -70,7 +76,7 @@ include('include/head.php');
 
                 </div>
 
-
+            
 
             </div> <!-- fin pagination  -->
 			 
@@ -118,5 +124,6 @@ include('include/head.php');
         </div> <!-- Fin partie du tableau -->
         <!-- ROW END -->
 
+    </div>
     </div>
     <?php include('include/footer.php'); ?>

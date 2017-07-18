@@ -4,16 +4,20 @@ include('include/head.php');
 ?>﻿
 <body>
 
-    <div class="container-fluid">
+    <div class="am-wrapper">
         <?php include('include/header.php'); ?>
 
         <!-- ROW start -->
-        <div class="row content">
+        
             <!-- Colonne du Menu -->
             <?php include('include/menu.php'); ?>
+
+
 		<?php echo $this->session->flashdata('msg-add'); ?> 
-            
-            <div class="col-md-9 "> <!-- Début partie des onglets -->
+        <div class="am-content">
+        <div class="main-content">
+            <div class="row">
+            <div class="col-sm-12"> <!-- Début partie des onglets -->
                 <ul class="nav nav-tabs " role="tablist">
                     <li class="active">
                         <a href="#biblio" class="tab" role="tab" data-toggle="tab">
@@ -28,31 +32,32 @@ include('include/head.php');
                 </ul>
 
                 <!-- Tab panes -->
-                <div class="tab-content bg-white">
+                <div class="tab-content bg-white ">
                     <div class="tab-pane fade active in" id="biblio">
-                        <div id="panel-table" class="panel panel-default">
-                            <div class="panel-body">              
+                        <div id="panel-table" class="panel panel-default col-md-8 col-sm-12 col-xs-12">
+                            <div class="panel-body form-horizontal">              
 
                                 <div class="form-group">
                                     <?php echo form_open('add-biblio'); ?>
 
-                                    <label class="control-label col-sm-2" for="nom"><?php echo $this->lang->line("name"); ?> </label>
-                                    <div class="nom col-sm-10">
+                                    <div class="form-group">
+                                    <label class="control-label col-md-2 col-sm-6 col-xs-12sm-2" for="nom"><?php echo $this->lang->line("name"); ?> </label>
+                                    <div class="nom col-md-10 col-sm-6 col-xs-12">
                                         <input name="nom" type="text"  required="required" class="form-control " >
-                                        </br>
+                                         
+                                    </div>
                                     </div>
 
-                                    </br>
-                                    <label class="control-label col-sm-2" for="description"><?php echo $this->lang->line("description"); ?>  </label>
-                                    <div class="desc col-sm-10">
+                                    <div class="form-group">
+                                    <label class="control-label col-md-2 col-sm-6 col-xs-12" for="description"><?php echo $this->lang->line("description"); ?>  </label>
+                                    <div class="desc col-md-10 col-sm-6 col-xs-12">
                                         <input name="description" type="text" class="form-control " >
-                                        </br>
+                                         
                                     </div>
+                                    </div> 
 
-
-
-                                    <div class="add">
-                                        <input class="btn btn-success pull-right" type="submit" value="<?php echo $this->lang->line("add"); ?>"/>
+                                    <div class="add ">
+                                        <input class="btn btn-primary pull-right" type="submit" value="<?php echo $this->lang->line("add"); ?>"/>
                                     </div>
 
                                     </form>
@@ -62,7 +67,7 @@ include('include/head.php');
                             </div>
                         </div>
 
-                        <table id="tabCat" class="table table-striped">
+                        <table id="tabCat" class="table table-striped table-hover table-fw-widget dataTable no-footer">
                             <thead>
                                 <tr>
                                     <th><?php echo $this->lang->line("name"); ?></th>
@@ -78,34 +83,39 @@ include('include/head.php');
                         </table>   
                     </div>
                     <div  class="tab-pane fade" id="sousBiblio">
-                        <div class="panel panel-default">
-                            <div class="panel-body">              
+                        <div class="panel panel-default col-md-8 col-sm-12 col-xs-12">
+                            <div class="panel-body form-horizontal">              
 
                                 <div class="form-group">
                                     <?php echo form_open('add-sous-biblio'); ?>
 
+                                    <div class="form-group"> 
 
-                                    <label class="control-label col-sm-2" for="biblio"><?php echo $this->lang->line("bibliotheque"); ?></label>
-                                    <div class="nom col-sm-10">
+                                    <label class="control-label col-md-2 col-sm-6 col-xs-12" for="biblio"><?php echo $this->lang->line("bibliotheque"); ?></label>
+                                    <div class="nom col-md-10 col-sm-6 col-xs-12">
                                         <select id="list-bib" name="id_cat" class="form-control" required="required" >
                                         </select>
-                                        </br>
+                                        
                                     </div>
+                                    </div>
+                                    <div class="form-group">
 
-                                    <label class="control-label col-sm-2" for="nom"><?php echo $this->lang->line("name"); ?></label>
-                                    <div class="nom col-sm-10">
+                                    <label class="control-label col-md-2 col-sm-6 col-xs-12" for="nom"><?php echo $this->lang->line("name"); ?></label>
+                                    <div class="nom col-md-10 col-sm-6 col-xs-12">
                                         <input name="nom" type="text"  required="required" class="form-control " >
-                                        </br>
+                                         
+                                    </div>
                                     </div>
 
-                                    </br>
-                                    <label class="control-label col-sm-2" for="description"><?php echo $this->lang->line("description"); ?> </label>
-                                    <div class="desc col-sm-10">
+                                     <div class="form-group">
+                                    <label class="control-label col-md-2 col-sm-6 col-xs-12" for="description"><?php echo $this->lang->line("description"); ?> </label>
+                                    <div class="desc col-md-10 col-sm-6 col-xs-12">
                                         <input name="description" type="text" class="form-control " >
-                                        </br>
+                                         
                                     </div>
-                                    <div class="add">
-                                        <input class="btn btn-success pull-right" type="submit" value="<?php echo $this->lang->line("add"); ?>"/>
+                                    </div>
+                                    <div class="add ">
+                                        <input class="btn btn-primary pull-right" type="submit" value="<?php echo $this->lang->line("add"); ?>"/>
                                     </div>
 
                                     </form>
@@ -136,8 +146,8 @@ include('include/head.php');
 
         </div>
     </div>
-
-
+ </div>
+</div>
     <script src="<?php echo base_url(); ?>assets/js/categ.js"></script>
     <script type="text/javascript">
 

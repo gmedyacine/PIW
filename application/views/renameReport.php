@@ -11,15 +11,15 @@ include('include/head.php');
  </script>
 <body>
 
-    <div class="container-fluid">
+    <div class="am-wrapper">
 <?php include('include/header.php'); ?>
 
         <!-- ROW END -->
-        <div class="row content">
-            <!-- Colonne du Menu -->
+         
 <?php include('include/menu.php'); ?>
             <?php echo $this->session->flashdata('msg-modif'); ?> 
-
+<div class="am-content">
+        <div class="main-content">
             <div class="col-md-6"> <!-- Début partie du tableau -->
               
                 
@@ -89,4 +89,5 @@ include('include/head.php');
         <!-- ROW END -->
 
     </div>
+     </div>
 <?php include('include/footer.php'); ?>

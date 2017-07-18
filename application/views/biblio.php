@@ -9,75 +9,90 @@ include('include/head.php');
         var lib_insert_date="<?php echo $this->lang->line("lib_insert_date"); ?>";
         var msg = "<?php echo $this->lang->line("required_field"); ?>";
     </script>
-    <div class="container-fluid">
+    <div class="am-wrapper">
 
         <?php include('include/header.php'); ?>
         <?php include('include/dataTables.php'); ?>
         <?php include('include/fancy.php'); ?> 
         <!-- ROW END -->
-        <div class="row content">
+         
             <!-- Colonne du Menu -->
             <?php include('include/menu.php'); ?>
+            <div class="am-content">
+        <div class="main-content">
 		
-            <div class="col-md-9"> <!-- Début partie des onglets -->
+            <div class="row">
+            <div class="col-sm-12"> <!-- Début partie des onglets -->
 
                 <!-- Tab panes -->
 				<?php if ($role != 2) { ?>
-				<div class="row">
+				 
 				
                 <div class="panel tab-content">
 				 
                     <div style="overflow: auto;" class="tab-panel fade active in" >
-                        <button type="button"  id="show-form" class="btn btn-info"><?php echo $this->lang->line("add_document"); ?></button>
-                        <div id="panel-table" class="panel" style="width: 100%;display: none; margin-right: 0 !important">
-                            <div class="panel-body" style="width: 100%">              
+                        <button type="button"  id="show-form" class="btn btn-primary"><?php echo $this->lang->line("add_document"); ?></button>
+                        <div id="panel-table" class="panel col-md-8 col-sm-12 col-xs-12" style="display: none; margin-right: 0 !important">
+                            <div class="panel-body form-horizontal" style="width: 100%">              
                                
                                     <div class="form-group">
-                                        <form action="<?php echo base_url(); ?>index.php/home/upload_file" method="post" id="addDocForm" enctype="multipart/form-data" >
+                                        <form action="<?php echo base_url(); ?>index.php/home/upload_file" method="post" id="addDocForm" enctype="multipart/form-data" role="form" data-parsley-validate="" novalidate="" class="form-horizontal" >
                                             <div class="error">
                                                 <?php echo validation_errors(); ?>
                                                 <?php echo isset($error_upload) ? $error_upload['error'] : ""; ?>
                                             </div>
-
-                                            <label  class="label_calender control-label col-sm-2" for="calender"><?php echo $this->lang->line("calendar"); ?></label>
-                                            <div class="nom col-sm-10">
+                                            <div class="form-group">
+                                            <label  class="label_calender control-label col-md-2 col-sm-6 col-xs-12" for="calender"><?php echo $this->lang->line("calendar"); ?></label>
+                                            <div class=" col-md-10 col-sm-6 col-xs-12 datetimepicker input-group ">
                                                 <input name="calender"  type="text"  value="<?php echo date('d/m/Y ', time())?>" class="form-control datepicker" >
-                                                </br>
+                                                <span class="input-group-addon btn btn-primary"><i class="icon-th s7-date"></i>
                                             </div>
-
-                                            <label class="control-label col-sm-2" for="lib_cat"><?php echo $this->lang->line("biblio"); ?></label>
-                                            <div class="nom col-sm-10">
+                                     
+                                            </div>
+                                           <div class="form-group">
+                                            <label class="control-label col-md-2 col-sm-6 col-xs-12" for="lib_cat"><?php echo $this->lang->line("biblio"); ?></label>
+                                            <div class="col-md-10 col-sm-6 col-xs-12">
                                                 <select name="libCat"  class="form-control"  id="list-bib"></select>
-                                                </br>
+                                                 
                                             </div>
-                                            <label class="control-label col-sm-2" for="lib_sous_cat"><?php echo $this->lang->line("sous_lib"); ?></label>
-                                            <div class="nom col-sm-10">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2 col-sm-6 col-xs-12" for="lib_sous_cat"><?php echo $this->lang->line("sous_lib"); ?></label>
+                                            <div class=" col-md-10 col-sm-6 col-xs-12">
                                                 <select name="libSousCat"  class="form-control"  id="lib-sous-cat"></select>
-                                                </br>
+                                                 
                                             </div>
+                                             </div>
+                                             <div class="form-group">
 
-                                            <label class="control-label col-sm-2" for="job"><?php echo $this->lang->line("title"); ?></label>
-                                            <div class="nom col-sm-10">
-                                                <input name="job"  type="text" value="<?php echo set_value('job'); ?>" class="form-control" >
-                                                </br>
+                                            <label class="control-label col-md-2 col-sm-6 col-xs-12" for="job"><?php echo $this->lang->line("title"); ?></label>
+                                            <div class=" col-md-10 col-sm-6 col-xs-12">
+                                                <input name="job"  type="text" value="<?php echo set_value('job'); ?>" required="required" class="form-control" >
+                                                
+                                            </div> </div>
+                                            <div class="form-group">
+                                            <label class="control-label col-md-2 col-sm-6 col-xs-12" for="vega"><?php echo $this->lang->line("categorie"); ?></label>
+                                            <div class=" col-md-10 col-sm-6 col-xs-12">
+                                                <input name="vega"  type="text" value="<?php echo set_value('vega'); ?>" required="required" class="form-control" >
+                                                 
                                             </div>
-                                            <label class="control-label col-sm-2" for="vega"><?php echo $this->lang->line("categorie"); ?></label>
-                                            <div class="nom col-sm-10">
-                                                <input name="vega"  type="text" value="<?php echo set_value('vega'); ?>" class="form-control" >
-                                                </br>
                                             </div>
-                                            <label  class="heur_lib control-label col-sm-2" for="heure_lib"><?php echo $this->lang->line("hour"); ?></label>
-                                            <div class="nom col-sm-10">
+                                            <div class="form-group">
+                                            <label  class="heur_lib control-label col-md-2 col-sm-6 col-xs-12" for="heure_lib"><?php echo $this->lang->line("hour"); ?></label>
+                                            <div class=" col-md-10 col-sm-6 col-xs-12">
                                                 <input name="heureLib"  type="text" value="Document" class="form-control" >
-                                                </br>
+                                                 
                                             </div>
-                                            <label class="control-label col-sm-2" for="file"><?php echo $this->lang->line("file"); ?></label>
-                                            <div class="tel col-sm-8">
+                                            </div>
+                                            <div class="form-group">
+                                            <label class="control-label col-md-2 col-sm-6 col-xs-12" for="file"><?php echo $this->lang->line("file"); ?></label>
+                                            <div class=" col-md-10 col-sm-6 col-xs-12">
                                                 <input type="file"  name="newFiles[]" class="form-control" multiple/>
-                                                </br>
+                                             
                                             </div>
-                                            <div class="upload col-sm-2">
-                                                <input class="btn btn-success pull-right" type="submit" name="fileSubmit" value="<?php echo $this->lang->line("add"); ?>"/>
+                                            </div>
+                                            <div class="upload text-right">
+                                                <input class="btn btn-primary" type="submit" name="fileSubmit" value="<?php echo $this->lang->line("add"); ?>"/>
                                             </div>
 
                                         </form>
@@ -90,12 +105,14 @@ include('include/head.php');
                     </div>
 				
 
-                </div> <!-- Fin partie du tableau -->
-              </div>  <!-- ROW END -->
+                </div> 
+<div class="clear"></div>
+                <!-- Fin partie du tableau -->
+                <!-- ROW END -->
 			  	<?php } ?>
 				
 				                <!-- Tab panes --> 
-								<div class="row">
+								 
 								
                 <div style="overflow: auto;" class="panel tab-content">
 		
@@ -110,12 +127,14 @@ include('include/head.php');
                         </div>
        
                 </div> <!-- Fin partie du tableau -->
-                </div><!-- ROW END -->
+                 <!-- ROW END -->
 				             
 								            
             </div>
         </div>
+        </div>
     </div>
+</div>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/validateDocForm.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/biblio.js"></script>

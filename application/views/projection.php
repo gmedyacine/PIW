@@ -11,59 +11,68 @@ include('include/dataTables.php');
 </script>
 <body>
 
-<div class="container-fluid">
+<div class="am-wrapper">
     <?php include('include/header.php'); ?>
 
     <!-- ROW END -->
-    <div class="row content">
-        <!-- Colonne du Menu -->
+    
         <?php include('include/menu.php'); ?>
-
-        <div class="col-md-9"> <!-- Début partie du tableau -->
+<div class="am-content">
+        <div class="main-content">
+        <div class="row">
+            <div class="col-sm-12"> <!-- Début partie du tableau -->
             <fieldset class="group-border">
-                <div class="row">
+               
                     <div id="panel-table" class="panel panel-default">
-                        <div class="panel-body">
+                        <div class="panel-body project-filters">
 
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <p><?php echo $this->lang->line("date_debut"); ?><input type="text"
-                                                                                            class="datepicker filtre_ligne"
-                                                                                            id="date_debut_filtre"/></p>
-                                    <span id="msg_error"><?php echo $this->lang->line("date_not_valide"); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <p><?php echo $this->lang->line("date_end"); ?><input type="text"
-                                                                                          class="datepicker filtre_ligne"
-                                                                                          id="date_fin_filtre"/></p>
-                                </div>
-                            </div>
-                            <a id="filtre_date" href="#"
-                               class="btn-bleu-filtre btn btn-info"><?php echo $this->lang->line("excute_filtre"); ?></a>
+                 
+                    <div class="form-group col-md-5 col-sm-6 col-xs-12">
+                      <label class="col-md-3 col-sm-4 col-xs-12 control-label"> <?php echo $this->lang->line("date_debut"); ?> </label>
+                      <div class="col-md-9 col-sm-8 col-xs-12">
+                         
+                          <input type="text" class="datepicker filtre_ligne form-control" id="date_debut_filtre"/>
+                         
+                        
+                        <span id="msg_error"><?php echo $this->lang->line("date_not_valide"); ?></span>
+                      </div>
+                    </div>
+                 
+                 
+                    <div class="form-group col-md-5 col-sm-6 col-xs-12">
+                      <label class="col-md-3 col-sm-4 col-xs-12 control-label"> <?php echo $this->lang->line("date_end"); ?> </label>
+                      <div class="col-md-9 col-sm-8 col-xs-12">
+                         
+                         <input type="text" class="datepicker filtre_ligne form-control" id="date_fin_filtre"/>
+                         
+                         
+                      </div>
+                    </div>
+                
+                    <a id="filtre_date" href="#"  class="btn  btn-primary"><?php echo $this->lang->line("excute_filtre"); ?></a>
                         </div>
                     </div>
-                </div>
+               
             </fieldset>
 						
 			
-            <div class="row ">       <!-- Début titre du tableau et lien export excel-->
-                <div id="panel-table" class="panel panel-default panel-reduit-5">
-                    <div class="panel-body">
-                        <div class="col-6 pull-left ">
-                            <H2>Titre du tableau</H2>
-                        </div>
-                        <div class="col-6 pull-right dropdown">
-                            <button class="btn icon-btn btn-success dropdown-toggle" type="button" id="dropdownMenu1"
+                  <!-- Début titre du tableau et lien export excel-->
+                <div id="panel-table" class="widget widget-fullwidth widget-small">
+                    <div class="widget-head">
+                        <div class=" pull-left ">
+                            <div class="title"><h2>Titre du tableau</h2></div>
+                        </div> 
+                         <div class=" pull-right ">
+                            <div class="btn-group ">
+                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <span class="glyphicon btn-glyphicon glyphicon-share img-circle text-info"></span>
+                                <i class="icon icon-left s7-cloud-download"></i>
                                 <?php echo $this->lang->line("export_excel"); ?>
-                                <span class="caret"></span>
+                                 <span class="caret"></span>
                             </button>
+ 
 
-
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"  role="menu" >
                                 <li><a id="exportExcelFiltre"
                                        href="#"><?php echo $this->lang->line("export_excute_filtre"); ?></a></li>
                                 <li><a id="exportExcelToDay"
@@ -73,10 +82,12 @@ include('include/dataTables.php');
 
                             </ul>
                         </div>
+                        </div>
+                    <div class="clear"></div>
 
-                    </div> <!-- Fin titre du tableau et lien export excel-->
+                    </div>  <!-- Fin titre du tableau et lien export excel-->
 
-                        <table id="mainTables" class="table cell-border" cellspacing="0" width="100%"> 
+                        <table id="mainTables" class="table table-striped table-hover table-fw-widget dataTable no-footer" > 
                             <thead class="" > 
 
                         </thead>
@@ -87,7 +98,7 @@ include('include/dataTables.php');
                     </table>
 
                 </div>
-            </div>
+             
 
         </div> <!-- fin pagination  -->
 		
@@ -112,4 +123,5 @@ include('include/dataTables.php');
     <!-- ROW END -->
 
 </div>
+</div></div>
 <?php include('include/footer.php'); ?>

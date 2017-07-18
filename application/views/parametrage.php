@@ -7,15 +7,16 @@ include('include/head.php'); ?>﻿
 </script>
 <body>
 
-    <div class="container-fluid">
+    <div class="am-wrapper">
         <?php include('include/header.php'); ?>
 
         <!-- ROW END -->
-        <div class="row content">
-            <!-- Colonne du Menu -->
+         
             <?php include('include/menu.php'); ?>
-
-            <div class="col-md-9"> <!-- Début partie des onglets -->
+<div class="am-content">
+        <div class="main-content">
+            <div class="row">
+            <div class="col-sm-12">  <!-- Début partie des onglets -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="active">
                         <a href="#sms" role="tab" data-toggle="tab">
@@ -27,53 +28,75 @@ include('include/head.php'); ?>﻿
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-panel fade active in" id="sms">
-                        <div id="panel-table" class="panel panel-default">
-                            <div class="panel-body">              
+                        <div id="panel-table" class="panel panel-default col-md-8 col-sm-12 col-xs-12">
+                            <div class="panel-body form-horizontal">              
 
                                 <div class="form-group">
                                     <?php echo form_open('add-user'); ?>
                                     <div class="error"><?php echo validation_errors(); ?></div>
-                                    <label class="control-label col-sm-2" for="username"><?php echo $this->lang->line('username'); ?></label>
-                                    <div class="nom col-sm-10">
+                                    <div class="form-group">
+                                    <label class="control-label col-md-2 col-sm-6 col-xs-12" for="username"><?php echo $this->lang->line('username'); ?></label>
+                                    <div class="nom col-md-10 col-sm-6 col-xs-12">
                                         <input name="username" type="text" value="<?php echo set_value('username'); ?>" class="form-control" >
-                                        </br>
+                                     
                                     </div>
-
-                                    </br>
-                                    <label class="control-label col-sm-2" for="mail"><?php echo $this->lang->line('email'); ?> </label>
-                                    <div class="mail col-sm-10">
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label col-md-2 col-sm-6 col-xs-12" for="mail"><?php echo $this->lang->line('email'); ?> </label>
+                                    <div class="mail col-md-10 col-sm-6 col-xs-12">
                                         <input name="mail" type="text" value="<?php echo set_value('mail'); ?>" class="form-control" >
-                                        </br>
+                                        
                                     </div>
-                                    <label class="control-label col-sm-2" for="tel"><?php echo $this->lang->line('tel'); ?> </label>
-                                    <div class="tel col-sm-10">
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label col-md-2 col-sm-6 col-xs-12" for="tel"><?php echo $this->lang->line('tel'); ?> </label>
+                                    <div class="tel col-md-10 col-sm-6 col-xs-12">
                                         <input name="tel" value="<?php echo set_value('tel'); ?>" type="text" class="form-control" >
-                                        </br>
+                                        
                                     </div>
-                                    <label class="control-label col-sm-2" for="admin"><?php echo $this->lang->line('admin'); ?> </label>
-                                    <div class="admin col-sm-10">
-                                        <input  name="admin"  value="1" type="checkbox" class="connexion form-control float-left">
-                                        </br>
                                     </div>
-                                    <label class="control-label col-sm-2" for="admin"><?php echo $this->lang->line('oper'); ?> </label>
-                                    <div class="admin col-sm-10">
-                                        <input  name="admin"  value="2" type="checkbox" class="connexion form-control float-left">
-                                        </br>
+                                    <div class="form-group">
+                                    <label class="control-label col-md-2 col-sm-6 col-xs-12" for="admin"><?php echo $this->lang->line('admin'); ?> </label>
+                                    <div class="admin col-md-10 col-sm-6 col-xs-12">
+                                        <div class="am-checkbox">
+                                        <input id="check1"  name="admin" value="1" type="checkbox" >
+                                        <label for="check1"> </label>
+                                       </div>
+                                        
                                     </div>
-                                    <label class="control-label col-sm-2" for="notifMail"><?php echo $this->lang->line('notif_mail'); ?> </label>
-                                    <div class="notif-mail col-sm-10">
-                                        <input name="notifMail"  type="checkbox" checked="checked" class="form-control float-left">
-                                        </br>
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label col-md-2 col-sm-6 col-xs-12" for="admin"><?php echo $this->lang->line('oper'); ?> </label>
+                                    <div class="admin col-md-10 col-sm-6 col-xs-12">
+                                        <div class="am-checkbox">
+                                        <input id="check2"  name="admin" value="2" type="checkbox" >
+                                        <label for="check2"> </label>
+                                       </div>
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label col-md-2 col-sm-6 col-xs-12" for="notifMail"><?php echo $this->lang->line('notif_mail'); ?> </label>
+                                    <div class="notif-mail col-md-10 col-sm-6 col-xs-12">
+                                        <div class="am-checkbox">
+                                        <input id="check3" name="notifMail"  type="checkbox" checked="checked" >
+                                         <label for="check3"> </label>
+                                       </div>
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+
+                                    <label class="control-label col-md-2 col-sm-6 col-xs-12" for="notifSms"><?php echo $this->lang->line('notif_sms'); ?> </label>
+                                    <div class="notif-mail col-md-10 col-sm-6 col-xs-12">
+                                       
+                                        <div class="am-checkbox">
+                                        <input id="check4" name="notifSms"  checked="checked"  type="checkbox" >
+                                        <label for="check4"> </label>
+                                       </div>
+                                    </div>
                                     </div>
 
-                                    <label class="control-label col-sm-2" for="notifSms"><?php echo $this->lang->line('notif_sms'); ?> </label>
-                                    <div class="notif-mail col-sm-10">
-                                        <input name="notifSms"  checked="checked"  type="checkbox" class="form-control float-left">
-                                        </br>
-                                    </div>
-
-                                    <div class="add">
-                                        <input class="btn btn-success pull-right" type="submit" value="<?php echo $this->lang->line('add'); ?>"/>
+                                    <div class="add ">
+                                        <input class="btn btn-primary pull-right" type="submit" value="<?php echo $this->lang->line('add'); ?>"/>
                                     </div>
 
                                     </form>
@@ -81,7 +104,7 @@ include('include/head.php'); ?>﻿
                             </div>
                         </div>
 
-                        <table id="tabUsers" class="table table-striped">
+                        <table id="tabUsers" class="table table-striped table-hover table-fw-widget dataTable no-footer">
                             <thead>
                                 <tr>
                                     <th><?php echo $this->lang->line('username'); ?></th>
@@ -103,4 +126,5 @@ include('include/head.php'); ?>﻿
                 <!-- ROW END -->
             </div>
         </div>
+        </div> </div>
         <?php include('include/footer.php'); ?>
