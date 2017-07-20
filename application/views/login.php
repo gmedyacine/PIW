@@ -10,8 +10,8 @@ include('include/head.php');
         <div class="row  pad-top ">
            
 
-            <div class="col-lg-4">
-                <select class="pull-right " id="select-lang" data-width="fit">
+            <div class="col-md-12 col-sm-12 col-xs-12 select-login">
+                <select class="selectpicker  btn-primary " id="select-lang" data-width="fit">
                     <option
                         value="english" <?php if ($this->session->userdata('site_lang') == 'English') echo 'selected="selected"'; ?>
                         data-content='<span class="flag-icon flag-icon-gb"></span> English'>English

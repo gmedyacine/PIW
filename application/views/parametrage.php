@@ -28,7 +28,7 @@ include('include/head.php'); ?>﻿
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-panel fade active in" id="sms">
-                        <div id="panel-table" class="panel panel-default col-md-8 col-sm-12 col-xs-12">
+                        <div id="panel-table" class="panel panel-default col-md-11 col-sm-12 col-xs-12">
                             <div class="panel-body form-horizontal">              
 
                                 <div class="form-group">
@@ -104,7 +104,7 @@ include('include/head.php'); ?>﻿
                             </div>
                         </div>
 
-                        <table id="tabUsers" class="table table-striped table-hover table-fw-widget dataTable no-footer">
+                        <table id="tabUsers" class="table table-striped table-hover table-fw-widget dataTable no-footer dt-responsive nowrap">
                             <thead>
                                 <tr>
                                     <th><?php echo $this->lang->line('username'); ?></th>

@@ -15,6 +15,14 @@ include('include/head.php');
 
 		<?php echo $this->session->flashdata('msg-add'); ?> 
         <div class="am-content">
+        <div class="page-head">
+          <h2>Panels</h2>
+          <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">UI Elements</a></li>
+            <li class="active">Panels</li>
+          </ol>
+        </div>
         <div class="main-content">
             <div class="row">
             <div class="col-sm-12"> <!-- Début partie des onglets -->
@@ -34,7 +42,7 @@ include('include/head.php');
                 <!-- Tab panes -->
                 <div class="tab-content bg-white ">
                     <div class="tab-pane fade active in" id="biblio">
-                        <div id="panel-table" class="panel panel-default col-md-8 col-sm-12 col-xs-12">
+                        <div id="panel-table" class="panel panel-default col-md-11 col-sm-12 col-xs-12">
                             <div class="panel-body form-horizontal">              
 
                                 <div class="form-group">
@@ -67,7 +75,7 @@ include('include/head.php');
                             </div>
                         </div>
 
-                        <table id="tabCat" class="table table-striped table-hover table-fw-widget dataTable no-footer">
+                        <table id="tabCat" class="table table-striped table-hover table-fw-widget dataTable no-footer dt-responsive nowrap">
                             <thead>
                                 <tr>
                                     <th><?php echo $this->lang->line("name"); ?></th>
@@ -83,7 +91,7 @@ include('include/head.php');
                         </table>   
                     </div>
                     <div  class="tab-pane fade" id="sousBiblio">
-                        <div class="panel panel-default col-md-8 col-sm-12 col-xs-12">
+                        <div class="panel panel-default col-md-11 col-sm-12 col-xs-12">
                             <div class="panel-body form-horizontal">              
 
                                 <div class="form-group">
@@ -123,7 +131,7 @@ include('include/head.php');
                             </div>
                         </div>
 
-                        <table  id="sou_bib" class="table table-striped">
+                        <table  id="sou_bib" class="table table-striped dt-responsive nowrap">
                             <thead>
                                 <tr>
                                     <th><?php echo $this->lang->line("name"); ?> (<?php echo $this->lang->line("sous_lib"); ?>)</th>

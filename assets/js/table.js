@@ -2,17 +2,21 @@
 Please consider that the JS part isn't production ready at all, I just code it to show the concept of merging filters and titles together !
 */
 $(document).ready(function(){
+  
     $('.filterable .btn-filter').click(function(){
+        
         var $panel = $(this).parents('.filterable'),
         $filters = $panel.find('.filters input'),
         $tbody = $panel.find('.table tbody');
         if ($filters.prop('disabled') == true) {
             $filters.prop('disabled', false);
             $filters.first().focus();
+            $('#tabDemande .filters').show();
         } else {
             $filters.val('').prop('disabled', true);
             $tbody.find('.no-result').remove();
             $tbody.find('tr').show();
+            $('#tabDemande .filters').hide();
         }
     });
 

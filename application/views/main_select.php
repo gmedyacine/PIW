@@ -16,8 +16,8 @@ include('include/head.php');
              <?php include('include/menu.php'); ?>
              <div class="am-content">
              <div class="main-content">
-                <div class="col-sm-6">
-                    <div class="panel panel-primary">
+                <div class="col-sm-12">
+                    <div class="panel panel-primary select-main-box">
                         <div class="panel-heading">
                             <?php echo $this->lang->line('main_menu'); ?>
                         </div>

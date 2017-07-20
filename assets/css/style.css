@@ -10141,6 +10141,9 @@ button:focus {
   .am-sticky-footer {
     padding-bottom: 0;
   }
+  .select-main-box .panel-body {
+    padding: 15px !important;
+}
 }
 .am-sticky-footer footer {
   position: fixed;
@@ -11146,6 +11149,10 @@ li.L9 {
   .timeline-content {
     padding: 15px 18px;
   }
+  .formboxs {
+    display: block !important;
+    margin: 10px 0 !important;
+}
 }
 .timeline-content:before {
   content: "";
@@ -18032,6 +18039,7 @@ fieldset[disabled] .btn-social.btn-tumblr.active {
   .modal-container {
     padding: 0 15px;
   }
+
 }
 .modal-content {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
@@ -18472,6 +18480,9 @@ fieldset[disabled] .btn-social.btn-tumblr.active {
     float: right !important;
     margin: 20px 15px;
 }
+.am-top-header .bootstrap-select .dropdown-menu > li > a, .select-login .bootstrap-select .dropdown-menu > li > a { 
+    padding: 9px 12px;
+}
 [data-id="select-lang"] {
     color: #ffffff;
     background-color: #ef6262;
@@ -18490,11 +18501,7 @@ fieldset[disabled] .btn-social.btn-tumblr.active {
     overflow: hidden;
     overflow-y: scroll;
 }
-#msg_error {
-    font-size: 70%;
-    color: red;
-    visibility: hidden;
-}
+
 .ui-datepicker {
     width: auto !important; 
 }
@@ -18565,13 +18572,17 @@ fieldset[disabled] .btn-social.btn-tumblr.active {
 }
 #filtre_date{
     margin: 18px 0 0;
+    float: right;
 }
 .dataTables_length{
-  padding: 0 15px;
+  padding: 10px 15px;
+  text-align: left !important;
+  clear: both;
 }
  
 div.dataTables_wrapper div.dataTables_filter {
      padding: 0 15px 15px;
+     text-align: right !important;
 }
 div.dataTables_wrapper div.dataTables_paginate {
     margin: 0;
@@ -18583,6 +18594,13 @@ div.dataTables_wrapper div.dataTables_info {
     float: left;
      
 }
+
+@media screen and (max-width: 640px){
+div.dt-buttons { 
+     text-align: left !important;  
+}
+}
+
  a.dt-button {
     position: relative;
     display: inline-block;
@@ -18674,6 +18692,10 @@ div.dt-buttons {
 }
 .report .remove-right {  
   color: #ffffff;
+  position: absolute;
+  right: 0;
+  top: 15px;
+  cursor: pointer;
 }
 .searchboxs{
   display: block;
@@ -18690,6 +18712,84 @@ div.dt-buttons {
     color: #ffffff;
     background-color: #484747;
     }
+    .select-login{
+      text-align: right;
+    }
+.sidebar-elements ul{
+      list-style: none;
+      padding: 0 15px;
+    }
+    .sidebar-elements ul li{
+      position: relative;
+    }
+     .project-filters .control-label{
+      padding-top: 10px;
+    }   
+    .project-filters .form-group {
+    margin: 15px 0 0;
+     
+}
+#msg_error {
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding: 15px 20px;
+    position: relative;
+    background-color: #EF6262;
+    color: #ffffff;
+    display: none;
+}
+#msg_error:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    -moz-transform: scale(0.9999);
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #EF6262;
+}
+#tabDemande .filters{
+  display: none;
+}
+.select-main-box .form-group {
+    margin: 20px 0;
+}
+.select-main-box .panel-body {
+    padding: 15px 30px 20px;
+}
+.table.dataTable{
+  width: 100% !important;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    margin: 0 10px ;
+    padding: 3px;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block; 
+}
+.formboxs{
+  display: inline-block;
+  margin: 0;
+}
 /*------------------------------------------------------------------
   [Badges]
 */
@@ -21013,10 +21113,4 @@ div.dataTables_wrapper div.dataTables_length label select {
   .lg-mb-0 {
     margin-bottom: 0px !important;
   }
-}
-
-.hidden_cl {
-overflow: hidden; 
-color:transparent; 
-display: none;
 }

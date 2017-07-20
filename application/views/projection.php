@@ -87,7 +87,7 @@ include('include/dataTables.php');
 
                     </div>  <!-- Fin titre du tableau et lien export excel-->
 
-                        <table id="mainTables" class="table table-striped table-hover table-fw-widget dataTable no-footer" > 
+                        <table id="mainTables" class="table table-striped table-hover table-fw-widget dataTable no-footer dt-responsive nowrap" > 
                             <thead class="" > 
 
                         </thead>

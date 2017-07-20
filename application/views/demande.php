@@ -37,7 +37,7 @@ include('include/head.php');
 
                     <div id="demande" class="tab-pane tab-panel fade in active">
                         <div id="panel-table" class="panel panel-default">
-                            <div class="panel-body form-horizontal col-md-8 col-sm-12 col-xs-12">
+                            <div class="panel-body form-horizontal col-md-11 col-sm-12 col-xs-12">
                               
                                 <div class="form-group">
                                

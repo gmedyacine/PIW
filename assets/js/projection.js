@@ -8,10 +8,10 @@ $(document).ready(function () {
         var date_debut = format_date($("#date_debut_filtre").val());
         var date_fin = format_date($("#date_fin_filtre").val());
         if (!validateDate(date_debut, date_fin)) {
-            $("#date_debut_filtre").addClass("has-error").after($("#msg_error").css('visibility', 'visible'));
+            $("#date_debut_filtre").addClass("has-error").after($("#msg_error").css('display', 'block'));
             return;
         } else {
-            $("#date_debut_filtre").removeClass("has-error").after($("#msg_error").css('visibility', 'hidden'));
+            $("#date_debut_filtre").removeClass("has-error").after($("#msg_error").css('display', 'none'));
         }
         $("#loader").show();
         $.ajax({

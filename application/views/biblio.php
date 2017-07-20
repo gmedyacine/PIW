@@ -19,6 +19,14 @@ include('include/head.php');
             <!-- Colonne du Menu -->
             <?php include('include/menu.php'); ?>
             <div class="am-content">
+           <div class="page-head">
+          <h2>Panels</h2>
+          <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">UI Elements</a></li>
+            <li class="active">Panels</li>
+          </ol>
+        </div>
         <div class="main-content">
 		
             <div class="row">
@@ -32,7 +40,7 @@ include('include/head.php');
 				 
                     <div style="overflow: auto;" class="tab-panel fade active in" >
                         <button type="button"  id="show-form" class="btn btn-primary"><?php echo $this->lang->line("add_document"); ?></button>
-                        <div id="panel-table" class="panel col-md-8 col-sm-12 col-xs-12" style="display: none; margin-right: 0 !important">
+                        <div id="panel-table" class="panel col-md-11 col-sm-12 col-xs-12" style="display: none; margin-right: 0 !important">
                             <div class="panel-body form-horizontal" style="width: 100%">              
                                
                                     <div class="form-group">
@@ -117,7 +125,7 @@ include('include/head.php');
                 <div style="overflow: auto;" class="panel tab-content">
 		
                         <div  class="panel ">
-                  <div class="panel-body" style="width: 95%">
+                  <div class="panel-body">
   
   					<div class="bg-white" id="cnt-mainTablesBib">
                              <?php include('partial/table_biblio.php'); ?>
