@@ -1,5 +1,16 @@
 $(document).ready(function () {
     loadCateg();
+    loadRpt();
+    
+    function loadRpt() {
+        $.each(projections, function (i, item) {
+            $('#main_select').append($('<option>', {
+                value: i,
+                text: item
+            }));
+        });
+    }
+
 
     $("#valid_select").click(function () {
         var val = $("#main_select").val();

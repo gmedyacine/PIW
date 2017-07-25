@@ -16,7 +16,8 @@ include('include/head.php');
         <!-- ROW END -->
 
         <?php include('include/menu.php'); ?>
-        <?php echo $this->session->flashdata('msg-modif'); ?> 
+        <?php echo $this->session->flashdata('msg-modif'); ?>
+        <?php // var_dump($projections); die; ?>
         <div class="am-content">
             <div class="main-content">
                 <div class="col-md-12"> <!-- Début partie du tableau -->
@@ -79,6 +80,17 @@ include('include/head.php');
                     });
                 </script>
 
+                <script type="text/javascript">
+                    loadRpt();
+                    function loadRpt() {
+                        $.each(projections, function (i, item) {
+                            $('#main_select').append($('<option>', {
+                                value: i,
+                                text: item
+                            }));
+                        });
+                    }
+                </script>
                 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
                 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/validateRenameReport.js"></script>
 
