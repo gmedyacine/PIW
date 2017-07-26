@@ -9,13 +9,12 @@
             <th>Action</th>
         </tr>
     </thead>
-    
+
     <tbody>
-	
+
 
         <?php
         foreach ($fetch_data as $row) {
-          
             ?>
             <tr>
 
@@ -29,16 +28,16 @@
                        <?php if ($row->nom_fichier) { ?>  href="http://docs.google.com/gview?url=<?php echo base_url(); ?>uploads/<?php echo $row->nom_fichier; ?>&embedded=true" <?php } else { ?> href="#" <?php } ?> >Loop </a>|
                     <a href="<?php echo base_url(); ?>index.php/home/download/<?php echo $row->nom_fichier; ?>"> télécharger </a>
                     <?php if ($role != 2) { ?>
-                    
-                    
+
+
                         |<a href="<?php echo base_url(); ?>index.php/home/delete_data/<?php echo $row->id; ?>/<?php echo $row->nom_fichier; ?>/<?php echo $row->lib_categ_id; ?>/<?php echo $row->lib_sous_categ_id; ?>" class="delete_data" > Supprimer </a> 
-                     
+                        <br>
                         <form action="<?php echo base_url(); ?>index.php/home/upload_extra_file" method="post" enctype="multipart/form-data" class="formboxs" >
-                            <label class="btn btn-primary btn-file"><input type="file" name="extraFile" required="required" /></labele>
-                            <input type="hidden" name="row_id" value="<?php echo $row->id; ?>" />
-							<input type="hidden" name="id_categ" value="<?php echo $row->lib_categ_id; ?>" />
-							<input type="hidden" name="id_sous_categ" value="<?php echo $row->lib_sous_categ_id; ?>" />
-                            <input type="submit" class="btn btn-primary btn-xs" name="upload" value="Upload" />
+                            <label class="fileBtn btn-xs"><input type="file" name="extraFile" required="required" /></label>
+                                <input type="hidden" name="row_id" value="<?php echo $row->id; ?>" />
+                                <input type="hidden" name="id_categ" value="<?php echo $row->lib_categ_id; ?>" />
+                                <input type="hidden" name="id_sous_categ" value="<?php echo $row->lib_sous_categ_id; ?>" />
+                                <input type="submit" class="btn btn-primary btn-xs" name="upload" value="Upload" />
                         </form>
                     <?php } ?>
                 </td>
