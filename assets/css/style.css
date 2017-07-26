@@ -21134,3 +21134,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before, table.dataT
     margin-bottom: 0px;
     padding-left: 0px
 }
+
+.display {
+    display: block !important;
+}
