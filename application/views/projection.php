@@ -68,7 +68,7 @@ include('include/dataTables.php');
 
                                             </div>
                                         </div>
-                                        <div id="colVis" class="form-group col-md-2 col-sm-6 col-xs-12t">
+                                        <div id="colVis" class="form-group col-md-2 col-sm-6 col-xs-12">
 
                                         </div>
                                         <!--end row filtres dataTables-->
@@ -80,7 +80,7 @@ include('include/dataTables.php');
 
                                         <div class="btn-group col-md-12 col-sm-12 col-xs-12">
 
-                                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1"
+                                            <button class="btn btn-success dropdown-toggle " type="button" id="dropdownMenu1"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 100%">
                                                 <i class="icon icon-left s7-cloud-download"></i>
                                                 <?php echo $this->lang->line("export_excel"); ?>
@@ -88,7 +88,7 @@ include('include/dataTables.php');
                                             </button>
 
 
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"  role="menu" >
+                                            <ul class="dropdown-menu pull-right" aria-labelledby="dropdownMenu1"  role="menu" >
                                                 <li><a id="exportExcelFiltre"
                                                        href="#"><?php echo $this->lang->line("export_excute_filtre"); ?></a></li>
                                                 <li><a id="exportExcelToDay"
