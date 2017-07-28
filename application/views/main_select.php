@@ -64,12 +64,12 @@ include('include/head.php');
             },
 
             title: {
-                text: 'Highcharts responsive chart'
+                text: 'Uploading files'
             },
 
-            subtitle: {
-                text: 'Resize the frame or click buttons to change appearance'
-            },
+//            subtitle: {
+//                text: 'Resize the frame or click buttons to change appearance'
+//            },
 
             legend: {
                 align: 'right',
@@ -78,7 +78,7 @@ include('include/head.php');
             },
 
             xAxis: {
-                categories: ['Apples', 'Oranges', 'Bananas'],
+                categories: calenders,
                 labels: {
                     x: -10
                 }
@@ -87,19 +87,15 @@ include('include/head.php');
             yAxis: {
                 allowDecimals: false,
                 title: {
-                    text: 'Amount'
+                    text: 'Number'
                 }
             },
 
             series: [{
-                    name: 'Christmas Eve',
-                    data: [1, 4, 3]
-                }, {
-                    name: 'Christmas Day before dinner',
-                    data: [6, 4, 2]
-                }, {
-                    name: 'Christmas Day after dinner',
-                    data: [8, 4, 3]
+                   
+                    name: 'Files',
+                    data: nbr_uploads,
+                    color: 'green'
                 }],
 
             responsive: {
