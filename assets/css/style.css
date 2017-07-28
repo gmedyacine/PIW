@@ -2890,7 +2890,7 @@ fieldset[disabled] .checkbox label {
   border-radius: 0;
 }
 select.input-sm {
-  height: 30px;
+  height: 33px;
   line-height: 30px;
 }
 textarea.input-sm,
@@ -21137,4 +21137,15 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before, table.dataT
 
 .display {
     display: block !important;
+}
+
+#showData .dataTables_length {
+    padding: 0px 0px;
+    text-align: left !important;
+    clear: both;
+}
+
+#colVis{
+    margin-top: 0px;
+    padding-left: 0px;
 }

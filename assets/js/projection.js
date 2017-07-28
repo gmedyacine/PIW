@@ -26,6 +26,7 @@ $(document).ready(function () {
                 });
         $("#mainTables").DataTable();
     });
+    $("#mainTables_filter").addClass("hidden"); // hidden search input
     $('#date_debut_filtre, #date_fin_filtre').datepicker({dateFormat: 'dd/mm/yy'});
     $("#panel-table h2").empty().append(projections[idPrj]);
 
@@ -58,6 +59,7 @@ $(document).ready(function () {
         $("#mainTables").empty().append(thead);
         if (typeof texport == "undefined") { // chargement par défaut "sans paramètres"
             $("#mainTables").DataTable({
+                language: {sLengthMenu: "_MENU_"},
                 "order": [],
                 "bProcessing": true,
                 "serverSide": true,
@@ -74,7 +76,15 @@ $(document).ready(function () {
 
             });
 
+            Table = $('#mainTables').DataTable(); //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
+            $('#search').keyup(function () {
+                Table.search($(this).val()).draw();
+            });
 
+            $("#mainTables_length").detach().appendTo('#showData');
+            // $("#mainTables_length").find("label").css('display', 'inline');
+            $("#mainTables_length").find("input").addClass('input-sm');
+            $(".dt-buttons").detach().appendTo('#colVis');
 
 
             //////////////////export all///////////////
@@ -107,11 +117,23 @@ $(document).ready(function () {
                             });
                         }
                         $("#mainTables").DataTable({
+                            language: {sLengthMenu: "_MENU_"},
                             dom: 'lBfrtip', // You just lack the l flag in dom. l for "length changing input control".
                             buttons: [
                                 'colvis'
                             ]
                         });
+                        $("#colVis").empty();
+                        $(".dt-buttons").detach().appendTo('#colVis');
+                        $("#showData").empty();
+                        $("#mainTables_length").detach().appendTo('#showData');
+                        $("#mainTables_length").find("input").addClass('input-sm');
+                        Table = $('#mainTables').DataTable(); //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
+                        $('#search').keyup(function () {
+                            Table.search($(this).val()).draw();
+                        });
+                        $("#mainTables_filter").addClass("hidden"); // hidden search input
+
                     });
 
 
@@ -153,11 +175,22 @@ $(document).ready(function () {
                             });
                         }
                         $("#mainTables").DataTable({
+                            language: {sLengthMenu: "_MENU_"},
                             dom: 'lBfrtip', // You just lack the l flag in dom. l for "length changing input control".
                             buttons: [
                                 'colvis'
                             ]
                         });
+                        $("#colVis").empty();
+                        $(".dt-buttons").detach().appendTo('#colVis');
+                        $("#showData").empty();
+                        $("#mainTables_length").detach().appendTo('#showData');
+                        $("#mainTables_length").find("input").addClass('input-sm');
+                        Table = $('#mainTables').DataTable(); //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
+                        $('#search').keyup(function () {
+                            Table.search($(this).val()).draw();
+                        });
+                        $("#mainTables_filter").addClass("hidden"); // hidden search input
                     });
 
             //////////////// export filtre ///////////////
@@ -191,14 +224,23 @@ $(document).ready(function () {
                             });
                         }
                         $("#mainTables").DataTable({
+                            language: {sLengthMenu: "_MENU_"},
                             dom: 'lBfrtip', // You just lack the l flag in dom. l for "length changing input control".
                             buttons: [
                                 'colvis'
                             ]
                         });
+                        $("#colVis").empty();
+                        $(".dt-buttons").detach().appendTo('#colVis');
+                        $("#showData").empty();
+                        $("#mainTables_length").detach().appendTo('#showData');
+                        $("#mainTables_length").find("input").addClass('input-sm');
+                        Table = $('#mainTables').DataTable(); //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
+                        $('#search').keyup(function () {
+                            Table.search($(this).val()).draw();
+                        });
+                        $("#mainTables_filter").addClass("hidden"); // hidden search input
                     });
-
-
 
         }
     }

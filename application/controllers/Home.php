@@ -380,6 +380,8 @@ class Home extends Home_Controller {
   public function drop_column() {
     $this->report->dropQuery()  ;
     $this->load->view("main_select", $this->data);
-  }  
+  } 
+  
+
 
 }
