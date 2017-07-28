@@ -58,6 +58,30 @@ include('include/head.php');
                                                 </select>
                                                 <p style="font-size: 12px; display: inline;"><?php echo $this->lang->line('sub_categ_not_found'); ?></p><a href="#" id="add_sous_categ" data-toggle="modal" onclick=" $('#addSubCateg').modal('show')" style="font-size: 12px; display: inline;"> <?php echo $this->lang->line('create_new'); ?></a>
                                             </div>
+                                            <div class="form-group">
+                                                <div class="am-checkbox">
+                                                    <input id="chart" type="checkbox" class="needsclick">
+                                                    <label for="chart"><?php echo $this->lang->line('genetate_chart'); ?></label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                            <div class="form-group col-md-8">
+                                                <fieldset>
+                                                    <legend>Chart Configuration</legend>
+                                                    <select  name="chartType" class="form-control" >
+                                                    <option value="">-- <?php echo $this->lang->line('select_chart'); ?> --</option>
+                                                </select> <br>
+                                                    <select  name="chartType" class="form-control" >
+                                                    <option value="">-- <?php echo $this->lang->line('select_X'); ?> --</option>
+                                                </select> <br>
+                                                    <select  name="chartType" class="form-control" >
+                                                    <option value="">-- <?php echo $this->lang->line('select_Y'); ?> --</option>
+                                                </select> <br>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-4"></div>
+                                            </div>
+
                                             <div class="text-right">
                                                 <input type="submit" class="btn btn-space btn-primary" value="<?php echo $this->lang->line('save'); ?>" >
                                             </div>
