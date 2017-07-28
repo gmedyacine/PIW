@@ -23,6 +23,8 @@ class Home extends Home_Controller {
     public function index() {
 
         $this->data["title"] = "Selectionnez une projection";
+        $this->data["calenders"] = json_encode($this->report->getCalender());
+        $this->data["nbr_uploads"] = json_encode($this->report->getNbrUploads());
         $this->load->view('main_select', $this->data);
     }
 
@@ -33,7 +35,7 @@ class Home extends Home_Controller {
     public function projection($id) {
 
         $retPrj = $this->projection->getProjection($id);
-        $dataPrj = empty($retPrj["data"]) ? array(): $retPrj["data"];
+        $dataPrj = empty($retPrj["data"]) ? array() : $retPrj["data"];
         $dataColonneNames = $this->projection->getNameColonne($id);
         $this->data["dataTable"] = json_encode($dataPrj);
         $this->data["dataNameColonne"] = json_encode($dataColonneNames);
@@ -42,14 +44,6 @@ class Home extends Home_Controller {
         $lastDate = $retPrj["lastDate"];
         $this->data['lastDate'] = json_encode($lastDate);
         $this->load->view("projection", $this->data);
-    }
-
-    public function report($id_categ_report, $id_group_report = 0) {
-        $data = $this->data;
-        $data["idCatRept"] = json_encode($id_categ_report);
-        $data["idGrpRept"] = json_encode($id_group_report);
-
-        $this->load->view("projection", $data);
     }
 
     public function excuteFiltre() {
@@ -377,11 +371,9 @@ class Home extends Home_Controller {
     }
 
     // executer cette fonction pour supprimer les colonnes report_categ et report_sous_categ des tables report
-  public function drop_column() {
-    $this->report->dropQuery()  ;
-    $this->load->view("main_select", $this->data);
-  } 
-  
-
+    public function drop_column() {
+        $this->report->dropQuery();
+        $this->load->view("main_select", $this->data);
+    }
 
 }

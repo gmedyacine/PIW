@@ -203,6 +203,47 @@ Class Report extends CI_Model {
             $this->db->query($sql_drop_column_sous_cat);
         }
     }
+    
+    function getCalender() {
+        $query = $this->db->distinct()
+                ->select('calendrier')
+                ->from('ipw_files')
+                ->order_by('calendrier', 'ASC')
+                ->get();
+        $ret = $query->result_array(); // selectionner les date 
+        $result = array(); // declarer le tableau des resultats
+        foreach ($ret as $key => $val) {
+            $date = array_values($val);
+            $result[] = $date[0];  // enregistrer la valeur de la date dans $calender
+        }
+        return $result; //  retourne les dates sans répétition  
+    }
+
+    function getNbrUploads() {
+        $query = $this->db->distinct()
+                ->select('calendrier')
+                ->from('ipw_files')
+                ->order_by('calendrier', 'ASC')
+                ->get();
+        $ret = $query->result_array(); // selectionner les date 
+        $result = array(); // declarer le tableau des resultats
+        foreach ($ret as $key => $val) {
+            $date = array_values($val);
+            $calender = $date[0];  // enregistrer la valeur de la date dans $calender
+            $queryCount = $this->db->select('count(*)')
+                    ->from('ipw_files')
+                    ->where('calendrier', $calender)
+                    ->get();
+            $res = $queryCount->result_array();  // selectionner le nombre de fichiers par date
+            foreach ($res as $key => $val) {
+                $set = array_values($val);
+                $count = intval($set[0]);
+                // $result[$calender] = $count; // stocker la combinaison (date,nbr_upload) dans un tableau associatif
+                $result[] = $count; // stocker les resultats (les nbr de Uploads)dans un tableau non associatif
+            }
+        }
+        return $result; // retourne les nbr de downloads
+    }
 
 }
 
