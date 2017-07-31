@@ -18421,6 +18421,26 @@ fieldset[disabled] .btn-social.btn-tumblr.active {
 /*------------------------------------------------------------------
   [Tables]
 */
+tr.bri{
+    background: #f0d7d7 !important;
+    color: #000000;
+}
+ 
+
+#nav li ul.sub-menu li a ul{
+    display: none ;
+}
+#nav li ul.sub-menu li a ul.active{
+    display: block ;
+}
+ #nav li ul.sub-menu li a ul.active li{
+    display: block ;
+
+}
+  #nav li ul.sub-menu li a ul  li{
+    
+    margin:   5px 0;
+}
 .table > thead > tr > th {
   border-bottom-width: 1px;
   font-weight: 400;
@@ -21148,4 +21168,25 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before, table.dataT
 #colVis{
     margin-top: 0px;
     padding-left: 0px;
+}
+
+/*Debut ouvrir le menu gauche au survole*/
+
+@media screen and (min-width: 767px)  { 
+    .am-left-sidebar .sidebar-elements > li:hover > ul {
+    display: block;
+}
+}
+#reports ul.open{
+  display: none;
+}
+
+/*fin ouvrir le menu gauche au survole*/
+
+.select2-container {
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0;
+    position: relative;
+    vertical-align: middle;
 }

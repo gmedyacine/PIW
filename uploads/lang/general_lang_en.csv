@@ -81,3 +81,4 @@ chart_config;Chart Configuration
 select_chart;Select a type of chart
 select_X;Select the X axis
 select_Y;Select the Y axis
+select_options;Select Multiple options

@@ -60,26 +60,35 @@ include('include/head.php');
                                             </div>
                                             <div class="form-group">
                                                 <div class="am-checkbox">
-                                                    <input id="chart" type="checkbox" class="needsclick">
-                                                    <label for="chart"><?php echo $this->lang->line('genetate_chart'); ?></label>
+                                                    <input id="chartCheck" type="checkbox" class="needsclick">
+                                                    <label for="chartCheck"><?php echo $this->lang->line('genetate_chart'); ?></label>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                            <div class="form-group col-md-8">
-                                                <fieldset>
-                                                    <legend>Chart Configuration</legend>
-                                                    <select  name="chartType" class="form-control" >
-                                                    <option value="">-- <?php echo $this->lang->line('select_chart'); ?> --</option>
-                                                </select> <br>
-                                                    <select  name="chartType" class="form-control" >
-                                                    <option value="">-- <?php echo $this->lang->line('select_X'); ?> --</option>
-                                                </select> <br>
-                                                    <select  name="chartType" class="form-control" >
-                                                    <option value="">-- <?php echo $this->lang->line('select_Y'); ?> --</option>
-                                                </select> <br>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col-md-4"></div>
+                                            <div class="row" id="chart_config">
+                                                <div class="form-group col-md-8">
+                                                    <fieldset>
+                                                        <legend>Chart Configuration</legend>
+                                                        <select  name="chartType" class="form-control" >
+                                                            <option value="">-- <?php echo $this->lang->line('select_chart'); ?> --</option>
+                                                            <option value="">-- Courbe --</option>
+                                                            <option value="">-- historgamme --</option>
+                                                            <option value="">-- Cercle --</option>
+                                                        </select> <br>
+                                                        <select id="chartX" name="chartX" class="form-control" >
+                                                            <option value="">-- <?php echo $this->lang->line('select_X'); ?> --</option>
+                                                        </select> <br>
+                                                        <select  id="chartY" name="chartY" class="form-control" >
+                                                            <option value="">-- <?php echo $this->lang->line('select_Y'); ?> --</option>
+                                                        </select> <br>
+                                          <select  id="multi" name="multi" class="form-control" >
+                                                            <option value="">-- <?php echo $this->lang->line('select_options'); ?> --</option>
+                                                        </select> <br>
+                                          
+                                                          
+                                                 
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-md-4"></div>
                                             </div>
 
                                             <div class="text-right">
@@ -114,6 +123,7 @@ include('include/head.php');
                 <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
                 <script type="text/javascript">
                                                     $(document).ready(function () {
+                                                        $("#chart_config").hide();
                                                         $(".chosen-select").chosen({
                                                             search_contains: true
                                                         });
@@ -131,7 +141,6 @@ include('include/head.php');
                     });
                 </script>
                 <script type="text/javascript">
-
                     loadRpt();
                     function loadRpt() {
                         $.each(rpt_allow_tables, function (i, item) {
@@ -141,6 +150,41 @@ include('include/head.php');
                             }));
                         });
                     }
+                </script>
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+
+                        $('input[type="checkbox"]').click(function () {
+                            if ($(this).prop("checked") == true) {
+                                $("#chart_config").show();
+                            } else if ($(this).prop("checked") == false) {
+                                $("#chart_config").hide();
+                            }
+                        });
+                        var cols;
+                        var rept = $("#rpt_select").find(":selected").val();
+                        $.ajax({
+                            type: "GET",
+                            url: "<?php echo base_url(); ?>index.php/home/getColumns/",
+                            dataType: 'json',
+                            data: {rept_id: rept},
+                            success: function (result) {
+                                clos = result;
+                            }
+                        });
+
+                        loadCols();
+                        function loadCols() {
+                            $.each(cols, function (i, item) {
+                                $('#chartX').append($('<option>', {
+                                    value: i,
+                                    text: item
+                                }));
+                            });
+                        }
+                    });
+
                 </script>
 
                 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>

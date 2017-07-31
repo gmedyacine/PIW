@@ -375,5 +375,16 @@ class Home extends Home_Controller {
         $this->report->dropQuery();
         $this->load->view("main_select", $this->data);
     }
+    
+    public function getColumns(){
+        $id=$this->input->get('rept_id');
+       $result = $this->projection->getNameColonne($id);
+        
+        $this->output->set_content_type('application/json');
+        $this->output->set_output(json_encode($result));
+
+        return $result;
+       
+    }
 
 }
