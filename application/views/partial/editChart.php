@@ -46,7 +46,7 @@
                     </div>
                     <div class="row form-group">   
                         <div class="col-md-3">
-                            <label for="chartY" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('x_axis'); ?></label>                     
+                            <label for="chartY" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('y_axis'); ?></label>                     
                         </div>
                         <div class="col-md-9">
                             <select id="chartY" name="chartY" class="form-control" required="">
