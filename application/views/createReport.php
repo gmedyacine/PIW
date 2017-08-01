@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
 ?>
 <link href="<?php echo base_url(); ?>assets/css/bootstrap-chosen.css" rel="stylesheet" />
+<link href="<?php echo base_url(); ?>assets/css/select2.min.css" rel="stylesheet" />
 <script type="text/javascript">
     var projections = <?php echo $projections; ?>;
     var rpt_tables_json = <?php echo $rpt_tables_json; ?>;
@@ -11,6 +12,7 @@ include('include/head.php');
     var msg_required = "<?php echo $this->lang->line("required_field"); ?>";
     var report_categ_json = <?php echo $report_categ_json; ?>;
     var report_sous_categ_json = <?php echo $report_sous_categ_json; ?>;
+    var cols;
 
 </script>
 <body>
@@ -40,7 +42,7 @@ include('include/head.php');
 
                                             <div class="form-group">								   
                                                 <select  id="rpt_select" name="old_name"  class="form-control chosen-select" tabindex="2" required>
-
+                                                    <option value="">-- <?php echo $this->lang->line('select_report'); ?> --</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -68,24 +70,41 @@ include('include/head.php');
                                                 <div class="form-group col-md-8">
                                                     <fieldset>
                                                         <legend>Chart Configuration</legend>
-                                                        <select  name="chartType" class="form-control" >
-                                                            <option value="">-- <?php echo $this->lang->line('select_chart'); ?> --</option>
-                                                            <option value="">-- Courbe --</option>
-                                                            <option value="">-- historgamme --</option>
-                                                            <option value="">-- Cercle --</option>
-                                                        </select> <br>
-                                                        <select id="chartX" name="chartX" class="form-control" >
-                                                            <option value="">-- <?php echo $this->lang->line('select_X'); ?> --</option>
-                                                        </select> <br>
-                                                        <select  id="chartY" name="chartY" class="form-control" >
-                                                            <option value="">-- <?php echo $this->lang->line('select_Y'); ?> --</option>
-                                                        </select> <br>
-                                          <select  id="multi" name="multi" class="form-control" >
-                                                            <option value="">-- <?php echo $this->lang->line('select_options'); ?> --</option>
-                                                        </select> <br>
-                                          
-                                                          
-                                                 
+                                                        <div class="form-group col-md-2">
+                                                            <label for="chartType" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('chart_type'); ?></label>
+                                                        </div>
+                                                        <div class="form-group col-md-8">
+                                                            <select  id="chartType" name="chartType" class="form-control " >
+                                                                <option value="">-- <?php echo $this->lang->line('select_chart'); ?> --</option>
+                                                                <option value="">-- Courbe --</option>
+                                                                <option value="">-- historgamme --</option>
+                                                                <option value="">-- Cercle --</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-2">
+                                                            <label for="chartX" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('x_axis'); ?></label>
+                                                        </div>
+                                                        <div class="form-group col-md-8">
+                                                            <select id="chartX" name="chartX" class="form-control" required="">
+                                                                <option value="">-- <?php echo $this->lang->line('select_X'); ?> --</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-2">
+                                                            <label for="chartY" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('y_axis'); ?></label>
+                                                        </div>
+                                                        <div class="form-group col-md-8">
+                                                            <select  id="chartY" name="chartY" class="form-control" required="">
+                                                                <option value="">-- <?php echo $this->lang->line('select_Y'); ?> --</option>
+                                                            </select> 
+                                                        </div>
+                                                        <div class="form-group col-md-2">
+                                                            <label for="multi" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('y_axis'); ?></label>
+                                                        </div>
+                                                        <div class="form-group col-md-8">
+                                                            <select  multiple="" id="multi" name="multi" class="form-control tags" >
+                                                                <option value="">-- <?php echo $this->lang->line('select_options'); ?> --</option>
+                                                            </select> 
+                                                        </div>
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-md-4"></div>
@@ -121,9 +140,11 @@ include('include/head.php');
                 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/validateCreateReport.js"></script>
 
                 <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
+                <script src="<?php echo base_url(); ?>assets/js/select2.min.js"></script>
                 <script type="text/javascript">
                                                     $(document).ready(function () {
                                                         $("#chart_config").hide();
+
                                                         $(".chosen-select").chosen({
                                                             search_contains: true
                                                         });
@@ -162,27 +183,36 @@ include('include/head.php');
                                 $("#chart_config").hide();
                             }
                         });
-                        var cols;
-                        var rept = $("#rpt_select").find(":selected").val();
-                        $.ajax({
-                            type: "GET",
-                            url: "<?php echo base_url(); ?>index.php/home/getColumns/",
-                            dataType: 'json',
-                            data: {rept_id: rept},
-                            success: function (result) {
-                                clos = result;
-                            }
-                        });
 
-                        loadCols();
-                        function loadCols() {
-                            $.each(cols, function (i, item) {
-                                $('#chartX').append($('<option>', {
-                                    value: i,
-                                    text: item
-                                }));
+                        $('#rpt_select').on('change', function () {
+                            var rept = $("#rpt_select").find(":selected").val();
+                            $.ajax({
+                                type: "GET",
+                                url: "<?php echo base_url(); ?>index.php/home/getColumns/",
+                                dataType: 'json',
+                                data: {rept_id: rept},
+                                success: function (result) {
+                                    $('#chartX').empty();
+                                    $('#chartY').empty();
+                                    $('#multi').empty();
+                                    $.each(result, function (i, item) {
+
+                                        $('#chartX').append($('<option>', {
+                                            value: i,
+                                            text: item
+                                        }));
+                                        $('#chartY').append($('<option>', {
+                                            value: i,
+                                            text: item
+                                        }));
+                                        $('#multi').append($('<option>', {
+                                            value: i,
+                                            text: item
+                                        }));
+                                    });
+                                }
                             });
-                        }
+                        });
                     });
 
                 </script>

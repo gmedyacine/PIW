@@ -74,10 +74,9 @@ include('include/dataTables.php');
                                         <!--end row filtres dataTables-->
 
                                     </div>
+
                                     <div class="row">
                                         <!-- Debut btn export excel -->  
-
-
                                         <div class="btn-group col-md-12 col-sm-12 col-xs-12">
 
                                             <button class="btn btn-success dropdown-toggle " type="button" id="dropdownMenu1"
@@ -107,6 +106,14 @@ include('include/dataTables.php');
 
                         </fieldset>
 
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div id="chart" class="col-md-12 col-sm-12" style="height: 300px; width: 100%;">
+
+                                </div>
+                            </div>
+                        </div>
+
 
                         <!-- Début titre du tableau et lien export excel-->
                         <div id="panel-table" class="widget widget-fullwidth widget-small">
@@ -130,11 +137,13 @@ include('include/dataTables.php');
                             </table>
 
                         </div>
-
+<?php include('partial/editChart.php'); ?>
 
                     </div> <!-- fin pagination  -->
 
-                    <script src="<?php echo base_url(); ?>assets/js/projection.js"></script>			 
+                    <script src="<?php echo base_url(); ?>assets/js/projection.js"></script>	
+                    <script src="https://code.highcharts.com/highcharts.js"></script>
+                    <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
                     <script>$('.dropdown-toggle').dropdown();
                     </script>
@@ -148,6 +157,81 @@ include('include/dataTables.php');
                                 });
                             }, 1000);
 
+                        });
+                    </script>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            Highcharts.setOptions({
+                                lang: {
+                                    editBtn: "Edit",
+                                    deleteBtn: "Delete"
+                                }
+                            });
+                            Highcharts.chart('chart', {
+                                chart: {
+                                    type: 'line'
+                                },
+                                title: {
+                                    text: 'Monthly Average Temperature'
+                                },
+                                subtitle: {
+                                    text: 'Source: WorldClimate.com'
+                                },
+                                xAxis: {
+                                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                                },
+                                yAxis: {
+                                    title: {
+                                        text: 'Temperature (°C)'
+                                    }
+                                },
+                                plotOptions: {
+                                    line: {
+                                        dataLabels: {
+                                            enabled: true
+                                        },
+                                        enableMouseTracking: false
+                                    }
+                                },
+                                series: [{
+                                        name: 'Tokyo',
+                                        data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+                                    }, {
+                                        name: 'London',
+                                        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                                    }],
+                                exporting: {
+                                    buttons: {
+                                        'edit': {
+                                            _id: 'edit',
+                                            symbol: 'url(<?php echo base_url(); ?>assets/img/edit.png)',
+                                            _titleKey: 'edit',
+                                            symbolX: 20,
+                                            symbolY: 18,
+                                            x: -45,
+                                            symbolFill: '#B5C9DF',
+                                            hoverSymbolFill: '#779ABF',
+                                            _titleKey: "editBtn",
+                                            onclick: function () {
+                                                $('#editChart').modal('show');
+                                            }
+                                        },
+                                        'delete': {
+                                            _id: 'delete',
+                                            symbol: 'url(<?php echo base_url(); ?>assets/img/delete.png)',
+                                            symbolX: 20,
+                                            symbolY: 18,
+                                            x: -88,
+                                            symbolFill: '#B5C9DF',
+                                            hoverSymbolFill: '#779ABF',
+                                            _titleKey: "deleteBtn",
+                                            onclick: function () {
+                                                alert('Delete chart ?')
+                                            }
+                                        }
+                                    }
+                                }
+                            });
                         });
                     </script>
 
