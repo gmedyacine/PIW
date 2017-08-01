@@ -49,7 +49,7 @@
                             <label for="chartY" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('x_axis'); ?></label>                     
                         </div>
                         <div class="col-md-9">
-                            <select id="chartX" name="chartX" class="form-control" required="">
+                            <select id="chartX" name="chartY" class="form-control" required="">
                                 <option value="">-- <?php echo $this->lang->line('select_Y'); ?> --</option>
                             </select>
                         </div>
