@@ -12,7 +12,7 @@ include('include/head.php');
     var msg_required = "<?php echo $this->lang->line("required_field"); ?>";
     var report_categ_json = <?php echo $report_categ_json; ?>;
     var report_sous_categ_json = <?php echo $report_sous_categ_json; ?>;
-  
+
 </script>
 <body>
 
@@ -97,7 +97,7 @@ include('include/head.php');
                                                             </select> 
                                                         </div>
                                                         <div class="form-group col-md-2">
-                                                            <label for="multi" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('y_axis'); ?></label>
+                                                            <label for="multi" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('multi_options'); ?></label>
                                                         </div>
                                                         <div class="form-group col-md-8">
                                                             <select  multiple id="multi" name="multi[]" class="form-control tags" >
@@ -178,15 +178,17 @@ include('include/head.php');
                         $('input[type="checkbox"]').click(function () {
                             if ($(this).prop("checked") == true) {
                                 $("#chart_config").show();
-                                 $('#chartType').attr('required', 'required');
+                                $('#chartType').attr('required', 'required');
                                 $('#chartX').attr('required', 'required');
-                                    $('#chartY').attr('required', 'required');
-                                   
+                                $('#chartY').attr('required', 'required');
+                                $('#multi').attr('required', 'required');
+
                             } else if ($(this).prop("checked") == false) {
                                 $("#chart_config").hide();
                                 $('#chartType').removeAttr('required');
                                 $('#chartX').removeAttr('required');
-                                    $('#chartY').removeAttr('required');
+                                $('#chartY').removeAttr('required');
+                                $('#multi').removeAttr('required');
                             }
                         });
 
