@@ -53,6 +53,7 @@ Class Report extends CI_Model {
                 ->from("ipw_create_report")
                 ->join("ipw_report_categ", 'ipw_report_categ.id_report_categ = report_categ')
                 ->join("ipw_report_sous_categ", 'ipw_report_sous_categ.id_report_sous_categ = report_sous_categ', "LEFT OUTER")
+                ->join("ipw_chart", 'ipw_chart.id_report = old_report_name', "LEFT OUTER")
                 ->get(); //select * from ipw_report_categ‏
 
         $ret = $query->result_array();
@@ -92,27 +93,14 @@ Class Report extends CI_Model {
         }
     }
 
-    function createReport($data) {
-        $user_id = $data['renamed_by'];
-        $report_id = $data['old_report_name'];
-        $new_report_name = $data['new_report_name'];
-        $report_categ = $data['report_categ'];
-        $report_sous_categ = $data['report_sous_categ'];
+    function createReport($data, $chart) {
 
-        $this->db->select('*');
-        $this->db->from('ipw_create_report');
-        $this->db->where('old_report_name', $report_id);
-
-        if ($this->db->count_all_results() == 0) {
-            if ($this->db->insert('ipw_create_report', $data)) {
+        if (!empty($chart)) { // si le tableau $chart n'est pas vide .. on le créé le rapport et on créé son configuration
+            if (($this->db->insert('ipw_create_report', $data)) && ($this->db->insert('ipw_chart', $chart))) {
                 return true;
             }
         } else {
-            if ($this->db->set('new_report_name', $new_report_name)
-                            ->set('report_categ', $report_categ)
-                            ->set('report_sous_categ', $report_sous_categ)
-                            ->where('old_report_name', $report_id)
-                            ->update('ipw_create_report')) {
+            if ($this->db->insert('ipw_create_report', $data)) {
                 return true;
             }
         }
@@ -203,14 +191,14 @@ Class Report extends CI_Model {
             $this->db->query($sql_drop_column_sous_cat);
         }
     }
-    
+
     function getCalender() {
         $query = $this->db->distinct()
                 ->select('calendrier')
                 ->from('ipw_files')
                 ->order_by('calendrier', 'ASC')
                 ->get();
-        $ret = $query->result_array(); // selectionner les date 
+        $ret = $query->result_array(); // selectionner les dates 
         $result = array(); // declarer le tableau des resultats
         foreach ($ret as $key => $val) {
             $date = array_values($val);
@@ -243,6 +231,56 @@ Class Report extends CI_Model {
             }
         }
         return $result; // retourne les nbr de downloads
+    }
+
+    function getChartReportId($id) {
+        $query = $this->db->select('id_report')
+                ->from("ipw_chart")
+                ->where('id_report', $id)
+                ->get(); //select * from ipw_report_categ‏
+
+        $ret = $query->result_array();
+        $report;
+        foreach ($ret as $key => $val) {
+            $set = array_values($val);
+            $report = intval($set[0]);
+            // $result[] = $count; // stocker les resultats (les nbr de Uploads)dans un tableau non associatif
+        }
+        if ($ret) {
+            return $report; // return all fields of table : ipw_create_report
+        } else {
+            return null;
+        }
+    }
+
+    function getChartConfig($id) {
+        $query = $this->db->select('*')
+                ->from("ipw_chart")
+                ->where('id_report', $id)
+                ->get(); //select * from ipw_report_categ‏
+
+        $ret = $query->result_array();
+
+        if ($ret) {
+            return $ret; // return all fields of table : ipw_create_report
+        } else {
+            return null;
+        }
+    }
+
+    function editChart($id_projection, $chartType, $chartX, $chartY, $multi) {
+        if ($this->db->set('chartType', $chartType)
+                        ->set('chartX', $chartX)
+                        ->set('chartY', $chartY)
+                        ->set('multi', $multi)
+                        ->where('id_report', $id_projection)
+                        ->update('ipw_chart')) {
+            return true;
+        }
+    }
+     function deleteChart($id) {
+        $this->db->where("id_report", $id);
+        $this->db->delete("ipw_chart");
     }
 
 }

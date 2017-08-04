@@ -21170,7 +21170,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before, table.dataT
     padding-left: 0px;
 }
 
-/*Debut ouvrir le menu gauche au survole*/
+/*Debut ouvrir le menu gauche au survole
 
 @media screen and (min-width: 767px)  { 
     .am-left-sidebar .sidebar-elements > li:hover > ul {
@@ -21181,7 +21181,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before, table.dataT
   display: none;
 }
 
-/*fin ouvrir le menu gauche au survole*/
+fin ouvrir le menu gauche au survole*/
 
 .select2-container {
     box-sizing: border-box;

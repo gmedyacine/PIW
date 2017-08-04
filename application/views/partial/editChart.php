@@ -1,4 +1,18 @@
 <!-- Modal -->
+<script type="text/javascript">
+
+    var chartType;
+    var chartX;
+    var chartY;
+    var multi;
+    $.each(chartConfigJson, function (key, element) {
+        chartType = element.chartType;
+        chartX = element.chartX;
+        chartY = element.chartY;
+        multi = element.multi;
+    });
+
+</script>
 <div class="modal fade" id="editChart" tabindex="-1" role="dialog" aria-labelledby="basicModal" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -26,9 +40,9 @@
                         <div class="col-md-9">
                             <select  id="chartType" name="chartType" class="form-control " >
                                 <option value="">-- <?php echo $this->lang->line('select_chart'); ?> --</option>
-                                <option value="">-- Courbe --</option>
-                                <option value="">-- historgamme --</option>
-                                <option value="">-- Cercle --</option>
+                                <option value="line">-- Courbe --</option>
+                                <option value="column">-- historgamme --</option>
+                                <option value="pie">-- Cercle --</option>
                             </select>
                         </div>
 
@@ -57,10 +71,10 @@
                     </div>
                     <div class="row form-group">   
                         <div class="col-md-3">
-                            <label for="chartY" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('multi_options'); ?></label>                     
+                            <label for="multi" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('multi_options'); ?></label>                     
                         </div>
                         <div class="col-md-9">
-                            <select multiple="" id="chartY" name="chartX" class="form-control" required="">
+                            <select multiple id="multi" name="multi[]" class="form-control" >
                                 <option value="">-- <?php echo $this->lang->line('select_options'); ?> --</option>
                             </select>
                         </div>
@@ -80,6 +94,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#chartType').val(chartType);
         var report = <?php echo $id_projection; ?>;
         $.ajax({
             type: "GET",
@@ -89,20 +104,24 @@
             success: function (result) {
                 $.each(result, function (i, item) {
                     $('#chartX').append($('<option>', {
-                        value: i,
+                        value: item,
                         text: item
                     }));
                     $('#chartY').append($('<option>', {
-                        value: i,
+                        value: item,
                         text: item
                     }));
                     $('#multi').append($('<option>', {
-                        value: i,
+                        value: item,
                         text: item
                     }));
+
+                    $('#chartX').val(chartX);
+                    $('#chartY').val(chartY);
                 });
             }
         });
+
     });
 
 </script>

@@ -12,8 +12,7 @@ include('include/head.php');
     var msg_required = "<?php echo $this->lang->line("required_field"); ?>";
     var report_categ_json = <?php echo $report_categ_json; ?>;
     var report_sous_categ_json = <?php echo $report_sous_categ_json; ?>;
-    var cols;
-
+  
 </script>
 <body>
 
@@ -62,7 +61,7 @@ include('include/head.php');
                                             </div>
                                             <div class="form-group">
                                                 <div class="am-checkbox">
-                                                    <input id="chartCheck" type="checkbox" class="needsclick">
+                                                    <input id="chartCheck" type="checkbox" name="chartCheck" value="chart" class="needsclick">
                                                     <label for="chartCheck"><?php echo $this->lang->line('genetate_chart'); ?></label>
                                                 </div>
                                             </div>
@@ -76,16 +75,16 @@ include('include/head.php');
                                                         <div class="form-group col-md-8">
                                                             <select  id="chartType" name="chartType" class="form-control " >
                                                                 <option value="">-- <?php echo $this->lang->line('select_chart'); ?> --</option>
-                                                                <option value="">-- Courbe --</option>
-                                                                <option value="">-- historgamme --</option>
-                                                                <option value="">-- Cercle --</option>
+                                                                <option value="line">-- Courbe --</option>
+                                                                <option value="column">-- historgamme --</option>
+                                                                <option value="pie">-- Cercle --</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-2">
                                                             <label for="chartX" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('x_axis'); ?></label>
                                                         </div>
                                                         <div class="form-group col-md-8">
-                                                            <select id="chartX" name="chartX" class="form-control" required="">
+                                                            <select id="chartX" name="chartX" class="form-control" >
                                                                 <option value="">-- <?php echo $this->lang->line('select_X'); ?> --</option>
                                                             </select>
                                                         </div>
@@ -93,7 +92,7 @@ include('include/head.php');
                                                             <label for="chartY" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('y_axis'); ?></label>
                                                         </div>
                                                         <div class="form-group col-md-8">
-                                                            <select  id="chartY" name="chartY" class="form-control" required="">
+                                                            <select  id="chartY" name="chartY" class="form-control" >
                                                                 <option value="">-- <?php echo $this->lang->line('select_Y'); ?> --</option>
                                                             </select> 
                                                         </div>
@@ -101,7 +100,7 @@ include('include/head.php');
                                                             <label for="multi" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('y_axis'); ?></label>
                                                         </div>
                                                         <div class="form-group col-md-8">
-                                                            <select  multiple="" id="multi" name="multi" class="form-control tags" >
+                                                            <select  multiple id="multi" name="multi[]" class="form-control tags" >
                                                                 <option value="">-- <?php echo $this->lang->line('select_options'); ?> --</option>
                                                             </select> 
                                                         </div>
@@ -179,8 +178,15 @@ include('include/head.php');
                         $('input[type="checkbox"]').click(function () {
                             if ($(this).prop("checked") == true) {
                                 $("#chart_config").show();
+                                 $('#chartType').attr('required', 'required');
+                                $('#chartX').attr('required', 'required');
+                                    $('#chartY').attr('required', 'required');
+                                   
                             } else if ($(this).prop("checked") == false) {
                                 $("#chart_config").hide();
+                                $('#chartType').removeAttr('required');
+                                $('#chartX').removeAttr('required');
+                                    $('#chartY').removeAttr('required');
                             }
                         });
 
@@ -198,15 +204,15 @@ include('include/head.php');
                                     $.each(result, function (i, item) {
 
                                         $('#chartX').append($('<option>', {
-                                            value: i,
+                                            value: item,
                                             text: item
                                         }));
                                         $('#chartY').append($('<option>', {
-                                            value: i,
+                                            value: item,
                                             text: item
                                         }));
                                         $('#multi').append($('<option>', {
-                                            value: i,
+                                            value: item,
                                             text: item
                                         }));
                                     });

@@ -13,7 +13,7 @@
     var menu_report = <?php echo $menu_report; ?>;
 
 </script>
-
+<?php //echo $id_projection; die ?>
 <div class="am-left-sidebar">
     <div class="content">
         <div class="am-logo"></div>    <!-- Colonne du Menu -->

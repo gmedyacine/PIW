@@ -37,6 +37,8 @@ class Home extends Home_Controller {
         $retPrj = $this->projection->getProjection($id);
         $dataPrj = empty($retPrj["data"]) ? array() : $retPrj["data"];
         $dataColonneNames = $this->projection->getNameColonne($id);
+        $this->data["chartReportId"] = json_encode($this->report->getChartReportId($id));
+        $this->data["chartConfig"] = json_encode($this->report->getChartConfig($id));
         $this->data["dataTable"] = json_encode($dataPrj);
         $this->data["dataNameColonne"] = json_encode($dataColonneNames);
         $this->data["id_projection"] = $id;
@@ -319,14 +321,28 @@ class Home extends Home_Controller {
         $report_sous_categ = $this->input->post('report_sous_categ');
         $new_name = $this->input->post('new_name');
         $old_name = $this->input->post('old_name');
+        $chartGen = $this->input->post('chartCheck');
+        $chart = array();
 
         if ($id_sous_categ == null || $id_sous_categ == '') {
             $id_sous_categ = 0;
         }
-
         $data = array('renamed_by' => $this->data['id_user_connected'], 'new_report_name' => $new_name, 'old_report_name' => $old_name, 'report_categ' => $report_categ, 'report_sous_categ' => $report_sous_categ);
 
-        if ($this->report->createReport($data)) {
+        if ($chartGen == 'chart') { //tester si l'utilisateur a coché le checkbox pour remplir la table $chart
+            $chartType = $this->input->post('chartType');
+            $chartX = $this->input->post('chartX');
+            $chartY = $this->input->post('chartY');
+            $multi = $this->input->post('multi');
+               if($multi != null){
+        $multi_str= implode(",", $multi);
+        }else{
+             $multi_str= $multi;
+        }
+
+            $chart = array('id_report' => $old_name, 'chartType' => $chartType, 'chartX' => $chartX, 'chartY' => $chartY, 'multi' => $multi_str);
+        }
+        if ($this->report->createReport($data, $chart)) {
             $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_modif") . "</div>");
         }
 
@@ -375,16 +391,37 @@ class Home extends Home_Controller {
         $this->report->dropQuery();
         $this->load->view("main_select", $this->data);
     }
-    
-    public function getColumns(){
-        $id=$this->input->get('rept_id');
-       $result = $this->projection->getNameColonne($id);
-        
+
+    //select columns to display inside <select> where generating chart of report
+    public function getColumns() {
+        $id = $this->input->get('rept_id');
+        $result = $this->projection->getNameColonne($id);
+
         $this->output->set_content_type('application/json');
         $this->output->set_output(json_encode($result));
 
         return $result;
-       
+    }
+
+    public function edit_chart() {
+        $id_projection = $this->input->post('id_projection');
+        $chartType = $this->input->post('chartType');
+        $chartX = $this->input->post('chartX');
+        $chartY = $this->input->post('chartY');
+        $multi = $this->input->post('multi');
+        if($multi != null){
+        $multi_str= implode(",", $multi);
+        }else{
+             $multi_str= $multi;
+        }
+
+         if ($this->report->editChart($id_projection, $chartType,$chartX, $chartY, $multi_str )) {
+            $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_modif") . "</div>");
+        }
+        redirect('projection/' . $id_projection, 'refresh');
+    }
+    public function delete_chart($id) {
+        $this->report->deleteChart($id);         
     }
 
 }

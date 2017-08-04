@@ -5,10 +5,26 @@ include('include/dataTables.php');
 ?>
 
 <script type="text/javascript">
+    var base_url = "<?php echo base_url(); ?>";
     var dataTable = <?php echo $dataTable; ?>;
     var lastDate = <?php echo (string) $lastDate; ?>;
     var dataNameColonne = <?php echo $dataNameColonne; ?>;
+    var chartReportId = <?php echo $chartReportId; ?>;
+    var id_projection = <?php echo $id_projection; ?>;
+    var chartConfig = <?php echo $chartConfig; ?>;
+    var chartType;
+    var chartX;
+    var chartY;
+    var multi;
+    $.each(chartConfig, function (key, element) {
+        chartType = element.chartType;
+        chartX = element.chartX;
+        chartY = element.chartY;
+        multi = element.multi;
+    });
+
 </script>
+
 <body>
 
     <div class="am-wrapper">
@@ -105,15 +121,15 @@ include('include/dataTables.php');
 
 
                         </fieldset>
+                        <?php if ($id_projection == $chartReportId) { ?>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div id="chart" class="col-md-12 col-sm-12" style="height: 300px; width: 100%;">
 
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <div id="chart" class="col-md-12 col-sm-12" style="height: 300px; width: 100%;">
-
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
+                        <?php } ?>
 
                         <!-- Début titre du tableau et lien export excel-->
                         <div id="panel-table" class="widget widget-fullwidth widget-small">
@@ -137,7 +153,7 @@ include('include/dataTables.php');
                             </table>
 
                         </div>
-<?php include('partial/editChart.php'); ?>
+                        <?php include('partial/editChart.php'); ?>
 
                     </div> <!-- fin pagination  -->
 
@@ -161,6 +177,7 @@ include('include/dataTables.php');
                     </script>
                     <script type="text/javascript">
                         $(document).ready(function () {
+
                             Highcharts.setOptions({
                                 lang: {
                                     editBtn: "Edit",
@@ -169,7 +186,7 @@ include('include/dataTables.php');
                             });
                             Highcharts.chart('chart', {
                                 chart: {
-                                    type: 'line'
+                                    type: chartType
                                 },
                                 title: {
                                     text: 'Monthly Average Temperature'
@@ -182,7 +199,7 @@ include('include/dataTables.php');
                                 },
                                 yAxis: {
                                     title: {
-                                        text: 'Temperature (°C)'
+                                        text: chartY
                                     }
                                 },
                                 plotOptions: {
@@ -226,13 +243,22 @@ include('include/dataTables.php');
                                             hoverSymbolFill: '#779ABF',
                                             _titleKey: "deleteBtn",
                                             onclick: function () {
-                                                alert('Delete chart ?')
+                                                if (confirm('delete chart')) {
+                                                    $.ajax({
+                                                        url: base_url + "index.php/delete-chart/" + id_projection,
+                                                        type: "GET"
+                                                    }).done(function (data) {
+                                                        location.replace(base_url + "index.php/projection/" + id_projection);
+                                                    });
+                                                }
                                             }
                                         }
                                     }
                                 }
                             });
                         });
+
+
                     </script>
 
                 </div> <!-- Fin partie du tableau -->
