@@ -11,6 +11,7 @@ include('include/dataTables.php');
     var dataNameColonne = <?php echo $dataNameColonne; ?>;
     var chartReportId = <?php echo $chartReportId; ?>;
     var id_projection = <?php echo $id_projection; ?>;
+    <?php if ($id_projection == $chartReportId) { ?>
     var chartConfig = <?php echo $chartConfig; ?>;
     var chartType;
     var chartTitle;
@@ -26,6 +27,7 @@ include('include/dataTables.php');
     });
     var series = <?php echo $series; ?>;
     var xData = <?php echo $xData; ?>;
+    <?php } ?>
 
 </script>
 

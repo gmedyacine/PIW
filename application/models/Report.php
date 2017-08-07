@@ -300,41 +300,46 @@ Class Report extends CI_Model {
     }
 
     function getSeries($report, $multi) {
+        if ($multi) {
+            $query = $this->db->select($multi)
+                    ->from($report)
+                    ->get(); //select * from ipw_report_categ‏
 
-        $query = $this->db->select($multi)
-                ->from($report)
-                ->get(); //select * from ipw_report_categ‏
+            $ret = $query->result_array();
+            $series = array();
+            $data = array();
+            $multi = explode(",", $multi);
 
-        $ret = $query->result_array();
-        $series = array();
-        $data = array();
-        $multi = explode(",", $multi);
-        foreach ($multi as $row) {
+            foreach ($multi as $row) {
 
-            foreach ($ret as $cle => $valeur) {
-                $data['name'] = $row;
-                $data['data'] = array_column($ret, $row);
-                $data['data'] = array_map('intval', $data['data']); // Convertir les valeurs en entiers pour pouvoir les afficher sur le graphique
+                foreach ($ret as $cle => $valeur) {
+                    $data['name'] = $row;
+                    $data['data'] = array_column($ret, $row);
+                    $data['data'] = array_map('intval', $data['data']); // Convertir les valeurs en entiers pour pouvoir les afficher sur le graphique
+                }
+                $series[] = $data;
             }
-            $series[] = $data;
+            return $series;
         }
-        return $series;
     }
 
     function getXData($report, $xAxis) {
-        $query = $this->db->select($xAxis)
-                ->from($report)
-                ->get(); //select * from ipw_report_categ‏
+        if ($xAxis) {
+            $query = $this->db->select($xAxis)
+                    ->from($report)
+                    ->get(); //select * from ipw_report_categ‏
 
-        $ret = $query->result_array();
-        $xData = array();
+            $ret = $query->result_array();
 
-        foreach ($ret as $cle => $valeur) {
-            $data = array_values($valeur);
-            $element = $data[0];
-            $xData[] = $element;
+            $xData = array();
+
+            foreach ($ret as $cle => $valeur) {
+                $data = array_values($valeur);
+                $element = $data[0];
+                $xData[] = $element;
+            }
+            return $xData;
         }
-        return $xData;
     }
 
 }
