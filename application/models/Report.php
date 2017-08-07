@@ -244,7 +244,6 @@ Class Report extends CI_Model {
         foreach ($ret as $key => $val) {
             $set = array_values($val);
             $report = intval($set[0]);
-            // $result[] = $count; // stocker les resultats (les nbr de Uploads)dans un tableau non associatif
         }
         if ($ret) {
             return $report; // return all fields of table : ipw_create_report
@@ -268,8 +267,9 @@ Class Report extends CI_Model {
         }
     }
 
-    function editChart($id_projection, $chartType, $chartX, $chartY, $multi) {
+    function editChart($id_projection, $chartType, $chartTitle, $chartX, $chartY, $multi) {
         if ($this->db->set('chartType', $chartType)
+                        ->set('chartTitle', $chartTitle)
                         ->set('chartX', $chartX)
                         ->set('chartY', $chartY)
                         ->set('multi', $multi)
@@ -278,9 +278,63 @@ Class Report extends CI_Model {
             return true;
         }
     }
-     function deleteChart($id) {
+
+    function deleteChart($id) {
         $this->db->where("id_report", $id);
         $this->db->delete("ipw_chart");
+    }
+
+    function getOriginalReportName($id) {
+        $query = $this->db->select('report')
+                ->from('ipw_reports_show')
+                ->where('id', $id)
+                ->get(); //select * from ipw_report_categ‏
+
+        $ret = $query->result_array();
+
+        if ($ret) {
+            return $ret[0]; // return all fields of table : ipw_create_report
+        } else {
+            return null;
+        }
+    }
+
+    function getSeries($report, $multi) {
+
+        $query = $this->db->select($multi)
+                ->from($report)
+                ->get(); //select * from ipw_report_categ‏
+
+        $ret = $query->result_array();
+        $series = array();
+        $data = array();
+        $multi = explode(",", $multi);
+        foreach ($multi as $row) {
+
+            foreach ($ret as $cle => $valeur) {
+                $data['name'] = $row;
+                $data['data'] = array_column($ret, $row);
+                $data['data'] = array_map('intval', $data['data']); // Convertir les valeurs en entiers pour pouvoir les afficher sur le graphique
+            }
+            $series[] = $data;
+        }
+        return $series;
+    }
+
+    function getXData($report, $xAxis) {
+        $query = $this->db->select($xAxis)
+                ->from($report)
+                ->get(); //select * from ipw_report_categ‏
+
+        $ret = $query->result_array();
+        $xData = array();
+
+        foreach ($ret as $cle => $valeur) {
+            $data = array_values($valeur);
+            $element = $data[0];
+            $xData[] = $element;
+        }
+        return $xData;
     }
 
 }

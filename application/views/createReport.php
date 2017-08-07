@@ -81,6 +81,13 @@ include('include/head.php');
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-2">
+                                                            <label for="chartTitle" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('chart_title'); ?></label>
+                                                        </div>
+                                                        <div class="form-group col-md-8">
+                                                            <input type="text" id="chartTitle" name="chartTitle"  placeholder="<?php echo $this->lang->line('chart_title'); ?>" class="form-control" />
+
+                                                        </div>
+                                                        <div class="form-group col-md-2">
                                                             <label for="chartX" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('x_axis'); ?></label>
                                                         </div>
                                                         <div class="form-group col-md-8">
@@ -179,6 +186,7 @@ include('include/head.php');
                             if ($(this).prop("checked") == true) {
                                 $("#chart_config").show();
                                 $('#chartType').attr('required', 'required');
+                                $('#chartTitle').attr('required', 'required');
                                 $('#chartX').attr('required', 'required');
                                 $('#chartY').attr('required', 'required');
                                 $('#multi').attr('required', 'required');
@@ -186,6 +194,7 @@ include('include/head.php');
                             } else if ($(this).prop("checked") == false) {
                                 $("#chart_config").hide();
                                 $('#chartType').removeAttr('required');
+                                $('#chartTitle').removeAttr('required');
                                 $('#chartX').removeAttr('required');
                                 $('#chartY').removeAttr('required');
                                 $('#multi').removeAttr('required');
