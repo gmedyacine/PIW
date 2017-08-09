@@ -36,7 +36,8 @@
             </ul>-->
             <ul class="nav navbar-nav navbar-right am-icons-nav">
               <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="icon s7-comment"></span></a>
-               <!-- <ul class="dropdown-menu am-messages">
+               
+                  <!-- <ul class="dropdown-menu am-messages">
                   <li>
                     <div class="title">Messages<span class="badge">3</span></div>
                     <div class="list">
@@ -91,7 +92,7 @@
                   </li>
                 </ul>-->
               </li>
-              <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="icon s7-share"></span></a>
+             <!-- <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="icon s7-share"></span></a>
                <!-- <ul class="dropdown-menu am-connections">
                   <li>
                     <div class="title">Connections</div>
