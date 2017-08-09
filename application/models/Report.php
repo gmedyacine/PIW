@@ -256,7 +256,9 @@ Class Report extends CI_Model {
         $query = $this->db->select('*')
                 ->from("ipw_chart")
                 ->where('id_report', $id)
-                ->get(); //select * from ipw_report_categ‏
+                ->join("ipw_reports_show", 'ipw_reports_show.id = id_report')
+                ->join("ipw_create_report", 'ipw_create_report.old_report_name = id_report')
+                ->get(); 
 
         $ret = $query->result_array();
 
@@ -284,21 +286,7 @@ Class Report extends CI_Model {
         $this->db->delete("ipw_chart");
     }
 
-    function getOriginalReportName($id) {
-        $query = $this->db->select('report')
-                ->from('ipw_reports_show')
-                ->where('id', $id)
-                ->get(); //select * from ipw_report_categ‏
-
-        $ret = $query->result_array();
-
-        if ($ret) {
-            return $ret[0]; // return all fields of table : ipw_create_report
-        } else {
-            return null;
-        }
-    }
-
+    
     function getSeries($report, $multi) {
         if ($multi) {
             $query = $this->db->select($multi)
@@ -341,7 +329,33 @@ Class Report extends CI_Model {
             return $xData;
         }
     }
+    
+    function getAllCharts() {
+        $query = $this->db->select('*')
+                ->from('ipw_chart')
+                ->join("ipw_reports_show", 'ipw_reports_show.id = id_report')
+                ->get(); //select * from ipw_chart
 
+        $ret = $query->result_array();
+        $allData=array();
+        foreach ($ret as $row) {
+                $xData = $this->getXData($row["report"], $row["chartX"]);
+                $row["xData"]=$xData;
+                $series= $this->getSeries($row["report"], $row["multi"]);
+                $row["series"]=$series;
+                $allData[]=$row;
+                
+            }
+        
+
+        if ($ret) {
+            return $allData; 
+        } else {
+            return null;
+        }
+        
+    }
+  
 }
 
 ?>

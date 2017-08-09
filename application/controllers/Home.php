@@ -25,6 +25,7 @@ class Home extends Home_Controller {
         $this->data["title"] = "Selectionnez une projection";
         $this->data["calenders"] = json_encode($this->report->getCalender());
         $this->data["nbr_uploads"] = json_encode($this->report->getNbrUploads());
+        $this->data["allCharts"] = $this->report->getAllCharts();
         $this->load->view('main_select', $this->data);
     }
 
@@ -42,7 +43,7 @@ class Home extends Home_Controller {
         $chartConfig = $this->report->getChartConfig($id);
         $multiCol = $chartConfig[0]['multi'];
         $xAxis = $chartConfig[0]['chartX'];
-        $report = $this->report->getOriginalReportName($id);
+        $report = $chartConfig[0]["report"];
         $this->data["series"] = json_encode($this->report->getSeries($report, $multiCol));
         $this->data["xData"] = json_encode($this->report->getXData($report, $xAxis));
         $this->data["dataTable"] = json_encode($dataPrj);

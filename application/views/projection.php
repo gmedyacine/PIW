@@ -13,12 +13,14 @@ include('include/dataTables.php');
     var id_projection = <?php echo $id_projection; ?>;
     <?php if ($id_projection == $chartReportId) { ?>
     var chartConfig = <?php echo $chartConfig; ?>;
+    var report;
     var chartType;
     var chartTitle;
     var chartX;
     var chartY;
     var multi;
     $.each(chartConfig, function (key, element) {
+        report = element.new_report_name;
         chartType = element.chartType;
         chartTitle = element.chartTitle;
         chartX = element.chartX;
@@ -43,7 +45,17 @@ include('include/dataTables.php');
             <div class="main-content">
                 <div class="row">
                     <div class="col-sm-12"> <!-- Début partie du tableau -->
-                        <fieldset class="group-border">
+                     
+                        <?php if ($id_projection == $chartReportId) { ?>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div id="chart" class="col-md-12 col-sm-12" style="height: 300px; width: 100%;">
+
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                           <fieldset class="group-border">
 
                             <div id="panel-table" class="panel panel-default">
                                 <div class="panel-body project-filters">
@@ -127,15 +139,6 @@ include('include/dataTables.php');
 
 
                         </fieldset>
-                        <?php if ($id_projection == $chartReportId) { ?>
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div id="chart" class="col-md-12 col-sm-12" style="height: 300px; width: 100%;">
-
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } ?>
 
                         <!-- Début titre du tableau et lien export excel-->
                         <div id="panel-table" class="widget widget-fullwidth widget-small">
@@ -195,10 +198,10 @@ include('include/dataTables.php');
                                     type: chartType
                                 },
                                 title: {
-                                    text: chartTitle
+                                    text: report
                                 },
                                 subtitle: {
-                                    // text: 'Source: WorldClimate.com'
+                                     text: chartTitle
                                 },
                                 xAxis: {
                                     categories: xData

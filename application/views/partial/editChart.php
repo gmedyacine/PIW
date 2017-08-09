@@ -38,7 +38,7 @@
                             <label for="chartType" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('chart_type'); ?></label>                     
                         </div>
                         <div class="col-md-9">
-                            <select  id="chartType" name="chartType" class="form-control " >
+                            <select  id="chartType" name="chartType" class="form-control " required="">
                                 <option value="">-- <?php echo $this->lang->line('select_chart'); ?> --</option>
                                 <option value="line">-- Courbe --</option>
                                 <option value="column">-- historgamme --</option>

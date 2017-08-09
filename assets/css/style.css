@@ -8324,7 +8324,8 @@ button:focus {
   margin-top: 20px
 }
 .am-top-header .navbar-collapse .navbar-nav > li.dropdown > a .angle-down {
-    margin: 15px 0 0;
+  /*  margin: 15px 0 0;*/
+    margin: 0 0 10px;
     display: inline-block;
 }
  
@@ -21190,3 +21191,11 @@ fin ouvrir le menu gauche au survole*/
     position: relative;
     vertical-align: middle;
 }
+ .letterpic {
+            width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 5px;
+  margin-top: 15px;
+ 
+        }

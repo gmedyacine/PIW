@@ -22,7 +22,8 @@ class Home_Controller extends MY_Controller {
         }
         $this->load->model('biblio', '', TRUE);
         $this->load->model('report', '', TRUE);
-        $dataLogin = $this->session->userdata('logged_in');
+        $dataLogin = $this->session->userdata('logged_in');        
+        $this->data['userName_connected'] = $dataLogin["username"];
         $this->data['id_user_connected'] = $dataLogin["id"];
         $this->data['id_param'] = 0;
         $this->data['role'] = $dataLogin["role"];

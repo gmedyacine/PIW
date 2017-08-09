@@ -6,9 +6,10 @@ include('include/head.php');
     var projections = <?php echo $projections; ?>;
     var calenders = <?php echo $calenders; ?>;
     var nbr_uploads = <?php echo $nbr_uploads; ?>;
+    var allCharts = <?php echo json_encode($allCharts); ?>;
 </script>
 <body>
-
+    <?php //var_dump($allCharts); die;?>
     <div class="am-wrapper">
         <?php include('include/header.php'); ?>
 
@@ -47,9 +48,14 @@ include('include/head.php');
                 <div id="chart1" class="col-md-6 col-sm-12" style="height: 300px; min-width: 310px;max-width: 800px;">
 
                 </div>
-                <div id="chart2" class="col-md-6 col-sm-12" style="height: 300px; min-width: 310px;max-width: 800px;">
+                <div id="chart2" class="col-md-6 col-sm-12" style=" height: 300px; min-width: 310px;max-width: 800px;">
 
                 </div>
+                <?php foreach ($allCharts as $key => $chart) { ?>
+                    <div id="<?php echo "chart" . $chart['id_chart']; ?>" class="col-md-6 col-sm-12" style="margin-top:30px; height: 300px; min-width: 310px;max-width: 800px;">
+
+                    </div>
+                <?php } ?>
                 <!-- ROW END -->
             </div>
         </div>
@@ -92,7 +98,7 @@ include('include/head.php');
             },
 
             series: [{
-                   
+
                     name: 'Files',
                     data: nbr_uploads,
                     color: 'green'
@@ -166,6 +172,45 @@ include('include/head.php');
                         }]
                 });
             });
-
         </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.each(allCharts, function (key, element) {
+
+                    Highcharts.chart('chart' + element.id_chart, {
+                        chart: {
+                            type: element.chartType
+                        },
+                        title: {
+                            text: element.chartTitle
+                        },
+//                    subtitle: {
+//                        text: 'Source: WorldClimate.com'
+//                    },
+                        xAxis: {
+                            categories: element.xData
+                        },
+                        yAxis: {
+                            title: {
+                                text: element.chartY
+                            }
+                        },
+                        plotOptions: {
+                            line: {
+                                dataLabels: {
+                                    enabled: true
+                                },
+                                enableMouseTracking: true
+                            }
+                        },
+                        series: element.series
+                    });
+
+                    $("#chart"+ element.id_chart).click(function () {
+                         location.replace(base_url + "index.php/projection/"+element.id_report);
+                    });
+                });
+            });
+        </script>
+
         <?php include('include/footer.php'); ?>
