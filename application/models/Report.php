@@ -258,7 +258,7 @@ Class Report extends CI_Model {
                 ->where('id_report', $id)
                 ->join("ipw_reports_show", 'ipw_reports_show.id = id_report')
                 ->join("ipw_create_report", 'ipw_create_report.old_report_name = id_report')
-                ->get(); 
+                ->get();
 
         $ret = $query->result_array();
 
@@ -286,7 +286,6 @@ Class Report extends CI_Model {
         $this->db->delete("ipw_chart");
     }
 
-    
     function getSeries($report, $multi) {
         if ($multi) {
             $query = $this->db->select($multi)
@@ -303,7 +302,9 @@ Class Report extends CI_Model {
                 foreach ($ret as $cle => $valeur) {
                     $data['name'] = $row;
                     $data['data'] = array_column($ret, $row);
-                    $data['data'] = array_map('intval', $data['data']); // Convertir les valeurs en entiers pour pouvoir les afficher sur le graphique
+                    //var_dump( $data['data']);
+                      $data['data'] = array_map('intval', $data['data']); // Convertir les valeurs en entiers pour pouvoir les afficher sur le graphique
+                  
                 }
                 $series[] = $data;
             }
@@ -329,7 +330,22 @@ Class Report extends CI_Model {
             return $xData;
         }
     }
-    
+
+    function getOriginalReportName($id) {
+        $query = $this->db->select('report')
+                ->from('ipw_reports_show')
+                ->where('id', $id)
+                ->get(); //select * from ipw_report_categ‏
+
+        $ret = $query->result_array();
+
+        if ($ret) {
+            return $ret[0]; // return all fields of table : ipw_create_report
+        } else {
+            return null;
+        }
+    }
+
     function getAllCharts() {
         $query = $this->db->select('*')
                 ->from('ipw_chart')
@@ -337,25 +353,23 @@ Class Report extends CI_Model {
                 ->get(); //select * from ipw_chart
 
         $ret = $query->result_array();
-        $allData=array();
+        $allData = array();
         foreach ($ret as $row) {
-                $xData = $this->getXData($row["report"], $row["chartX"]);
-                $row["xData"]=$xData;
-                $series= $this->getSeries($row["report"], $row["multi"]);
-                $row["series"]=$series;
-                $allData[]=$row;
-                
-            }
-        
+            $xData = $this->getXData($row["report"], $row["chartX"]);
+            $row["xData"] = $xData;
+            $series = $this->getSeries($row["report"], $row["multi"]);
+            $row["series"] = $series;
+            $allData[] = $row;
+        }
+
 
         if ($ret) {
-            return $allData; 
+            return $allData;
         } else {
             return null;
         }
-        
     }
-  
+
 }
 
 ?>

@@ -364,6 +364,7 @@ class Home extends Home_Controller {
 
     public function delete_report_menu($id) {
         $this->report->deleteCreatedReport($id);
+        $this->report->deleteChart($id);
         $this->delete_report($id);
     }
 
@@ -409,6 +410,35 @@ class Home extends Home_Controller {
         $this->output->set_output(json_encode($result));
 
         return $result;
+    }
+
+    //check if column values is of type numeric
+    public function checkNumeric() {
+        $rept_id = $this->input->get('rept_id');
+        $col_name = $this->input->get('col_name');
+        $report = $this->report->getOriginalReportName($rept_id);
+
+        $result = $this->report->getXData($report, $col_name);
+        $check = $this->IsNumericArray($result);
+
+        $this->output->set_content_type('application/json');
+        $this->output->set_output(json_encode($check));
+
+        return $check;
+    }
+
+    function IsNumericArray($arr) {
+        if (!is_array($arr)) {
+            return false;
+        } else {
+            foreach ($arr as $ar) {
+                if (!is_numeric($ar)) {
+                    return false;
+                    exit;
+                }
+            }
+            return true;
+        }
     }
 
     public function edit_chart() {
