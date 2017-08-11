@@ -229,9 +229,7 @@ include('include/head.php');
                                     });
                                 }
                             });
-                        });
-
-                        $('#multi').on('click', function () {
+                            $('#multi').on('click', function () {
                             var rept = $("#rpt_select").find(":selected").val();
                             var multi = $("#multi option:selected").last().val(); 
                             $.ajax({
@@ -250,7 +248,7 @@ include('include/head.php');
                                 }
                             });
                         });
-
+                        });
                     });
 
                 </script>
