@@ -229,6 +229,7 @@ include('include/head.php');
                                     });
                                 }
                             });
+                           
                             $('#multi').on('click', function () {
                             var rept = $("#rpt_select").find(":selected").val();
                             var multi = $("#multi option:selected").last().val(); 
@@ -242,7 +243,7 @@ include('include/head.php');
                                 },
                                 success: function (res) {
                                     if(res == false){
-                                        alert("not_Num"); 
+                                        alert("This is not a numeric choice !"); 
                                         $('#multi option:selected').last().prop('selected', false).trigger('chosen:updated').attr("disabled", true);
                                     }                                       
                                 }

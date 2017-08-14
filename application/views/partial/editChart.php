@@ -12,6 +12,8 @@
         chartY = element.chartY;
         multi = element.multi;
     });
+    var id_projection = <?php echo $id_projection; ?>;
+   // var not_Num = <?php //echo $this->lang->line("not_num"); ?>;
 </script>
 <div class="modal fade" id="editChart" tabindex="-1" role="dialog" aria-labelledby="basicModal" >
     <div class="modal-dialog" role="document">
@@ -134,26 +136,25 @@
                 });
             }
         });
-        $('#multi').on('click', function () {
-                            var rept = $("#rpt_select").find(":selected").val();
+    
+    $('#multi').on('click', function () {
                             var multi = $("#multi option:selected").last().val(); 
                             $.ajax({
                                 type: "GET",
                                 url: "<?php echo base_url(); ?>index.php/home/checkNumeric/",
                                 dataType: 'json',
                                 data: {
-                                    rept_id: rept,
+                                    rept_id: id_projection,
                                     col_name: multi
                                 },
                                 success: function (res) {
                                     if(res == false){
-                                        alert("not_Num"); 
+                                        alert("This is not a numeric choice !"); 
                                         $('#multi option:selected').last().prop('selected', false).trigger('chosen:updated').attr("disabled", true);
                                     }                                       
                                 }
                             });
                         });
-
     });
 
 </script>

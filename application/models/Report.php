@@ -361,8 +361,7 @@ Class Report extends CI_Model {
             $row["series"] = $series;
             $allData[] = $row;
         }
-
-
+        
         if ($ret) {
             return $allData;
         } else {

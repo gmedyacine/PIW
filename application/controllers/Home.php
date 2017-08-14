@@ -428,16 +428,13 @@ class Home extends Home_Controller {
     }
 
     function IsNumericArray($arr) {
-        if (!is_array($arr)) {
-            return false;
-        } else {
+        if (is_array($arr)) {
             foreach ($arr as $ar) {
                 if (!is_numeric($ar)) {
                     return false;
                     exit;
                 }
             }
-            return true;
         }
     }
 

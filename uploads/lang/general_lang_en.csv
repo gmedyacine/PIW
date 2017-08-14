@@ -87,4 +87,4 @@ x_axis;X axis
 y_axis;Y axis
 multi_options;Multi Options
 chart_title;Chart Title
-not_num;Please select an other column
+not_num;This is not a numeric choice !
