@@ -303,8 +303,7 @@ Class Report extends CI_Model {
                     $data['name'] = $row;
                     $data['data'] = array_column($ret, $row);
                     //var_dump( $data['data']);
-                      $data['data'] = array_map('intval', $data['data']); // Convertir les valeurs en entiers pour pouvoir les afficher sur le graphique
-                  
+                    $data['data'] = array_map('intval', $data['data']); // Convertir les valeurs en entiers pour pouvoir les afficher sur le graphique
                 }
                 $series[] = $data;
             }
@@ -361,12 +360,8 @@ Class Report extends CI_Model {
             $row["series"] = $series;
             $allData[] = $row;
         }
-        
-        if ($ret) {
-            return $allData;
-        } else {
-            return null;
-        }
+
+        return $allData;
     }
 
 }
