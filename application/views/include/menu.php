@@ -30,7 +30,9 @@
                 <ul id="menu_gauche_ul" class="sub-menu">
                     <li class="title"><?php echo $this->lang->line("rapport_libelle") ?></li>
                     <li>
-                        <span class="searchboxs"> <input  type="text" name="recherche" id="recherche" data-filter-list="#reports" class="form-control"  placeholder="<?php echo $this->lang->line('search_by'); ?>" /></span>
+                        <span class="searchboxs has-clear"> <input  type="text" name="recherche" id="recherche" data-filter-list="#reports" class="form-control"  placeholder="<?php echo $this->lang->line('search_by'); ?>" />
+                        <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
+                        </span>
                         <div id="reports"  class="scroll_ul">
                         </div>
                     </li>
@@ -139,6 +141,16 @@
         });
 
     });
+    $('.has-clear input[type="text"]').on('input propertychange', function() {
+  var $this = $(this);
+  var visible = Boolean($this.val());
+  $this.siblings('.form-control-clear').toggleClass('hidden', !visible);
+}).trigger('propertychange');
+
+$('.form-control-clear').click(function() {
+  $(this).siblings('input[type="text"]').val('')
+    .trigger('propertychange').focus();
+});
 
 </script>
 <script src="<?php echo base_url(); ?>assets/js/home.js"></script>
