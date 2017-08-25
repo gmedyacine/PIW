@@ -75,6 +75,7 @@ include('include/head.php');
                                             <th><?php echo $this->lang->line("added_by"); ?></th>
                                             <th><?php echo $this->lang->line("added_at"); ?></th>
                                             <th><?php echo $this->lang->line("delete"); ?></th>
+                                             <th><?php echo $this->lang->line("update"); ?></th>
 
                                         </tr>
                                     </thead>
@@ -131,6 +132,7 @@ include('include/head.php');
                                             <th><?php echo $this->lang->line("added_by"); ?></th>
                                             <th><?php echo $this->lang->line("added_at"); ?></th>
                                             <th><?php echo $this->lang->line("delete"); ?></th>
+                                            <th><?php echo $this->lang->line("update"); ?></th>
 
                                         </tr>
                                     </thead>
@@ -141,7 +143,8 @@ include('include/head.php');
                             </div>
                         </div> <!-- Fin partie du tableau -->
                         <!-- ROW END -->
-
+  <!-- Modal -->
+<?php include('partial/renameCateg.php'); ?>
                     </div>
 
                 </div>

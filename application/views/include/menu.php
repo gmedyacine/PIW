@@ -148,8 +148,18 @@
 }).trigger('propertychange');
 
 $('.form-control-clear').click(function() {
-  $(this).siblings('input[type="text"]').val('')
-    .trigger('propertychange').focus();
+//  $(this).siblings('input[type="text"]').val('')
+//    .trigger('propertychange').focus();
+    
+//    var str = $('#recherche').val();
+//$('#recherche').val(str.substring(0, str.length - str.length));
+ // $(this).siblings('input[type="text"]').val('').trigger('reset');
+ 
+// var e = jQuery.Event("backspace", { keyCode: 8 });
+//$(this).siblings('input[type="text"]').val(trigger( e ));
+
+var e = jQuery.Event("backspace", { keyCode: 8 });
+$('#recherche').val('').trigger( e );
 });
 
 </script>

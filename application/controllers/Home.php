@@ -206,10 +206,17 @@ class Home extends Home_Controller {
         force_download($file, $data);
     }
 
-    public function delete_data($id, $name, $categ, $sous_categ) {
+  public function delete_data($id, $name, $categ, $sous_categ) {
         $this->load->model('files');
+       // echo $categ; die();
+        if($categ=='1'){
         $this->files->delete_data($id);
         unlink('./uploads/' . $name); // delete file
+         
+        }else{
+             $this->files->archive_file($id);
+             
+        }
         redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
     }
 
@@ -220,7 +227,7 @@ class Home extends Home_Controller {
         $this->data["fetch_data"] = $this->files->fetch_data();
 
         $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'txt|docx|pdf|doc|xls|xlsx';
+        $config['allowed_types'] = '*';
         $config['max_size'] = '';
         $this->load->library('upload', $config);
 
@@ -262,7 +269,7 @@ class Home extends Home_Controller {
         $this->load->helper(array('form'));
         $this->data["fetch_data"] = $this->files->fetch_data();
         $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'txt|docx|pdf|doc|xls|xlsx';
+        $config['allowed_types'] = '*';
         $config['max_size'] = '';
         $this->load->library('upload', $config);
         $this->upload->initialize($config);

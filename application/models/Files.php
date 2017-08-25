@@ -24,6 +24,10 @@ Class Files extends CI_Model {
         $this->db->where("id", $id);
         $this->db->delete("ipw_files");
     }
+    function archive_file($id) {
+        $this->db->where('id', $id);
+        $this->db->update('ipw_files', array("lib_categ_id" => 1));
+    }
 
     function update_file($id, $name, $title) {
         $this->db->where('id', $id);

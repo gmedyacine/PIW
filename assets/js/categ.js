@@ -22,6 +22,9 @@ $(document).ready(function () {
                     return;
                 }
             }));
+             trData.append($('<td>').append('<button id="update_categ" data-toggle="modal" type="button" class="btn btn-success  btn-sm btn-round"><span class="glyphicon glyphicon-pencil"></span></button></td>').click(function () {
+                 $('#renameCateg').modal('show');
+            }));
 
 
             tbody.append(trData);
@@ -51,7 +54,7 @@ $(document).ready(function () {
                 trData.append($('<td>' + valData["lib_sous_categ‏_desc"] + '</td>'));
                 trData.append($('<td>' + valData["username"] + '</td>'));
                 trData.append($('<td>' + valData["added_at"] + '</td>'));
-
+                
                 trData.append($('<td>').append('<button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>').click(function () {
                     if (confirm('Vous etes sur le point de supprimer ' + valData["lib_sous_categ‏_nom"])) {
                         document.location.href = "delete-sous-categ/" + valData["lib_sous_id"];
@@ -59,6 +62,7 @@ $(document).ready(function () {
                         return;
                     }
                 }));
+                 trData.append($('<td>' + valData["added_at"] + '</td>'));
 
 
                 tbody.append(trData);

@@ -45,25 +45,32 @@ include('include/head.php');
                         </div>
                     </div>
                 </div>
-                <div id="chart1" class="col-md-6 col-sm-12" style="height: 300px; min-width: 310px;max-width: 800px;">
+              
+                <div id="chart_1" class="col-md-6 col-sm-12" style="height: 300px; min-width: 310px;max-width: 800px;">
 
                 </div>
-                <div id="chart2" class="col-md-6 col-sm-12" style=" height: 300px; min-width: 310px;max-width: 800px;">
+                <div id="chart_2" class="col-md-6 col-sm-12" style=" height: 300px; min-width: 310px;max-width: 800px;">
 
                 </div>
+                   <!--  <div id="chartPaginate">-->
+                  
                 <?php foreach ($allCharts as $key => $chart) { ?>
+                  
                     <div id="<?php echo "chart" . $chart['id_chart']; ?>" class="col-md-6 col-sm-12" style="margin-top:30px; height: 300px; min-width: 310px;max-width: 800px;">
 
                     </div>
+                       
                 <?php } ?>
+                 <!--  </div>
                 <!-- ROW END -->
             </div>
         </div>
 
         <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/jquery.easyPaginate.js"></script>
         <script type="text/javascript">
     $(document).ready(function () {
-        var chart = Highcharts.chart('chart1', {
+        var chart = Highcharts.chart('chart_1', {
 
             chart: {
                 type: 'column'
@@ -140,7 +147,7 @@ include('include/head.php');
         </script>
         <script type="text/javascript">
             $(document).ready(function () {
-                Highcharts.chart('chart2', {
+                Highcharts.chart('chart_2', {
                     chart: {
                         type: 'line'
                     },
@@ -212,5 +219,14 @@ include('include/head.php');
                 });
             });
         </script>
-
+        <script type="text/javascript">
+    $(document).ready(function () {
+        $('#chartPaginate').easyPaginate({
+    paginateElement: 'div',
+    elementsPerPage: 2,
+    effect: 'climb'
+});
+                    });
+        </script>
+    
         <?php include('include/footer.php'); ?>

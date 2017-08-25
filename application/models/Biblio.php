@@ -56,7 +56,12 @@ Class Biblio extends CI_Model {
        }
        return $ret; 
     }
-
+    
+    function update_biblio($id, $name, $description) {
+        $this->db->where('lib_categ_id', $id);
+        $this->db->update('ipw_lib_categ‏', array("lib_categ" => $name, "commentaire"=> $description));
+    }
+    
 }
 
 ?>
