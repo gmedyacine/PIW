@@ -329,16 +329,31 @@ class Home extends Home_Controller {
     }
 
     public function rename_report() {
-
-        $id_projection = $this->input->post('id_projection');
         $new_name = $this->input->post('new_name');
-        $old_name = $this->projection->getNameTable($id_projection);
-        $data = array('renamed_by' => $this->data['id_user_connected'], 'new_report_name' => $new_name, 'old_report_name' => $id_projection);
+        $old_name = $this->input->post('old_name');
+        $chartGen = $this->input->post('chartCheck');
+        $chart = array();
 
-        if ($this->report->renameReport($data)) {
-            $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_modif") . "</div>");
-            //traduction ici 
+        $data = array('new_report_name' => $new_name, 'old_report_name' => $old_name);
+
+        if ($chartGen == 'chart') { //tester si l'utilisateur a coché le checkbox pour remplir la table $chart
+            $chartType = $this->input->post('chartType');
+            $chartTitle = $this->input->post('chartTitle');
+            $chartX = $this->input->post('chartX');
+            $chartY = $this->input->post('chartY');
+            $multi = $this->input->post('multi');
+            if ($multi != null) {
+                $multi_str = implode(",", $multi);
+            } else {
+                $multi_str = $multi;
+            }
+
+            $chart = array('id_report' => $old_name, 'chartType' => $chartType, 'chartTitle' => $chartTitle, 'chartX' => $chartX, 'chartY' => $chartY, 'multi' => $multi_str);
         }
+        if ($this->report->renameReport($data, $chart)) {
+            $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_modif") . "</div>");
+        }
+
 
         redirect("rename-report");
     }
@@ -480,5 +495,15 @@ class Home extends Home_Controller {
     public function delete_chart($id) {
         $this->report->deleteChart($id);
     }
+    
+ //check if a report has a chart
+    public function hasChart() {
+        $rept_id = $this->input->get('rept_id');
+        $check = $this->report->getChartReportId($rept_id);
+        
+        $this->output->set_content_type('application/json');
+        $this->output->set_output(json_encode($check));
 
+        return $check;
+    }
 }

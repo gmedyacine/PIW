@@ -106,17 +106,15 @@ Class Report extends CI_Model {
         }
     }
 
-    function renameReport($data) {
-        $user_id = $data['renamed_by'];
+    function renameReport($data, $chart) {
         $report_id = $data['old_report_name'];
         $new_report_name = $data['new_report_name'];
 
-        $this->db->select('*');
-        $this->db->from('ipw_create_report');
-        $this->db->where('old_report_name', $report_id);
-
-        if ($this->db->count_all_results() == 0) {
-            if ($this->db->insert('ipw_create_report', $data)) {
+                   
+            if (!empty($chart)) { // si le tableau $chart n'est pas vide .. on le créé le rapport et on créé son configuration
+            if (($this->db->set('new_report_name', $new_report_name)
+                            ->where('old_report_name', $report_id)
+                            ->update('ipw_create_report')) && ($this->db->insert('ipw_chart', $chart))) {
                 return true;
             }
         } else {
@@ -126,6 +124,8 @@ Class Report extends CI_Model {
                 return true;
             }
         }
+
+        
     }
 
     function manager_report() { // pour afficher les tables report
