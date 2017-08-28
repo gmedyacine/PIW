@@ -24,6 +24,9 @@ $(document).ready(function () {
             }));
              trData.append($('<td>').append('<button id="update_categ" data-toggle="modal" type="button" class="btn btn-success  btn-sm btn-round"><span class="glyphicon glyphicon-pencil"></span></button></td>').click(function () {
                  $('#renameCateg').modal('show');
+                 $('#idBiblio').val(valData["lib_categ_id"]);
+              $('#nom').val(valData["lib_categ"]);
+              $('#description').val(valData["commentaire"]);
             }));
 
 
