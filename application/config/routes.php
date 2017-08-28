@@ -56,7 +56,6 @@ $route['parametrage']='home/parametrage';
 $route['biblio/(:num)/(:num)']='home/biblio/$1/$2';
 $route['biblio/(:num)']='home/biblio/$1';
 $route['add-biblio']='home/add_biblio';
-$route['update-biblio']='home/update_biblio';
 $route['add-sous-biblio']='home/add_sous_biblio';
 $route['demande']='home/demandeSpecifique';
 $route["list-sc"]='home/list_scat';

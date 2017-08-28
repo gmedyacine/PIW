@@ -176,12 +176,13 @@ class Home extends Home_Controller {
             $id_cat = $this->input->post('idBiblio');
             $nom = $this->input->post('nom');
             $desc = $this->input->post('description');
-           
-            if ($this->biblio->update_biblio($id_cat, $nom, $desc )) {
-                $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_add") . "</div>");
-                redirect(base_url() . "index.php/add-biblio");
-            }
-            $this->load->view("addBib", $this->data);
+           $this->biblio->update_biblio($id_cat, $nom, $desc);
+//            if () {
+//                $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_add") . "</div>");
+//                redirect(base_url() . "index.php/add-biblio");
+//            }
+//            $this->load->view("addBib", $this->data);
+            redirect('add-biblio', 'refrech');
         
     }
 
