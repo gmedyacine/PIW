@@ -36,7 +36,7 @@ include('include/head.php');
 
                             <div class="panel-body"> 
                                 <div class="form-group">    
-                                    <form action="<?php echo base_url(); ?>index.php/home/create_report" method="post" id="createReport">
+                                    <form action="#" method="post" id="createReport">
                                         <div class="col-sm-12">
 
                                             <div class="form-group">								   
