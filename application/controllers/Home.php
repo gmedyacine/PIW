@@ -472,7 +472,7 @@ class Home extends Home_Controller {
             }
         }
     }
-
+     
     public function edit_chart() {
         $id_projection = $this->input->post('id_projection');
         $chartType = $this->input->post('chartType');
@@ -491,7 +491,27 @@ class Home extends Home_Controller {
         }
         redirect('projection/' . $id_projection, 'refresh');
     }
-
+    
+public function create_chart() {
+        $id_projection = $this->input->post('id_projection');
+        $chartType = $this->input->post('chartType');
+        $chartTitle = $this->input->post('chartTitle');
+        $chartX = $this->input->post('chartX');
+        $chartY = $this->input->post('chartY');
+        $multi = $this->input->post('multi');
+        if ($multi != null) {
+            $multi_str = implode(",", $multi);
+        } else {
+            $multi_str = $multi;
+        }
+$chart = array('id_report' => $id_projection, 'chartType' => $chartType, 'chartTitle' => $chartTitle, 'chartX' => $chartX, 'chartY' => $chartY, 'multi' => $multi_str);
+  
+        if ($this->report->createChart($chart)) {
+            $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_modif") . "</div>");
+        }
+        redirect('projection/' . $id_projection, 'refresh');
+    }
+    
     public function delete_chart($id) {
         $this->report->deleteChart($id);
     }

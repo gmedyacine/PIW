@@ -33,11 +33,6 @@ include('include/head.php');
                                 <select id="main_select" class="form-control" >
                                     <option value="0">-- <?php echo $this->lang->line('default_projection'); ?> --</option>
                                 </select>
-
-
-
-
-
                             </div>
 
                             <a href="#" id="valid_select" class="btn btn-primary pull-right"><?php echo $this->lang->line('valider'); ?> </a>
@@ -45,29 +40,34 @@ include('include/head.php');
                         </div>
                     </div>
                 </div>
-              
+
                 <div id="chart_1" class="col-md-6 col-sm-12" style="height: 300px; min-width: 310px;max-width: 800px;">
 
                 </div>
                 <div id="chart_2" class="col-md-6 col-sm-12" style=" height: 300px; min-width: 310px;max-width: 800px;">
 
                 </div>
-                   <!--  <div id="chartPaginate">-->
-                  
-                <?php foreach ($allCharts as $key => $chart) { ?>
-                  
-                    <div id="<?php echo "chart" . $chart['id_chart']; ?>" class="col-md-6 col-sm-12" style="margin-top:30px; height: 300px; min-width: 310px;max-width: 800px;">
+                <div id="chartPaginate">
+                    <div class="row list">
+                        <?php foreach ($allCharts as $key => $chart) { ?>
 
+                            <div id="<?php echo "chart" . $chart['id_chart']; ?>" class="chart col-md-6 col-sm-12" style="margin-top:30px; height: 300px; min-width: 310px;max-width: 800px;">
+
+                            </div>
+
+                        <?php } ?>
                     </div>
-                       
-                <?php } ?>
-                 <!--  </div>
+                    <div class="row" align="center">
+                        <ul class="pagination" style="text-align: center;"></ul>  
+                    </div>
+                </div>
                 <!-- ROW END -->
             </div>
         </div>
 
         <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="<?php echo base_url(); ?>assets/js/jquery.easyPaginate.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/list.min.js"></script>
+
         <script type="text/javascript">
     $(document).ready(function () {
         var chart = Highcharts.chart('chart_1', {
@@ -213,20 +213,20 @@ include('include/head.php');
                         series: element.series
                     });
 
-                    $("#chart"+ element.id_chart).click(function () {
-                         location.replace(base_url + "index.php/projection/"+element.id_report);
+                    $("#chart" + element.id_chart).click(function () {
+                        location.replace(base_url + "index.php/projection/" + element.id_report);
                     });
                 });
             });
         </script>
+
         <script type="text/javascript">
-    $(document).ready(function () {
-        $('#chartPaginate').easyPaginate({
-    paginateElement: 'div',
-    elementsPerPage: 2,
-    effect: 'climb'
-});
-                    });
+            $(document).ready(function () {
+                var chartList = new List('chartPaginate', {
+                    valueNames: ['chart'],
+                    page: 2,
+                    pagination: true
+                });
+            });
         </script>
-    
         <?php include('include/footer.php'); ?>

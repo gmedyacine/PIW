@@ -28,6 +28,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/lib/jquery.vectormap/jquery-jvectormap-1.2.2.css"/>
          <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/lib/jquery.nanoscroller/css/nanoscroller.css"/>
         <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" />
+     
 
 		
      </head>

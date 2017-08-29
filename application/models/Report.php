@@ -280,6 +280,11 @@ Class Report extends CI_Model {
             return true;
         }
     }
+    function createChart($chart) {
+        if ($this->db->insert('ipw_chart', $chart)) {
+            return true;
+        }
+    }
 
     function deleteChart($id) {
         $this->db->where("id_report", $id);

@@ -11,25 +11,25 @@ include('include/dataTables.php');
     var dataNameColonne = <?php echo $dataNameColonne; ?>;
     var chartReportId = <?php echo $chartReportId; ?>;
     var id_projection = <?php echo $id_projection; ?>;
-    <?php if ($id_projection == $chartReportId) { ?>
-    var chartConfig = <?php echo $chartConfig; ?>;
-    var report;
-    var chartType;
-    var chartTitle;
-    var chartX;
-    var chartY;
-    var multi;
-    $.each(chartConfig, function (key, element) {
-        report = element.new_report_name;
-        chartType = element.chartType;
-        chartTitle = element.chartTitle;
-        chartX = element.chartX;
-        chartY = element.chartY;
-        multi = element.multi;
-    });
-    var series = <?php echo $series; ?>;
-    var xData = <?php echo $xData; ?>;
-    <?php } ?>
+<?php if ($id_projection == $chartReportId) { ?>
+        var chartConfig = <?php echo $chartConfig; ?>;
+        var report;
+        var chartType;
+        var chartTitle;
+        var chartX;
+        var chartY;
+        var multi;
+        $.each(chartConfig, function (key, element) {
+            report = element.new_report_name;
+            chartType = element.chartType;
+            chartTitle = element.chartTitle;
+            chartX = element.chartX;
+            chartY = element.chartY;
+            multi = element.multi;
+        });
+        var series = <?php echo $series; ?>;
+        var xData = <?php echo $xData; ?>;
+<?php } ?>
 
 </script>
 
@@ -45,7 +45,7 @@ include('include/dataTables.php');
             <div class="main-content">
                 <div class="row">
                     <div class="col-sm-12"> <!-- Début partie du tableau -->
-                     
+
                         <?php if ($id_projection == $chartReportId) { ?>
                             <div class="panel panel-default">
                                 <div class="panel-body">
@@ -55,7 +55,7 @@ include('include/dataTables.php');
                                 </div>
                             </div>
                         <?php } ?>
-                           <fieldset class="group-border">
+                        <fieldset class="group-border">
 
                             <div id="panel-table" class="panel panel-default">
                                 <div class="panel-body project-filters">
@@ -140,15 +140,23 @@ include('include/dataTables.php');
 
                         </fieldset>
 
-                        <!-- Début titre du tableau et lien export excel-->
+                        <!-- Début titre du tableau et bouton create chart-->
                         <div id="panel-table" class="widget widget-fullwidth widget-small">
                             <div class="widget-head">
-                                <div class=" pull-left ">
+                                <div class=" pull-left clo-md-6">
                                     <div class="title"><h2>Titre du tableau</h2></div>
                                 </div> 
 
+                                <?php if ($id_projection != $chartReportId) { ?>
+                                    <div class=" pull-right clo-md-6">
+                                        <div> <button class="btn btn-primary chart_btn" type="button" data-toggle="modal"
+                                                      onclick="$('#createChart').modal('show');">
+                                                <i class="icon icon-left s7-graph"></i>
+                                                <?php echo $this->lang->line('genetate_chart'); ?>
+                                            </button></div>
+                                    </div>
+                                <?php } ?>
                                 <div class="clear"></div>
-
                             </div>  <!-- Fin titre du tableau et lien export excel-->
 
                             <table id="mainTables" class="table table-striped table-hover table-fw-widget dataTable no-footer dt-responsive nowrap" > 
@@ -163,6 +171,7 @@ include('include/dataTables.php');
 
                         </div>
                         <?php include('partial/editChart.php'); ?>
+                        <?php include('partial/createChart.php'); ?>
 
                     </div> <!-- fin pagination  -->
 
@@ -201,7 +210,7 @@ include('include/dataTables.php');
                                     text: report
                                 },
                                 subtitle: {
-                                     text: chartTitle
+                                    text: chartTitle
                                 },
                                 xAxis: {
                                     categories: xData
@@ -260,10 +269,8 @@ include('include/dataTables.php');
                                 }
                             });
                         });
-
-
                     </script>
-
+                     
                 </div> <!-- Fin partie du tableau -->
                 <!-- ROW END -->
 
