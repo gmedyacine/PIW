@@ -52,7 +52,7 @@
                             <label for="chartX" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('x_axis'); ?></label>                     
                         </div>
                         <div class="col-md-9">
-                            <select id="chartX" name="chartX" class="form-control" required="">
+                            <select id="graphX" name="chartX" class="form-control" required="">
                                 <option value="">-- <?php echo $this->lang->line('select_X'); ?> --</option>
                             </select>
                         </div>
@@ -63,7 +63,7 @@
                             <label for="chartY" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('y_axis'); ?></label>                     
                         </div>
                         <div class="col-md-9">
-                            <select id="chartY" name="chartY" class="form-control" required="">
+                            <select id="graphY" name="chartY" class="form-control" required="">
                                 <option value="">-- <?php echo $this->lang->line('select_Y'); ?> --</option>
                             </select>
                         </div>
@@ -74,7 +74,7 @@
                             <label for="multi" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('multi_options'); ?></label>                     
                         </div>
                         <div class="col-md-9">
-                            <select multiple id="multi" name="multi[]" class="form-control" required="">
+                            <select multiple id="multiOpt" name="multi[]" class="form-control" required="">
                                 <option value="">-- <?php echo $this->lang->line('select_options'); ?> --</option>
                             </select>
                         </div>
@@ -100,17 +100,16 @@
             dataType: 'json',
             data: {rept_id: id_projection},
             success: function (result) {
-              //  alert(result);
                 $.each(result, function (i, item) {
-                    $('#chartX').append($('<option>', {
+                    $('#graphX').append($('<option>', {
                         value: item,
                         text: item
                     }));
-                    $('#chartY').append($('<option>', {
+                    $('#graphY').append($('<option>', {
                         value: item,
                         text: item
                     }));
-                    $('#multi').append($('<option>', {
+                    $('#multiOpt').append($('<option>', {
                         value: item,
                         text: item
                     }));
@@ -118,8 +117,8 @@
             }
         });
 
-        $('#multi').on('click', function () {
-            var multi = $("#multi option:selected").last().val();
+        $('#multiOpt').on('click', function () {
+            var multi = $("#multiOpt option:selected").last().val();
             $.ajax({
                 type: "GET",
                 url: "<?php echo base_url(); ?>index.php/home/checkNumeric/",
@@ -131,7 +130,7 @@
                 success: function (res) {
                     if (res == false) {
                         alert("This is not a numeric choice !");
-                        $('#multi option:selected').last().prop('selected', false).trigger('chosen:updated').attr("disabled", true);
+                        $('#multiOpt option:selected').last().prop('selected', false).trigger('chosen:updated').attr("disabled", true);
                     }
                 }
             });
