@@ -143,7 +143,8 @@ include('include/head.php');
     <script type="text/javascript">
         $(document).ready(function () {
             $("#lib-sous-cat").chainedTo("#list-bib");
-        });
+            
+                   });
     </script>
     <script type="text/javascript">
         $(document).ready(function () {

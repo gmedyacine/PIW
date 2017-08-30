@@ -224,13 +224,15 @@ class Home extends Home_Controller {
        // echo $categ; die();
         if($categ=='1'){
         $this->files->delete_data($id);
+        if(file_exists('./uploads/' . $name)){
         unlink('./uploads/' . $name); // delete file
-         
+        }
+         redirect('biblio/1', 'refresh');
         }else{
              $this->files->archive_file($id);
-             
+             redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
         }
-        redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
+        
     }
 
     /*     * ************ Upload_multi_file************ */

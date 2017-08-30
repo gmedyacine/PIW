@@ -29,15 +29,21 @@
                     <a href="<?php echo base_url(); ?>index.php/home/download/<?php echo $row->nom_fichier; ?>"> télécharger </a>
                     <?php if ($role != 2) { ?>
 
+                        <script type="text/javascript">
 
-                        |<a href="<?php echo base_url(); ?>index.php/home/delete_data/<?php echo $row->id; ?>/<?php echo $row->nom_fichier; ?>/<?php echo $row->lib_categ_id; ?>/<?php echo $row->lib_sous_categ_id; ?>" class="delete_data" > Supprimer </a> 
+                            var id = <?php echo $row->id; ?>;
+                            var nom_fichier = <?php echo $row->nom_fichier; ?>;
+                            var lib_categ_id = <?php echo $row->lib_categ_id; ?>;
+                            var lib_sous_categ_id = <?php echo $row->lib_sous_categ_id; ?>;
+                        </script>
+                        |<a href="javascript:deleteFunc('<?php echo $row->id; ?>' ,'<?php echo $row->nom_fichier; ?>' ,'<?php echo $row->lib_categ_id; ?>' ,'<?php echo $row->lib_sous_categ_id; ?>')" class="delete_data" > Supprimer </a> 
                         <br>
                         <form action="<?php echo base_url(); ?>index.php/home/upload_extra_file" method="post" enctype="multipart/form-data" class="formboxs" >
                             <label class="fileBtn btn-xs"><input type="file" name="extraFile" required="required" /></label>
-                                <input type="hidden" name="row_id" value="<?php echo $row->id; ?>" />
-                                <input type="hidden" name="id_categ" value="<?php echo $row->lib_categ_id; ?>" />
-                                <input type="hidden" name="id_sous_categ" value="<?php echo $row->lib_sous_categ_id; ?>" />
-                                <input type="submit" class="btn btn-primary btn-xs" name="upload" value="Upload" />
+                            <input type="hidden" name="row_id" value="<?php echo $row->id; ?>" />
+                            <input type="hidden" name="id_categ" value="<?php echo $row->lib_categ_id; ?>" />
+                            <input type="hidden" name="id_sous_categ" value="<?php echo $row->lib_sous_categ_id; ?>" />
+                            <input type="submit" class="btn btn-primary btn-xs" name="upload" value="Upload" />
                         </form>
                     <?php } ?>
                 </td>
@@ -47,3 +53,13 @@
 
     </tbody>
 </table>    
+
+<script>
+    function deleteFunc(id, nom, lib, subLib) {
+        if (confirm('Vous etes sur le point de supprimer ce/ces documents')) {
+            document.location.href = "<?php echo base_url(); ?>index.php/home/delete_data/" + id + "/" + nom + "/" + lib + "/" + subLib;
+        } else {
+            return;
+        }
+    }
+</script>
