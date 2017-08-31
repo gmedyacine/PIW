@@ -172,18 +172,18 @@ class Home extends Home_Controller {
             $this->load->view("addBib");
         }
     }
-     public function update_biblio() {
-            $id_cat = $this->input->post('idBiblio');
-            $nom = $this->input->post('nom');
-            $desc = $this->input->post('description');
-           $this->biblio->update_biblio($id_cat, $nom, $desc);
+
+    public function update_biblio() {
+        $id_cat = $this->input->post('idBiblio');
+        $nom = $this->input->post('nom');
+        $desc = $this->input->post('description');
+        $this->biblio->update_biblio($id_cat, $nom, $desc);
 //            if () {
 //                $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_add") . "</div>");
 //                redirect(base_url() . "index.php/add-biblio");
 //            }
 //            $this->load->view("addBib", $this->data);
-            redirect('add-biblio', 'refrech');
-        
+        redirect('add-biblio', 'refrech');
     }
 
     public function add_sous_biblio() {
@@ -219,20 +219,43 @@ class Home extends Home_Controller {
         force_download($file, $data);
     }
 
-  public function delete_data($id, $name, $categ, $sous_categ) {
+    public function delete_data($id, $name, $categ, $sous_categ) {
         $this->load->model('files');
-       // echo $categ; die();
-        if($categ=='1'){
-        $this->files->delete_data($id);
-        if(file_exists('./uploads/' . $name)){
-        unlink('./uploads/' . $name); // delete file
+        // echo $categ; die();
+        if ($categ == '1') {
+            $this->files->delete_data($id);
+            if (file_exists('./uploads/' . $name)) {
+                unlink('./uploads/' . $name); // delete file
+            }
+            redirect('biblio/1', 'refresh');
+        } else {
+            $this->files->archive_file($id);
+            redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
         }
-         redirect('biblio/1', 'refresh');
-        }else{
-             $this->files->archive_file($id);
-             redirect('biblio/' . $categ . '/' . $sous_categ, 'refresh');
+    }
+
+    public function delete_multi_data() {
+        $files_json = $this->input->post('data_files');
+        $files = json_decode($files_json, true);
+        $result = false;
+        foreach ($files as $file) {
+            $id = $file[0];
+            $name = $file[1];
+            $lib = $file[2];
+            if ($lib == '1') {
+                $this->files->delete_data($id);
+                if (file_exists('./uploads/' . $name)) {
+                    unlink('./uploads/' . $name); // delete file
+                    $result = true ;
+                }
+            } else {
+                $this->files->archive_file($id);
+                $result = true ;
+            }
         }
-        
+         $this->output->set_content_type('application/json');
+        $this->output->set_output(json_encode($result));
+        return $result;
     }
 
     /*     * ************ Upload_multi_file************ */
@@ -474,7 +497,7 @@ class Home extends Home_Controller {
             }
         }
     }
-     
+
     public function edit_chart() {
         $id_projection = $this->input->post('id_projection');
         $chartType = $this->input->post('chartType');
@@ -493,8 +516,8 @@ class Home extends Home_Controller {
         }
         redirect('projection/' . $id_projection, 'refresh');
     }
-    
-public function create_chart() {
+
+    public function create_chart() {
         $id_projection = $this->input->post('id_projection');
         $chartType = $this->input->post('chartType');
         $chartTitle = $this->input->post('chartTitle');
@@ -506,26 +529,27 @@ public function create_chart() {
         } else {
             $multi_str = $multi;
         }
-$chart = array('id_report' => $id_projection, 'chartType' => $chartType, 'chartTitle' => $chartTitle, 'chartX' => $chartX, 'chartY' => $chartY, 'multi' => $multi_str);
-  
+        $chart = array('id_report' => $id_projection, 'chartType' => $chartType, 'chartTitle' => $chartTitle, 'chartX' => $chartX, 'chartY' => $chartY, 'multi' => $multi_str);
+
         if ($this->report->createChart($chart)) {
             $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_modif") . "</div>");
         }
         redirect('projection/' . $id_projection, 'refresh');
     }
-    
+
     public function delete_chart($id) {
         $this->report->deleteChart($id);
     }
-    
- //check if a report has a chart
+
+    //check if a report has a chart
     public function hasChart() {
         $rept_id = $this->input->get('rept_id');
         $check = $this->report->getChartReportId($rept_id);
-        
+
         $this->output->set_content_type('application/json');
         $this->output->set_output(json_encode($check));
 
         return $check;
     }
+
 }

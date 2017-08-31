@@ -7,6 +7,7 @@
             <th>Categorie </th>
             <th>Fichier</th>
             <th>Action</th>
+            <th><button type="button" name="btn_delete" id="btn_delete" class="btn btn-primary btn-xs">Delete</button></th>
         </tr>
     </thead>
 
@@ -16,7 +17,7 @@
         <?php
         foreach ($fetch_data as $row) {
             ?>
-            <tr>
+            <tr id="<?php echo $row->id; ?>">
 
                 <td><?php echo $row->calendrier; ?></td>
                 <td><?php echo $row->heure_lib; ?></td>
@@ -29,13 +30,6 @@
                     <a href="<?php echo base_url(); ?>index.php/home/download/<?php echo $row->nom_fichier; ?>"> télécharger </a>
                     <?php if ($role != 2) { ?>
 
-                        <script type="text/javascript">
-
-                            var id = <?php echo $row->id; ?>;
-                            var nom_fichier = <?php echo $row->nom_fichier; ?>;
-                            var lib_categ_id = <?php echo $row->lib_categ_id; ?>;
-                            var lib_sous_categ_id = <?php echo $row->lib_sous_categ_id; ?>;
-                        </script>
                         |<a href="javascript:deleteFunc('<?php echo $row->id; ?>' ,'<?php echo $row->nom_fichier; ?>' ,'<?php echo $row->lib_categ_id; ?>' ,'<?php echo $row->lib_sous_categ_id; ?>')" class="delete_data" > Supprimer </a> 
                         <br>
                         <form action="<?php echo base_url(); ?>index.php/home/upload_extra_file" method="post" enctype="multipart/form-data" class="formboxs" >
@@ -47,6 +41,10 @@
                         </form>
                     <?php } ?>
                 </td>
+                <?php if ($role != 2) { ?>
+                    <td><input type="checkbox" name="file_id[]" class="delete_file" value="<?php echo $row->id; ?>,<?php echo $row->nom_fichier; ?>,<?php echo $row->lib_categ_id; ?>" />
+                    </td>
+                <?php } ?>
 
             </tr>
         <?php } ?>
@@ -62,4 +60,50 @@
             return;
         }
     }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btn_delete').click(function () {
+            if (confirm('Vous etes sur le point de supprimer ce/ces documents')) {
+                var files = [];
+                $(':checkbox:checked').each(function (i) {
+                    files[i] = $(this).val();
+                });
+                //alert(files);
+                if (files.length === 0) {
+                    alert("Vous devez sélectionner au moin un fichier !");
+                } else {
+                    var data_files = [];
+                    for (var i = 0; i < files.length; i++)
+                    {
+                        data_files[i] = files[i].split(",");
+                    }
+
+                    $.ajax({
+                        method: "POST",
+                        url: "<?php echo base_url(); ?>index.php/home/delete_multi_data/",
+                        dataType: 'json',
+                        data: {data_files: JSON.stringify(data_files)},
+                        success: function (result)
+                        {
+                            if (result == true) {
+                                for (var i = 0; i < data_files.length; i++)
+                                {
+                                    $('tr#' + data_files[i][0] + '').css('background-color', '#ccc');
+                                    $('tr#' + data_files[i][0] + '').fadeOut('slow');
+
+                                }
+                            }
+                        }
+
+
+                    });
+                }
+
+            } else {
+                return;
+            }
+
+        });
+    });
 </script>
