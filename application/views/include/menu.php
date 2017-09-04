@@ -30,8 +30,8 @@
                 <ul id="menu_gauche_ul" class="sub-menu">
                     <li class="title"><?php echo $this->lang->line("rapport_libelle") ?></li>
                     <li>
-                        <span class="searchboxs has-clear"> <input  type="search" name="recherche" id="recherche" data-filter-list="#reports" class="form-control"  placeholder="<?php echo $this->lang->line('search_by'); ?>" />
-                        <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
+                        <span class="searchboxs"> <input  type="search" name="recherche" id="recherche" data-filter-list="#reports" class="form-control"  placeholder="<?php echo $this->lang->line('search_by'); ?>" />
+                        
                         </span>
                         <div id="reports"  class="scroll_ul">
                         </div>
@@ -141,27 +141,6 @@
         });
 
     });
-    $('.has-clear input[type="text"]').on('input propertychange', function() {
-  var $this = $(this);
-  var visible = Boolean($this.val());
-  $this.siblings('.form-control-clear').toggleClass('hidden', !visible);
-}).trigger('propertychange');
-
-$('.form-control-clear').click(function() {
-//  $(this).siblings('input[type="text"]').val('')
-//    .trigger('propertychange').focus();
-    
-//    var str = $('#recherche').val();
-//$('#recherche').val(str.substring(0, str.length - str.length));
- // $(this).siblings('input[type="text"]').val('').trigger('reset');
- 
-// var e = jQuery.Event("backspace", { keyCode: 8 });
-//$(this).siblings('input[type="text"]').val(trigger( e ));
-
-var e = jQuery.Event("backspace", { keyCode: 8 });
-$('#recherche').val('').trigger( e );
-});
-
 </script>
 <script src="<?php echo base_url(); ?>assets/js/home.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/nav.js"></script>

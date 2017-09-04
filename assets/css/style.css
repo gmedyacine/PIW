@@ -21203,15 +21203,7 @@ fin ouvrir le menu gauche au survole*/
     display: none;
 }
 
-.form-control-clear {
-    color:white;
-    font-size:10px; 
-    margin-top: 8px;
-    margin-right: 3px;
-    z-index: 10;
-    pointer-events: auto;
-    cursor: pointer;
-}
+
 #recherche::-webkit-search-cancel-button{
     content: '';    /* required for :after content to show */
     display: block;
