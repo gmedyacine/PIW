@@ -88,8 +88,10 @@
                         report = val.new_report_name.substring(0, 19) + '...';
                     var linkToRpt = $("<li  id='" + val.old_report_name + "' class='report " + classOpn + "'>"
                             + "<a id='" + val.old_report_name + "' href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' data-container='body' title='<?php echo $this->lang->line("categorie"); ?>: " + val.nom_report_categ + " <br> <?php echo $this->lang->line("sub_cat_rept"); ?>: " + val.nom_report_sous_categ + " <br> <?php echo $this->lang->line("report"); ?>: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
-                            + report + '</a>'
+                            + report 
                             + '<span class="hidden_cl"> "' + val.nom_report_categ + '" </span> <span class="hidden_cl"> "' + val.nom_report_sous_categ + '" </span>'  // pour detecter la recherche par categ et par group
+                            + '</a>'
+                           
                             + <?php if ($role != 2) { ?> '<span data-remove="' + val.old_report_name + '" class="remove-right glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>'  <?php } ?>
                     + '</li>');
                     /*$('#menu_gauche_ul').css('display','block !important').addClass("show").show();*/
@@ -142,6 +144,38 @@
 
     });
 </script>
+<script>
+(function ($) {
+	  jQuery.expr[':'].Contains = function(a,i,m){
+		  return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase())>=0;
+	  };
+	 
+	  function listFilter() {
+		var input = $("#recherche");
+                var list = $("#reports").find("ul");  
+		$(input).change( function () {
+			var filter = $(this).val();
+			if(filter) {
+			  $(list).find("a:not(:Contains(" + filter + "))").parent().slideUp();
+			  $(list).find("a:Contains(" + filter + ")").parent().parent().slideDown();
+                        
+			} else {
+			  $(list).find("li").slideDown();
+          
+			}
+			return false;
+		  })
+		.keyup( function () {
+			$(this).change();
+		});
+	  }
+	
+	  $(function () {
+		listFilter();
+	  });
+	}(jQuery));
+</script>
+
 <script src="<?php echo base_url(); ?>assets/js/home.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/nav.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.filter-list.js"></script>
