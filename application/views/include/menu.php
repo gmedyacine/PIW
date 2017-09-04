@@ -30,7 +30,7 @@
                 <ul id="menu_gauche_ul" class="sub-menu">
                     <li class="title"><?php echo $this->lang->line("rapport_libelle") ?></li>
                     <li>
-                        <span class="searchboxs has-clear"> <input  type="text" name="recherche" id="recherche" data-filter-list="#reports" class="form-control"  placeholder="<?php echo $this->lang->line('search_by'); ?>" />
+                        <span class="searchboxs has-clear"> <input  type="search" name="recherche" id="recherche" data-filter-list="#reports" class="form-control"  placeholder="<?php echo $this->lang->line('search_by'); ?>" />
                         <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </span>
                         <div id="reports"  class="scroll_ul">

@@ -21212,3 +21212,29 @@ fin ouvrir le menu gauche au survole*/
     pointer-events: auto;
     cursor: pointer;
 }
+#recherche::-webkit-search-cancel-button{
+    content: '';    /* required for :after content to show */
+    display: block;
+
+    /*
+     * Setup dimensions for the custom icon.  Note that these dimensions seem to
+     * affect positioning.
+     */
+    width: 14px;
+    height: 10px;
+
+    /*
+     * Base64 encoded custom "X" icon
+     * Natively 30x30, but downscaled for highres screens
+    */
+    background-image: url(../img/remove-mini.png);
+
+    /* setup all the background tweaks for our custom icon */
+    background-repeat: no-repeat;
+
+    /* icon size */
+    background-size: 10px;
+
+    /* note: this positioning will need to be tweaked for iOS */
+    background-position: top left;
+}
