@@ -10,7 +10,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title center" id="myModalLabel"><?php echo $this->lang->line('chart_config'); ?></h4> 
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="padding-top: 0px;">
                 <form action="<?php echo base_url(); ?>index.php/home/create_chart" method="post" >
 
                     <div class="row form-group hidden">
@@ -23,11 +23,9 @@
                         </div>
                     </div> 
 
-                    <div class="row form-group">   
-                        <div class="col-md-3">
-                            <label for="chartType" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('chart_type'); ?></label>                     
-                        </div>
-                        <div class="col-md-9">
+                    <div class="row form-group" style="margin-bottom: 0px;">   
+                       
+                        <div class="col-md-6">
                             <select  id="chartType" name="chartType" class="form-control " required="">
                                 <option value="">-- <?php echo $this->lang->line('select_chart'); ?> --</option>
                                 <option value="line">-- Courbe --</option>
@@ -36,50 +34,31 @@
                             </select>
                         </div>
 
-                    </div>
-
-                    <div class="row form-group">   
-                        <div class="col-md-3">
-                            <label for="chartTitle" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('chart_title'); ?></label>                     
-                        </div>
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <input type="text" id="chartTitle" name="chartTitle"  placeholder="<?php echo $this->lang->line('chart_title'); ?>" class="form-control" required=""/>
                         </div>
 
                     </div>
-                    <div class="row form-group">   
-                        <div class="col-md-3">
-                            <label for="chartX" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('x_axis'); ?></label>                     
-                        </div>
-                        <div class="col-md-9">
+                    <div class="row form-group" style="margin-bottom: 0px;">   
+                        <div class="col-md-6">
                             <select id="graphX" name="chartX" class="form-control" required="">
                                 <option value="">-- <?php echo $this->lang->line('select_X'); ?> --</option>
                             </select>
                         </div>
 
-                    </div>
-                    <div class="row form-group">   
-                        <div class="col-md-3">
-                            <label for="chartY" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('y_axis'); ?></label>                     
-                        </div>
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <select id="graphY" name="chartY" class="form-control" required="">
                                 <option value="">-- <?php echo $this->lang->line('select_Y'); ?> --</option>
                             </select>
                         </div>
-
                     </div>
-                    <div class="row form-group">   
-                        <div class="col-md-3">
-                            <label for="multi" class="control-label" style="margin-top: 10px;" ><?php echo $this->lang->line('multi_options'); ?></label>                     
-                        </div>
-                        <div class="col-md-9">
+                    <div class="row form-group" style="margin-bottom: 0px;"> 
+                     <div class="col-md-12">
                             <select multiple id="multiOpt" name="multi[]" class="form-control" required="">
                                 <option value="">-- <?php echo $this->lang->line('select_options'); ?> --</option>
                             </select>
                         </div>
-
-                    </div>
+            </div>
                     <br>
 
                     <input type="submit"  class="btn btn-primary pull-right" value="<?php echo $this->lang->line('save'); ?>">
