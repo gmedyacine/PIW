@@ -368,6 +368,15 @@ Class Report extends CI_Model {
 
         return $allData;
     }
+    
+    function renameCategory($idCat,$newName) {
+         if ($this->db->set('nom_report_categ', $newName)
+                            ->where('id_report_categ', $idCat)
+                            ->update('ipw_report_categ')) {
+                return true;
+            }
+        
+    }
 
 }
 

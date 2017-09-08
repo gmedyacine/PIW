@@ -73,6 +73,7 @@ $route['projection/(:num)'] = 'home/projection/$1';
 $route["delete-report/(:num)"]='home/delete_report_menu/$1';
 $route["create-report"]='home/create_form';
 $route["rename-report"]='home/rename_form';
+$route["rename-category"]='home/rename_categ_form';
 $route["delete-chart/(:num)"]='home/delete_chart/$1';
 $route['logout'] = 'home/logout';
 $route['404_override'] = '';

@@ -51,12 +51,12 @@ msg_success;Your request has been send successfully !!
 title_login;connection login and password
 username_connexion;username
 password_connexion;password
-rename_report;Rename your report
+rename_report;Rename report
 select_report;Select a report
 save;Save
 msg_add;Successfully added !!
 msg_modif;Successfully updated !!
-create_report;Create your report
+create_report;Create report
 still_char;Character(s) Remaining
 required_field;This field is required !
 add_categ;Create category
@@ -90,3 +90,4 @@ chart_title;Chart Title
 not_num;This is not a numeric choice !
 update;Update
 update_bib;Update Library
+rename_category;Rename category

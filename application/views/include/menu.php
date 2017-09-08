@@ -123,9 +123,10 @@
 
         //add "Create your report" at the end of list projections
 <?php if ($role != 2) { ?>
+            var li_rename_categ = $("<li><a href='" + base_url + "index.php/rename-category' id='renameCateg'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("rename_category"); ?></a></li>");
             var li_rename = $("<li><a href='" + base_url + "index.php/rename-report' id='renameRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("rename_report"); ?></a></li>");
             var li_create = $("<li><a href='" + base_url + "index.php/create-report' id='createRpt'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;<?php echo $this->lang->line("create_report"); ?></a></li>");
-            $("#menu_gauche_ul").append(li_rename).append(li_create);
+            $("#menu_gauche_ul").append(li_rename_categ).append(li_rename).append(li_create);
 <?php } ?>
         $('[data-toggle="tooltip"]').tooltip();
         $('#recherche').filterList();

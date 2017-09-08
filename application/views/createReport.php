@@ -149,8 +149,6 @@ include('include/head.php');
                 <script src="<?php echo base_url(); ?>assets/js/select2.min.js"></script>
                 <script type="text/javascript">
                                                     $(document).ready(function () {
-                                                        $("#chart_config").hide();
-
                                                         $(".chosen-select").chosen({
                                                             search_contains: true
                                                         });
@@ -181,7 +179,7 @@ include('include/head.php');
 
                 <script type="text/javascript">
                     $(document).ready(function () {
-
+                        $("#chart_config").hide();
                         $('input[type="checkbox"]').click(function () {
                             if ($(this).prop("checked") == true) {
                                 $("#chart_config").show();
@@ -229,26 +227,26 @@ include('include/head.php');
                                     });
                                 }
                             });
-                           
+
                             $('#multi').on('click', function () {
-                            var rept = $("#rpt_select").find(":selected").val();
-                            var multi = $("#multi option:selected").last().val(); 
-                            $.ajax({
-                                type: "GET",
-                                url: "<?php echo base_url(); ?>index.php/home/checkNumeric/",
-                                dataType: 'json',
-                                data: {
-                                    rept_id: rept,
-                                    col_name: multi
-                                },
-                                success: function (res) {
-                                    if(res == false){
-                                        alert("This is not a numeric choice !"); 
-                                        $('#multi option:selected').last().prop('selected', false).trigger('chosen:updated').attr("disabled", true);
-                                    }                                       
-                                }
+                                var rept = $("#rpt_select").find(":selected").val();
+                                var multi = $("#multi option:selected").last().val();
+                                $.ajax({
+                                    type: "GET",
+                                    url: "<?php echo base_url(); ?>index.php/home/checkNumeric/",
+                                    dataType: 'json',
+                                    data: {
+                                        rept_id: rept,
+                                        col_name: multi
+                                    },
+                                    success: function (res) {
+                                        if (res == false) {
+                                            alert("This is not a numeric choice !");
+                                            $('#multi option:selected').last().prop('selected', false).trigger('chosen:updated').attr("disabled", true);
+                                        }
+                                    }
+                                });
                             });
-                        });
                         });
                     });
 

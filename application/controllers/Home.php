@@ -344,7 +344,9 @@ class Home extends Home_Controller {
     public function rename_form() {
         $this->load->view("renameReport", $this->data);
     }
-
+  public function rename_categ_form() {
+        $this->load->view("renameCategory", $this->data);
+    }
     public function create_form() {
 
         $this->data['rpt_tables_json'] = json_encode($this->report->searchReporttables());
@@ -352,6 +354,15 @@ class Home extends Home_Controller {
         //var_dump($this->report->searchReporttables());die;
         $this->load->view("createReport", $this->data);
     }
+     public function rename_category() {
+        $report_categ = $this->input->post('report_categ_id');
+        $new_name = $this->input->post('new_name');
+        
+             if ($this->report->renameCategory($report_categ, $new_name)) {
+                  $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_modif") . "</div>");
+             }
+             redirect('rename-category','refresh');
+     }
 
     public function rename_report() {
         $new_name = $this->input->post('new_name');
