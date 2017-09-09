@@ -438,6 +438,15 @@ class Home extends Home_Controller {
         $this->report->deleteChart($id);
         $this->delete_report($id);
     }
+    public function delete_categ_menu($id){ // supprimer un dossier dans le menu gquche
+        if($this->report->isArchived($id) == 0){
+            $this->report->moveToArchive($id);
+        }else{
+        $this->report->deleteCategory($id);
+        $this->report->deleteReportByCateg($id);
+        $this->report->deleteGroupByCateg($id);
+        }
+    }
 
     public function add_report_categ() {
         $nom_report_categ = $this->input->post('nom_report_categ');

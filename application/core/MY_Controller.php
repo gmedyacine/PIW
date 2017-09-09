@@ -36,6 +36,7 @@ class Home_Controller extends MY_Controller {
         $this->data['report_categ_json'] = json_encode($this->report->getAllReportCateg());
         $this->data['report_sous_categ_json'] = json_encode($this->report->getAllReportSubCateg());
         $this->data["menu_report"] = json_encode($this->report->fetch_menu_report());
+        $this->data["archived_menu_report"] = json_encode($this->report->fetch_archived_menu_report());
     }
 
     protected function logout() {

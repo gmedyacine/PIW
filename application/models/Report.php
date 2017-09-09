@@ -5,12 +5,24 @@ Class Report extends CI_Model {
     function getAllReportCateg() {
         $query = $this->db->select('*')
                 ->from("ipw_report_categ")
+                ->where('archived', 0)
                 ->join("piw_users", 'piw_users.id = added_by')
                 ->get(); //select * from ipw_report_categ‏
 
         $ret = $query->result_array();
         return $ret;
     }
+    function getArchivedReportCateg() {
+        $query = $this->db->select('*')
+                ->from("ipw_report_categ")
+                ->where('archived', 1)
+                ->join("piw_users", 'piw_users.id = added_by')
+                ->get(); //select * from ipw_report_categ‏
+
+        $ret = $query->result_array();
+        return $ret;
+    }
+    
 
     function getAllReportSubCateg() {
         $query = $this->db->select('*')
@@ -72,11 +84,6 @@ Class Report extends CI_Model {
         return $ret; // return all fields of table : ipw_create_report
     }
 
-    function deleteReportCateg($id) {
-        $this->db->where("id", $id);
-        $this->db->delete("ipw_report_categ");
-    }
-
     function addReportCateg($data) {
         if ($this->db->insert('ipw_report_categ', $data)) {
             return true;
@@ -110,8 +117,8 @@ Class Report extends CI_Model {
         $report_id = $data['old_report_name'];
         $new_report_name = $data['new_report_name'];
 
-                   
-            if (!empty($chart)) { // si le tableau $chart n'est pas vide .. on le créé le rapport et on créé son configuration
+
+        if (!empty($chart)) { // si le tableau $chart n'est pas vide .. on le créé le rapport et on créé son configuration
             if (($this->db->set('new_report_name', $new_report_name)
                             ->where('old_report_name', $report_id)
                             ->update('ipw_create_report')) && ($this->db->insert('ipw_chart', $chart))) {
@@ -124,8 +131,6 @@ Class Report extends CI_Model {
                 return true;
             }
         }
-
-        
     }
 
     function manager_report() { // pour afficher les tables report
@@ -168,6 +173,17 @@ Class Report extends CI_Model {
 
     function fetch_menu_report() {
         $menu = $this->getAllReportCateg();
+        $ret =array();
+        foreach ($menu as $report) {
+            $ret[] = array("id_menu" => $report["id_report_categ"],
+                "report_menu" => $report["nom_report_categ"],
+                "sous_menu" => $this->getCreatedReptFullByCat($report["id_report_categ"]));
+        }
+        return $ret;
+    }
+    function fetch_archived_menu_report() {
+        $menu = $this->getArchivedReportCateg();
+        $ret = array();
         foreach ($menu as $report) {
             $ret[] = array("id_menu" => $report["id_report_categ"],
                 "report_menu" => $report["nom_report_categ"],
@@ -280,6 +296,7 @@ Class Report extends CI_Model {
             return true;
         }
     }
+
     function createChart($chart) {
         if ($this->db->insert('ipw_chart', $chart)) {
             return true;
@@ -368,13 +385,63 @@ Class Report extends CI_Model {
 
         return $allData;
     }
+
+    function renameCategory($idCat, $newName) {
+        if ($this->db->set('nom_report_categ', $newName)
+                        ->where('id_report_categ', $idCat)
+                        ->update('ipw_report_categ')) {
+            return true;
+        }
+    }
+
+    function deleteCategory($idCat) {
+        $this->db->where("id_report_categ ", $idCat);
+        $this->db->delete("ipw_report_categ");
+    }
+
+    function deleteReportByCateg($idCat) {
+        
+        $query = $this->db->select('old_report_name')
+                ->from("ipw_create_report")
+                ->where('report_categ', $idCat)
+                ->get();
+
+        $ret = $query->result_array(); // récupérer les id des rapports de la catégorie $idCat
+        
+        foreach ($ret as $key => $val) {
+            $id = array_values($val);
+            $this->deleteChart($id[0]);
+            $this->deleteCreatedReport($id[0]);
+        }
+             
+    }
+
+    function deleteGroupByCateg($idCat) { //supprimer tous les sous categ d'une categorie bien détérminée
+        $this->db->where("report_categ", $idCat);
+        $this->db->delete("ipw_report_sous_categ");
+    }
     
-    function renameCategory($idCat,$newName) {
-         if ($this->db->set('nom_report_categ', $newName)
-                            ->where('id_report_categ', $idCat)
-                            ->update('ipw_report_categ')) {
-                return true;
-            }
+    function isArchived($id){
+         $query = $this->db->select('archived')
+                ->from("ipw_report_categ")
+                ->where('id_report_categ', $id)
+                ->get();
+
+        $ret = $query->result_array(); // récupérer les id des rapports de la catégorie $idCat
+        $archived;
+        foreach ($ret as $key => $val) {
+            $id = array_values($val);
+            $archived = $id[0];
+        }
+        return $archived;
+    }
+    
+    function moveToArchive($id){
+        if ($this->db->set('archived', 1)
+                        ->where('id_report_categ', $id)
+                        ->update('ipw_report_categ')) {
+            return true;
+        }
         
     }
 

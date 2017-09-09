@@ -18703,7 +18703,7 @@ div.dt-buttons {
     font-weight: 300;
 }
 
-.am-left-sidebar .sidebar-elements > li > ul > li .scroll_ul   > li > a:hover, .report  a:hover {
+.am-left-sidebar .sidebar-elements > li > ul > li .scroll_ul   > li > a:hover, .report  a:hover{
     background-color: #424141;
     color: #ffffff;
 }
@@ -21229,4 +21229,30 @@ fin ouvrir le menu gauche au survole*/
 
     /* note: this positioning will need to be tweaked for iOS */
     background-position: top left;
+}
+.remove-categ{
+    font-size: 10px;
+    position: absolute;
+    right: 5;
+    top: 15px;
+    cursor: pointer;
+}
+
+#archived > li > a, .report a {
+    padding: 11px 45px;
+    color: #b3b3b3;
+    font-size: 13px;
+    display: block;
+    font-weight: 300;
+}
+ li > a, .archived a{
+    padding: 11px 25px;
+    color: #b3b3b3;
+    font-size: 13px;
+    display: block;
+    font-weight: 300;
+}
+#archived > li > a:hover,li > a:hover, .archived a:hover{
+    background-color: #424141;
+    color: #ffffff;
 }
