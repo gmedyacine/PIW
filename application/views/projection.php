@@ -48,10 +48,11 @@ include('include/dataTables.php');
 
                         <?php if ($id_projection == $chartReportId) { ?>
                             <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div id="chart" class="col-md-12 col-sm-12" style="height: 300px; width: 100%;">
+                                <div class="panel-body" id="chart_content">
+                                    <div id ="chart" class = "col-md-12 col-sm-12" style = "height: 300px; width: 100%;">
 
                                     </div>
+                                    <div id="chart1" style="width: 300px; height: 200px;"></div>
                                 </div>
                             </div>
                         <?php } ?>
@@ -183,7 +184,6 @@ include('include/dataTables.php');
                     </script>
 
                     <script type="text/javascript">
-
                         $(document).ready(function () {
                             window.setTimeout(function () {
                                 $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
@@ -195,7 +195,23 @@ include('include/dataTables.php');
                     </script>
                     <script type="text/javascript">
                         $(document).ready(function () {
+//                            function autoRefresh_chart() {
+////                                $.get(location.href).then(function (page) {
+////                                    $("#chart").html($(page).find("#chart").html());
+////                                });
+////alert('test');
+//                            }
 
+//                            setInterval(function () {
+////                                  $("#chart").reload();
+////                                  refresh();
+////                                data = [150, 300]; // data from ajax or any other way
+//                                var series = request();
+//                                chart.series[0].setData(series, true);
+//                                // alert("Message to alert every 5 seconds");
+//                            }, 5000);
+                            
+                  
                             Highcharts.setOptions({
                                 lang: {
                                     editBtn: "Edit",
@@ -233,7 +249,7 @@ include('include/dataTables.php');
                                     buttons: {
                                         'edit': {
                                             _id: 'edit',
-                                            symbol: 'url(<?php echo base_url(); ?>assets/img/edit.png)',
+                                            symbol: 'url(<?php echo base_url();    ?>assets/img/edit.png)',
                                             _titleKey: 'edit',
                                             symbolX: 20,
                                             symbolY: 18,
@@ -247,7 +263,7 @@ include('include/dataTables.php');
                                         },
                                         'delete': {
                                             _id: 'delete',
-                                            symbol: 'url(<?php echo base_url(); ?>assets/img/delete.png)',
+                                            symbol: 'url(<?php echo base_url();    ?>assets/img/delete.png)',
                                             symbolX: 20,
                                             symbolY: 18,
                                             x: -88,
@@ -268,9 +284,106 @@ include('include/dataTables.php');
                                     }
                                 }
                             });
-                        });
+                            
+                            
+                          /* 
+                            function request() {
+                                return $.ajax({
+                                    url: "<?php //echo base_url(); ?>index.php/home/updateSeries/",
+                                    type: "GET",
+                                    async: true,
+                                    dataType: "json",
+                                    data: {rept_id: id_projection}
+                                });
+                            }
+                            var options = {
+                                chart: {
+                                    renderTo: "chart",
+                                    type: chartType,
+                                    events: {// (3)
+                                        load: function () {
+                                            var series = this.series;
+//            var series1 = this.series[1];
+//            var series2 = this.series[2];
+//            var series3 = this.series[3];
+                                            setInterval(function () {
+                                                request().done(function (point) {
+//chart.series[0].setData(data, true);
+                                                    series.update({
+                                                        name: point.name,
+                                                        data: point.data
+                                                    });
+//                series2.update({
+//                	name: point[2].name,
+//                	data: point[2].data
+//                });
+//                series3.update({
+//                	name: point[3].name,
+//                	data: point[3].data
+//                });
+                                                });
+                                            }, 5000);
+                                        }
+                                    }
+                                },
+                                title: {
+                                    text: report
+                                },
+                                subtitle: {
+                                    text: chartTitle
+                                },
+                                xAxis: {
+                                    categories: xData
+                                },
+                                yAxis: {
+                                    title: {
+                                        text: chartY
+                                    }
+                                },
+
+                                plotOptions: {
+                                    column: {
+                                        dataLabels: {
+                                            enabled: true
+                                        }
+                                    }
+                                },
+                                series: []
+                            };
+                            // (2)
+                            $(function () {
+                                request().done(function (point) {
+                                    options.series = point;
+                                    var chart = new Highcharts.Chart(options);
+                              
+                                });
+                            });
+                            
+                        });*/
+//                                       
+                    });    
+
                     </script>
-                     
+
+
+                    <script>
+//                        var series = $.ajax({
+//                            url: "<?php //echo base_url();   ?>index.php/home/updateSeries/",
+//                            type: "GET",
+//                            async: true,
+//                            dataType: "json",
+//                            data: {rept_id: id_projection}
+//                        });
+//                        setInterval(function () {
+//                            $.getJSON(series, function (data) {
+//                                var chart = $('#chart').highcharts();
+//                                $.each(data, function (pos, serie) {
+//                                    chart.series[pos].setData(serie, false);
+//                                });
+//                                chart.redraw();
+//                            });
+//                        }, 3000);
+                    </script>
                 </div> <!-- Fin partie du tableau -->
                 <!-- ROW END -->
 

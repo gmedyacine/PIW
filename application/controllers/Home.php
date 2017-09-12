@@ -55,6 +55,21 @@ class Home extends Home_Controller {
         $this->load->view("projection", $this->data);
     }
 
+    public function updateSeries() {
+        $id = $this->input->get('rept_id');
+        $chartConfig = $this->report->getChartConfig($id);
+        $multiCol = $chartConfig[0]['multi'];
+        $xAxis = $chartConfig[0]['chartX'];
+        $report = $chartConfig[0]["report"];
+        
+        $series = $this->report->getSeries($report, $multiCol);
+
+        $this->output->set_content_type('application/json');
+        $this->output->set_output(json_encode($series));
+
+        return $series;        
+    }
+
     public function excuteFiltre() {
         $date_debut = $this->input->post('date_debut');
         $date_fin = $this->input->post('date_fin');
@@ -246,14 +261,14 @@ class Home extends Home_Controller {
                 $this->files->delete_data($id);
                 if (file_exists('./uploads/' . $name)) {
                     unlink('./uploads/' . $name); // delete file
-                    $result = true ;
+                    $result = true;
                 }
             } else {
                 $this->files->archive_file($id);
-                $result = true ;
+                $result = true;
             }
         }
-         $this->output->set_content_type('application/json');
+        $this->output->set_content_type('application/json');
         $this->output->set_output(json_encode($result));
         return $result;
     }
@@ -344,9 +359,11 @@ class Home extends Home_Controller {
     public function rename_form() {
         $this->load->view("renameReport", $this->data);
     }
-  public function rename_categ_form() {
+
+    public function rename_categ_form() {
         $this->load->view("renameCategory", $this->data);
     }
+
     public function create_form() {
 
         $this->data['rpt_tables_json'] = json_encode($this->report->searchReporttables());
@@ -354,15 +371,16 @@ class Home extends Home_Controller {
         //var_dump($this->report->searchReporttables());die;
         $this->load->view("createReport", $this->data);
     }
-     public function rename_category() {
+
+    public function rename_category() {
         $report_categ = $this->input->post('report_categ_id');
         $new_name = $this->input->post('new_name');
-        
-             if ($this->report->renameCategory($report_categ, $new_name)) {
-                  $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_modif") . "</div>");
-             }
-             redirect('rename-category','refresh');
-     }
+
+        if ($this->report->renameCategory($report_categ, $new_name)) {
+            $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_modif") . "</div>");
+        }
+        redirect('rename-category', 'refresh');
+    }
 
     public function rename_report() {
         $new_name = $this->input->post('new_name');
@@ -438,13 +456,14 @@ class Home extends Home_Controller {
         $this->report->deleteChart($id);
         $this->delete_report($id);
     }
-    public function delete_categ_menu($id){ // supprimer un dossier dans le menu gquche
-        if($this->report->isArchived($id) == 0){
+
+    public function delete_categ_menu($id) { // supprimer un dossier dans le menu gquche
+        if ($this->report->isArchived($id) == 0) {
             $this->report->moveToArchive($id);
-        }else{
-        $this->report->deleteCategory($id);
-        $this->report->deleteReportByCateg($id);
-        $this->report->deleteGroupByCateg($id);
+        } else {
+            $this->report->deleteCategory($id);
+            $this->report->deleteReportByCateg($id);
+            $this->report->deleteGroupByCateg($id);
         }
     }
 

@@ -202,7 +202,7 @@
     });
             $(document).on("click", '.remove-categ', function () {
     var id_remove = $(this).attr("data-remove");
-            if (confirm('delete category')) {
+            if (confirm('Do you want do delete this folder and all it reports ?')) {
     $.ajax({
     url: base_url + "index.php/delete-category/" + id_remove,
             type: "GET"

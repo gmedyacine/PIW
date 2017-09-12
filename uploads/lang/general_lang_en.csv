@@ -91,3 +91,4 @@ not_num;This is not a numeric choice !
 update;Update
 update_bib;Update Library
 rename_category;Rename category
+delete_categ_confirm;Do you want do delete this folder and all it reports ?
