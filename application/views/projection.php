@@ -210,17 +210,58 @@ include('include/dataTables.php');
 //                                chart.series[0].setData(series, true);
 //                                // alert("Message to alert every 5 seconds");
 //                            }, 5000);
-                            
-                  
+
+
                             Highcharts.setOptions({
                                 lang: {
                                     editBtn: "Edit",
                                     deleteBtn: "Delete"
                                 }
                             });
-                            Highcharts.chart('chart', {
+                            function request() {//1
+                                return $.ajax({
+                                    url: "<?php echo base_url(); ?>index.php/home/updateSeries/",
+                                    type: "GET",
+                                    async: true,
+                                    dataType: "json",
+                                    data: {rept_id: id_projection}
+                                });
+                            }
+                            var options = {
                                 chart: {
-                                    type: chartType
+                                    renderTo: "chart",
+                                    type: chartType,
+                                    events: {// (3)
+                                        load: function () {
+                                            var series = this.series[0];
+                                            var xData = this.xAxis[0];
+                                            //            var series1 = this.series[1];
+                                            //            var series2 = this.series[2];
+                                            //            var series3 = this.series[3];
+                                            setInterval(function () {
+                                                request().done(function (point) {
+                                                    series.update({
+                                                        name: point.series[0].name,
+                                                        data: point.series[0].data
+                                                    });
+                                                    
+                                                    xData.update({
+                                                        categories: point.XData
+                                                        
+                                                    });
+                                                    //                series2.update({
+                                                    //                	name: point[2].name,
+                                                    //                	data: point[2].data
+                                                    //                });
+                                                    //                series3.update({
+                                                    //                	name: point[3].name,
+                                                    //                	data: point[3].data
+                                                    //                });
+                                                });
+                                            }, 5000);
+                                        }
+
+                                    }
                                 },
                                 title: {
                                     text: report
@@ -228,8 +269,9 @@ include('include/dataTables.php');
                                 subtitle: {
                                     text: chartTitle
                                 },
+
                                 xAxis: {
-                                    categories: xData
+                                    categories: []
                                 },
                                 yAxis: {
                                     title: {
@@ -244,12 +286,12 @@ include('include/dataTables.php');
                                         enableMouseTracking: true
                                     }
                                 },
-                                series: series,
+                                series: [],
                                 exporting: {
                                     buttons: {
                                         'edit': {
                                             _id: 'edit',
-                                            symbol: 'url(<?php echo base_url();    ?>assets/img/edit.png)',
+                                            symbol: 'url(<?php echo base_url(); ?>assets/img/edit.png)',
                                             _titleKey: 'edit',
                                             symbolX: 20,
                                             symbolY: 18,
@@ -263,7 +305,7 @@ include('include/dataTables.php');
                                         },
                                         'delete': {
                                             _id: 'delete',
-                                            symbol: 'url(<?php echo base_url();    ?>assets/img/delete.png)',
+                                            symbol: 'url(<?php echo base_url(); ?>assets/img/delete.png)',
                                             symbolX: 20,
                                             symbolY: 18,
                                             x: -88,
@@ -283,107 +325,19 @@ include('include/dataTables.php');
                                         }
                                     }
                                 }
-                            });
-                            
-                            
-                          /* 
-                            function request() {
-                                return $.ajax({
-                                    url: "<?php //echo base_url(); ?>index.php/home/updateSeries/",
-                                    type: "GET",
-                                    async: true,
-                                    dataType: "json",
-                                    data: {rept_id: id_projection}
-                                });
                             }
-                            var options = {
-                                chart: {
-                                    renderTo: "chart",
-                                    type: chartType,
-                                    events: {// (3)
-                                        load: function () {
-                                            var series = this.series;
-//            var series1 = this.series[1];
-//            var series2 = this.series[2];
-//            var series3 = this.series[3];
-                                            setInterval(function () {
-                                                request().done(function (point) {
-//chart.series[0].setData(data, true);
-                                                    series.update({
-                                                        name: point.name,
-                                                        data: point.data
-                                                    });
-//                series2.update({
-//                	name: point[2].name,
-//                	data: point[2].data
-//                });
-//                series3.update({
-//                	name: point[3].name,
-//                	data: point[3].data
-//                });
-                                                });
-                                            }, 5000);
-                                        }
-                                    }
-                                },
-                                title: {
-                                    text: report
-                                },
-                                subtitle: {
-                                    text: chartTitle
-                                },
-                                xAxis: {
-                                    categories: xData
-                                },
-                                yAxis: {
-                                    title: {
-                                        text: chartY
-                                    }
-                                },
-
-                                plotOptions: {
-                                    column: {
-                                        dataLabels: {
-                                            enabled: true
-                                        }
-                                    }
-                                },
-                                series: []
-                            };
-                            // (2)
-                            $(function () {
+                            $(function () {//2
                                 request().done(function (point) {
-                                    options.series = point;
+                                    options.series = point.series;
+                                    options.xAxis.categories = point.XData;
                                     var chart = new Highcharts.Chart(options);
-                              
+
                                 });
                             });
-                            
-                        });*/
-//                                       
-                    });    
+                        });
 
                     </script>
 
-
-                    <script>
-//                        var series = $.ajax({
-//                            url: "<?php //echo base_url();   ?>index.php/home/updateSeries/",
-//                            type: "GET",
-//                            async: true,
-//                            dataType: "json",
-//                            data: {rept_id: id_projection}
-//                        });
-//                        setInterval(function () {
-//                            $.getJSON(series, function (data) {
-//                                var chart = $('#chart').highcharts();
-//                                $.each(data, function (pos, serie) {
-//                                    chart.series[pos].setData(serie, false);
-//                                });
-//                                chart.redraw();
-//                            });
-//                        }, 3000);
-                    </script>
                 </div> <!-- Fin partie du tableau -->
                 <!-- ROW END -->
 

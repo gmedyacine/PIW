@@ -61,13 +61,15 @@ class Home extends Home_Controller {
         $multiCol = $chartConfig[0]['multi'];
         $xAxis = $chartConfig[0]['chartX'];
         $report = $chartConfig[0]["report"];
-        
         $series = $this->report->getSeries($report, $multiCol);
+        $XData = $this->report->getXData($report, $xAxis);
+        
+        $data = array('XData' => $XData, 'series' => $series);
 
         $this->output->set_content_type('application/json');
-        $this->output->set_output(json_encode($series));
+        $this->output->set_output(json_encode($data));
 
-        return $series;        
+        return $data;                
     }
 
     public function excuteFiltre() {

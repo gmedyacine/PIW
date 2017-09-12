@@ -227,6 +227,7 @@
                             $(list).find("a:Contains(" + filter + ")").parent().parent().slideDown();
                     } else {
                     $(list).find("li").slideDown();
+                    
                     }
                     return false;
                     })
