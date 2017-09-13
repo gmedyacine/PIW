@@ -146,8 +146,8 @@
                         var report = val.new_report_name;
                                 if (val.old_report_name == idPrj)
                                 classOpn = "open";
-                                if (val.new_report_name.length > 19)
-                                report = val.new_report_name.substring(0, 19) + '...';
+                                if (val.new_report_name.length > 15)
+                                report = val.new_report_name.substring(0, 15) + '...';
                                 var linkToRpt = $("<li  id='" + val.old_report_name + "' class='report " + classOpn + "'>"
                                         + "<a id='" + val.old_report_name + "' href='" + base_url + "index.php/projection/" + val.old_report_name + "' data-toggle='tooltip' data-placement='right' data-html='true' data-container='body' title='<?php echo $this->lang->line("categorie"); ?>: " + val.nom_report_categ + " <br> <?php echo $this->lang->line("sub_cat_rept"); ?>: " + val.nom_report_sous_categ + " <br> <?php echo $this->lang->line("report"); ?>: " + val.new_report_name + "'> " + '<span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;&nbsp;'
                                         + report
