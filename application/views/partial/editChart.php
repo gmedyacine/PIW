@@ -18,7 +18,7 @@
 <div class="modal fade" id="editChart" tabindex="-1" role="dialog" aria-labelledby="basicModal" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="cursor: move;">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title center" id="myModalLabel"><?php echo $this->lang->line('chart_config'); ?></h4> 
             </div>

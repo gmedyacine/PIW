@@ -56,7 +56,7 @@ include('include/dataTables.php');
                                 </div>
                             </div>
                         <?php } ?>
-                        <fieldset class="group-border">
+                        <fieldset id="filter_panel" class="group-border">
 
                             <div id="panel-table" class="panel panel-default">
                                 <div class="panel-body project-filters">
@@ -149,7 +149,7 @@ include('include/dataTables.php');
                                 </div> 
 
                                 <?php if ($id_projection != $chartReportId) { ?>
-                                    <div class=" pull-right clo-md-6">
+                                    <div class=" pull-right clo-md-3">
                                         <div> <button class="btn btn-primary chart_btn" type="button" data-toggle="modal"
                                                       onclick="$('#createChart').modal('show');">
                                                 <i class="icon icon-left s7-graph"></i>
@@ -157,6 +157,14 @@ include('include/dataTables.php');
                                             </button></div>
                                     </div>
                                 <?php } ?>
+
+                                <div class=" pull-right clo-md-3" style="margin-right: 7px">
+                                    <div> <button class="btn btn-success" type="button" id="filter_btn">
+                                            <i class="icon icon-left s7-filter"></i>
+                                            <?php echo $this->lang->line('filter'); ?>
+                                        </button></div>
+                                </div>
+
                                 <div class="clear"></div>
                             </div>  <!-- Fin titre du tableau et lien export excel-->
 
@@ -190,27 +198,40 @@ include('include/dataTables.php');
                                     $(this).remove();
                                 });
                             }, 1000);
-
                         });
                     </script>
                     <script type="text/javascript">
                         $(document).ready(function () {
-//                            function autoRefresh_chart() {
-////                                $.get(location.href).then(function (page) {
-////                                    $("#chart").html($(page).find("#chart").html());
-////                                });
-////alert('test');
-//                            }
 
-//                            setInterval(function () {
-////                                  $("#chart").reload();
-////                                  refresh();
-////                                data = [150, 300]; // data from ajax or any other way
-//                                var series = request();
-//                                chart.series[0].setData(series, true);
-//                                // alert("Message to alert every 5 seconds");
-//                            }, 5000);
+                            $("#filter_panel").addClass("hidden").hide();
+                            $('#filter_btn').html("<i class='icon icon-left s7-filter'></i>Show Filter");
+                            $('#filter_btn').click(function () {
+                                if ($("#filter_panel").hasClass("hidden") == true) {
+                                    $("#filter_panel").removeClass("hidden").show();
+                                  //  $('#filter_btn').val("Hide Filter");​​​​​​
+                                  $(this).html("<i class='icon icon-left s7-filter'></i>Hide Filter");
+                                } else {
+                                    $("#filter_panel").addClass("hidden").hide();
+                                    $(this).html("<i class='icon icon-left s7-filter'></i>Show Filter");
+                                }
 
+                            });
+                        });
+                    </script>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $("#createChart").draggable({ // pour pouvoir deplacer le modal
+                                handle: ".modal-header"
+                            });
+                            $("#editChart").draggable({ // pour pouvoir deplacer le modal
+                                handle: ".modal-header"
+                            });
+                        });
+
+                    </script>
+
+                    <script type="text/javascript">
+                        $(document).ready(function () {
 
                             Highcharts.setOptions({
                                 lang: {
@@ -244,10 +265,10 @@ include('include/dataTables.php');
                                                         name: point.series[0].name,
                                                         data: point.series[0].data
                                                     });
-                                                    
+
                                                     xData.update({
                                                         categories: point.XData
-                                                        
+
                                                     });
                                                     //                series2.update({
                                                     //                	name: point[2].name,
