@@ -137,24 +137,24 @@
             }
         });
     
-    $('#multi').on('click', function () {
-                            var multi = $("#multi option:selected").last().val(); 
-                            $.ajax({
-                                type: "GET",
-                                url: "<?php echo base_url(); ?>index.php/home/checkNumeric/",
-                                dataType: 'json',
-                                data: {
-                                    rept_id: id_projection,
-                                    col_name: multi
-                                },
-                                success: function (res) {
-                                    if(res == false){
-                                        alert("This is not a numeric choice !"); 
-                                        $('#multi option:selected').last().prop('selected', false).trigger('chosen:updated').attr("disabled", true);
-                                    }                                       
-                                }
-                            });
-                        });
+//    $('#multi').on('click', function () {
+//                            var multi = $("#multi option:selected").last().val(); 
+//                            $.ajax({
+//                                type: "GET",
+//                                url: "<?php //echo base_url(); ?>index.php/home/checkNumeric/",
+//                                dataType: 'json',
+//                                data: {
+//                                    rept_id: id_projection,
+//                                    col_name: multi
+//                                },
+//                                success: function (res) {
+//                                    if(res == false){
+//                                        alert("This is not a numeric choice !"); 
+//                                        $('#multi option:selected').last().prop('selected', false).trigger('chosen:updated').attr("disabled", true);
+//                                    }                                       
+//                                }
+//                            });
+//                        });
     });
 
 </script>

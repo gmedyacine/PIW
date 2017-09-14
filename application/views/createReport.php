@@ -228,25 +228,25 @@ include('include/head.php');
                                 }
                             });
 
-                            $('#multi').on('click', function () {
-                                var rept = $("#rpt_select").find(":selected").val();
-                                var multi = $("#multi option:selected").last().val();
-                                $.ajax({
-                                    type: "GET",
-                                    url: "<?php echo base_url(); ?>index.php/home/checkNumeric/",
-                                    dataType: 'json',
-                                    data: {
-                                        rept_id: rept,
-                                        col_name: multi
-                                    },
-                                    success: function (res) {
-                                        if (res == false) {
-                                            alert("This is not a numeric choice !");
-                                            $('#multi option:selected').last().prop('selected', false).trigger('chosen:updated').attr("disabled", true);
-                                        }
-                                    }
-                                });
-                            });
+//                            $('#multi').on('click', function () {
+//                                var rept = $("#rpt_select").find(":selected").val();
+//                                var multi = $("#multi option:selected").last().val();
+//                                $.ajax({
+//                                    type: "GET",
+//                                    url: "<?php //echo base_url(); ?>index.php/home/checkNumeric/",
+//                                    dataType: 'json',
+//                                    data: {
+//                                        rept_id: rept,
+//                                        col_name: multi
+//                                    },
+//                                    success: function (res) {
+//                                        if (res == false) {
+//                                            alert("This is not a numeric choice !");
+//                                            $('#multi option:selected').last().prop('selected', false).trigger('chosen:updated').attr("disabled", true);
+//                                        }
+//                                    }
+//                                });
+//                            });
                         });
                     });
 

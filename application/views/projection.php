@@ -208,8 +208,7 @@ include('include/dataTables.php');
                             $('#filter_btn').click(function () {
                                 if ($("#filter_panel").hasClass("hidden") == true) {
                                     $("#filter_panel").removeClass("hidden").show();
-                                  //  $('#filter_btn').val("Hide Filter");​​​​​​
-                                  $(this).html("<i class='icon icon-left s7-filter'></i>Hide Filter");
+                                    $(this).html("<i class='icon icon-left s7-filter'></i>Hide Filter");
                                 } else {
                                     $("#filter_panel").addClass("hidden").hide();
                                     $(this).html("<i class='icon icon-left s7-filter'></i>Show Filter");
@@ -220,10 +219,10 @@ include('include/dataTables.php');
                     </script>
                     <script type="text/javascript">
                         $(document).ready(function () {
-                            $("#createChart").draggable({ // pour pouvoir deplacer le modal
+                            $("#createChart").draggable({// pour pouvoir deplacer le modal
                                 handle: ".modal-header"
                             });
-                            $("#editChart").draggable({ // pour pouvoir deplacer le modal
+                            $("#editChart").draggable({// pour pouvoir deplacer le modal
                                 handle: ".modal-header"
                             });
                         });
@@ -254,30 +253,24 @@ include('include/dataTables.php');
                                     type: chartType,
                                     events: {// (3)
                                         load: function () {
-                                            var series = this.series[0];
+                                            var multiSelect = multi.split(',');
+                                            var markers = [];
+                                            for (i = 0; i < multiSelect.length; i++) {
+                                                markers[i] = this.series[i];
+                                            }
                                             var xData = this.xAxis[0];
-                                            //            var series1 = this.series[1];
-                                            //            var series2 = this.series[2];
-                                            //            var series3 = this.series[3];
                                             setInterval(function () {
                                                 request().done(function (point) {
-                                                    series.update({
-                                                        name: point.series[0].name,
-                                                        data: point.series[0].data
-                                                    });
-
+                                                    for (i = 0; i < multiSelect.length; i++) {
+                                                        markers[i].update({
+                                                            name: point.series[i].name,
+                                                            data: point.series[i].data
+                                                        });
+                                                    }
                                                     xData.update({
                                                         categories: point.XData
 
                                                     });
-                                                    //                series2.update({
-                                                    //                	name: point[2].name,
-                                                    //                	data: point[2].data
-                                                    //                });
-                                                    //                series3.update({
-                                                    //                	name: point[3].name,
-                                                    //                	data: point[3].data
-                                                    //                });
                                                 });
                                             }, 5000);
                                         }

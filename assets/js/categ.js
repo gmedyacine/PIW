@@ -22,8 +22,8 @@ $(document).ready(function () {
                     return;
                 }
             }));
-             trData.append($('<td>').append('<button id="update_categ" data-toggle="modal" type="button" class="btn btn-success  btn-sm btn-round"><span class="glyphicon glyphicon-pencil"></span></button></td>').click(function () {
-                 $('#renameCateg').modal('show');
+             trData.append($('<td>').append('<button id="update_categ" data-toggle="modal" type="button" class="btn btn-success data-toggle="modal" data-target="#renameCategModal" btn-sm btn-round"><span class="glyphicon glyphicon-pencil"></span></button></td>').click(function () {
+            
                  $('#idBiblio').val(valData["lib_categ_id"]);
               $('#nom').val(valData["lib_categ"]);
               $('#description').val(valData["commentaire"]);
@@ -65,7 +65,13 @@ $(document).ready(function () {
                         return;
                     }
                 }));
-                 trData.append($('<td>' + valData["added_at"] + '</td>'));
+                //la partie update
+//                 trData.append($('<td>').append('<button id="update_categ" data-toggle="modal" type="button" class="btn btn-success data-toggle="modal" data-target="#renameSubCategModal" btn-sm btn-round"><span class="glyphicon glyphicon-pencil"></span></button></td>').click(function () {
+//                
+//                 $('#idSubBiblio').val(valData["lib_sous_id"]);
+//              $('#nomSubBoblio').val(valData["lib_sous_categ‏_nom"]);
+//              $('#descSubBiblio').val(valData["lib_sous_categ‏_desc"]);
+//            }));
 
 
                 tbody.append(trData);

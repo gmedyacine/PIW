@@ -132,7 +132,7 @@ include('include/head.php');
                                             <th><?php echo $this->lang->line("added_by"); ?></th>
                                             <th><?php echo $this->lang->line("added_at"); ?></th>
                                             <th><?php echo $this->lang->line("delete"); ?></th>
-                                            <th><?php echo $this->lang->line("update"); ?></th>
+<!--                                            <th><?php //echo $this->lang->line("update"); //la partie update ?></th>-->
 
                                         </tr>
                                     </thead>
@@ -145,6 +145,7 @@ include('include/head.php');
                         <!-- ROW END -->
   <!-- Modal -->
 <?php include('partial/renameCateg.php'); ?>
+<?php include('partial/renameSubCateg.php'); ?>
                     </div>
 
                 </div>

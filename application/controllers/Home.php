@@ -202,6 +202,20 @@ class Home extends Home_Controller {
 //            $this->load->view("addBib", $this->data);
         redirect('add-biblio', 'refrech');
     }
+    
+        public function update_sub_biblio() {
+        $id_sub_cat = $this->input->post('idSubBiblio');
+        $nom = $this->input->post('nomSubBoblio');
+        $desc = $this->input->post('descSubBiblio');
+       
+        $this->biblio->update_sub_biblio($id_sub_cat, $nom, $desc);
+//            if () {
+//                $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_add") . "</div>");
+//                redirect(base_url() . "index.php/add-biblio");
+//            }
+//            $this->load->view("addBib", $this->data);
+        redirect('add-biblio', 'refrech');
+    }
 
     public function add_sous_biblio() {
         $nom = $this->input->post('nom');
