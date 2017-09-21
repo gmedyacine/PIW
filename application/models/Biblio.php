@@ -23,6 +23,17 @@ Class Biblio extends CI_Model {
         return $ret;
     }
 
+    function fetch_all_sous_categ($id) {
+        $query = $this->db->select('*')
+                ->where('lib_sous_categ‏_categ', $id)
+                ->from("ipw_lib_sous_categ‏")
+                ->join("piw_users", 'piw_users.id = added_by')
+                ->get(); //select * from piw_files
+
+        $ret = $query->result_array();
+        return $ret;
+    }
+
     function delete_categ($id) {
         $this->db->where("lib_categ_id", $id);
         $this->db->delete("ipw_lib_categ‏");

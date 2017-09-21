@@ -147,6 +147,8 @@ class Home extends Home_Controller {
         $data["id_categ"] = json_encode($id_bib);
         $data["id_sous_categ"] = json_encode($id_sous_bib);
         $data["fetch_data"] = $this->files->fetch_data($id_bib, $id_sous_bib);
+        $data['data_all_sous_categs'] = json_encode($this->biblio->fetch_all_sous_categ($id_bib));
+        //var_dump($data['data_all_sous_categs']); die ;
         $this->load->view("biblio", $data);
     }
 

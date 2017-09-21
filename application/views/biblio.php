@@ -8,6 +8,7 @@ include('include/head.php');
         var lib_dossier = "<?php echo $this->lang->line("lib_dossier"); ?>";
         var lib_insert_date = "<?php echo $this->lang->line("lib_insert_date"); ?>";
         var msg = "<?php echo $this->lang->line("required_field"); ?>";
+        var data_all_sous_categs =<?php echo $data_all_sous_categs; ?>;
     </script>
     <div class="am-wrapper">
 
@@ -118,8 +119,8 @@ include('include/head.php');
                         <div style="overflow: auto;" class="panel tab-content">
 
                             <div  class="panel ">
+                                <h2 id="biblio_title"></h2>
                                 <div class="panel-body">
-
                                     <div class="bg-white" id="cnt-mainTablesBib">
                                         <?php include('partial/table_biblio.php'); ?>
                                     </div>
@@ -143,14 +144,34 @@ include('include/head.php');
     <script type="text/javascript">
         $(document).ready(function () {
             $("#lib-sous-cat").chainedTo("#list-bib");
-            
-                   });
+
+        });
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('.datepicker').datepicker({dateFormat: 'dd/mm/yy'});
         });
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var biblio_title;
+            var sBiblio_title;
+            $.each(data_categs, function (i, biblio) {
+                if (biblio.lib_categ_id == idBib) {
+                    // alert(biblio.lib_categ);
+                    biblio_title = biblio.lib_categ;
+                }
+            });
+            $("#biblio_title").append(biblio_title);
+            $.each(data_all_sous_categs, function (i, sousBiblio) {
+                if (sousBiblio.lib_sous_id == id_sous_categ) {
+                     sBiblio_title = sousBiblio.lib_sous_categ_nom;
+                     $("#biblio_title").empty().append(biblio_title).append(' > ').append(sBiblio_title);
+                }
+            });
+        });
+    </script>
+
 
 
     <?php include('include/footer.php'); ?>

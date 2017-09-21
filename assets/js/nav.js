@@ -22,7 +22,7 @@ $(document).ready(function () {
         $.each(menu.sous_menu, function (i, s_mn) {
             var url_s = base_url + "index.php/biblio/" + menu.id_menu + "/" + s_mn.lib_sous_id;
             ul_sm.append(
-                    $("<li>").attr("id", s_mn.lib_sous_id).addClass("sub_lib").append($("<a>").attr("href", url_s).css('color','rgb(255, 190, 87)').html('<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;' + s_mn["lib_sous_categ‏_nom"])));
+                    $("<li>").attr("id", s_mn.lib_sous_id).addClass("sub_lib").append($("<a>").attr("href", url_s).css('color','rgb(255, 190, 87)').html('<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;' + s_mn["lib_sous_categ_nom"])));
         });
         var url = base_url + "index.php/biblio/" + menu.id_menu;
         var elem = $("<li>").attr("id", menu.id_menu).append($("<a>").attr("href", url).html('<div><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;' + menu.lib_menu + "</div>").append(ul_sm));

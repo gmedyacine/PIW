@@ -46,7 +46,7 @@ function loadSC(id) {
         $.each(resp, function (idObj, valData) {
             $('#lib-sous-cat').append($('<option>', {
                 value: valData['lib_sous_id'],
-                text: valData['lib_sous_categ‏_nom']
+                text: valData['lib_sous_categ_nom']
             }));
         });
 

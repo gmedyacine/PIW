@@ -53,13 +53,13 @@ $(document).ready(function () {
             var tbody = $('<tbody></tbody>').empty();
             $.each(resp, function (idObj, valData) {
                 var trData = $('<tr></tr>');
-                trData.append($('<td>' + valData["lib_sous_categ‏_nom"] + '</td>'));
+                trData.append($('<td>' + valData["lib_sous_categ_nom"] + '</td>'));
                 trData.append($('<td>' + valData["lib_sous_categ‏_desc"] + '</td>'));
                 trData.append($('<td>' + valData["username"] + '</td>'));
                 trData.append($('<td>' + valData["added_at"] + '</td>'));
                 
                 trData.append($('<td>').append('<button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>').click(function () {
-                    if (confirm('Vous etes sur le point de supprimer ' + valData["lib_sous_categ‏_nom"])) {
+                    if (confirm('Vous etes sur le point de supprimer ' + valData["lib_sous_categ_nom"])) {
                         document.location.href = "delete-sous-categ/" + valData["lib_sous_id"];
                     } else {
                         return;
@@ -69,7 +69,7 @@ $(document).ready(function () {
 //                 trData.append($('<td>').append('<button id="update_categ" data-toggle="modal" type="button" class="btn btn-success data-toggle="modal" data-target="#renameSubCategModal" btn-sm btn-round"><span class="glyphicon glyphicon-pencil"></span></button></td>').click(function () {
 //                
 //                 $('#idSubBiblio').val(valData["lib_sous_id"]);
-//              $('#nomSubBoblio').val(valData["lib_sous_categ‏_nom"]);
+//              $('#nomSubBoblio').val(valData["lib_sous_categ_nom"]);
 //              $('#descSubBiblio').val(valData["lib_sous_categ‏_desc"]);
 //            }));
 
