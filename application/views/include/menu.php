@@ -78,6 +78,13 @@
         </ul>
 
     </div></div>
+<script src="<?php echo base_url(); ?>assets/js/jquery.sticky.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#nav").sticky({topSpacing:80, zIndex:9990});
+  //  $("#menu_gauche_ul").offset().top;
+  });
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
     $.each(menu_report, function (i, menu) {

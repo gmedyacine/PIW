@@ -1,13 +1,14 @@
 <table id="mainTablesBib" class="table table-striped cell-border dt-responsive nowrap"  cellspacing="0" width="100%"> 
     <thead>
         <tr>
+            <th> </th>
+            <th  class="checkbox_delete"><!--<input type="checkbox"  class="delete_all_files"> --><button type="button" name="btn_delete" id="btn_delete" class="btn btn-primary btn-xs">Delete</button></th>
             <th class="label_calender">Calendrier</th>
             <th class="heur_lib whiteSpace">heure lib</th>
             <th  class="whiteSpace">Titre</th>
             <th>Categorie </th>
             <th>Fichier</th>
             <th>Action</th>
-            <th><button type="button" name="btn_delete" id="btn_delete" class="btn btn-primary btn-xs">Delete</button></th>
         </tr>
     </thead>
 
@@ -17,8 +18,13 @@
         <?php
         foreach ($fetch_data as $row) {
             ?>
-            <tr id="<?php echo $row->id; ?>">
 
+            <tr id="<?php echo $row->id; ?>">
+                <td></td>
+                <?php if ($role != 2) { ?>
+                    <td><input type="checkbox" name="file_id[]" class="delete_file" value="<?php echo $row->id; ?>,<?php echo $row->nom_fichier; ?>,<?php echo $row->lib_categ_id; ?>" />
+                    </td>
+                <?php } ?>
                 <td><?php echo $row->calendrier; ?></td>
                 <td><?php echo $row->heure_lib; ?></td>
                 <td  class="whiteSpace"><?php echo $row->job; ?></td>
@@ -41,10 +47,7 @@
                         </form>
                     <?php } ?>
                 </td>
-                <?php if ($role != 2) { ?>
-                    <td><input type="checkbox" name="file_id[]" class="delete_file" value="<?php echo $row->id; ?>,<?php echo $row->nom_fichier; ?>,<?php echo $row->lib_categ_id; ?>" />
-                    </td>
-                <?php } ?>
+
 
             </tr>
         <?php } ?>
@@ -104,6 +107,17 @@
                 return;
             }
 
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.delete_all_files').click(function () {
+            if ($(this).prop("checked") == true) {
+                $(".delete_file").prop('checked', true); // Checks it
+            } else if ($(this).prop("checked") == false) {
+                $(".delete_file").prop('checked', false); // Unchecks itcF
+            }
         });
     });
 </script>
