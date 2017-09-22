@@ -2,8 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
 ?>﻿
+    <script>
+    var selected_bib = <?php echo $this->session->flashdata('$selected_bib'); ?>;
+    </script>
 <body>
-
+<?php echo $this->session->flashdata('$selected_bib'); //die;?>
     <div class="am-wrapper">
         <?php include('include/header.php'); ?>
 
@@ -20,12 +23,12 @@ include('include/head.php');
                     <div class="col-sm-12"> <!-- Début partie des onglets -->
                         <ul class="nav nav-tabs " role="tablist">
                             <li class="active">
-                                <a href="#biblio" class="tab" role="tab" data-toggle="tab">
+                                <a data-target="#biblio" class="tab" role="tab" data-toggle="tab">
                                     <?php echo $this->lang->line("add_lib"); ?> 
                                 </a>
                             </li>
                             <li>
-                                <a href="#sousBiblio" class="tab" role="tab" data-toggle="tab">
+                                <a data-target="#sousBiblio" class="tab" role="tab" data-toggle="tab">
                                     <?php echo $this->lang->line("add_sub_lib"); ?> 
                                 </a>
                             </li>
@@ -75,7 +78,7 @@ include('include/head.php');
                                             <th><?php echo $this->lang->line("added_by"); ?></th>
                                             <th><?php echo $this->lang->line("added_at"); ?></th>
                                             <th><?php echo $this->lang->line("delete"); ?></th>
-                                             <th><?php echo $this->lang->line("update"); ?></th>
+                                            <th><?php echo $this->lang->line("update"); ?></th>
 
                                         </tr>
                                     </thead>
@@ -95,6 +98,7 @@ include('include/head.php');
                                                 <label class="control-label col-md-2 col-sm-6 col-xs-12" for="biblio"><?php echo $this->lang->line("bibliotheque"); ?></label>
                                                 <div class="nom col-md-10 col-sm-6 col-xs-12">
                                                     <select id="list-bib" name="id_cat" class="form-control" required="required" >
+                                                      
                                                     </select>
 
                                                 </div>
@@ -132,7 +136,7 @@ include('include/head.php');
                                             <th><?php echo $this->lang->line("added_by"); ?></th>
                                             <th><?php echo $this->lang->line("added_at"); ?></th>
                                             <th><?php echo $this->lang->line("delete"); ?></th>
-<!--                                            <th><?php //echo $this->lang->line("update"); //la partie update ?></th>-->
+<!--                                            <th><?php //echo $this->lang->line("update"); //la partie update  ?></th>-->
 
                                         </tr>
                                     </thead>
@@ -143,9 +147,9 @@ include('include/head.php');
                             </div>
                         </div> <!-- Fin partie du tableau -->
                         <!-- ROW END -->
-  <!-- Modal -->
-<?php include('partial/renameCateg.php'); ?>
-<?php include('partial/renameSubCateg.php'); ?>
+                        <!-- Modal -->
+                        <?php include('partial/renameCateg.php'); ?>
+                        <?php include('partial/renameSubCateg.php'); ?>
                     </div>
 
                 </div>
@@ -162,8 +166,25 @@ include('include/head.php');
                     $(this).remove();
                 });
             }, 1000);
-
         });
+        
+        $("#list-bib").val(selected_bib);
     </script>
+    <script>
+           $(function () {
+                var lastTab = localStorage.getItem('lastTab');
+                 var select;
+                $('.container, .tab-content').removeClass('hidden');
+                if (lastTab) {
+                    $('[data-target="' + lastTab + '"]').tab('show');
+                    //select = $("#list-bib").find(":selected").val();
+                }
+                $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                    localStorage.setItem('lastTab', $(this).data('target'));
+                   
+                    
+                });
+            });
+        </script>
 
     <?php include('include/footer.php'); ?>

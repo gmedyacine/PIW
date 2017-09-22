@@ -76,7 +76,7 @@ Class Biblio extends CI_Model {
     }
 
     function update_sub_biblio($idSC, $nameSC, $descriptionSC) {
-        if ($this->db->set("lib_sous_categ‏_nom", $nameSC)
+        if ($this->db->set("lib_sous_categ_nom", $nameSC)
                         //->set("lib_sous_categ‏_desc", $descriptionSC)
                         ->where("lib_sous_id", $idSC)
                         ->update("ipw_lib_sous_categ")) {
