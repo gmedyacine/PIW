@@ -21,6 +21,7 @@ INSERT INTO `ipw_lib_categ‏` (`lib_categ_id`, `lib_categ`, `commentaire`, `add
 ALTER TABLE  `ipw_report_categ` ADD  `archived` INT DEFAULT 0;
 
 --
--- il y a un espace invisible dans le nom de la colonne il faudrait l'enlever
+-- il y a un espace invisible dans le nom de la colonne qui engendre des erreur, il faudrait l'enlever
+-- modifié le 22/09/2017
 --
 ALTER TABLE `ipw_lib_sous_categ‏` CHANGE  `lib_sous_categ‏_nom` `lib_sous_categ_nom` VARCHAR(250) NOT NULL; 
