@@ -8921,7 +8921,7 @@ button:focus {
     position: fixed;
     left: 100px;
     top: 0;
-    height: 100%;
+    height: auto;
     background-color: #484747;
     z-index: 1031;
     padding: 0;
