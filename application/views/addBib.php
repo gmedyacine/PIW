@@ -1,9 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
-
 ?>﻿
-   
+
 <body>
     <div class="am-wrapper">
         <?php include('include/header.php'); ?>
@@ -96,7 +95,7 @@ include('include/head.php');
                                                 <label class="control-label col-md-2 col-sm-6 col-xs-12" for="biblio"><?php echo $this->lang->line("bibliotheque"); ?></label>
                                                 <div class="nom col-md-10 col-sm-6 col-xs-12">
                                                     <select id="list-bib" name="id_cat" class="form-control" required="required" >
-                                                      
+
                                                     </select>
 
                                                 </div>
@@ -134,7 +133,7 @@ include('include/head.php');
                                             <th><?php echo $this->lang->line("added_by"); ?></th>
                                             <th><?php echo $this->lang->line("added_at"); ?></th>
                                             <th><?php echo $this->lang->line("delete"); ?></th>
-<!--                                            <th><?php //echo $this->lang->line("update"); //la partie update  ?></th>-->
+<!--                                            <th><?php //echo $this->lang->line("update"); //la partie update   ?></th>-->
 
                                         </tr>
                                     </thead>
@@ -153,25 +152,25 @@ include('include/head.php');
                 </div>
             </div>
         </div>
-        
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-   
-    <script type="text/javascript">
 
-        $(document).ready(function () {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
-            window.setTimeout(function () {
-                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
-                    $(this).remove();
-                });
-            }, 1000);
-        });
-        
-    </script>
-    <script>
-           $(function () {
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                        $(this).remove();
+                    });
+                }, 1000);
+            });
+
+        </script>
+        <script>
+            $(function () {
                 var lastTab = localStorage.getItem('lastTab');
-                 var select;
+                var select;
                 $('.container, .tab-content').removeClass('hidden');
                 if (lastTab) {
                     $('[data-target="' + lastTab + '"]').tab('show');
@@ -179,31 +178,30 @@ include('include/head.php');
                 }
                 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                     localStorage.setItem('lastTab', $(this).data('target'));
-                   
-                    
+
+
                 });
-//                 document.getElementById("list-bib").onchange = function() {
-//     localStorage['list-bib'] = document.getElementById("list-bib").value;
-//    }
-//    window.onload= function(){
-//        if(localStorage['list-bib'])
-//            document.getElementById("list-bib").value = localStorage['list-bib'];
-//    }
-
-//                // On submit
-//var id_cat = $('#list-bib').val()
-//localStorage.setItem('storedPickup', id_cat);
-//
-//// On the pages that have the select box
-//jQuery(document).ready(function () {
-//  var loadedPickup = localStorage.getItem('storedPickup');
-//  $('#id_cat').val(loadedPickup);
-//});
 
 
-        
-    });
+                $(function () {
+                    var timeCookie = $.cookie("timeCookie"),
+                            selElem = $('select[name=id_cat]');
+                    selElem.on('change', function () {
+                        $.cookie("timeCookie", this.value);
+                        refreshSC(this.value);
+                    });
+
+
+                    if (timeCookie != undefined) {
+                        $('#list-bib').val(timeCookie);
+                        refreshSC(timeCookie);
+                    } else {
+                        $.cookie("timeCookie", selElem.val());
+                    }
+                });
+
+            });
         </script>
- <script src="<?php echo base_url(); ?>assets/js/categ.js"></script>
-  <script src="<?php echo base_url(); ?>assets/js/functions.js"></script>
-    <?php include('include/footer.php'); ?>
+        <script src="<?php echo base_url(); ?>assets/js/categ.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/functions.js"></script>
+        <?php include('include/footer.php'); ?>
