@@ -241,7 +241,7 @@ Class Report extends CI_Model {
             $res = $queryCount->result_array();  // selectionner le nombre de fichiers par date
             foreach ($res as $key => $val) {
                 $set = array_values($val);
-                $count = intval($set[0]);
+                $count = floatval($set[0]);
                 // $result[$calender] = $count; // stocker la combinaison (date,nbr_upload) dans un tableau associatif
                 $result[] = $count; // stocker les resultats (les nbr de Uploads)dans un tableau non associatif
             }
@@ -259,7 +259,7 @@ Class Report extends CI_Model {
         $report;
         foreach ($ret as $key => $val) {
             $set = array_values($val);
-            $report = intval($set[0]);
+            $report = floatval($set[0]);
         }
         if ($ret) {
             return $report; // return all fields of table : ipw_create_report
@@ -312,6 +312,7 @@ Class Report extends CI_Model {
         if ($multi) {
             $query = $this->db->select($multi)
                     ->from($report)
+                    ->limit(12)
                     ->get(); //select * from ipw_report_categ‏
 
             $ret = $query->result_array();
@@ -325,7 +326,7 @@ Class Report extends CI_Model {
                     $data['name'] = $row;
                     $data['data'] = array_column($ret, $row);
                     //var_dump( $data['data']);
-                    $data['data'] = array_map('intval', $data['data']); // Convertir les valeurs en entiers pour pouvoir les afficher sur le graphique
+                    $data['data'] = array_map('floatval', $data['data']); // Convertir les valeurs en entiers pour pouvoir les afficher sur le graphique
                 }
                 $series[] = $data;
             }
@@ -337,6 +338,7 @@ Class Report extends CI_Model {
         if ($xAxis) {
             $query = $this->db->select($xAxis)
                     ->from($report)
+                    ->limit(12)
                     ->get(); //select * from ipw_report_categ‏
 
             $ret = $query->result_array();
