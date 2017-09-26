@@ -1,12 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
+
 ?>﻿
-    <script>
-    var selected_bib = <?php echo $this->session->flashdata('$selected_bib'); ?>;
-    </script>
+   
 <body>
-<?php echo $this->session->flashdata('$selected_bib'); //die;?>
     <div class="am-wrapper">
         <?php include('include/header.php'); ?>
 
@@ -155,8 +153,9 @@ include('include/head.php');
                 </div>
             </div>
         </div>
-    </div>
-    <script src="<?php echo base_url(); ?>assets/js/categ.js"></script>
+        
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+   
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -168,7 +167,6 @@ include('include/head.php');
             }, 1000);
         });
         
-        $("#list-bib").val(selected_bib);
     </script>
     <script>
            $(function () {
@@ -184,7 +182,28 @@ include('include/head.php');
                    
                     
                 });
-            });
-        </script>
+//                 document.getElementById("list-bib").onchange = function() {
+//     localStorage['list-bib'] = document.getElementById("list-bib").value;
+//    }
+//    window.onload= function(){
+//        if(localStorage['list-bib'])
+//            document.getElementById("list-bib").value = localStorage['list-bib'];
+//    }
 
+//                // On submit
+//var id_cat = $('#list-bib').val()
+//localStorage.setItem('storedPickup', id_cat);
+//
+//// On the pages that have the select box
+//jQuery(document).ready(function () {
+//  var loadedPickup = localStorage.getItem('storedPickup');
+//  $('#id_cat').val(loadedPickup);
+//});
+
+
+        
+    });
+        </script>
+ <script src="<?php echo base_url(); ?>assets/js/categ.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/functions.js"></script>
     <?php include('include/footer.php'); ?>

@@ -6,80 +6,20 @@ $(document).ready(function () {
         refreshSC($(this).val());
     });
 
-    function refreshDataCat() {
-        var tbody = $('<tbody></tbody>').empty();
-        $.each(data_categs, function (idObj, valData) {
-            var trData = $('<tr></tr>');
-            trData.append($('<td>' + valData["lib_categ"] + '</td>'));
-            trData.append($('<td>' + valData["commentaire"] + '</td>'));
-            trData.append($('<td>' + valData["username"] + '</td>'));
-            trData.append($('<td>' + valData["added_at"] + '</td>'));
-
-            trData.append($('<td>').append('<button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>').click(function () {
-                if (confirm('Vous etes sur le point de supprimer ' + valData["lib_categ"])) {
-                    document.location.href = "delete-categ/" + valData["lib_categ_id"];
-                } else {
-                    return;
-                }
-            }));
-             trData.append($('<td>').append('<button id="update_categ" data-toggle="modal" type="button" class="btn btn-success data-toggle="modal" data-target="#renameCategModal" btn-sm btn-round"><span class="glyphicon glyphicon-pencil"></span></button></td>').click(function () {
-            
-                 $('#idBiblio').val(valData["lib_categ_id"]);
-              $('#nom').val(valData["lib_categ"]);
-              $('#description').val(valData["commentaire"]);
-            }));
-
-
-            tbody.append(trData);
-        });
-        $("#tabCat").find("tbody").remove();
-        $("#tabCat").append(tbody);
-        $('.pager').hide();
-        paginate("#tabCat", 'tbody tr', 6);
-
-    }
+$(function() {
+    var timeCookie = $.cookie( "timeCookie" ),
+        selElem = $('select[name=id_cat]');
+    selElem.on('change', function() {
+        $.cookie( "timeCookie", this.value );
+        refreshSC(this.value);
+    });
     
-
-    function refreshSC(id) {
-        if (id == 0) {
-            id = $('#list-bib').val();
-        }
-        $.ajax({
-            type: "post",
-            url:  base_url + "index.php/list-sc",
-            data: {id_cat: id},
-
-        }).done(function (resp) {
-            var tbody = $('<tbody></tbody>').empty();
-            $.each(resp, function (idObj, valData) {
-                var trData = $('<tr></tr>');
-                trData.append($('<td>' + valData["lib_sous_categ_nom"] + '</td>'));
-                trData.append($('<td>' + valData["lib_sous_categ‏_desc"] + '</td>'));
-                trData.append($('<td>' + valData["username"] + '</td>'));
-                trData.append($('<td>' + valData["added_at"] + '</td>'));
-                
-                trData.append($('<td>').append('<button type="button" class="btn btn-danger btn-sm btn-round"><span class="glyphicon glyphicon-trash"></span></button></td>').click(function () {
-                    if (confirm('Vous etes sur le point de supprimer ' + valData["lib_sous_categ_nom"])) {
-                        document.location.href = "delete-sous-categ/" + valData["lib_sous_id"];
-                    } else {
-                        return;
-                    }
-                }));
-                //la partie update
-//                 trData.append($('<td>').append('<button id="update_categ" data-toggle="modal" type="button" class="btn btn-success data-toggle="modal" data-target="#renameSubCategModal" btn-sm btn-round"><span class="glyphicon glyphicon-pencil"></span></button></td>').click(function () {
-//                
-//                 $('#idSubBiblio').val(valData["lib_sous_id"]);
-//              $('#nomSubBoblio').val(valData["lib_sous_categ_nom"]);
-//              $('#descSubBiblio').val(valData["lib_sous_categ‏_desc"]);
-//            }));
-
-
-                tbody.append(trData);
-            });
-            $("#sou_bib").find("tbody").remove();
-            $("#sou_bib").append(tbody);
-            $('.pager').hide();
-            paginate("#sou_bib", 'tbody tr', 6);
-        });
+        
+    if( timeCookie != undefined ) {
+        $('#list-bib').val(timeCookie);
+        refreshSC(timeCookie);
+    } else {
+        $.cookie( "timeCookie", selElem.val() );
     }
+});
 });

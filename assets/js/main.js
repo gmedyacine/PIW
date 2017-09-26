@@ -230,6 +230,7 @@ var App = (function () {
         }
       });
 
+	  
     /*Calculate sidebar tree active & open classes*/
       $("li.active", leftSidebar).parents(".parent").addClass("active");
 
@@ -541,7 +542,7 @@ var App = (function () {
       var subMenu = $(".sidebar-elements > li > ul:visible", leftSidebar);
       subMenu.addClass('hide');
       setTimeout(function(){
-        subMenu.removeClass('hide');
+        subMenu.removeClass('show');
       }, 50);
     }
   };

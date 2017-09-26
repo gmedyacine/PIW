@@ -218,7 +218,7 @@
     });
     }
     });
-    });</script>
+      });</script>
 <script>
             (function ($) {
             jQuery.expr[':'].Contains = function (a, i, m) {
@@ -246,9 +246,11 @@
             $(function () {
             listFilter();
             });
-            }(jQuery));</script>
+            }(jQuery));
+     });</script>
 
 <script src="<?php echo base_url(); ?>assets/js/home.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/nav.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/functions.js"></script>
 
 

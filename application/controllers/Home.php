@@ -222,12 +222,14 @@ class Home extends Home_Controller {
     public function add_sous_biblio() {
         $nom = $this->input->post('nom');
         $id_cat = $this->input->post('id_cat');
+        $id_lib = json_encode($id_cat);
+         $this->session->set_userdata('selected_bib', $id_lib);
         $desc = $this->input->post('desc');
         $data = array('lib_sous_categ_nom' => $nom, 'lib_sous_categ‏_desc' => $desc, 'lib_sous_categ‏_categ' => $id_cat, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
-        $this->data["selected_bib"] = $id_cat;
+     
         if ($this->biblio->add_sous_categ($data)) {
             $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_add") . "</div>");
-            $this->session->set_flashdata('selected_lib', json_encode($id_cat));
+         //echo $id_lib; die;
            redirect(base_url() . "index.php/add-biblio");
         }
         $this->load->view("addBib");
