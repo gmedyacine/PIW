@@ -31,8 +31,11 @@
                 <ul id="menu_gauche_ul" class="sub-menu">
                     <li class="title"><?php echo $this->lang->line("rapport_libelle") ?></li>
                     <li>
-                        <span class="searchboxs"> <input  type="search" name="recherche" id="recherche" data-filter-list="#reports" class="form-control"  placeholder="<?php echo $this->lang->line('search_by'); ?>" />
+<!--                        <span class="searchboxs"> <input  type="search" name="recherche" id="recherche" data-filter-list="#reports" class="form-control"  placeholder="<?php echo $this->lang->line('search_by'); ?>" />
 
+                        </span>-->
+                        <span class="searchboxs"> <input  type="search" name="recherche" id="recherche" data-filter-list="#reports" class="form-control"  placeholder="<?php echo $this->lang->line('search_by'); ?>" />
+                        
                         </span>
                         <div id="reports"  class="scroll_ul">
                         </div>
@@ -218,37 +221,11 @@
     });
     }
     });
-      });</script>
-<script>
-            (function ($) {
-            jQuery.expr[':'].Contains = function (a, i, m) {
-            return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
-            };
-                    function listFilter() {
-                    var input = $("#recherche");
-                            var list = $("#reports").find("ul");
-                            $(input).change(function () {
-                    var filter = $(this).val();
-                            if (filter) {
-                    $(list).find("a:not(:Contains(" + filter + "))").parent().slideUp();
-                            $(list).find("a:Contains(" + filter + ")").parent().parent().slideDown();
-                    } else {
-                    $(list).find("li").slideDown();
-                    
-                    }
-                    return false;
-                    })
-                            .keyup(function () {
-                            $(this).change();
-                            });
-                    }
+$('#recherche').filterList();    
+});</script>
 
-            $(function () {
-            listFilter();
-            });
-            }(jQuery));
-     });</script>
 
+<script src="<?php echo base_url(); ?>assets/js/jquery.filter-list.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/home.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/nav.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/functions.js"></script>
