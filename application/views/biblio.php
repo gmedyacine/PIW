@@ -140,6 +140,7 @@ include('include/head.php');
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/validateDocForm.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/biblio.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/functions.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/jquery.chained.min.js"></script><!-- pour les listes liées -->
     <script type="text/javascript">
         $(document).ready(function () {
