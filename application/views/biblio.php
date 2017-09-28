@@ -139,8 +139,8 @@ include('include/head.php');
     </div>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/validateDocForm.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/biblio.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/functions.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/biblio.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/jquery.chained.min.js"></script><!-- pour les listes liées -->
     <script type="text/javascript">
         $(document).ready(function () {
@@ -159,15 +159,14 @@ include('include/head.php');
             var sBiblio_title;
             $.each(data_categs, function (i, biblio) {
                 if (biblio.lib_categ_id == idBib) {
-                    // alert(biblio.lib_categ);
                     biblio_title = biblio.lib_categ;
                 }
             });
             $("#biblio_title").append(biblio_title);
             $.each(data_all_sous_categs, function (i, sousBiblio) {
                 if (sousBiblio.lib_sous_id == id_sous_categ) {
-                     sBiblio_title = sousBiblio.lib_sous_categ_nom;
-                     $("#biblio_title").empty().append(biblio_title).append(' > ').append(sBiblio_title);
+                    sBiblio_title = sousBiblio.lib_sous_categ_nom;
+                    $("#biblio_title").empty().append(biblio_title).append(' > ').append(sBiblio_title);
                 }
             });
         });

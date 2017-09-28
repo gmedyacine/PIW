@@ -139,4 +139,24 @@ function refreshSC(id) {
         paginate("#sou_bib", 'tbody tr', 6);
     });
 }
+function loadSC(id) {
+        if (id == 0) {
+            id = $('#list-bib').val();
+        }
+        $.ajax({
+            type: "post",
+            url: base_url + "index.php/list-sc",
+            data: {id_cat: id},
+
+        }).done(function (resp) {
+            $.each(resp, function (idObj, valData) {
+                $('#lib-sous-cat').append($('<option>', {
+                    value: valData['lib_sous_id'],
+                    text: valData['lib_sous_categ_nom']
+                }));
+            });
+
+
+        });
+    }
 
