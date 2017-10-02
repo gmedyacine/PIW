@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 include('include/head.php');
+$label_lib =  $this->lang->line("label_lib");
+$label_fold = $this->lang->line("label_fold");
 ?>﻿
 <body>
     <script type="text/javascript">
@@ -9,6 +11,9 @@ include('include/head.php');
         var lib_insert_date = "<?php echo $this->lang->line("lib_insert_date"); ?>";
         var msg = "<?php echo $this->lang->line("required_field"); ?>";
         var data_all_sous_categs =<?php echo $data_all_sous_categs; ?>;
+        var label_lib = "<?php echo $label_lib; ?>";
+        var label_fold = "<?php echo $label_fold; ?>";
+        
     </script>
     <div class="am-wrapper">
 
@@ -159,14 +164,14 @@ include('include/head.php');
             var sBiblio_title;
             $.each(data_categs, function (i, biblio) {
                 if (biblio.lib_categ_id == idBib) {
-                    biblio_title = biblio.lib_categ;
+                    biblio_title = label_lib + ' "' + biblio.lib_categ + '"';
                 }
             });
             $("#biblio_title").append(biblio_title);
             $.each(data_all_sous_categs, function (i, sousBiblio) {
                 if (sousBiblio.lib_sous_id == id_sous_categ) {
                     sBiblio_title = sousBiblio.lib_sous_categ_nom;
-                    $("#biblio_title").empty().append(biblio_title).append(' > ').append(sBiblio_title);
+                    $("#biblio_title").empty().append(biblio_title).append(label_fold).append(' "').append(sBiblio_title).append('"');
                 }
             });
         });

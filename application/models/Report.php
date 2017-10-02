@@ -309,6 +309,7 @@ Class Report extends CI_Model {
     }
 
     function getSeries($report, $multi) {
+        //var_dump($multi); die;
         if ($multi) {
             $query = $this->db->select($multi)
                     ->from($report)

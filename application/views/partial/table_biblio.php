@@ -32,7 +32,7 @@
                 <td><?php echo $row->nom_fichier; ?></td>
                 <td> 
                     <a class="fancybox" data-fancybox-type="iframe" 
-                       <?php if ($row->nom_fichier) { ?>  href="http://docs.google.com/gview?url=<?php echo base_url(); ?>uploads/<?php echo $row->nom_fichier; ?>&embedded=true" <?php } else { ?> href="#" <?php } ?> >Loop </a>|
+                       <?php if ($row->nom_fichier) { ?>  href="http://docs.google.com/gview?url=<?php echo base_url(); ?>uploads/<?php echo $row->nom_fichier; ?>&embedded=true" <?php } else { ?> href="#" <?php } ?> >Visualizer </a>|
                     <a href="<?php echo base_url(); ?>index.php/home/download/<?php echo $row->nom_fichier; ?>"> télécharger </a>
                     <?php if ($role != 2) { ?>
 

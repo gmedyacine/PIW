@@ -171,7 +171,7 @@ include('include/head.php');
                         $.each(rpt_allow_tables, function (i, item) {
                             $('#rpt_select').append($('<option>', {
                                 value: item.n,
-                                text: item.table_name
+                                text: item.table_name.substring(4) // substring(4) pour enlever "ipw_" au début du nom du rapport 
                             }));
                         });
                     }

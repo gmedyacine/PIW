@@ -93,3 +93,5 @@ update_bib;Update Library
 rename_category;Rename category
 delete_categ_confirm;Do you want do delete this folder and all it reports ?
 filter;Show Filter
+label_lib;Library:
+label_fold;Folder:
