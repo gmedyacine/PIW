@@ -164,7 +164,7 @@ $label_fold = $this->lang->line("label_fold");
             var sBiblio_title;
             $.each(data_categs, function (i, biblio) {
                 if (biblio.lib_categ_id == idBib) {
-                    biblio_title = label_lib + ' "' + biblio.lib_categ + '"';
+                    biblio_title = label_lib + ' "' + biblio.lib_categ + '" ';
                 }
             });
             $("#biblio_title").append(biblio_title);
