@@ -49,10 +49,7 @@
                 </a>
                 <ul id="ul_bib" class="sub-menu">
                     <li class="title"><?php echo $this->lang->line('biblio'); ?></li>
-                    <li id="bib"><a href="<?php echo base_url(); ?>index.php/biblio">&nbsp;&nbsp;&nbsp;&nbsp;Suivi Vega</a></li>
-                    <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;Masteri</a></li>
-                    <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;Edd</a></li>
-                    <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;Sage</a></li>
+                   
                 </ul>
             </li>
             <?php if ($role != 2) { ?>
