@@ -63,9 +63,40 @@ $(document).ready(function () {
 
     // supprimer un report déjà creer ou renomer 
 
-$('.am-toggle-left-sidebar').click(function(e) {
+/*$('.am-toggle-left-sidebar').click(function(e) {
         e.preventDefault();
         $('body').toggleClass('open-left-sidebar am-animate');
-    });
+    });*/
+	
+	
+// menu pour mobile		
+$('.am-toggle-left-sidebar').click(function(e){
+    e.stopPropagation();
+    $('.am-left-sidebar').toggleClass('show-menu');
+});
+    $('.am-left-sidebar').click(function(e){
+    e.stopPropagation();
+});
+$('body,html').click(function(e){
+   $('.am-left-sidebar').removeClass('show-menu');
+});
+	
+	
+// menu slideUp/slideDown	
+$('.am-left-sidebar .sidebar-elements > li > a').click(function(e){
+    e.stopPropagation();
+    $(this).parent().find('.am-left-sidebar .sidebar-elements > li > ul').slideDown();
+});
+    $('.am-left-sidebar .sidebar-elements > li > ul').click(function(e){
+    e.stopPropagation();
+});
+$('body,html').click(function(e){
+   $('.am-left-sidebar .sidebar-elements > li > ul').slideUp();
+});
+	
+	
+	
+	
+	
 
 });
