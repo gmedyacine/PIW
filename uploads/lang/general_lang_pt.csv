@@ -1,24 +1,53 @@
 key;traduction
-main_menu;select itemxxx
-default_projection;default projection
+main_menu;Menu Principal 
+default_projection;Relatorios 
 rapport_libelle;Reports
-biblio;Biblio
-logout;logout
-parametrage;settings
-date_debut;start date
-date_end;end date
-date_not_valide;not valid date
-excute_filtre;excute
-export_excute_filtre;export excute filtre
-export_last_day;export last day
-export_all;export all
-add;Add
-file;File
-hour;Hour
-categorie;categorie
-title;title
-sous_lib;small lib
-add_document;Add document
-calendar;calendar
-lib_dossier;lib_dossier
-lib_insert_date;insert date
+biblio;Biblioteca
+logout;Sair
+parametrage;Configurar
+date_debut;Data inicio
+date_end;Data de fim
+date_not_valide;Data invalida
+execute_filtre;Executar
+export_excute_filtre;Exportar resultado  
+export_last_day;Exportar ultimo dia
+export_all;Exportar todos dados
+export_excel;Exportar para Excel
+add;Adicionar
+file;Ficheiro
+hour;Hora
+categorie;Categoria
+title;Titulo
+sous_lib;Sub-categoria
+add_document;Adicionar documento
+calendar;Calendario
+lib_dossier;Dossier
+lib_insert_date;Data insercao
+add_lib;Nova biblioteca
+add_sub_lib;Nova sub-biblioteca
+name;Nome
+description;Descriptivo
+added_by;Adicionado por 
+added_at;Data insercao
+delete;Apagar
+bibliotheque;Biblioteca
+valider;Validar
+notification;Notificacoes
+username;Utilizador 
+email;Email
+tel;Tel
+admin;admin
+oper;oper
+notif_mail;notif_mail
+notif_sms;notif_sms
+gestion_utilisateurs;Gestao utilizadores 
+gestion_biblio;Gestao biblioteca
+demande_specifique;Pedidos especificos
+liste_des_demandes;Lista dos pedidos 
+objet_de_demande;Objeto dos pedidos
+message;Mensagem
+envoyer;Enviar
+msg_success;msg_successo
+title_login;Titulo login
+username_connexion;Nome utilizador
+password_connexion;Codigo secreto
