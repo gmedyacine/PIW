@@ -374,6 +374,7 @@ Class Report extends CI_Model {
         $query = $this->db->select('*')
                 ->from('ipw_chart')                
                 ->join("ipw_reports_show", 'ipw_reports_show.id = id_report')
+                ->join("ipw_create_report", 'ipw_create_report.old_report_name = id_report')
                 ->order_by('id_chart', 'DESC')
                 ->get(); //select * from ipw_chart
 

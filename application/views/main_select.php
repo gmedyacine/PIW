@@ -189,11 +189,11 @@ include('include/head.php');
                             type: element.chartType
                         },
                         title: {
+                            text: element.new_report_name
+                        },
+                        subtitle: {
                             text: element.chartTitle
                         },
-//                    subtitle: {
-//                        text: 'Source: WorldClimate.com'
-//                    },
                         xAxis: {
                             categories: element.xData
                         },
