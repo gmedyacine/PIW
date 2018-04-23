@@ -225,15 +225,15 @@ $('#recherche').filterList();
 });</script>
 
 <script>
-var boxArray = ['menu_gauche_ul','ul_bib','ul_param'];
-window.addEventListener('mouseup', function(event){
-	for(var i=0; i < boxArray.length; i++){
-	    var box = document.getElementById(boxArray[i]);
-	    if(event.target != box && event.target.parentNode != box){
-		   box.style.display = 'none';
-	    }
-	}
-});
+//var boxArray = ['menu_gauche_ul','ul_bib','ul_param'];
+//window.addEventListener('mouseup', function(event){
+//	for(var i=0; i < boxArray.length; i++){
+//	    var box = document.getElementById(boxArray[i]);
+//	    if(event.target != box && event.target.parentNode != box){
+//		   box.style.display = 'none';
+//	    }
+//	}
+//});
 </script>
     
 <script src="<?php echo base_url(); ?>assets/js/jquery.filter-list.js"></script>

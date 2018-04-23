@@ -9137,21 +9137,6 @@ button:focus {
         -webkit-transform: translate3d(0%, 0, 0);
         transform: translate3d(0%, 0, 0);
     }
-	
-	.am-left-sidebar{
-   -webkit-transition: all 0.35s ease;
-    -o-transition: all 0.35s ease;
-    transition: all 0.35s ease;
-	}
-	.show-menu.am-left-sidebar {
-    -webkit-transform: translate3d(0%, 0, 0);
-    transform: translate3d(0%, 0, 0);
- }
-	.am-left-sidebar .sidebar-elements {
-    bottom:inherit;
-	top:75px;
-}
-	
 }
 /*------------------------------------------------------------------
   [Right sidebar]
