@@ -93,3 +93,7 @@ update_bib;Update Library
 rename_category;Rename category
 delete_categ_confirm;Do you want do delete this folder and all it reports ?
 filter;Show Filter
+create_new_csv;Import with CSV
+report_not_found;You didn't find your report ?
+upload_csv; Upload csv
+rept_name; Report name
