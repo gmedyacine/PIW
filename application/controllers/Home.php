@@ -11,6 +11,7 @@ class Home extends Home_Controller {
         $this->load->model('files', '', TRUE);
         $this->load->model('biblio', '', TRUE);
         $this->load->model('demande', '', TRUE);
+        $this->load->model('csv', '', TRUE);
 
 
         $this->load->helper('form');
@@ -18,6 +19,7 @@ class Home extends Home_Controller {
         $this->load->helper('url');
 
         $this->load->library('session');
+        $this->load->library('Csvimport');
     }
 
     public function index() {
@@ -419,7 +421,7 @@ class Home extends Home_Controller {
             $chartY = $this->input->post('chartY');
             $multi = $this->input->post('multi');
             if ($multi != null) {
-                $multi_str = implode(",", $multi);
+                $multi_str = implode(",", $multi);  // (implode) Join array elements with a string
             } else {
                 $multi_str = $multi;
             }
@@ -611,6 +613,16 @@ class Home extends Home_Controller {
         $this->output->set_output(json_encode($check));
 
         return $check;
+    }
+    
+        //import csv files
+    public function csv_import() {
+        $rept_id = $this->input->post('rept_id');
+        $file_data= $this->csvimport->get_array($_FILES["csv_file"]["tmp_name"]);
+        foreach($file_data as $row){
+            
+        }
+      
     }
 
 }

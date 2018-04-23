@@ -43,6 +43,7 @@ include('include/head.php');
                                                 <select  id="rpt_select" name="old_name"  class="form-control chosen-select" tabindex="2" required>
                                                     <option value="">-- <?php echo $this->lang->line('select_report'); ?> --</option>
                                                 </select>
+                                                      <p style="font-size: 12px; display: inline;"><?php echo $this->lang->line('report_not_found'); ?></p><a href="#" id="add_csv" data-toggle="modal" onclick=" $('#addCsv').modal('show')" style="font-size: 12px; display: inline;"> <?php echo $this->lang->line('create_new_csv'); ?></a>
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" name="new_name" id="create" placeholder="<?php echo $this->lang->line("create_report"); ?>" required="required" class="form-control">
@@ -126,6 +127,7 @@ include('include/head.php');
                                     </form>    
 
                                 </div>
+                                <?php include('partial/addCsv.php'); ?>
                                 <?php include('partial/addCateg.php'); ?>
                                 <?php include('partial/addSubCateg.php'); ?>
 

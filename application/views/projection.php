@@ -168,7 +168,7 @@ include('include/dataTables.php');
                                 <div class="clear"></div>
                             </div>  <!-- Fin titre du tableau et lien export excel-->
 
-                            <table id="mainTables" class="table table-striped table-hover table-fw-widget dataTable no-footer dt-responsive nowrap" > 
+                            <table id="mainTables" class="table table-striped table-hover table-fw-widget dataTable no-footer dt-responsive nowrap noExl" > 
                                 <thead class="" > 
 
                                 </thead>
