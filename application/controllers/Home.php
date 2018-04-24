@@ -225,14 +225,14 @@ class Home extends Home_Controller {
         $nom = $this->input->post('nom');
         $id_cat = $this->input->post('id_cat');
         $id_lib = json_encode($id_cat);
-         $this->session->set_userdata('selected_bib', $id_lib);
+        $this->session->set_userdata('selected_bib', $id_lib);
         $desc = $this->input->post('desc');
         $data = array('lib_sous_categ_nom' => $nom, 'lib_sous_categ‏_desc' => $desc, 'lib_sous_categ‏_categ' => $id_cat, 'added_by' => $this->data['id_user_connected'], 'added_at' => date('Y-m-d H:i:s', time()));
-     
+
         if ($this->biblio->add_sous_categ($data)) {
             $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_add") . "</div>");
-         //echo $id_lib; die;
-           redirect(base_url() . "index.php/add-biblio");
+            //echo $id_lib; die;
+            redirect(base_url() . "index.php/add-biblio");
         }
         $this->load->view("addBib");
     }
@@ -614,15 +614,63 @@ class Home extends Home_Controller {
 
         return $check;
     }
-    
-        //import csv files
+
+    //import csv files
     public function csv_import() {
-        $rept_id = $this->input->post('rept_id');
-        $file_data= $this->csvimport->get_array($_FILES["csv_file"]["tmp_name"]);
-        foreach($file_data as $row){
-            
+        
+        $file_name = $_FILES['csvFile']['name'];
+        $ext = '.csv';
+        $table = basename($file_name, $ext); // remove extention from file
+        
+        $file = $_FILES["csvFile"]["tmp_name"]; //get file content
+        
+       // $file
+       // $table = 'ipw_rept_csv';
+        
+     //   var_dump($file); die;
+
+// get structure from csv and insert db
+        ini_set('auto_detect_line_endings', TRUE);
+        $handle = fopen($file, 'r');
+// first row, structure
+        if (($data = fgetcsv($handle) ) === FALSE) {
+            echo "Cannot read from csv $file";
+            die();
         }
-      
+        $header = explode(';',$data[0]);
+        
+      //   var_dump(count($header)); die;
+        
+        $fields = array();
+        $field_count = 0;
+        for ($i = 0; $i < count($header); $i++) {
+            $f = strtolower(trim($header[$i],'"'));
+            if ($f) {
+                // normalize the field name, strip to 20 chars if too long
+                $f = substr(preg_replace('/[^0-9a-z]/', '_', $f), 0, 50);
+                $field_count++;
+                $fields[] = $f . ' VARCHAR(60)';
+            }
+        }
+        
+        
+        $sql = "CREATE TABLE $table (" . implode(', ', $fields) . ')';
+         $this->csv->insert_query($sql);
+         
+        echo $sql. "<br /><br />"; 
+// $db->query($sql);
+        while (($data = fgetcsv($handle) ) !== FALSE) {
+        var_dump($data);die;
+            $fields = array();
+            for ($i = 0; $i < $field_count; $i++) {
+                $fields[] = '\'' . addslashes($data[$i]) . '\'';
+            }
+           // $sql = "Insert into $table values(" . implode(', ','\''. $fields.'\'') . ')';
+            echo $sql;
+            // $db->query($sql);
+        }
+        fclose($handle);
+        ini_set('auto_detect_line_endings', FALSE);
     }
 
 }
