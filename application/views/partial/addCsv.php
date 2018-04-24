@@ -21,7 +21,7 @@
                     
                     <div class="row form-group">   
                         <div class="col-md-12">
-                            <input type="file" id="csv_file" name="csv_file" required="required" accept=".csv" class="form-control"  >
+                            <input type="file" name="csvFile" required="required" accept=".csv" class="form-control"  >
                             <span class="error"></span>
                         </div>
 
