@@ -20,6 +20,8 @@ class Home extends Home_Controller {
 
         $this->load->library('session');
         $this->load->library('Csvimport');
+        
+         $this->load->dbforge();
     }
 
     public function index() {
@@ -617,18 +619,15 @@ class Home extends Home_Controller {
 
     //import csv files
     public function csv_import() {
-        
+
         $file_name = $_FILES['csvFile']['name'];
         $ext = '.csv';
         $table = basename($file_name, $ext); // remove extention from file
-        
-        $file = $_FILES["csvFile"]["tmp_name"]; //get file content
-        
-       // $file
-       // $table = 'ipw_rept_csv';
-        
-     //   var_dump($file); die;
 
+        $file = $_FILES["csvFile"]["tmp_name"]; //get file content
+        // $file
+        // $table = 'ipw_rept_csv';
+        //   var_dump($file); die;
 // get structure from csv and insert db
         ini_set('auto_detect_line_endings', TRUE);
         $handle = fopen($file, 'r');
@@ -637,35 +636,31 @@ class Home extends Home_Controller {
             echo "Cannot read from csv $file";
             die();
         }
-        $header = explode(';',$data[0]);
-        
-      //   var_dump(count($header)); die;
-        
+
+        // get heading fields
         $fields = array();
         $field_count = 0;
-        for ($i = 0; $i < count($header); $i++) {
-            $f = strtolower(trim($header[$i],'"'));
+        for ($i = 0; $i < count($data); $i++) {
+            $f = strtolower(trim($data[$i]));
             if ($f) {
-                // normalize the field name, strip to 20 chars if too long
-                $f = substr(preg_replace('/[^0-9a-z]/', '_', $f), 0, 50);
+                $f = str_replace(";", ",", $data[$i]);
                 $field_count++;
-                $fields[] = $f . ' VARCHAR(60)';
+                $fields[] = $f ;
             }
         }
-        
-        
-        $sql = "CREATE TABLE $table (" . implode(', ', $fields) . ')';
-         $this->csv->insert_query($sql);
-         
-        echo $sql. "<br /><br />"; 
+           
+        $this->csv->create_table($table, $fields);
+        $sql = "CREATE TABLE $table (" . implode(' , ', $fields) . ') ENGINE=InnoDB';
+
+        echo $sql . "<br /><br />";
 // $db->query($sql);
         while (($data = fgetcsv($handle) ) !== FALSE) {
-        var_dump($data);die;
             $fields = array();
             for ($i = 0; $i < $field_count; $i++) {
-                $fields[] = '\'' . addslashes($data[$i]) . '\'';
+                $fields[] = '\'' . addslashes(str_replace(";", ",", $data[$i])) . '\'';
             }
-           // $sql = "Insert into $table values(" . implode(', ','\''. $fields.'\'') . ')';
+
+            $sql = "Insert into $table values(" . implode(' , ', $fields) . ')';
             echo $sql;
             // $db->query($sql);
         }
