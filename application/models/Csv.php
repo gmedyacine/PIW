@@ -15,10 +15,10 @@ Class Csv extends CI_Model {
         $string = str_replace(', ', ' , ', $string);
         $champs_array = explode(' , ', $string);
         $isId = FALSE;
-        
-            if ($isId == FALSE) {
+
+        if ($isId == FALSE) {
             $this->dbforge->add_field('id');
-         // gives id INT(9) NOT NULL AUTO_INCREMENT 
+            // gives id INT(9) NOT NULL AUTO_INCREMENT 
         }
 
         foreach ($champs_array as $champ) {
@@ -35,20 +35,29 @@ Class Csv extends CI_Model {
 
                 $fields[$champ] = array(
                     'type' => 'VARCHAR',
-                    'constraint' => '100',
+                    'constraint' => '1000',
                     'null' => TRUE,
                 );
             }
         }
 
-    
-        
-      //  $this->dbforge->add_key('id', TRUE);
-        // gives PRIMARY KEY (id)
         $this->dbforge->add_field($fields);
 
 
-        $this->dbforge->create_table($table, TRUE, $attributes);
+        if ($this->dbforge->create_table($table, TRUE, $attributes)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function insert($table, $data) {
+      //  var_dump($data); die;
+        if ($this->db->insert_batch($table, $data)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

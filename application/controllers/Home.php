@@ -20,8 +20,8 @@ class Home extends Home_Controller {
 
         $this->load->library('session');
         $this->load->library('Csvimport');
-        
-         $this->load->dbforge();
+
+        $this->load->dbforge();
     }
 
     public function index() {
@@ -617,17 +617,31 @@ class Home extends Home_Controller {
         return $check;
     }
 
+    //create heauding of table
+    public function create_heading($champs) {
+
+        $string = $champs[0];
+        $string = str_replace('"', ' ', $string);
+        $string = str_replace(', ', ' , ', $string);
+        $champs_array = explode(' , ', $string);
+        $isId = FALSE;
+
+
+        foreach ($champs_array as $champ) {
+            $champ = trim($champ);
+              
+        }
+
+        return $champs_array;
+    }
+
     //import csv files
     public function csv_import() {
 
         $file_name = $_FILES['csvFile']['name'];
-        $ext = '.csv';
-        $table = basename($file_name, $ext); // remove extention from file
+        $table = basename($file_name, '.csv'); // remove extention from file
 
         $file = $_FILES["csvFile"]["tmp_name"]; //get file content
-        // $file
-        // $table = 'ipw_rept_csv';
-        //   var_dump($file); die;
 // get structure from csv and insert db
         ini_set('auto_detect_line_endings', TRUE);
         $handle = fopen($file, 'r');
@@ -636,7 +650,11 @@ class Home extends Home_Controller {
             echo "Cannot read from csv $file";
             die();
         }
-
+// Filter for table name 
+        $pos = strpos($table, "ipw_rept_");
+        if ($pos === false) {
+            $table = 'ipw_rept_' . $table;
+        }
         // get heading fields
         $fields = array();
         $field_count = 0;
@@ -645,11 +663,46 @@ class Home extends Home_Controller {
             if ($f) {
                 $f = str_replace(";", ",", $data[$i]);
                 $field_count++;
-                $fields[] = $f ;
+                $fields[] = $f;
             }
         }
-           
-        $this->csv->create_table($table, $fields);
+        
+      //   var_dump($fields); die;
+       //  $this->csv->create_table($table, $fields);  // create table
+         
+        $heading = $this->create_heading($fields);
+        
+        $file_data = $this->csvimport->get_array($file);
+              
+        $keys = array_keys($file_data[0]);
+        $values = array();
+        $t_data = array();
+         //$global = array() ;
+        $count =0;
+         
+        foreach($file_data as $row){
+           $values[] = explode(';',$row[$keys[0]]);  
+           $count++;
+        }
+          for($i=0;$i<$count;$i++){
+              for($j =0;$j<$count;$j++){
+                     $t_data[$heading[$j]] = $values[$i][$j];
+              }
+                     $global[] = $t_data;
+                }
+        $this->csv->insert($table, $global);  // create table
+        print_r($global); die;
+          while (($data = fgetcsv($handle) ) !== FALSE) {
+            $fields = array();
+            for ($i = 0; $i < $field_count; $i++) {
+                $fields[] = str_replace(";", ",", $data[$i]);
+            }
+          }
+        
+        
+
+
+
         $sql = "CREATE TABLE $table (" . implode(' , ', $fields) . ') ENGINE=InnoDB';
 
         echo $sql . "<br /><br />";
