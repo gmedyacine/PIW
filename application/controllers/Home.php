@@ -629,7 +629,6 @@ class Home extends Home_Controller {
 
         foreach ($champs_array as $champ) {
             $champ = trim($champ);
-              
         }
 
         return $champs_array;
@@ -666,59 +665,37 @@ class Home extends Home_Controller {
                 $fields[] = $f;
             }
         }
-        
-      //   var_dump($fields); die;
-       //  $this->csv->create_table($table, $fields);  // create table
-         
+
+        //  var_dump(count($data)); die;
+          $this->csv->create_table($table, $fields);  // create table
+
         $heading = $this->create_heading($fields);
-        
+
         $file_data = $this->csvimport->get_array($file);
-              
-        $keys = array_keys($file_data[0]);
+
+
+        
+        $string_values = array();
         $values = array();
         $t_data = array();
-         //$global = array() ;
-        $count =0;
-         
-        foreach($file_data as $row){
-           $values[] = explode(';',$row[$keys[0]]);  
-           $count++;
+
+        for ($i = 0; $i < count($file_data); $i++) {
+            $string_values = array_values($file_data[$i]);
+            $values[$i] = explode(';', $string_values[0]);
         }
-          for($i=0;$i<$count;$i++){
-              for($j =0;$j<$count;$j++){
-                     $t_data[$heading[$j]] = $values[$i][$j];
-              }
-                     $global[] = $t_data;
-                }
-        $this->csv->insert($table, $global);  // create table
-        print_r($global); die;
-          while (($data = fgetcsv($handle) ) !== FALSE) {
-            $fields = array();
-            for ($i = 0; $i < $field_count; $i++) {
-                $fields[] = str_replace(";", ",", $data[$i]);
+
+        for ($i = 0; $i < count($file_data); $i++) {
+            for ($j = 0; $j < count($heading); $j++) {
+                $t_data[$i][$heading[$j]] = $values[$i][$j];
             }
-          }
-        
-        
-
-
-
-        $sql = "CREATE TABLE $table (" . implode(' , ', $fields) . ') ENGINE=InnoDB';
-
-        echo $sql . "<br /><br />";
-// $db->query($sql);
-        while (($data = fgetcsv($handle) ) !== FALSE) {
-            $fields = array();
-            for ($i = 0; $i < $field_count; $i++) {
-                $fields[] = '\'' . addslashes(str_replace(";", ",", $data[$i])) . '\'';
-            }
-
-            $sql = "Insert into $table values(" . implode(' , ', $fields) . ')';
-            echo $sql;
-            // $db->query($sql);
         }
+
+        $this->csv->insert($table, $t_data);  // create table
+
         fclose($handle);
         ini_set('auto_detect_line_endings', FALSE);
+        
+        redirect('create-report/', 'refresh');
     }
 
 }
