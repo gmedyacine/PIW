@@ -642,7 +642,7 @@ class Home extends Home_Controller {
 
         $file = $_FILES["csvFile"]["tmp_name"]; //get file content
         if ($_FILES['csvFile']['size'] == 0) {
-            $this->session->set_flashdata('file-empty', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("file_empty") . "</div>");
+            $this->session->set_flashdata('file-empty', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("file_empty") . "</div>");
             redirect(base_url() . "index.php/create-report");
         }
 
@@ -651,7 +651,7 @@ class Home extends Home_Controller {
         $handle = fopen($file, 'r');
 // first row, structure
         if (($data = fgetcsv($handle) ) === FALSE) {
-             $this->session->set_flashdata('error-read-csv', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("error_read_csv") . "</div>");
+             $this->session->set_flashdata('error-read-csv', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("error_read_csv") . "</div>");
             redirect(base_url() . "index.php/create-report");
         }
 // Filter for table name 
