@@ -641,13 +641,18 @@ class Home extends Home_Controller {
         $table = basename($file_name, '.csv'); // remove extention from file
 
         $file = $_FILES["csvFile"]["tmp_name"]; //get file content
+        if ($_FILES['csvFile']['size'] == 0) {
+            $this->session->set_flashdata('file-empty', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("file_empty") . "</div>");
+            redirect(base_url() . "index.php/create-report");
+        }
+
 // get structure from csv and insert db
         ini_set('auto_detect_line_endings', TRUE);
         $handle = fopen($file, 'r');
 // first row, structure
         if (($data = fgetcsv($handle) ) === FALSE) {
-            echo "Cannot read from csv $file";
-            die();
+             $this->session->set_flashdata('error-read-csv', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("error_read_csv") . "</div>");
+            redirect(base_url() . "index.php/create-report");
         }
 // Filter for table name 
         $pos = strpos($table, "ipw_rept_");
@@ -666,8 +671,8 @@ class Home extends Home_Controller {
             }
         }
 
-        //  var_dump(count($data)); die;
-        $this->csv->create_table($table, $fields);  // create table
+       // create table
+         $this->csv->create_table($table, $fields);  
 
         $heading = $this->create_heading($fields);
 
@@ -688,15 +693,14 @@ class Home extends Home_Controller {
             }
         }
 
-          // insert values
-          if ($this->csv->insert($table, $t_data)) {
-                $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_add") . "</div>");
-                redirect(base_url() . "index.php/create-report");
-            }
+        // insert values
+        if ($this->csv->insert($table, $t_data)) {
+            $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_add") . "</div>");
+            redirect(base_url() . "index.php/create-report");
+        }
 
         fclose($handle);
         ini_set('auto_detect_line_endings', FALSE);
-
     }
 
 }

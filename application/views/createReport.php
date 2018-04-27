@@ -29,6 +29,8 @@ include('include/head.php');
 
                 <div class="col-md-12"> <!-- Début partie du tableau -->
                     <?php echo $this->session->flashdata('msg-add'); ?> 
+                     <?php echo $this->session->flashdata('file-empty'); ?> 
+                    <?php echo $this->session->flashdata('file-error'); ?> 
                     <div class="row">
                         <div class="panel panel-primary">
                             <div class="panel-heading">

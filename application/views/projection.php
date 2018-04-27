@@ -167,8 +167,7 @@ include('include/dataTables.php');
                                 </div>
                                 
                                  <div class=" pull-right clo-md-3" style="margin-right: 7px">
-                                    <div> <button class="btn btn-success" type="button" data-toggle="modal"
-                                                      onclick="$('#compare').modal('show');">
+                                  <div> <button class="btn btn-success" type="button" >
                                             <i class="icon icon-left s7-display1"></i>
                                             <?php echo $this->lang->line('compare'); ?>
                                             
