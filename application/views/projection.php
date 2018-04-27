@@ -43,6 +43,7 @@ include('include/dataTables.php');
         <?php include('include/menu.php'); ?>
         <div class="am-content">
             <div class="main-content">
+                <?php echo $this->session->flashdata('msg-add'); ?> 
                 <div class="row">
                     <div class="col-sm-12"> <!-- Début partie du tableau -->
 
@@ -159,9 +160,18 @@ include('include/dataTables.php');
                                 <?php } ?>
 
                                 <div class=" pull-right clo-md-3" style="margin-right: 7px">
-                                    <div> <button class="btn btn-success" type="button" id="filter_btn">
+                                    <div> <button class="btn btn-success" type="button" id="filter_btn" >
                                             <i class="icon icon-left s7-filter"></i>
                                             <?php echo $this->lang->line('filter'); ?>
+                                        </button></div>
+                                </div>
+                                
+                                 <div class=" pull-right clo-md-3" style="margin-right: 7px">
+                                    <div> <button class="btn btn-success" type="button" data-toggle="modal"
+                                                      onclick="$('#compare').modal('show');">
+                                            <i class="icon icon-left s7-display1"></i>
+                                            <?php echo $this->lang->line('compare'); ?>
+                                            
                                         </button></div>
                                 </div>
 
@@ -181,6 +191,7 @@ include('include/dataTables.php');
                         </div>
                         <?php include('partial/editChart.php'); ?>
                         <?php include('partial/createChart.php'); ?>
+                        <?php include('partial/compare.php'); ?>
 
                     </div> <!-- fin pagination  -->
 

@@ -667,14 +667,12 @@ class Home extends Home_Controller {
         }
 
         //  var_dump(count($data)); die;
-          $this->csv->create_table($table, $fields);  // create table
+        $this->csv->create_table($table, $fields);  // create table
 
         $heading = $this->create_heading($fields);
 
         $file_data = $this->csvimport->get_array($file);
 
-
-        
         $string_values = array();
         $values = array();
         $t_data = array();
@@ -686,16 +684,19 @@ class Home extends Home_Controller {
 
         for ($i = 0; $i < count($file_data); $i++) {
             for ($j = 0; $j < count($heading); $j++) {
-                $t_data[$i][$heading[$j]] = $values[$i][$j];
+                $t_data[$i][$heading[$j]] = trim($values[$i][$j], '"');
             }
         }
 
-        $this->csv->insert($table, $t_data);  // create table
+          // insert values
+          if ($this->csv->insert($table, $t_data)) {
+                $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_add") . "</div>");
+                redirect(base_url() . "index.php/create-report");
+            }
 
         fclose($handle);
         ini_set('auto_detect_line_endings', FALSE);
-        
-        redirect('create-report/', 'refresh');
+
     }
 
 }

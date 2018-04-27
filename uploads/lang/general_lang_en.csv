@@ -99,3 +99,4 @@ create_new_csv;Import with CSV
 report_not_found;You didn't find your report ?
 upload_csv; Upload csv
 rept_name; Report name
+compare; Compare

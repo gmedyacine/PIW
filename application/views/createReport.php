@@ -25,9 +25,10 @@ include('include/head.php');
         <?php include('include/menu.php'); ?>
         <div class="am-content">
             <div class="main-content">
-                <?php echo $this->session->flashdata('msg-modif'); ?> 
+                
 
                 <div class="col-md-12"> <!-- Début partie du tableau -->
+                    <?php echo $this->session->flashdata('msg-add'); ?> 
                     <div class="row">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
