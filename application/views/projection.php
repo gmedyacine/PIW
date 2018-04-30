@@ -4,12 +4,16 @@ include('include/head.php');
 include('include/dataTables.php');
 ?>
 
+<link href="<?php echo base_url(); ?>assets/css/bootstrap-chosen.css" rel="stylesheet" />
+<link href="<?php echo base_url(); ?>assets/css/select2.min.css" rel="stylesheet" />
+
 <script type="text/javascript">
     var base_url = "<?php echo base_url(); ?>";
     var dataTable = <?php echo $dataTable; ?>;
     var lastDate = <?php echo (string) $lastDate; ?>;
     var dataNameColonne = <?php echo $dataNameColonne; ?>;
-    var chartReportId = <?php echo $chartReportId; ?>;
+    var chartReportId = <?php echo $chartReportId; ?>; 
+   
     var id_projection = <?php echo $id_projection; ?>;
 <?php if ($id_projection == $chartReportId) { ?>
         var chartConfig = <?php echo $chartConfig; ?>;
@@ -30,9 +34,10 @@ include('include/dataTables.php');
         var series = <?php echo $series; ?>;
         var xData = <?php echo $xData; ?>;
 <?php } ?>
-
+  var projections = <?php echo projectionsFull; ?>;
 </script>
 
+<?php //var_dump($projections); die ; ?>;
 <body>
 
     <div class="am-wrapper">
@@ -167,7 +172,8 @@ include('include/dataTables.php');
                                 </div>
                                 
                                  <div class=" pull-right clo-md-3" style="margin-right: 7px">
-                                  <div> <button class="btn btn-success" type="button" >
+                                  <div> <button class="btn btn-success" type="button"  data-toggle="modal"
+                                                      onclick="$('#compare').modal('show');">
                                             <i class="icon icon-left s7-display1"></i>
                                             <?php echo $this->lang->line('compare'); ?>
                                             
@@ -200,6 +206,29 @@ include('include/dataTables.php');
 
                     <script>$('.dropdown-toggle').dropdown();
                     </script>
+                    
+                                                        <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
+                <script src="<?php echo base_url(); ?>assets/js/select2.min.js"></script>
+                <script type="text/javascript">
+                                                    $(document).ready(function () {
+                                                        $(".chosen-select").chosen({
+                                                            search_contains: true
+                                                        });
+                                                    });
+                </script>
+
+         
+                <script type="text/javascript">
+                    loadRpt();
+                    function loadRpt() {
+                        $.each(projections, function (i, item) {
+                            $('#rpt_select').append($('<option>', {
+                                value: item.n,
+                                text: item.new_report_name 
+                            }));
+                        });
+                    }
+                </script>
 
                     <script type="text/javascript">
                         $(document).ready(function () {
@@ -361,6 +390,9 @@ include('include/dataTables.php');
                         });
 
                     </script>
+                    
+
+    
 
                 </div> <!-- Fin partie du tableau -->
                 <!-- ROW END -->

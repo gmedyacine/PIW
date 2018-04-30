@@ -56,6 +56,8 @@ class Home extends Home_Controller {
         $this->data["title"] = "Afficher Ma projection";
         $lastDate = $retPrj["lastDate"];
         $this->data['lastDate'] = json_encode($lastDate);
+        $this->data['projections'] = json_encode($this->report->getCreatedReptFull());
+        
         $this->load->view("projection", $this->data);
     }
 

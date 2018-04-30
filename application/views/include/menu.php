@@ -196,7 +196,7 @@
                 $("#menu_gauche_ul").append(li_rename_categ).append(li_rename).append(li_create);
 <?php } ?>
     $('[data-toggle="tooltip"]').tooltip();
-            $(document).on("click", '.remove-right', function () {
+            $('.remove-right').click(function () {
     var id_remove = $(this).attr("data-remove");
             if (confirm('delete report')) {
     $.ajax({
@@ -207,7 +207,7 @@
     });
     }
     });
-            $(document).on("click", '.remove-categ', function () {
+            $('.remove-categ').click(function () {
     var id_remove = $(this).attr("data-remove");
             if (confirm('Do you want do delete this folder and all it reports ?')) {
     $.ajax({
@@ -222,17 +222,6 @@ $('#recherche').filterList();
 });</script>
 
 
-<script>
-//var boxArray = ['menu_gauche_ul','ul_bib','ul_param'];
-//window.addEventListener('mouseup', function(event){
-//	for(var i=0; i < boxArray.length; i++){
-//	    var box = document.getElementById(boxArray[i]);
-//	    if(event.target != box && event.target.parentNode != box){
-//		   box.style.display = 'none';
-//	    }
-//	}
-//});
-</script>
 
     
 <script src="<?php echo base_url(); ?>assets/js/jquery.filter-list.js"></script>
