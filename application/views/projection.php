@@ -13,7 +13,6 @@ include('include/dataTables.php');
     var lastDate = <?php echo (string) $lastDate; ?>;
     var dataNameColonne = <?php echo $dataNameColonne; ?>;
     var chartReportId = <?php echo $chartReportId; ?>; 
-   
     var id_projection = <?php echo $id_projection; ?>;
 <?php if ($id_projection == $chartReportId) { ?>
         var chartConfig = <?php echo $chartConfig; ?>;
@@ -34,7 +33,7 @@ include('include/dataTables.php');
         var series = <?php echo $series; ?>;
         var xData = <?php echo $xData; ?>;
 <?php } ?>
-  var projections = <?php echo projectionsFull; ?>;
+
 </script>
 
 <?php //var_dump($projections); die ; ?>;
@@ -207,28 +206,7 @@ include('include/dataTables.php');
                     <script>$('.dropdown-toggle').dropdown();
                     </script>
                     
-                                                        <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.js"></script>
-                <script src="<?php echo base_url(); ?>assets/js/select2.min.js"></script>
-                <script type="text/javascript">
-                                                    $(document).ready(function () {
-                                                        $(".chosen-select").chosen({
-                                                            search_contains: true
-                                                        });
-                                                    });
-                </script>
 
-         
-                <script type="text/javascript">
-                    loadRpt();
-                    function loadRpt() {
-                        $.each(projections, function (i, item) {
-                            $('#rpt_select').append($('<option>', {
-                                value: item.n,
-                                text: item.new_report_name 
-                            }));
-                        });
-                    }
-                </script>
 
                     <script type="text/javascript">
                         $(document).ready(function () {

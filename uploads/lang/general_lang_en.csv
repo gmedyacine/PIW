@@ -102,3 +102,4 @@ rept_name; Report name
 compare; Compare
 file_empty; Your file is empty !
 error_read_csv; Cannot read from csv $file !
+compre_rept; Compare Reports
