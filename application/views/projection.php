@@ -12,8 +12,9 @@ include('include/dataTables.php');
     var dataTable = <?php echo $dataTable; ?>;
     var lastDate = <?php echo (string) $lastDate; ?>;
     var dataNameColonne = <?php echo $dataNameColonne; ?>;
-    var chartReportId = <?php echo $chartReportId; ?>; 
+    var chartReportId = <?php echo $chartReportId; ?>;
     var id_projection = <?php echo $id_projection; ?>;
+    var name_projection;
 <?php if ($id_projection == $chartReportId) { ?>
         var chartConfig = <?php echo $chartConfig; ?>;
         var report;
@@ -63,7 +64,7 @@ include('include/dataTables.php');
                         <?php } ?>
                         <fieldset id="filter_panel" class="group-border">
 
-                            <div id="panel-table" class="panel panel-default">
+                            <div  class="panel panel-default">
                                 <div class="panel-body project-filters">
 
                                     <div class="row">
@@ -147,7 +148,7 @@ include('include/dataTables.php');
                         </fieldset>
 
                         <!-- Début titre du tableau et bouton create chart-->
-                        <div id="panel-table" class="widget widget-fullwidth widget-small">
+                        <div id="panel-table" class="widget widget-fullwidth widget-small ">
                             <div class="widget-head">
                                 <div class=" pull-left clo-md-6">
                                     <div class="title"><h2>Titre du tableau</h2></div>
@@ -169,15 +170,16 @@ include('include/dataTables.php');
                                             <?php echo $this->lang->line('filter'); ?>
                                         </button></div>
                                 </div>
-                                
-                                 <div class=" pull-right clo-md-3" style="margin-right: 7px">
-                                  <div> <button class="btn btn-success" type="button"  data-toggle="modal"
+                                <?php if ($id_projection == $chartReportId) { ?>
+                                    <div class=" pull-right clo-md-3" style="margin-right: 7px">
+                                        <div> <button class="btn btn-success" type="button"  data-toggle="modal"
                                                       onclick="$('#compare').modal('show');">
-                                            <i class="icon icon-left s7-display1"></i>
-                                            <?php echo $this->lang->line('compare'); ?>
-                                            
-                                        </button></div>
-                                </div>
+                                                <i class="icon icon-left s7-display1"></i>
+                                                <?php echo $this->lang->line('compare'); ?>
+
+                                            </button></div>
+                                    </div>
+                                <?php } ?>
 
                                 <div class="clear"></div>
                             </div>  <!-- Fin titre du tableau et lien export excel-->
@@ -192,6 +194,8 @@ include('include/dataTables.php');
                                 </tbody> 
                             </table>
 
+
+
                         </div>
                         <?php include('partial/editChart.php'); ?>
                         <?php include('partial/createChart.php'); ?>
@@ -203,11 +207,23 @@ include('include/dataTables.php');
                     <script src="https://code.highcharts.com/highcharts.js"></script>
                     <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
-                    <script>$('.dropdown-toggle').dropdown();
+                    <script>$('.dropdown-toggle').dropdown();</script>
+
+                    <script type="text/javascript">
+
+                        $.each(projections, function (i, item) {
+                            if (item.old_report_name == id_projection) {
+                                name_projection = item.new_report_name
+                            }
+                        });
+
                     </script>
-                    
 
-
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $("#panel-table h2").empty().append(name_projection);
+                        });
+                    </script>
                     <script type="text/javascript">
                         $(document).ready(function () {
                             window.setTimeout(function () {
@@ -368,9 +384,9 @@ include('include/dataTables.php');
                         });
 
                     </script>
-                    
 
-    
+
+
 
                 </div> <!-- Fin partie du tableau -->
                 <!-- ROW END -->

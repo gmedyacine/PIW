@@ -57,7 +57,8 @@ class Home extends Home_Controller {
         $lastDate = $retPrj["lastDate"];
         $this->data['lastDate'] = json_encode($lastDate);
         $this->data['projections'] = json_encode($this->report->getCreatedReptFull());
-        
+        $this->data['projections_haschart'] = json_encode($this->report->getReptHasChart($id));
+
         $this->load->view("projection", $this->data);
     }
 
@@ -653,7 +654,7 @@ class Home extends Home_Controller {
         $handle = fopen($file, 'r');
 // first row, structure
         if (($data = fgetcsv($handle) ) === FALSE) {
-             $this->session->set_flashdata('error-read-csv', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("error_read_csv") . "</div>");
+            $this->session->set_flashdata('error-read-csv', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("error_read_csv") . "</div>");
             redirect(base_url() . "index.php/create-report");
         }
 // Filter for table name 
@@ -673,8 +674,8 @@ class Home extends Home_Controller {
             }
         }
 
-       // create table
-         $this->csv->create_table($table, $fields);  
+        // create table
+        $this->csv->create_table($table, $fields);
 
         $heading = $this->create_heading($fields);
 
@@ -703,6 +704,16 @@ class Home extends Home_Controller {
 
         fclose($handle);
         ini_set('auto_detect_line_endings', FALSE);
+    }
+
+    public function compare_report() {
+        $id_1 = $this->input->post('original_rept');
+        $id_2 = $this->input->post('to_compare');
+        $this->data["twoCharts"] = $this->report->getTwoCharts($id_1, $id_2);
+       
+
+
+        $this->load->view("compared", $this->data);
     }
 
 }

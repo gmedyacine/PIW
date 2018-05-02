@@ -12,6 +12,7 @@ Class Report extends CI_Model {
         $ret = $query->result_array();
         return $ret;
     }
+
     function getArchivedReportCateg() {
         $query = $this->db->select('*')
                 ->from("ipw_report_categ")
@@ -22,7 +23,6 @@ Class Report extends CI_Model {
         $ret = $query->result_array();
         return $ret;
     }
-    
 
     function getAllReportSubCateg() {
         $query = $this->db->select('*')
@@ -67,6 +67,19 @@ Class Report extends CI_Model {
                 ->join("ipw_report_sous_categ", 'ipw_report_sous_categ.id_report_sous_categ = report_sous_categ', "LEFT OUTER")
                 ->join("ipw_chart", 'ipw_chart.id_report = old_report_name', "LEFT OUTER")
                 ->get(); //select * from ipw_report_categ‏
+
+        $ret = $query->result_array();
+        return $ret; // return all fields of table : ipw_create_report
+    }
+
+    function getReptHasChart($id) {
+        $query = $this->db->select('*')
+                ->from("ipw_create_report")
+                ->join("ipw_report_categ", 'ipw_report_categ.id_report_categ = report_categ')
+                ->join("ipw_report_sous_categ", 'ipw_report_sous_categ.id_report_sous_categ = report_sous_categ', "LEFT OUTER")
+                ->join("ipw_chart", 'ipw_chart.id_report = old_report_name')
+                ->where('old_report_name !=', $id)
+                ->get(); 
 
         $ret = $query->result_array();
         return $ret; // return all fields of table : ipw_create_report
@@ -173,7 +186,7 @@ Class Report extends CI_Model {
 
     function fetch_menu_report() {
         $menu = $this->getAllReportCateg();
-        $ret =array();
+        $ret = array();
         foreach ($menu as $report) {
             $ret[] = array("id_menu" => $report["id_report_categ"],
                 "report_menu" => $report["nom_report_categ"],
@@ -181,6 +194,7 @@ Class Report extends CI_Model {
         }
         return $ret;
     }
+
     function fetch_archived_menu_report() {
         $menu = $this->getArchivedReportCateg();
         $ret = array();
@@ -372,9 +386,32 @@ Class Report extends CI_Model {
 
     function getAllCharts() {
         $query = $this->db->select('*')
-                ->from('ipw_chart')                
+                ->from('ipw_chart')
                 ->join("ipw_reports_show", 'ipw_reports_show.id = id_report')
                 ->join("ipw_create_report", 'ipw_create_report.old_report_name = id_report')
+                ->order_by('id_chart', 'DESC')
+                ->get(); //select * from ipw_chart
+
+        $ret = $query->result_array();
+        $allData = array();
+        foreach ($ret as $row) {
+            $xData = $this->getXData($row["report"], $row["chartX"]);
+            $row["xData"] = $xData;
+            $series = $this->getSeries($row["report"], $row["multi"]);
+            $row["series"] = $series;
+            $allData[] = $row;
+        }
+
+        return $allData;
+    }
+
+    function getTwoCharts($id_1, $id_2) {
+        $query = $this->db->select('*')
+                ->from('ipw_chart')
+                ->join("ipw_reports_show", 'ipw_reports_show.id = id_report')
+                ->join("ipw_create_report", 'ipw_create_report.old_report_name = id_report')
+                ->where('id', $id_1)
+                ->or_where('id', $id_2)
                 ->order_by('id_chart', 'DESC')
                 ->get(); //select * from ipw_chart
 
@@ -405,29 +442,28 @@ Class Report extends CI_Model {
     }
 
     function deleteReportByCateg($idCat) {
-        
+
         $query = $this->db->select('old_report_name')
                 ->from("ipw_create_report")
                 ->where('report_categ', $idCat)
                 ->get();
 
         $ret = $query->result_array(); // récupérer les id des rapports de la catégorie $idCat
-        
+
         foreach ($ret as $key => $val) {
             $id = array_values($val);
             $this->deleteChart($id[0]);
             $this->deleteCreatedReport($id[0]);
         }
-             
     }
 
     function deleteGroupByCateg($idCat) { //supprimer tous les sous categ d'une categorie bien détérminée
         $this->db->where("report_categ", $idCat);
         $this->db->delete("ipw_report_sous_categ");
     }
-    
-    function isArchived($id){
-         $query = $this->db->select('archived')
+
+    function isArchived($id) {
+        $query = $this->db->select('archived')
                 ->from("ipw_report_categ")
                 ->where('id_report_categ', $id)
                 ->get();
@@ -440,14 +476,13 @@ Class Report extends CI_Model {
         }
         return $archived;
     }
-    
-    function moveToArchive($id){
+
+    function moveToArchive($id) {
         if ($this->db->set('archived', 1)
                         ->where('id_report_categ', $id)
                         ->update('ipw_report_categ')) {
             return true;
         }
-        
     }
 
 }
