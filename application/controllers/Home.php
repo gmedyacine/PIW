@@ -707,13 +707,20 @@ class Home extends Home_Controller {
     }
 
     public function compare_report() {
-        $id_1 = $this->input->post('original_rept');
-        $id_2 = $this->input->post('to_compare');
-        $this->data["twoCharts"] = $this->report->getTwoCharts($id_1, $id_2);
-       
+        $id_rept[0] = $this->input->post('original_rept');
+        $id_rept[1] = $this->input->post('to_compare');
+        $retPrj_1 = $this->projection->getProjection($id_rept[0]);
+        $retPrj_2 = $this->projection->getProjection($id_rept[1]);
+        $dataTable[0] = empty($retPrj_1["data"]) ? array() : $retPrj_1["data"];
+        $dataTable[1] = empty($retPrj_2["data"]) ? array() : $retPrj_2["data"];
+        $dataNameColonne[0] = $this->projection->getNameColonne($id_rept[0]);
+        $dataNameColonne[1] = $this->projection->getNameColonne($id_rept[1]);
+        $this->data["id_rept"] = $id_rept;
+        $this->data["dataNameColonne"] = $dataNameColonne;
+        $this->data["dataTable"] = $dataTable;
+        $this->data["twoCharts"] = $this->report->getTwoCharts($id_rept[0], $id_rept[1]);
 
-
-        $this->load->view("compared", $this->data);
+        $this->load->view("compare_view", $this->data);
     }
 
 }
