@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title center" id="myModalLabel"><?php echo $this->lang->line('create_new_cat'); ?></h4> 
+                <h4 class="modal-title center" id="myModalLabel"><?php echo $this->lang->line('upload_csv'); ?></h4> 
             </div>
             <div class="modal-body">
                 <form action="<?php echo base_url(); ?>index.php/home/csv_import" method="post" enctype="multipart/form-data" >
