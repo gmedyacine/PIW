@@ -711,16 +711,19 @@ class Home extends Home_Controller {
         $id_rept[1] = $this->input->post('to_compare');
         $retPrj_1 = $this->projection->getProjection($id_rept[0]);
         $retPrj_2 = $this->projection->getProjection($id_rept[1]);
-        $dataTable[0] = empty($retPrj_1["data"]) ? array() : $retPrj_1["data"];
-        $dataTable[1] = empty($retPrj_2["data"]) ? array() : $retPrj_2["data"];
-        $dataNameColonne[0] = $this->projection->getNameColonne($id_rept[0]);
-        $dataNameColonne[1] = $this->projection->getNameColonne($id_rept[1]);
+        $dataTable[$id_rept[0]] = empty($retPrj_1["data"]) ? array() : $retPrj_1["data"];
+        $dataTable[$id_rept[1]] = empty($retPrj_2["data"]) ? array() : $retPrj_2["data"];
+        $charts[0]= $this->report->getChartByReptId($id_rept[0]);
+        $charts[1]= $this->report->getChartByReptId($id_rept[1]);
+        $dataNameColonne[$id_rept[0]] = $this->projection->getNameColonne($id_rept[0]);
+        $dataNameColonne[$id_rept[1]] = $this->projection->getNameColonne($id_rept[1]);
+        
         $this->data["id_rept"] = $id_rept;
         $this->data["dataNameColonne"] = $dataNameColonne;
         $this->data["dataTable"] = $dataTable;
-        $this->data["twoCharts"] = $this->report->getTwoCharts($id_rept[0], $id_rept[1]);
+        $this->data["charts"] = $charts;
 
-        $this->load->view("compare_view", $this->data);
+        $this->load->view("reports_comparison", $this->data);
     }
 
 }

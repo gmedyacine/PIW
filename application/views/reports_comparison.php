@@ -10,7 +10,7 @@ include('include/dataTables.php');
     var id_rept = <?php echo json_encode($id_rept); ?>;
     var dataTable = <?php echo json_encode($dataTable); ?>;
     var dataNameColonne = <?php echo json_encode($dataNameColonne); ?>;
-    var twoCharts = <?php echo json_encode($twoCharts); ?>;
+    var charts = <?php echo json_encode($charts); ?>;
     var name_rept = [];
 
 </script>
@@ -26,15 +26,14 @@ include('include/dataTables.php');
         <?php include('include/menu.php'); ?>
         <div class="am-content">
             <div class="main-content">
-                <?php //var_dump($id_rept) ;   die;      ?>
                 <div class="row">
+                    <h1 align="center" style="margin-top: -30;"><?php echo $this->lang->line("rept_comparison"); ?></h1>
                     <div class="col-sm-12"> <!-- Début col-sm-12 -->
-                        <?php// var_dump($twoCharts) ; die;    ?>
                         <div id="chartCompared">
                             <div class="row ">
-                                <?php foreach ($twoCharts as $key => $chart) { ?>
+                                <?php for ( $i=0 ; $i<2 ; $i++) { ?>
 
-                                    <div id="<?php echo "chart" . $chart['id_chart']; ?>" class="chart col-md-6 col-sm-12" style="margin-top:30px; height: 300px; min-width: 310px;max-width: 800px;">
+                                    <div id="<?php echo "chart" . $charts[$i]['id_report']; ?>" class="chart col-md-6 col-sm-12" style="margin-top:30px; height: 300px; min-width: 310px;max-width: 800px;">
 
                                     </div>
 
@@ -55,21 +54,21 @@ include('include/dataTables.php');
                             </div>
                             <div  class=" panel panel-default widget widget-fullwidth widget-small ">
                                 <table id="<?php echo "mainTables_" . $id; ?>" class="table table-striped table-hover table-fw-widget dataTable no-footer dt-responsive nowrap col-md-6 col-sm-12 " > 
-                                    
-                                          <div class="widget-head">
-                                <div  class=" pull-left clo-md-6">
-                                    <div class="title"><h2 id="<?php echo "h2_" . $id; ?>">Sales_Distribution_0116</h2></div>
-                                </div>
-                                    <thead class="" > 
 
-                                    </thead>
-                                    
-                                                                    
-                                    
-                                    <tbody> 
+                                    <div class="widget-head">
+                                        <div  class=" pull-left clo-md-6">
+                                            <div class="title"><h2 id="<?php echo "h2_" . $id; ?>"></h2></div>
+                                        </div>
+                                        <thead class="" > 
+
+                                        </thead>
 
 
-                                    </tbody> 
+
+                                        <tbody> 
+
+
+                                        </tbody> 
                                 </table>
                             </div>
                         </div>  <?php } ?>
@@ -85,35 +84,48 @@ include('include/dataTables.php');
 
                 <script type="text/javascript">
                     $(document).ready(function () {
-                            for( var i=0; i<2; i++){
-                        
-                        $('#h2_' + id_rept[i]).empty().append(name_rept[i]); // Nom du rapport
-                        
-                        creatColonne(dataNameColonne[i], 'mainTables_' + id_rept[i]); // colonnes du tableau
+                        for (var i = 0; i < 2; i++) {
 
-                        $('#mainTables_' + id_rept[i]).DataTable(); // creation du dataTable
-                    }
+                            $('#h2_' + id_rept[i]).empty().append(name_rept[i]); // Nom du rapport
+
+                            creatColonne(dataNameColonne[id_rept[i]], 'mainTables_' + id_rept[i]); // colonnes du tableau
+                            
+                            var tbody = $('<tbody></tbody>').empty();  //vider la table
+                            $.each(dataTable[id_rept[i]], function (idObj, valData) { //reconstruire la table
+                                var trData = $('<tr></tr>');
+                                $.each(valData, function (id, val) {
+                                    trData.append($('<td class="whiteSpace">' + val + '</td>'));
+                                });
+                                tbody.append(trData);
+                            });
+                            $('#mainTables_' + id_rept[i]).append(tbody);
+
+
+                            $('#mainTables_' + id_rept[i]).DataTable(); // creation du dataTable
+                        }
+
+
 
                         $(".dataTables_filter").addClass("hidden"); // hidden search input
                         $(".dataTables_length").addClass("hidden"); // hidden entry select
 
+
+
                     });
                 </script>
-                                   <script type="text/javascript">
+                <script type="text/javascript">
 
-                        $.each(twoCharts, function (i, item) {
-                        
-                                name_rept[i] = item.new_report_name
-                           
-                        });
+                    $.each(charts, function (i, item) {
+                        name_rept[i] = item.new_report_name;
+                    });
 
-                    </script>
+                </script>
 
                 <script type="text/javascript">
                     $(document).ready(function () {
-                        $.each(twoCharts, function (key, element) {
+                        $.each(charts, function (key, element) {
 
-                            Highcharts.chart('chart' + element.id_chart, {
+                            Highcharts.chart('chart' + element.id_report, {
                                 chart: {
                                     type: element.chartType
                                 },
@@ -142,7 +154,7 @@ include('include/dataTables.php');
                                 series: element.series
                             });
 
-                            $("#chart" + element.id_chart).click(function () {
+                            $("#chart" + element.id_report).click(function () {
                                 location.replace(base_url + "index.php/projection/" + element.id_report);
                             });
                         });

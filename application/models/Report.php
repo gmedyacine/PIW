@@ -405,17 +405,16 @@ Class Report extends CI_Model {
         return $allData;
     }
 
-    function getTwoCharts($id_1, $id_2) {
+    function getChartByReptId($id) {
         $query = $this->db->select('*')
                 ->from('ipw_chart')
                 ->join("ipw_reports_show", 'ipw_reports_show.id = id_report')
                 ->join("ipw_create_report", 'ipw_create_report.old_report_name = id_report')
-                ->where('id', $id_1)
-                ->or_where('id', $id_2)
-                ->order_by('id_chart', 'DESC')
+                ->where('id', $id)
                 ->get(); //select * from ipw_chart
 
         $ret = $query->result_array();
+
         $allData = array();
         foreach ($ret as $row) {
             $xData = $this->getXData($row["report"], $row["chartX"]);
@@ -424,8 +423,7 @@ Class Report extends CI_Model {
             $row["series"] = $series;
             $allData[] = $row;
         }
-
-        return $allData;
+        return $allData[0];
     }
 
     function renameCategory($idCat, $newName) {
