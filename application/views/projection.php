@@ -49,6 +49,7 @@ include('include/dataTables.php');
         <div class="am-content">
             <div class="main-content">
                 <?php echo $this->session->flashdata('msg-add'); ?> 
+                 <?php echo $this->session->flashdata('msg-err-chart'); ?>
                 <div class="row">
                     <div class="col-sm-12"> <!-- Début partie du tableau -->
 

@@ -314,6 +314,8 @@ Class Report extends CI_Model {
     function createChart($chart) {
         if ($this->db->insert('ipw_chart', $chart)) {
             return true;
+        }else{
+            return false;
         }
     }
 
@@ -405,7 +407,7 @@ Class Report extends CI_Model {
         return $allData;
     }
 
-    function getChartByReptId($id) {
+    function getChartByReptId($id) {    // utilisé dans comparaison reports
         $query = $this->db->select('*')
                 ->from('ipw_chart')
                 ->join("ipw_reports_show", 'ipw_reports_show.id = id_report')

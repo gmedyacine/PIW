@@ -27,7 +27,7 @@ Class Csv extends CI_Model {
                 $isId = TRUE;
                 $fields[$champ] = array(
                     'type' => 'INT',
-                    'constraint' => 9,
+                    'constraint' => 15,
                     'unsigned' => TRUE,
                     'auto_increment' => TRUE
                 );
@@ -47,19 +47,30 @@ Class Csv extends CI_Model {
         if ($this->dbforge->create_table($table, TRUE, $attributes)) {
             return true;
         } else {
-            return false;
+                return false;
         }
     }
 
     function insert($table, $data) {
-      //  var_dump($data); die;
-        if ($this->db->insert_batch($table, $data)) {
-            return true;
-        } else {
-            return false;
+        //  var_dump($data); die;
+
+          $query = $this->db->insert_batch($table, $data);
+          
+          
+        //  echo $str; die;
+        // returns null if SQL error occurs.
+//$res = $this->db->query($str);
+
+//        if (!$res) {
+//            // if query returns null
+//            $msg = $this->db->_error_message();
+//            $num = $this->db->_error_number();
+//
+//            $data['msg'] = "Error(" . $num . ") " . $msg;
+//            $this->load->view('error_db', $data);
         }
     }
 
-}
+
 
 ?>

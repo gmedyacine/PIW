@@ -104,3 +104,5 @@ file_empty; Your file is empty !
 error_read_csv; Cannot read from csv $file !
 compre_rept; Compare Reports
 rept_comparison; Reports Comparison
+msg_err_chart; Can't create chart .. Please verify the report structure
+bad_csv; Bad CSV file !! 
