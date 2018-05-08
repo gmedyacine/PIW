@@ -601,8 +601,8 @@ class Home extends Home_Controller {
 
         if ($this->report->createChart($chart)) {
             $this->session->set_flashdata('msg-modif', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_modif") . "</div>");
-        }else{
-            $this->session->set_flashdata('msg-err-chart', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("msg_err_chart") . "</div>"); 
+        } else {
+            $this->session->set_flashdata('msg-err-chart', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("msg_err_chart") . "</div>");
         }
         redirect('projection/' . $id_projection, 'refresh');
     }
@@ -622,7 +622,7 @@ class Home extends Home_Controller {
         return $check;
     }
 
-    //create heauding of table
+    //create heading of table
     public function create_heading($champs) {
 
         $string = $champs[0];
@@ -651,69 +651,41 @@ class Home extends Home_Controller {
             redirect(base_url() . "index.php/create-report");
         }
 
-// get structure from csv and insert db
-        ini_set('auto_detect_line_endings', TRUE);
-        $handle = fopen($file, 'r');
-// first row, structure
-        if (($data = fgetcsv($handle) ) === FALSE) {
-            $this->session->set_flashdata('error-read-csv', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("error_read_csv") . "</div>");
-            redirect(base_url() . "index.php/create-report");
-        }
+  
 // Filter for table name 
         $pos = strpos($table, "ipw_rept_");
         if ($pos === false) {
             $table = 'ipw_rept_' . $table;
         }
-        // get heading fields
-        $fields = array();
-        $field_count = 0;
-        for ($i = 0; $i < count($data); $i++) {
-            $f = strtolower(trim($data[$i]));
-            if ($f) {
-                $f = str_replace(";", ",", $data[$i]);
-                $field_count++;
-                $fields[] = $f;
-            }
-        }
-
-        // create table
-       if( $this->csv->create_table($table, $fields)){
-
-        $heading = $this->create_heading($fields);
 
         $file_data = $this->csvimport->get_array($file);
 
-        $string_values = array();
-        $values = array();
-        $t_data = array();
+        //------------ extraction des noms des colonnes à partir de la ligne 0 du tableux
+        foreach ($file_data[0] as $key => $value) {
+            $fields[] = $key; //
+        }
+        //------------ Fin extraction
         
 
-        for ($i = 0; $i < count($file_data); $i++) {
-            $string_values = array_values($file_data[$i]);
-            $values[$i] = explode(';', $string_values[0]);
-        }
-     // var_dump($values[3]); die;
-        for ($i = 0; $i < count($file_data); $i++) {
-            for ($j = 0; $j < count($heading); $j++) {
-               $t_data[$i][$heading[$j]] = trim($values[$i][$j], '"');
-          //     var_dump($t_data[$i][$heading[$j]]);
-            }
-        }
-         
+        // create table
+        if ($this->csv->create_table($table, $fields)) { // if table created then insert datas
+           
 
-        // insert values
-        if ($this->csv->insert($table, $t_data)) {
-            $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_add") . "</div>");
+
+            // insert values
+            if ($this->csv->insert($table, $file_data)) {
+
+                $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_add") . "</div>");
+                redirect(base_url() . "index.php/create-report");
+            } else {
+                $this->session->set_flashdata('bad-csv', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("bad_csv") . "</div>");
+                redirect(base_url() . "index.php/create-report");
+            }
+        } else {  //if table does not created 
+            $this->session->set_flashdata('bad-csv', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("bad_csv") . "</div>");
             redirect(base_url() . "index.php/create-report");
-        }else{
-    $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("msg_add") . "</div>");
-            redirect(base_url() . "index.php/create-report");
-       }}else{
-           $this->session->set_flashdata('bad-csv', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("bad_csv") . "</div>");
-            redirect(base_url() . "index.php/create-report");
-       }
-        fclose($handle);
-        ini_set('auto_detect_line_endings', FALSE);
+        }
+     
     }
 
     public function compare_report() {
@@ -723,11 +695,11 @@ class Home extends Home_Controller {
         $retPrj_2 = $this->projection->getProjection($id_rept[1]);
         $dataTable[$id_rept[0]] = empty($retPrj_1["data"]) ? array() : $retPrj_1["data"];
         $dataTable[$id_rept[1]] = empty($retPrj_2["data"]) ? array() : $retPrj_2["data"];
-        $charts[0]= $this->report->getChartByReptId($id_rept[0]);
-        $charts[1]= $this->report->getChartByReptId($id_rept[1]);
+        $charts[0] = $this->report->getChartByReptId($id_rept[0]);
+        $charts[1] = $this->report->getChartByReptId($id_rept[1]);
         $dataNameColonne[$id_rept[0]] = $this->projection->getNameColonne($id_rept[0]);
         $dataNameColonne[$id_rept[1]] = $this->projection->getNameColonne($id_rept[1]);
-        
+
         $this->data["id_rept"] = $id_rept;
         $this->data["dataNameColonne"] = $dataNameColonne;
         $this->data["dataTable"] = $dataTable;
@@ -736,4 +708,11 @@ class Home extends Home_Controller {
         $this->load->view("reports_comparison", $this->data);
     }
 
+    public function get_error($error) {
+        
+        $this->data["error"] = $error;
+
+        $this->load->view("error_page", $this->data);
+        
+    }
 }

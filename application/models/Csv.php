@@ -7,13 +7,8 @@ Class Csv extends CI_Model {
         $this->load->dbforge();
 
         $attributes = array('ENGINE' => 'InnoDB');
-
         $fields = array();
 
-        $string = $champs[0];
-        $string = str_replace('"', ' ', $string);
-        $string = str_replace(', ', ' , ', $string);
-        $champs_array = explode(' , ', $string);
         $isId = FALSE;
 
         if ($isId == FALSE) {
@@ -21,8 +16,7 @@ Class Csv extends CI_Model {
             // gives id INT(9) NOT NULL AUTO_INCREMENT 
         }
 
-        foreach ($champs_array as $champ) {
-            $champ = trim($champ);
+        foreach ($champs as $champ) {
             if ($champ == 'id') {
                 $isId = TRUE;
                 $fields[$champ] = array(
@@ -43,34 +37,27 @@ Class Csv extends CI_Model {
 
         $this->dbforge->add_field($fields);
 
+        $create_table = $this->dbforge->create_table($table, TRUE, $attributes);
+        if ($this->db->error()) {
+            redirect(base_url() . "index.php/create-report");
+        }
 
-        if ($this->dbforge->create_table($table, TRUE, $attributes)) {
+        if ($create_table) {
             return true;
         } else {
-                return false;
+            return false;
         }
     }
 
     function insert($table, $data) {
-        //  var_dump($data); die;
-
-          $query = $this->db->insert_batch($table, $data);
-          
-          
-        //  echo $str; die;
-        // returns null if SQL error occurs.
-//$res = $this->db->query($str);
-
-//        if (!$res) {
-//            // if query returns null
-//            $msg = $this->db->_error_message();
-//            $num = $this->db->_error_number();
-//
-//            $data['msg'] = "Error(" . $num . ") " . $msg;
-//            $this->load->view('error_db', $data);
+        $query = $this->db->insert_batch($table, $data);
+        if ($query) {
+            return TRUE;
+        } else {
+            return FALSE;
         }
     }
 
-
+}
 
 ?>

@@ -106,3 +106,4 @@ compre_rept; Compare Reports
 rept_comparison; Reports Comparison
 msg_err_chart; Can't create chart .. Please verify the report structure
 bad_csv; Bad CSV file !! 
+verify_data;Please verify the data
