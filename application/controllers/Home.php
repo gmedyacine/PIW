@@ -664,27 +664,31 @@ class Home extends Home_Controller {
         foreach ($file_data[0] as $key => $value) {
             $fields[] = $key; //
         }
+       // var_dump($file_data);die;
         //------------ Fin extraction
         
+        // drop table if exists
+      //  $this->csv->drop_table($table);
 
         // create table
         if ($this->csv->create_table($table, $fields)) { // if table created then insert datas
-           
-
-
-            // insert values
+                // insert values
             if ($this->csv->insert($table, $file_data)) {
-
                 $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_add") . "</div>");
                 redirect(base_url() . "index.php/create-report");
             } else {
                 $this->session->set_flashdata('bad-csv', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("bad_csv") . "</div>");
                 redirect(base_url() . "index.php/create-report");
             }
+
         } else {  //if table does not created 
             $this->session->set_flashdata('bad-csv', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("bad_csv") . "</div>");
             redirect(base_url() . "index.php/create-report");
         }
+        
+      
+
+         
      
     }
 

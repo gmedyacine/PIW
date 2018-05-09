@@ -37,12 +37,16 @@ Class Csv extends CI_Model {
 
         $this->dbforge->add_field($fields);
 
-        $create_table = $this->dbforge->create_table($table, TRUE, $attributes);
-        if ($this->db->error()) {
-            redirect(base_url() . "index.php/create-report");
+
+        if ($this->db->table_exists($table)) {
+            // table exists
+              $this->session->set_flashdata('table-exist', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("table_exist") . "</div>");
+              redirect(base_url() . "index.php/create-report");
+        } else {
+            // table does not exist
         }
 
-        if ($create_table) {
+        if ($this->dbforge->create_table($table, TRUE, $attributes)) {
             return true;
         } else {
             return false;
@@ -50,14 +54,20 @@ Class Csv extends CI_Model {
     }
 
     function insert($table, $data) {
-        $query = $this->db->insert_batch($table, $data);
-        if ($query) {
+        if ($this->db->insert_batch($table, $data)) {
             return TRUE;
         } else {
             return FALSE;
         }
     }
 
-}
+    function drop_table($table) {
+        $this->dbforge->drop_table('$table', TRUE);
+        if ($this->db->error()) {
+            $this->session->set_flashdata('bad-csv', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("bad_csv") . "</div>");
+            redirect(base_url() . "index.php/create-report");
+        }
+    }
 
+}
 ?>

@@ -19,7 +19,7 @@ class Csvimport {
     private $filepath = FALSE;
     private $column_headers = FALSE;
     private $initial_line = 0;
-    private $delimiter = ";";
+    private $delimiter = ",";
     private $detect_line_endings = FALSE;
    /**
      * Function that parses a CSV file and returns results
