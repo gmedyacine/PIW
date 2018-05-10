@@ -108,3 +108,8 @@ msg_err_chart; Can't create chart .. Please verify the report structure
 bad_csv; Bad CSV file !! 
 verify_data;Please verify the data
 table_exist; Report already exists !
+line1_as_cols; The first line of the file contains the names of the columns of table
+line1_not_cols;If this is not checked, the first line will be part of the data
+file_csv;File CSV
+delimiter;Delimiter
+verify_delimiter;Please Verify the right delimiter

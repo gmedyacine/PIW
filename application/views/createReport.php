@@ -32,6 +32,8 @@ include('include/head.php');
                      <?php echo $this->session->flashdata('file-empty'); ?> 
                     <?php echo $this->session->flashdata('file-error'); ?> 
                        <?php echo $this->session->flashdata('bad-csv'); ?>
+                     <?php echo $this->session->flashdata('table-exist'); ?>
+                    <?php echo $this->session->flashdata('verify-delimiter'); ?>
                     <div class="row">
                         <div class="panel panel-primary">
                             <div class="panel-heading">

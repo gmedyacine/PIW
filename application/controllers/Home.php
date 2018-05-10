@@ -642,8 +642,11 @@ class Home extends Home_Controller {
     //import csv files
     public function csv_import() {
 
+        $delimiter = $this->input->post('delimiter');
         $file_name = $_FILES['csvFile']['name'];
         $table = basename($file_name, '.csv'); // remove extention from file
+        $initial_line = $this->input->post('initial_line');
+       //echo $initial_line; die;
 
         $file = $_FILES["csvFile"]["tmp_name"]; //get file content
         if ($_FILES['csvFile']['size'] == 0) {
@@ -651,28 +654,36 @@ class Home extends Home_Controller {
             redirect(base_url() . "index.php/create-report");
         }
 
-  
+
 // Filter for table name 
         $pos = strpos($table, "ipw_rept_");
         if ($pos === false) {
             $table = 'ipw_rept_' . $table;
         }
 
+        $this->csvimport->delimiter($delimiter);
         $file_data = $this->csvimport->get_array($file);
-
+        $nb_col=count($file_data[0]);
+       
         //------------ extraction des noms des colonnes à partir de la ligne 0 du tableux
-        foreach ($file_data[0] as $key => $value) {
-            $fields[] = $key; //
+        if ($initial_line == 1) {
+            foreach ($file_data[0] as $key => $value) {
+                $fields[] = $key;
+            }
+        } else {
+            for($i=0;$i<$nb_col;$i++){
+                $fields[$i] = 'COL_'.($i+1);
+            }
         }
-       // var_dump($file_data);die;
         //------------ Fin extraction
-        
-        // drop table if exists
-      //  $this->csv->drop_table($table);
-
+       
+        if(is_array($fields)&& count($fields)==1){
+            $this->session->set_flashdata('verify-delimiter', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("verify_delimiter") . "</div>");
+                redirect(base_url() . "index.php/create-report");
+        }
         // create table
         if ($this->csv->create_table($table, $fields)) { // if table created then insert datas
-                // insert values
+            // insert values
             if ($this->csv->insert($table, $file_data)) {
                 $this->session->set_flashdata('msg-add', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_add") . "</div>");
                 redirect(base_url() . "index.php/create-report");
@@ -680,16 +691,10 @@ class Home extends Home_Controller {
                 $this->session->set_flashdata('bad-csv', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("bad_csv") . "</div>");
                 redirect(base_url() . "index.php/create-report");
             }
-
         } else {  //if table does not created 
             $this->session->set_flashdata('bad-csv', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("bad_csv") . "</div>");
             redirect(base_url() . "index.php/create-report");
         }
-        
-      
-
-         
-     
     }
 
     public function compare_report() {
@@ -713,10 +718,10 @@ class Home extends Home_Controller {
     }
 
     public function get_error($error) {
-        
+
         $this->data["error"] = $error;
 
         $this->load->view("error_page", $this->data);
-        
     }
+
 }
