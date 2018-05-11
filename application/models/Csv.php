@@ -63,9 +63,13 @@ Class Csv extends CI_Model {
     }
 
     function drop_table($table) {
-        $this->dbforge->drop_table('$table', TRUE);
+         if ($this->dbforge->drop_table($table, TRUE)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
         if ($this->db->error()) {
-            $this->session->set_flashdata('bad-csv', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("bad_csv") . "</div>");
+            $this->session->set_flashdata('error-delete', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("error_delete") . "</div>");
             redirect(base_url() . "index.php/create-report");
         }
     }

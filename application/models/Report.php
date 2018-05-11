@@ -380,9 +380,18 @@ Class Report extends CI_Model {
         $ret = $query->result_array();
 
         if ($ret) {
-            return $ret[0]; // return all fields of table : ipw_create_report
+            return $ret[0]; 
         } else {
             return null;
+        }
+    }
+    
+    function removeFromShow($id){
+        $this->db->where('id', $id);
+        if($this->db->delete('ipw_reports_show')){
+            return TRUE;
+        }else{
+            return FALSE;
         }
     }
 

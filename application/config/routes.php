@@ -75,6 +75,7 @@ $route["delete-category/(:num)"]='home/delete_categ_menu/$1';
 $route["create-report"]='home/create_form';
 $route["rename-report"]='home/rename_form';
 $route["rename-category"]='home/rename_categ_form';
+$route["remove-report"]='home/remove_report_form';
 $route["delete-chart/(:num)"]='home/delete_chart/$1';
 $route['logout'] = 'home/logout';
 $route['404_override'] = '';

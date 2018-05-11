@@ -156,9 +156,7 @@ Class Projection extends CI_Model {
     public function showAllReports() {
 
         $this->db->query("show tables from  like 'ipw%';");
-        var_dump($this->result());
-        die;
-        foreach ($this->result() as $prj) {
+                foreach ($this->result() as $prj) {
             
         }
     }

@@ -731,5 +731,24 @@ class Home extends Home_Controller {
 
         $this->load->view("error_page", $this->data);
     }
-
+    
+        public function remove_report_form() {
+        $this->data['rpt_allow_tables'] = json_encode($this->report->searchAllowReport());
+        $this->load->view("removeReport", $this->data);
+        }
+        
+       public function remove_report() {
+         $old_name = $this->input->post('old_name');
+         $report = $this->report->getOriginalReportName($old_name);
+         $report_name = $report['report'];
+         
+        $this->report->removeFromShow($old_name);
+       // $this->csv->drop_table($report_name);
+           if($this->csv->drop_table($report_name)) {
+                 $this->session->set_flashdata('msg-remove', "<div  class='brav-fix alert alert-success text-center'>" . $this->lang->line("msg_remove") . "</div>");
+                redirect(base_url() . "index.php/remove-report");
+            }
+//         
+//         echo $report_name['report']; die;
+        }
 }
