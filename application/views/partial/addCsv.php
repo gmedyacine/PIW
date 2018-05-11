@@ -39,7 +39,7 @@
                     <div class="row form-group">
                         <div class="col-md-12">
                             <div class="checkbox">
-                                <label><input type="checkbox" id="initial_line" name="1" value="line1_col">
+                                <label><input type="checkbox" id="initial_line" name="initial_line" value="1">
                                     <?php echo $this->lang->line('line1_as_cols'); ?><b> (<?php echo $this->lang->line('line1_not_cols'); ?>)</b>
                                 </label>
                             </div>

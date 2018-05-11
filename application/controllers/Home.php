@@ -646,8 +646,7 @@ class Home extends Home_Controller {
         $file_name = $_FILES['csvFile']['name'];
         $table = basename($file_name, '.csv'); // remove extention from file
         $initial_line = $this->input->post('initial_line');
-       //echo $initial_line; die;
-
+        
         $file = $_FILES["csvFile"]["tmp_name"]; //get file content
         if ($_FILES['csvFile']['size'] == 0) {
             $this->session->set_flashdata('file-empty', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("file_empty") . "</div>");
@@ -664,7 +663,8 @@ class Home extends Home_Controller {
         $this->csvimport->delimiter($delimiter);
         $file_data = $this->csvimport->get_array($file);
         $nb_col=count($file_data[0]);
-       
+        
+        
         //------------ extraction des noms des colonnes à partir de la ligne 0 du tableux
         if ($initial_line == 1) {
             foreach ($file_data[0] as $key => $value) {
@@ -674,13 +674,21 @@ class Home extends Home_Controller {
             for($i=0;$i<$nb_col;$i++){
                 $fields[$i] = 'COL_'.($i+1);
             }
+            $this->csvimport->column_headers($fields);
+            $this->csvimport->initial_line(-1);
+          
         }
         //------------ Fin extraction
+        
+         $file_data = $this->csvimport->get_array($file); // pour déterminer column_headers if $initial_line not line 0
+           //echo count($file_data); die;
        
-        if(is_array($fields)&& count($fields)==1){
+        if(is_array($fields)&& count($fields)==1){ // if delimiter is not correct
             $this->session->set_flashdata('verify-delimiter', "<div  class='brav-fix alert alert-warning text-center'>" . $this->lang->line("verify_delimiter") . "</div>");
                 redirect(base_url() . "index.php/create-report");
         }
+        
+       
         // create table
         if ($this->csv->create_table($table, $fields)) { // if table created then insert datas
             // insert values
