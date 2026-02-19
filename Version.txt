@@ -1,0 +1,11 @@
+db.endpointVersions.find(
+    { "endpointId": ObjectId("683460c416d9892982ddbeee") },
+    { 
+        "versionNumber": 1, 
+        "status": 1,
+        "image": 1,          // Selon la version de Domino, le champ peut s'appeler 'image'
+        "imageUri": 1,       // ou 'imageUri'
+        "build.image": 1,    // ou être imbriqué dans l'objet de build
+        "buildId": 1
+    }
+).sort({ "versionNumber": -1 })
