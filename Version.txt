@@ -27,3 +27,14 @@ for(var i = 0; i < collections.length; i++) {
 
 foundInCollection;
 
+
+rs.secondaryOk()
+db.<LE_NOM_TROUVÉ>.find(
+    { "modelId": ObjectId("683460c416d9892982ddbeee") }, // Attention, ici "endpointId" est sûrement devenu "modelId"
+    { 
+        "versionNumber": 1, 
+        "image": 1,
+        "imageUri": 1
+    }
+).sort({ "versionNumber": -1 })
+
