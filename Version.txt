@@ -38,3 +38,14 @@ db.<LE_NOM_TROUVÉ>.find(
     }
 ).sort({ "versionNumber": -1 })
 
+
+
+
+rs.secondaryOk()
+db.model_versions.find(
+    { "modelId.value": ObjectId("683460c416d9892982ddbeee") },
+    { 
+        "metadata.number": 1,
+        "metadata.builds.slug.image": 1
+    }
+).sort({ "metadata.number": -1 })
