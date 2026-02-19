@@ -9,3 +9,21 @@ db.endpointVersions.find(
         "buildId": 1
     }
 ).sort({ "versionNumber": -1 })
+
+rs.secondaryOk();
+var collections = db.getCollectionNames();
+var targetId = ObjectId("69683ec4b54e8f20b3f15d63");
+var foundInCollection = "Non trouvé";
+
+for(var i = 0; i < collections.length; i++) {
+    var collName = collections[i];
+    // On cherche un document avec cet ID dans chaque collection
+    var doc = db.getCollection(collName).findOne({ "_id": targetId });
+    if (doc) {
+        foundInCollection = collName;
+        break; // On a trouvé, on arrête de chercher
+    }
+}
+
+foundInCollection;
+
