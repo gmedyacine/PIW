@@ -88,3 +88,46 @@ paramsList.forEach(function(param) {
     });
 });
 
+
+rs.secondaryOk();
+
+// 1. La nouvelle liste prend maintenant le NOM ('name') au lieu de l'ID
+var paramsList = [
+    { name: "PROD_FR-ICARE_CLAIMS_AUTOMATION", number: 25 },
+    // Ajoutez d'autres modèles ici :
+    // { name: "AUTRE_NOM_DE_MODEL", number: 10 }
+];
+
+paramsList.forEach(function(param) {
+    
+    // 2. Étape supplémentaire : On cherche le modèle par son nom pour obtenir son ID
+    var modelDoc = db.models.findOne({ "name": param.name });
+    
+    if (!modelDoc) {
+        print("⚠️ Attention : Le modèle '" + param.name + "' est introuvable dans la base.");
+        return; // Passe au modèle suivant dans la liste
+    }
+    
+    var targetModelId = modelDoc._id; // On a récupéré l'ObjectId !
+
+    // 3. On reprend votre logique d'origine sur model_versions
+    db.model_versions.find({
+        "modelId.value": targetModelId, // On utilise l'ID trouvé juste au-dessus
+        "metadata.number": { $lte: param.number }
+    }).forEach(function(myDoc) {
+        
+        // 4. Sécurité : vérifier que l'image existe bien pour cette version
+        var imageToDelete = "Aucune_image_trouvee";
+        if (myDoc.metadata && myDoc.metadata.builds && myDoc.metadata.builds.length > 0) {
+            imageToDelete = myDoc.metadata.builds[0].slug.image.repository + ":" + myDoc.metadata.builds[0].slug.image.tag;
+        }
+
+        // 5. Affichage final (j'ai rajouté le nom du modèle pour que vos logs soient plus clairs)
+        print("model_name: " + param.name + 
+              ", model_id: " + myDoc.modelId.value + 
+              ", number: " + myDoc.metadata.number + 
+              ", modevl_versions_id: " + myDoc._id + 
+              ", image-to-delete: " + imageToDelete);
+    });
+});
+
