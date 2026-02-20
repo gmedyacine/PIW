@@ -49,3 +49,42 @@ db.model_versions.find(
         "metadata.builds.slug.image": 1
     }
 ).sort({ "metadata.number": -1 })
+
+
+
+
+
+
+
+rs.secondaryOk();
+
+// 1. Définissez votre liste de paramètres ici
+var paramsList = [
+    { id: "683460c416d9892982ddbeee", number: 25 },
+    // Vous pouvez ajouter d'autres modèles ici :
+    // { id: "AUTRE_MODEL_ID", number: 10 }
+];
+
+// 2. On boucle sur chaque élément de la liste
+paramsList.forEach(function(param) {
+    
+    // 3. Requête MongoDB avec la condition $lte (inférieur ou égal)
+    db.model_versions.find({
+        "modelId.value": ObjectId(param.id),
+        "metadata.number": { $lte: param.number }
+    }).forEach(function(myDoc) {
+        
+        // 4. Sécurité : vérifier que l'image existe bien pour cette version
+        var imageToDelete = "Aucune_image_trouvee";
+        if (myDoc.metadata && myDoc.metadata.builds && myDoc.metadata.builds.length > 0) {
+            imageToDelete = myDoc.metadata.builds[0].slug.image.repository + ":" + myDoc.metadata.builds[0].slug.image.tag;
+        }
+
+        // 5. Affichage avec le format demandé
+        print("model_id: " + myDoc.modelId.value + 
+              ", number: " + myDoc.metadata.number + 
+              ", modevl_versions_id: " + myDoc._id + 
+              ", image-to-delete: " + imageToDelete);
+    });
+});
+
